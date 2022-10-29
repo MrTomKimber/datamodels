@@ -1,0 +1,408 @@
+@prefix : <http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#> .
+@prefix dm: <http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel> .
+
+<http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#definition
+<http://www.w3.org/2004/02/skos/core#definition> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#example
+<http://www.w3.org/2004/02/skos/core#example> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractIsRepresentedBy
+dm:AbstractIsRepresentedBy rdf:type owl:ObjectProperty ;
+                           owl:inverseOf dm:ClassIsRepresentationOfAbstract ;
+                           rdfs:domain dm:Abstract ;
+                           rdfs:range [ owl:intersectionOf ( dm:Class
+                                                             [ rdf:type owl:Class ;
+                                                               owl:complementOf dm:Abstract
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AttributeIsMemberOfClass
+dm:AttributeIsMemberOfClass rdf:type owl:ObjectProperty ;
+                            owl:inverseOf dm:ClassHasAttribute ;
+                            rdfs:domain dm:Attribute ;
+                            rdfs:range dm:Class .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasAttribute
+dm:ClassHasAttribute rdf:type owl:ObjectProperty ;
+                     rdfs:domain dm:Class ;
+                     rdfs:range dm:Attribute .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasRelationshipWith
+dm:ClassHasRelationshipWith rdf:type owl:ObjectProperty ;
+                            rdfs:domain dm:Class ;
+                            rdfs:range dm:Class ;
+                            owl:propertyChainAxiom ( [ owl:inverseOf dm:RelationshipHasDomain
+                                                     ]
+                                                     dm:RelationshipHasRange
+                                                   ) ;
+                            <http://www.w3.org/2004/02/skos/core#definition> "This is an Inferred Relationship: ClassHasRelationshipWith provides a simplified direct pointer to classes linked via a Relationship." .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsDomainOfRelationship
+dm:ClassIsDomainOfRelationship rdf:type owl:ObjectProperty ;
+                               owl:inverseOf dm:RelationshipHasDomain ;
+                               rdfs:domain dm:Class ;
+                               rdfs:range dm:Relationship .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel
+dm:ClassIsMemberOfModel rdf:type owl:ObjectProperty ;
+                        owl:inverseOf dm:ModelContainsClass ;
+                        rdfs:domain dm:Class ;
+                        rdfs:range dm:Model .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsRangeOfRelationship
+dm:ClassIsRangeOfRelationship rdf:type owl:ObjectProperty ;
+                              owl:inverseOf dm:RelationshipHasRange ;
+                              rdfs:domain dm:Class ;
+                              rdfs:range dm:Relationship .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsRepresentationOfAbstract
+dm:ClassIsRepresentationOfAbstract rdf:type owl:ObjectProperty ;
+                                   rdfs:domain [ owl:intersectionOf ( dm:Class
+                                                                      [ rdf:type owl:Class ;
+                                                                        owl:complementOf dm:Abstract
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                                   rdfs:range dm:Abstract .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsClass
+dm:ModelContainsClass rdf:type owl:ObjectProperty ;
+                      rdfs:domain dm:Model ;
+                      rdfs:range dm:Class .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainContainsModel
+dm:ModelDomainContainsModel rdf:type owl:ObjectProperty ;
+                            owl:inverseOf dm:ModelIsMemberOfModelDomain ;
+                            rdfs:domain dm:ModelDomain ;
+                            rdfs:range dm:Model .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainContainsSubDomain
+dm:ModelDomainContainsSubDomain rdf:type owl:ObjectProperty ;
+                                owl:inverseOf dm:ModelDomainIsSubDomainOf ;
+                                rdf:type owl:TransitiveProperty ;
+                                rdfs:domain dm:ModelDomain ;
+                                rdfs:range dm:ModelDomain .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainIsSubDomainOf
+dm:ModelDomainIsSubDomainOf rdf:type owl:ObjectProperty ,
+                                     owl:TransitiveProperty ;
+                            rdfs:domain dm:ModelDomain ;
+                            rdfs:range dm:ModelDomain .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelIsMemberOfModelDomain
+dm:ModelIsMemberOfModelDomain rdf:type owl:ObjectProperty ;
+                              rdfs:domain dm:Model ;
+                              rdfs:range dm:ModelDomain .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromCardinality
+dm:RelationshipFromCardinality rdf:type owl:ObjectProperty ;
+                               rdfs:domain dm:Relationship ;
+                               rdfs:range dm:Cardinality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromOptionality
+dm:RelationshipFromOptionality rdf:type owl:ObjectProperty ;
+                               rdfs:domain dm:Relationship ;
+                               rdfs:range dm:Optionality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasDomain
+dm:RelationshipHasDomain rdf:type owl:ObjectProperty ;
+                         rdfs:domain dm:Relationship ;
+                         rdfs:range dm:Class .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasRange
+dm:RelationshipHasRange rdf:type owl:ObjectProperty ;
+                        rdfs:domain dm:Relationship ;
+                        rdfs:range dm:Class .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyFrom
+dm:RelationshipKeyFrom rdf:type owl:ObjectProperty ;
+                       rdfs:domain dm:Relationship ;
+                       rdfs:range dm:Attribute ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "The attribute that acts as a pointer (i.e. the foreign key) to the target entity for this relationship." .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyTo
+dm:RelationshipKeyTo rdf:type owl:ObjectProperty ;
+                     rdfs:domain dm:Relationship ;
+                     rdfs:range dm:Attribute ;
+                     rdfs:comment "The attribute that acts as the primary key for the entity being referenced in the relationship." .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToCardinality
+dm:RelationshipToCardinality rdf:type owl:ObjectProperty ;
+                             rdfs:domain dm:Relationship ;
+                             rdfs:range dm:Cardinality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToOptionality
+dm:RelationshipToOptionality rdf:type owl:ObjectProperty ;
+                             rdfs:domain dm:Relationship ;
+                             rdfs:range dm:Optionality .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Description
+dm:Description rdf:type owl:DatatypeProperty ;
+               rdfs:domain dm:Definition ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Name
+dm:Name rdf:type owl:DatatypeProperty ;
+        rdfs:domain dm:Definition ;
+        rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Abstract
+dm:Abstract rdf:type owl:Class ;
+            rdfs:subClassOf dm:Class ;
+            <http://www.w3.org/2004/02/skos/core#definition> "An Abstract is a type of class used to represent a single abstracted version of classes that might be present across multiple models."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute
+dm:Attribute rdf:type owl:Class ;
+             rdfs:subClassOf dm:Definition ;
+             rdfs:label "Attribute"^^xsd:string ;
+             <http://www.w3.org/2004/02/skos/core#definition> "An attribute represents a particular data point associated with an entity. It will often have a value that conforms to a primitive data type - but for enumerations, might be associated with some other class or controlled list. For modelling purposes, use the attribute and express it as its primitive form, and consider annotating the associated Relationship relation between entities to reference the attributes used to perform the link."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality
+dm:Cardinality rdf:type owl:Class ;
+               rdfs:subClassOf dm:MetaReference ;
+               rdfs:label "Cardinality"^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class
+dm:Class rdf:type owl:Class ;
+         rdfs:subClassOf dm:Definition ;
+         rdfs:label "Class"^^xsd:string ;
+         <http://www.w3.org/2004/02/skos/core#definition> "A class is a set of things having some property or attribute in common."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Concept
+dm:Concept rdf:type owl:Class ;
+           rdfs:subClassOf dm:Class ;
+           <http://www.w3.org/2004/02/skos/core#definition> "A concept in this context is a high level class describing some concept, idea or thing that is of interest to the business. Concepts form the nodes of a conceptual data model."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ConceptualDataModel
+dm:ConceptualDataModel rdf:type owl:Class ;
+                       rdfs:subClassOf dm:Model .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context
+dm:Context rdf:type owl:Class ;
+           rdfs:subClassOf dm:Definition ;
+           rdfs:label "Context"^^xsd:string ;
+           <http://www.w3.org/2004/02/skos/core#definition> "A context is some grouping of entities, schema or concepts. In physical data models, this might describe an IBM DB2 or Oracle schema (i.e. a collection of tables, views and other objects into an administrative package), an application or a collection of datasets. For logical or conceptual models, it would be used to form an informal grouping within a larger model. For more formal groupings, expect to use Domain, or Model."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType
+dm:DataType rdf:type owl:Class ;
+            rdfs:subClassOf dm:MetaReference ;
+            rdfs:label "DataType"^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataTypeSchema
+dm:DataTypeSchema rdf:type owl:Class ;
+                  rdfs:subClassOf dm:MetaReference ;
+                  rdfs:label "DataTypeSchema"^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition
+dm:Definition rdf:type owl:Class ;
+              rdfs:label "Definition"^^xsd:string ;
+              <http://www.w3.org/2004/02/skos/core#definition> "A definition is the description of some kind of representation."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Entity
+dm:Entity rdf:type owl:Class ;
+          rdfs:subClassOf dm:Class ;
+          <http://www.w3.org/2004/02/skos/core#definition> "An entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#LogicalDataModel
+dm:LogicalDataModel rdf:type owl:Class ;
+                    rdfs:subClassOf dm:Model .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaReference
+dm:MetaReference rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model
+dm:Model rdf:type owl:Class ;
+         rdfs:subClassOf dm:Definition ;
+         rdfs:label "Model"^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain
+dm:ModelDomain rdf:type owl:Class ;
+               rdfs:subClassOf dm:Definition ;
+               rdfs:label "ModelDomain"^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Optionality
+dm:Optionality rdf:type owl:Class ;
+               rdfs:subClassOf dm:MetaReference ;
+               rdfs:label "Optionality"^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PhysicalDataModel
+dm:PhysicalDataModel rdf:type owl:Class ;
+                     rdfs:subClassOf dm:Model .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship
+dm:Relationship rdf:type owl:Class ;
+                rdfs:subClassOf dm:Definition ;
+                rdfs:label "Relationship"^^xsd:string ;
+                <http://www.w3.org/2004/02/skos/core#definition> """A relationship class describes a possible interaction, association or property shared between a pair of class definitions. 
+
+Each *instance* of relationship class will have a Range and Domain associated with it that constrain the anticipated class types that are acceptable for the relationship."""^^xsd:string .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mandatory
+dm:Mandatory rdf:type owl:NamedIndividual ,
+                      dm:Optionality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Many
+dm:Many rdf:type owl:NamedIndividual ,
+                 dm:Cardinality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#One
+dm:One rdf:type owl:NamedIndividual ,
+                dm:Cardinality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Optional
+dm:Optional rdf:type owl:NamedIndividual ,
+                     dm:Optionality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Person
+dm:Person rdf:type owl:NamedIndividual ,
+                   dm:Concept .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PersonID
+dm:PersonID rdf:type owl:NamedIndividual ,
+                     dm:Attribute ;
+            dm:AttributeIsMemberOfClass dm:Person .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PersonName
+dm:PersonName rdf:type owl:NamedIndividual ,
+                       dm:Attribute ;
+              dm:AttributeIsMemberOfClass dm:Person .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Role
+dm:Role rdf:type owl:NamedIndividual ,
+                 dm:Concept .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RoleID
+dm:RoleID rdf:type owl:NamedIndividual ,
+                   dm:Attribute ;
+          dm:AttributeIsMemberOfClass dm:Role .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RoleName
+dm:RoleName rdf:type owl:NamedIndividual ,
+                     dm:Attribute ;
+            dm:AttributeIsMemberOfClass dm:Role .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRole
+dm:hasRole rdf:type owl:NamedIndividual ,
+                    dm:Relationship ;
+           dm:RelationshipHasDomain dm:Person ;
+           dm:RelationshipHasRange dm:Role ;
+           dm:RelationshipKeyFrom dm:PersonID ;
+           dm:RelationshipKeyTo dm:RoleID .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isOpenTo
+dm:isOpenTo rdf:type owl:NamedIndividual ,
+                     dm:Relationship ;
+            dm:RelationshipHasDomain dm:Role ;
+            dm:RelationshipHasRange dm:Person .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isPerformedBy
+dm:isPerformedBy rdf:type owl:NamedIndividual ,
+                          dm:Relationship ;
+                 dm:RelationshipHasDomain dm:Role ;
+                 dm:RelationshipHasRange dm:Person .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( dm:Attribute
+                dm:Class
+                dm:Context
+                dm:MetaReference
+                dm:Model
+                dm:ModelDomain
+                dm:Relationship
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi
