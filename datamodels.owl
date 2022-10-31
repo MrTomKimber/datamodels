@@ -51,6 +51,24 @@ dm:ClassHasAttribute rdf:type owl:ObjectProperty ;
                      rdfs:range dm:Attribute .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasIdentifier
+dm:ClassHasIdentifier rdf:type owl:ObjectProperty ;
+                      rdfs:domain dm:Class ;
+                      rdfs:range dm:Identifier ;
+                      owl:propertyChainAxiom ( dm:ClassHasAttribute
+                                               dm:r_Identifier
+                                             ) .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasPartialIdentifier
+dm:ClassHasPartialIdentifier rdf:type owl:ObjectProperty ;
+                             rdfs:domain dm:Class ;
+                             rdfs:range dm:PartialIdentifier ;
+                             owl:propertyChainAxiom ( dm:ClassHasAttribute
+                                                      dm:r_PartialIdentifier
+                                                    ) .
+
+
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasRelationshipWith
 dm:ClassHasRelationshipWith rdf:type owl:ObjectProperty ;
                             rdfs:domain dm:Class ;
@@ -93,6 +111,19 @@ dm:ClassIsRepresentationOfAbstract rdf:type owl:ObjectProperty ;
                                                  rdf:type owl:Class
                                                ] ;
                                    rdfs:range dm:Abstract .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataTypeIsMemberOfDataTypeSchema
+dm:DataTypeIsMemberOfDataTypeSchema rdf:type owl:ObjectProperty ;
+                                    owl:inverseOf dm:DataTypeSchemaContainsDataType ;
+                                    rdfs:domain dm:DataType ;
+                                    rdfs:range dm:DataTypeSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataTypeSchemaContainsDataType
+dm:DataTypeSchemaContainsDataType rdf:type owl:ObjectProperty ;
+                                  rdfs:domain dm:DataTypeSchema ;
+                                  rdfs:range dm:DataType .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsClass
@@ -153,18 +184,38 @@ dm:RelationshipHasRange rdf:type owl:ObjectProperty ;
                         rdfs:range dm:Class .
 
 
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyFrom
-dm:RelationshipKeyFrom rdf:type owl:ObjectProperty ;
-                       rdfs:domain dm:Relationship ;
-                       rdfs:range dm:Attribute ;
-                       <http://www.w3.org/2004/02/skos/core#definition> "The attribute that acts as a pointer (i.e. the foreign key) to the target entity for this relationship." .
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyFromAttribute
+dm:RelationshipKeyFromAttribute rdf:type owl:ObjectProperty ;
+                                rdfs:domain dm:Relationship ;
+                                rdfs:range dm:Attribute ;
+                                owl:propertyChainAxiom ( dm:RelationshipHasDomain
+                                                         dm:ClassHasIdentifier
+                                                       ) ;
+                                <http://www.w3.org/2004/02/skos/core#definition> "The attribute that acts as a pointer (i.e. the foreign key) to the target entity for this relationship." .
 
 
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyTo
-dm:RelationshipKeyTo rdf:type owl:ObjectProperty ;
-                     rdfs:domain dm:Relationship ;
-                     rdfs:range dm:Attribute ;
-                     rdfs:comment "The attribute that acts as the primary key for the entity being referenced in the relationship." .
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyToAttribute
+dm:RelationshipKeyToAttribute rdf:type owl:ObjectProperty ;
+                              rdfs:domain dm:Relationship ;
+                              rdfs:range dm:Attribute ;
+                              owl:propertyChainAxiom ( dm:RelationshipHasRange
+                                                       dm:ClassHasIdentifier
+                                                     ) ;
+                              rdfs:comment "The attribute that acts as the primary key for the entity being referenced in the relationship." .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipPartialKeyFromAttribute
+dm:RelationshipPartialKeyFromAttribute rdf:type owl:ObjectProperty ;
+                                       owl:propertyChainAxiom ( dm:RelationshipHasDomain
+                                                                dm:ClassHasPartialIdentifier
+                                                              ) .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipPartialKeyToAttribute
+dm:RelationshipPartialKeyToAttribute rdf:type owl:ObjectProperty ;
+                                     owl:propertyChainAxiom ( dm:RelationshipHasRange
+                                                              dm:ClassHasPartialIdentifier
+                                                            ) .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToCardinality
@@ -177,6 +228,14 @@ dm:RelationshipToCardinality rdf:type owl:ObjectProperty ;
 dm:RelationshipToOptionality rdf:type owl:ObjectProperty ;
                              rdfs:domain dm:Relationship ;
                              rdfs:range dm:Optionality .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_Identifier
+dm:r_Identifier rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_PartialIdentifier
+dm:r_PartialIdentifier rdf:type owl:ObjectProperty .
 
 
 #################################################################
@@ -195,6 +254,20 @@ dm:Name rdf:type owl:DatatypeProperty ;
         rdfs:range xsd:string .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isIdentifierForClass
+dm:isIdentifierForClass rdf:type owl:DatatypeProperty ;
+                        rdfs:domain dm:Attribute ;
+                        rdfs:range xsd:boolean ;
+                        rdfs:comment "For attributes that can be used to uniquely identify members of this class, set to true." .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isPartialIdentifierForClass
+dm:isPartialIdentifierForClass rdf:type owl:DatatypeProperty ;
+                               rdfs:domain dm:Attribute ;
+                               rdfs:range xsd:boolean ;
+                               rdfs:comment "Used for attributes that, in combination, are used as a unique identifier for the class." .
+
+
 #################################################################
 #    Classes
 #################################################################
@@ -202,7 +275,7 @@ dm:Name rdf:type owl:DatatypeProperty ;
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Abstract
 dm:Abstract rdf:type owl:Class ;
             rdfs:subClassOf dm:Class ;
-            <http://www.w3.org/2004/02/skos/core#definition> "An Abstract is a type of class used to represent a single abstracted version of classes that might be present across multiple models."^^xsd:string .
+            <http://www.w3.org/2004/02/skos/core#definition> "An Abstract is a type of class used to represent a single abstracted version of classes that might be present across multiple models or domains. Its use comes about as a result from the assumption that every class is unique to its given model. Multuple model-level classes are mapped to a single Abstract class inheriting all the model-level details."^^xsd:string .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute
@@ -210,6 +283,16 @@ dm:Attribute rdf:type owl:Class ;
              rdfs:subClassOf dm:Definition ;
              rdfs:label "Attribute"^^xsd:string ;
              <http://www.w3.org/2004/02/skos/core#definition> "An attribute represents a particular data point associated with an entity. It will often have a value that conforms to a primitive data type - but for enumerations, might be associated with some other class or controlled list. For modelling purposes, use the attribute and express it as its primitive form, and consider annotating the associated Relationship relation between entities to reference the attributes used to perform the link."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Boolean
+dm:Boolean rdf:type owl:Class ;
+           rdfs:subClassOf dm:DataType .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Bytes
+dm:Bytes rdf:type owl:Class ;
+         rdfs:subClassOf dm:DataType .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality
@@ -225,10 +308,15 @@ dm:Class rdf:type owl:Class ;
          <http://www.w3.org/2004/02/skos/core#definition> "A class is a set of things having some property or attribute in common."^^xsd:string .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Compound
+dm:Compound rdf:type owl:Class ;
+            rdfs:subClassOf dm:DataType .
+
+
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Concept
 dm:Concept rdf:type owl:Class ;
            rdfs:subClassOf dm:Class ;
-           <http://www.w3.org/2004/02/skos/core#definition> "A concept in this context is a high level class describing some concept, idea or thing that is of interest to the business. Concepts form the nodes of a conceptual data model."^^xsd:string .
+           <http://www.w3.org/2004/02/skos/core#definition> "A concept in this context is a high level class describing some concept, idea or thing that is of interest to the business. Concepts form the nodes of a conceptual data model. Each model will consist of a unique set of concepts - so if two models reference a \"user\" concept, there would exist two versions of this, one per model - enabling an independence of definition."^^xsd:string .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ConceptualDataModel
@@ -261,10 +349,38 @@ dm:Definition rdf:type owl:Class ;
               <http://www.w3.org/2004/02/skos/core#definition> "A definition is the description of some kind of representation."^^xsd:string .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Empty
+dm:Empty rdf:type owl:Class ;
+         rdfs:subClassOf dm:DataType .
+
+
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Entity
 dm:Entity rdf:type owl:Class ;
           rdfs:subClassOf dm:Class ;
           <http://www.w3.org/2004/02/skos/core#definition> "An entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models."^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Enumeration
+dm:Enumeration rdf:type owl:Class ;
+               rdfs:subClassOf dm:DataType .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Identifier
+dm:Identifier rdf:type owl:Class ;
+              owl:equivalentClass [ owl:intersectionOf ( dm:Attribute
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty dm:isIdentifierForClass ;
+                                                           owl:hasValue "true"^^xsd:boolean
+                                                         ]
+                                                       ) ;
+                                    rdf:type owl:Class
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty dm:r_Identifier ;
+                                    owl:hasSelf "true"^^xsd:boolean
+                                  ] ;
+              rdfs:subClassOf dm:Attribute ;
+              owl:disjointWith dm:PartialIdentifier .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#LogicalDataModel
@@ -288,10 +404,39 @@ dm:ModelDomain rdf:type owl:Class ;
                rdfs:label "ModelDomain"^^xsd:string .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Numeric
+dm:Numeric rdf:type owl:Class ;
+           rdfs:subClassOf dm:DataType .
+
+
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Optionality
 dm:Optionality rdf:type owl:Class ;
                rdfs:subClassOf dm:MetaReference ;
                rdfs:label "Optionality"^^xsd:string .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PartialIdentifier
+dm:PartialIdentifier rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( dm:Attribute
+                                                                [ rdf:type owl:Class ;
+                                                                  owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty dm:isPartialIdentifierForClass ;
+                                                                                  owl:someValuesFrom xsd:integer
+                                                                                ]
+                                                                                [ rdf:type owl:Restriction ;
+                                                                                  owl:onProperty dm:isPartialIdentifierForClass ;
+                                                                                  owl:hasValue "true"^^xsd:boolean
+                                                                                ]
+                                                                              )
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty dm:r_PartialIdentifier ;
+                                           owl:hasSelf "true"^^xsd:boolean
+                                         ] ;
+                     rdfs:subClassOf dm:Attribute .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PhysicalDataModel
@@ -308,9 +453,46 @@ dm:Relationship rdf:type owl:Class ;
 Each *instance* of relationship class will have a Range and Domain associated with it that constrain the anticipated class types that are acceptable for the relationship."""^^xsd:string .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#String
+dm:String rdf:type owl:Class ;
+          rdfs:subClassOf dm:DataType .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Temporal
+dm:Temporal rdf:type owl:Class ;
+            rdfs:subClassOf dm:DataType .
+
+
 #################################################################
 #    Individuals
 #################################################################
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ANSISQL
+dm:ANSISQL rdf:type owl:NamedIndividual ,
+                    dm:DataTypeSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Address
+dm:Address rdf:type owl:NamedIndividual ,
+                    dm:Concept .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DB2
+dm:DB2 rdf:type owl:NamedIndividual ,
+                dm:DataTypeSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HouseNumber
+dm:HouseNumber rdf:type owl:NamedIndividual ,
+                        dm:Attribute ;
+               dm:AttributeIsMemberOfClass dm:Address ;
+               dm:isPartialIdentifierForClass "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#JSONSchema
+dm:JSONSchema rdf:type owl:NamedIndividual ,
+                       dm:DataTypeSchema .
+
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mandatory
 dm:Mandatory rdf:type owl:NamedIndividual ,
@@ -332,6 +514,11 @@ dm:Optional rdf:type owl:NamedIndividual ,
                      dm:Optionality .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Oracle
+dm:Oracle rdf:type owl:NamedIndividual ,
+                   dm:DataTypeSchema .
+
+
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Person
 dm:Person rdf:type owl:NamedIndividual ,
                    dm:Concept .
@@ -340,13 +527,19 @@ dm:Person rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PersonID
 dm:PersonID rdf:type owl:NamedIndividual ,
                      dm:Attribute ;
-            dm:AttributeIsMemberOfClass dm:Person .
+            dm:AttributeIsMemberOfClass dm:Person ;
+            dm:isIdentifierForClass "true"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PersonName
 dm:PersonName rdf:type owl:NamedIndividual ,
                        dm:Attribute ;
               dm:AttributeIsMemberOfClass dm:Person .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Python
+dm:Python rdf:type owl:NamedIndividual ,
+                   dm:DataTypeSchema .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Role
@@ -357,7 +550,8 @@ dm:Role rdf:type owl:NamedIndividual ,
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RoleID
 dm:RoleID rdf:type owl:NamedIndividual ,
                    dm:Attribute ;
-          dm:AttributeIsMemberOfClass dm:Role .
+          dm:AttributeIsMemberOfClass dm:Role ;
+          dm:isIdentifierForClass "true"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RoleName
@@ -366,13 +560,191 @@ dm:RoleName rdf:type owl:NamedIndividual ,
             dm:AttributeIsMemberOfClass dm:Role .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#StreetName
+dm:StreetName rdf:type owl:NamedIndividual ,
+                       dm:Attribute ;
+              dm:AttributeIsMemberOfClass dm:Address ;
+              dm:isPartialIdentifierForClass "true"^^xsd:boolean .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#XMLSchema
+dm:XMLSchema rdf:type owl:NamedIndividual ,
+                      dm:DataTypeSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_CHAR
+dm:ansi_CHAR rdf:type owl:NamedIndividual ,
+                      dm:String ;
+             dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_CHARACTER
+dm:ansi_CHARACTER rdf:type owl:NamedIndividual ,
+                           dm:String ;
+                  dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_DECIMAL
+dm:ansi_DECIMAL rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_DOUBLE_PRECISION
+dm:ansi_DOUBLE_PRECISION rdf:type owl:NamedIndividual ,
+                                  dm:Numeric ;
+                         dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_FLOAT
+dm:ansi_FLOAT rdf:type owl:NamedIndividual ,
+                       dm:Numeric ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_INT
+dm:ansi_INT rdf:type owl:NamedIndividual ,
+                     dm:Numeric ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_INTEGER
+dm:ansi_INTEGER rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_NCHAR
+dm:ansi_NCHAR rdf:type owl:NamedIndividual ,
+                       dm:String ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_NUMERIC
+dm:ansi_NUMERIC rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_REAL
+dm:ansi_REAL rdf:type owl:NamedIndividual ,
+                      dm:Numeric ;
+             dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ansi_SMALLINT
+dm:ansi_SMALLINT rdf:type owl:NamedIndividual ,
+                          dm:Numeric ;
+                 dm:DataTypeIsMemberOfDataTypeSchema dm:ANSISQL .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_BIGINT
+dm:db2_BIGINT rdf:type owl:NamedIndividual ,
+                       dm:Numeric ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_BINARY
+dm:db2_BINARY rdf:type owl:NamedIndividual ,
+                       dm:Bytes ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_BLOB
+dm:db2_BLOB rdf:type owl:NamedIndividual ,
+                     dm:Bytes ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_BOOLEAN
+dm:db2_BOOLEAN rdf:type owl:NamedIndividual ,
+                        dm:Boolean ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_CHAR
+dm:db2_CHAR rdf:type owl:NamedIndividual ,
+                     dm:String ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_CLOB
+dm:db2_CLOB rdf:type owl:NamedIndividual ,
+                     dm:String ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_DATE
+dm:db2_DATE rdf:type owl:NamedIndividual ,
+                     dm:Temporal ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_DECFLOAT
+dm:db2_DECFLOAT rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_DECIMAL
+dm:db2_DECIMAL rdf:type owl:NamedIndividual ,
+                        dm:Numeric ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_DOUBLE
+dm:db2_DOUBLE rdf:type owl:NamedIndividual ,
+                       dm:Numeric ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_INTEGER
+dm:db2_INTEGER rdf:type owl:NamedIndividual ,
+                        dm:Numeric ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_REAL
+dm:db2_REAL rdf:type owl:NamedIndividual ,
+                     dm:Numeric ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_SMALLINT
+dm:db2_SMALLINT rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_TIME
+dm:db2_TIME rdf:type owl:NamedIndividual ,
+                     dm:Temporal ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_TIMESTAMP
+dm:db2_TIMESTAMP rdf:type owl:NamedIndividual ,
+                          dm:Temporal ;
+                 dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_VARBINARY
+dm:db2_VARBINARY rdf:type owl:NamedIndividual ,
+                          dm:Bytes ;
+                 dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#db2_VARCHAR
+dm:db2_VARCHAR rdf:type owl:NamedIndividual ,
+                        dm:String ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
+
+
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRole
 dm:hasRole rdf:type owl:NamedIndividual ,
                     dm:Relationship ;
            dm:RelationshipHasDomain dm:Person ;
-           dm:RelationshipHasRange dm:Role ;
-           dm:RelationshipKeyFrom dm:PersonID ;
-           dm:RelationshipKeyTo dm:RoleID .
+           dm:RelationshipHasRange dm:Role .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isOpenTo
@@ -389,6 +761,265 @@ dm:isPerformedBy rdf:type owl:NamedIndividual ,
                  dm:RelationshipHasRange dm:Person .
 
 
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_array
+dm:json_array rdf:type owl:NamedIndividual ,
+                       dm:Compound ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_boolean
+dm:json_boolean rdf:type owl:NamedIndividual ,
+                         dm:Boolean ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_integer
+dm:json_integer rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_null
+dm:json_null rdf:type owl:NamedIndividual ,
+                      dm:Empty ;
+             dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_number
+dm:json_number rdf:type owl:NamedIndividual ,
+                        dm:Numeric ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_object
+dm:json_object rdf:type owl:NamedIndividual ,
+                        dm:Compound ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_string
+dm:json_string rdf:type owl:NamedIndividual ,
+                        dm:String ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#livesAt
+dm:livesAt rdf:type owl:NamedIndividual ,
+                    dm:Relationship ;
+           dm:RelationshipHasDomain dm:Person ;
+           dm:RelationshipHasRange dm:Address .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_BINARY_DOUBLE
+dm:oracle_BINARY_DOUBLE rdf:type owl:NamedIndividual ,
+                                 dm:Numeric ;
+                        dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_BINARY_FLOAT
+dm:oracle_BINARY_FLOAT rdf:type owl:NamedIndividual ,
+                                dm:Numeric ;
+                       dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_CHAR
+dm:oracle_CHAR rdf:type owl:NamedIndividual ,
+                        dm:String ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_DEC
+dm:oracle_DEC rdf:type owl:NamedIndividual ,
+                       dm:Numeric ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_LONG
+dm:oracle_LONG rdf:type owl:NamedIndividual ,
+                        dm:String ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_NCHAR
+dm:oracle_NCHAR rdf:type owl:NamedIndividual ,
+                         dm:String ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_NUMBER
+dm:oracle_NUMBER rdf:type owl:NamedIndividual ,
+                          dm:Numeric ;
+                 dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_NVARCHAR2
+dm:oracle_NVARCHAR2 rdf:type owl:NamedIndividual ,
+                             dm:String ;
+                    dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_RAW
+dm:oracle_RAW rdf:type owl:NamedIndividual ,
+                       dm:Bytes ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_VARCHAR
+dm:oracle_VARCHAR rdf:type owl:NamedIndividual ,
+                           dm:String ;
+                  dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_VARCHAR2
+dm:oracle_VARCHAR2 rdf:type owl:NamedIndividual ,
+                            dm:String ;
+                   dm:DataTypeIsMemberOfDataTypeSchema dm:Oracle .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_None
+dm:python_None rdf:type owl:NamedIndividual ,
+                        dm:Empty ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_bool
+dm:python_bool rdf:type owl:NamedIndividual ,
+                        dm:Boolean ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_dict
+dm:python_dict rdf:type owl:NamedIndividual ,
+                        dm:Compound ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_float
+dm:python_float rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_int
+dm:python_int rdf:type owl:NamedIndividual ,
+                       dm:Numeric ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_list
+dm:python_list rdf:type owl:NamedIndividual ,
+                        dm:Compound ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_string
+dm:python_string rdf:type owl:NamedIndividual ,
+                          dm:String ;
+                 dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#python_tuple
+dm:python_tuple rdf:type owl:NamedIndividual ,
+                         dm:Compound ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:Python .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_base64Binary
+dm:xmls_base64Binary rdf:type owl:NamedIndividual ,
+                              dm:Bytes ;
+                     dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_boolean
+dm:xmls_boolean rdf:type owl:NamedIndividual ,
+                         dm:Boolean ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_byte
+dm:xmls_byte rdf:type owl:NamedIndividual ,
+                      dm:Numeric ;
+             dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_date
+dm:xmls_date rdf:type owl:NamedIndividual ,
+                      dm:Temporal ;
+             dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_dateTime
+dm:xmls_dateTime rdf:type owl:NamedIndividual ,
+                          dm:Temporal ;
+                 dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_decimal
+dm:xmls_decimal rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_double
+dm:xmls_double rdf:type owl:NamedIndividual ,
+                        dm:Numeric ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_duration
+dm:xmls_duration rdf:type owl:NamedIndividual ,
+                          dm:Temporal ;
+                 dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_float
+dm:xmls_float rdf:type owl:NamedIndividual ,
+                       dm:Numeric ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_hexBinary
+dm:xmls_hexBinary rdf:type owl:NamedIndividual ,
+                           dm:Bytes ;
+                  dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_int
+dm:xmls_int rdf:type owl:NamedIndividual ,
+                     dm:Numeric ;
+            dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_integer
+dm:xmls_integer rdf:type owl:NamedIndividual ,
+                         dm:Numeric ;
+                dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_long
+dm:xmls_long rdf:type owl:NamedIndividual ,
+                      dm:Numeric ;
+             dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_short
+dm:xmls_short rdf:type owl:NamedIndividual ,
+                       dm:Numeric ;
+              dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_string
+dm:xmls_string rdf:type owl:NamedIndividual ,
+                        dm:String ;
+               dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
+###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#xmls_time
+dm:xmls_time rdf:type owl:NamedIndividual ,
+                      dm:Temporal ;
+             dm:DataTypeIsMemberOfDataTypeSchema dm:XMLSchema .
+
+
 #################################################################
 #    General axioms
 #################################################################
@@ -402,6 +1033,13 @@ dm:isPerformedBy rdf:type owl:NamedIndividual ,
                 dm:ModelDomain
                 dm:Relationship
               )
+] .
+
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( dm:json_string
+                        dm:python_string
+                      )
 ] .
 
 
