@@ -472,21 +472,9 @@ dm:ANSISQL rdf:type owl:NamedIndividual ,
                     dm:DataTypeSchema .
 
 
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Address
-dm:Address rdf:type owl:NamedIndividual ,
-                    dm:Concept .
-
-
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DB2
 dm:DB2 rdf:type owl:NamedIndividual ,
                 dm:DataTypeSchema .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HouseNumber
-dm:HouseNumber rdf:type owl:NamedIndividual ,
-                        dm:Attribute ;
-               dm:AttributeIsMemberOfClass dm:Address ;
-               dm:isPartialIdentifierForClass "true"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#JSONSchema
@@ -519,52 +507,9 @@ dm:Oracle rdf:type owl:NamedIndividual ,
                    dm:DataTypeSchema .
 
 
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Person
-dm:Person rdf:type owl:NamedIndividual ,
-                   dm:Concept .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PersonID
-dm:PersonID rdf:type owl:NamedIndividual ,
-                     dm:Attribute ;
-            dm:AttributeIsMemberOfClass dm:Person ;
-            dm:isIdentifierForClass "true"^^xsd:boolean .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PersonName
-dm:PersonName rdf:type owl:NamedIndividual ,
-                       dm:Attribute ;
-              dm:AttributeIsMemberOfClass dm:Person .
-
-
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Python
 dm:Python rdf:type owl:NamedIndividual ,
                    dm:DataTypeSchema .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Role
-dm:Role rdf:type owl:NamedIndividual ,
-                 dm:Concept .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RoleID
-dm:RoleID rdf:type owl:NamedIndividual ,
-                   dm:Attribute ;
-          dm:AttributeIsMemberOfClass dm:Role ;
-          dm:isIdentifierForClass "true"^^xsd:boolean .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RoleName
-dm:RoleName rdf:type owl:NamedIndividual ,
-                     dm:Attribute ;
-            dm:AttributeIsMemberOfClass dm:Role .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#StreetName
-dm:StreetName rdf:type owl:NamedIndividual ,
-                       dm:Attribute ;
-              dm:AttributeIsMemberOfClass dm:Address ;
-              dm:isPartialIdentifierForClass "true"^^xsd:boolean .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#XMLSchema
@@ -740,27 +685,6 @@ dm:db2_VARCHAR rdf:type owl:NamedIndividual ,
                dm:DataTypeIsMemberOfDataTypeSchema dm:DB2 .
 
 
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRole
-dm:hasRole rdf:type owl:NamedIndividual ,
-                    dm:Relationship ;
-           dm:RelationshipHasDomain dm:Person ;
-           dm:RelationshipHasRange dm:Role .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isOpenTo
-dm:isOpenTo rdf:type owl:NamedIndividual ,
-                     dm:Relationship ;
-            dm:RelationshipHasDomain dm:Role ;
-            dm:RelationshipHasRange dm:Person .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isPerformedBy
-dm:isPerformedBy rdf:type owl:NamedIndividual ,
-                          dm:Relationship ;
-                 dm:RelationshipHasDomain dm:Role ;
-                 dm:RelationshipHasRange dm:Person .
-
-
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#json_array
 dm:json_array rdf:type owl:NamedIndividual ,
                        dm:Compound ;
@@ -801,13 +725,6 @@ dm:json_object rdf:type owl:NamedIndividual ,
 dm:json_string rdf:type owl:NamedIndividual ,
                         dm:String ;
                dm:DataTypeIsMemberOfDataTypeSchema dm:JSONSchema .
-
-
-###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#livesAt
-dm:livesAt rdf:type owl:NamedIndividual ,
-                    dm:Relationship ;
-           dm:RelationshipHasDomain dm:Person ;
-           dm:RelationshipHasRange dm:Address .
 
 
 ###  http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#oracle_BINARY_DOUBLE

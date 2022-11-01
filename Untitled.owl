@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/tomk/ontologies/2022/9/example_datamodel.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/tomk/ontologies/2022/9/example_datamodel.owl">
+    <Prefix name="dmo" IRI="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel</Import>
+    <Declaration>
+        <NamedIndividual IRI="#Address"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AddressHouseNumber"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AddressPostCode"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AddressStreetName"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#InsuranceProduct"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#InsuranceProductCoverage"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#InsuranceProductID"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#InsuranceProductTitle"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Person"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PersonDOB"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PersonFamilyName"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PersonFirstName"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#PersonID"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#hasInsurancePolicy"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#livesAt"/>
+    </Declaration>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Concept"/>
+        <NamedIndividual IRI="#Address"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#AddressHouseNumber"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#AddressPostCode"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#AddressStreetName"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Concept"/>
+        <NamedIndividual IRI="#InsuranceProduct"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#InsuranceProductCoverage"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#InsuranceProductID"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#InsuranceProductTitle"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Concept"/>
+        <NamedIndividual IRI="#Person"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#PersonDOB"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#PersonFamilyName"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#PersonFirstName"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Attribute"/>
+        <NamedIndividual IRI="#PersonID"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Relationship"/>
+        <NamedIndividual IRI="#hasInsurancePolicy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="dmo:Relationship"/>
+        <NamedIndividual IRI="#livesAt"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#AddressHouseNumber"/>
+        <NamedIndividual IRI="#Address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#AddressPostCode"/>
+        <NamedIndividual IRI="#Address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#AddressStreetName"/>
+        <NamedIndividual IRI="#Address"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#InsuranceProductCoverage"/>
+        <NamedIndividual IRI="#InsuranceProduct"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#InsuranceProductID"/>
+        <NamedIndividual IRI="#InsuranceProduct"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#InsuranceProductTitle"/>
+        <NamedIndividual IRI="#InsuranceProduct"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#PersonDOB"/>
+        <NamedIndividual IRI="#Person"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#PersonFamilyName"/>
+        <NamedIndividual IRI="#Person"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#PersonFirstName"/>
+        <NamedIndividual IRI="#Person"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:AttributeIsMemberOfClass"/>
+        <NamedIndividual IRI="#PersonID"/>
+        <NamedIndividual IRI="#Person"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:RelationshipHasDomain"/>
+        <NamedIndividual IRI="#hasInsurancePolicy"/>
+        <NamedIndividual IRI="#Person"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:RelationshipHasRange"/>
+        <NamedIndividual IRI="#hasInsurancePolicy"/>
+        <NamedIndividual IRI="#InsuranceProduct"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:RelationshipHasDomain"/>
+        <NamedIndividual IRI="#livesAt"/>
+        <NamedIndividual IRI="#Person"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="dmo:RelationshipHasRange"/>
+        <NamedIndividual IRI="#livesAt"/>
+        <NamedIndividual IRI="#Address"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="dmo:isPartialIdentifierForClass"/>
+        <NamedIndividual IRI="#AddressHouseNumber"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="dmo:isPartialIdentifierForClass"/>
+        <NamedIndividual IRI="#AddressPostCode"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="dmo:isPartialIdentifierForClass"/>
+        <NamedIndividual IRI="#AddressStreetName"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="dmo:isIdentifierForClass"/>
+        <NamedIndividual IRI="#InsuranceProductID"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="dmo:isIdentifierForClass"/>
+        <NamedIndividual IRI="#PersonID"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi -->
+
