@@ -1,2426 +1,1495 @@
 <?xml version="1.0"?>
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
- xml:base="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel"
- xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
- xmlns:xml="http://www.w3.org/XML/1998/namespace"
- xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
- xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
- ontologyIRI="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel">
-<Prefix name="" IRI="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel"/>
-<Prefix name="dm" IRI="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#"/>
-<Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
-<Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-<Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
-<Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
-<Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-<Declaration>
-    <Class IRI="#AbstractClass"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Attribute"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Boolean"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Bytes"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Cardinality"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Class"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Compound"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#ConceptClass"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#ConceptualDataModel"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Context"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#DataModel"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#DataType"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#DataTypeSchema"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Definition"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Empty"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#EntityMapping"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Enumeration"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Identifier"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#LogicalDataModel"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#LogicalEntityClass"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Mapping"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#MasterDataModel"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#MetaReference"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#ModelDomain"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Numeric"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Optionality"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#PartialIdentifier"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#PhysicalDataModel"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#PhysicalEntityClass"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#PropertyMapping"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Relationship"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Serialization"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#String"/>
-</Declaration>
-<Declaration>
-    <Class IRI="#Temporal"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#AttributeHasDataType"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassHasAttribute"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassHasIdentifier"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassHasRelationshipWith"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassIsMemberOfModel"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#DataTypeSchemaContainsDataType"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#MappingDescripesProperty"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ModelContainsClass"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ModelDomainContainsModel"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ModelHasModelTypeCode"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipFromCardinality"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipFromOptionality"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipHasDomain"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipHasRange"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipPartialKeyFromAttribute"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipPartialKeyToAttribute"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipToCardinality"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#RelationshipToOptionality"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#r_Identifier"/>
-</Declaration>
-<Declaration>
-    <ObjectProperty IRI="#r_PartialIdentifier"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#Description"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#MappingDomain"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#MappingLabel"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#MappingRange"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#MappingSubType"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#ModelTypeCode"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#Name"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#SerializationLabel"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#isIdentifierForClass"/>
-</Declaration>
-<Declaration>
-    <DataProperty IRI="#isPartialIdentifierForClass"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ANSISQL"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#AttributeMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ClassMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#DB2"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#DomainMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#JSONSchema"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#Mandatory"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#Many"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ModelMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#One"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#Optional"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#Oracle"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#PersonModel"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#Python"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#XMLSchema"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_CHAR"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_CHARACTER"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_DECIMAL"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_DOUBLE_PRECISION"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_FLOAT"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_INT"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_INTEGER"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_NCHAR"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_NUMERIC"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_REAL"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#ansi_SMALLINT"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_BIGINT"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_BINARY"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_BLOB"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_BOOLEAN"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_CHAR"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_CLOB"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_DATE"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_DECFLOAT"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_DECIMAL"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_DOUBLE"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_INTEGER"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_REAL"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_SMALLINT"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_TIME"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_TIMESTAMP"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_VARBINARY"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#db2_VARCHAR"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#hasClassMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#hasDataType"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#hasModelMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#json_array"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#json_boolean"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#json_integer"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#json_null"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#json_number"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#json_object"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#json_string"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_BINARY_DOUBLE"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_BINARY_FLOAT"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_CHAR"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_DEC"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_LONG"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_NCHAR"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_NUMBER"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_NVARCHAR2"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_RAW"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_VARCHAR"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#oracle_VARCHAR2"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_None"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_bool"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_dict"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_float"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_int"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_list"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_string"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#python_tuple"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_base64Binary"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_boolean"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_byte"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_date"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_dateTime"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_decimal"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_double"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_duration"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_float"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_hexBinary"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_int"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_integer"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_long"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_short"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_string"/>
-</Declaration>
-<Declaration>
-    <NamedIndividual IRI="#xmls_time"/>
-</Declaration>
-<Declaration>
-    <AnnotationProperty IRI="#MappingKey"/>
-</Declaration>
-<Declaration>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-</Declaration>
-<Declaration>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#example"/>
-</Declaration>
-<EquivalentClasses>
-    <Class IRI="#AbstractClass"/>
-    <ObjectSomeValuesFrom>
-        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
-        <Class IRI="#MasterDataModel"/>
-    </ObjectSomeValuesFrom>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#ConceptClass"/>
-    <ObjectSomeValuesFrom>
-        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+     xml:base="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel">
+    <Prefix name="" IRI="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel"/>
+    <Prefix name="dm" IRI="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#AbstractClass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Attribute"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Class"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ConceptClass"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#ConceptualDataModel"/>
-    </ObjectSomeValuesFrom>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#ConceptualDataModel"/>
-    <DataHasValue>
-        <DataProperty IRI="#ModelTypeCode"/>
-        <Literal>Conceptual</Literal>
-    </DataHasValue>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#EntityMapping"/>
-    <DataHasValue>
-        <DataProperty IRI="#MappingSubType"/>
-        <Literal>Entity</Literal>
-    </DataHasValue>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#Identifier"/>
-    <ObjectIntersectionOf>
-        <Class IRI="#Attribute"/>
-        <DataHasValue>
-            <DataProperty IRI="#isIdentifierForClass"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-        </DataHasValue>
-    </ObjectIntersectionOf>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#Identifier"/>
-    <ObjectHasSelf>
-        <ObjectProperty IRI="#r_Identifier"/>
-    </ObjectHasSelf>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#LogicalDataModel"/>
-    <DataHasValue>
-        <DataProperty IRI="#ModelTypeCode"/>
-        <Literal>Logical</Literal>
-    </DataHasValue>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#LogicalEntityClass"/>
-    <ObjectSomeValuesFrom>
-        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Context"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DataModel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Definition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EntityMapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Identifier"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#LogicalDataModel"/>
-    </ObjectSomeValuesFrom>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#MasterDataModel"/>
-    <DataHasValue>
-        <DataProperty IRI="#ModelTypeCode"/>
-        <Literal>Abstract</Literal>
-    </DataHasValue>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#PartialIdentifier"/>
-    <ObjectIntersectionOf>
-        <Class IRI="#Attribute"/>
-        <ObjectUnionOf>
-            <DataSomeValuesFrom>
-                <DataProperty IRI="#isPartialIdentifierForClass"/>
-                <Datatype abbreviatedIRI="xsd:integer"/>
-            </DataSomeValuesFrom>
-            <DataHasValue>
-                <DataProperty IRI="#isPartialIdentifierForClass"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-            </DataHasValue>
-        </ObjectUnionOf>
-    </ObjectIntersectionOf>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#PartialIdentifier"/>
-    <ObjectHasSelf>
-        <ObjectProperty IRI="#r_PartialIdentifier"/>
-    </ObjectHasSelf>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#PhysicalDataModel"/>
-    <DataHasValue>
-        <DataProperty IRI="#ModelTypeCode"/>
-        <Literal>Physical</Literal>
-    </DataHasValue>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#PhysicalEntityClass"/>
-    <ObjectSomeValuesFrom>
-        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LogicalEntityClass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MasterDataModel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ModelDomain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PartialIdentifier"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#PhysicalDataModel"/>
-    </ObjectSomeValuesFrom>
-</EquivalentClasses>
-<EquivalentClasses>
-    <Class IRI="#PropertyMapping"/>
-    <ObjectIntersectionOf>
-        <ObjectIntersectionOf>
-            <DataSomeValuesFrom>
-                <DataProperty IRI="#MappingDomain"/>
-                <Datatype abbreviatedIRI="xsd:string"/>
-            </DataSomeValuesFrom>
-            <DataSomeValuesFrom>
-                <DataProperty IRI="#MappingLabel"/>
-                <Datatype abbreviatedIRI="xsd:string"/>
-            </DataSomeValuesFrom>
-            <DataSomeValuesFrom>
-                <DataProperty IRI="#MappingRange"/>
-                <Datatype abbreviatedIRI="xsd:string"/>
-            </DataSomeValuesFrom>
-        </ObjectIntersectionOf>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PhysicalEntityClass"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PropertyMapping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Relationship"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Serialization"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassHasAttribute"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassHasIdentifier"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassHasRelationshipWith"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#IdentityAttributeParentClass"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#IdentityClassParentModel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#IdentityParent"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#IdentityRelationshipParentModel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ModelContainsClass"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ModelContainsRelationship"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ModelDomainContainsModel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipFeaturesInModel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipFromCardinality"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipFromOptionality"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipHasDomain"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipHasRange"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipPartialKeyFromAttribute"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipPartialKeyToAttribute"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipToCardinality"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#RelationshipToOptionality"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#r_Identifier"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#r_PartialIdentifier"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Cardinality"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#DataType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Description"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Identifier"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#MappingDomain"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#MappingLabel"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#MappingRange"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#MappingSubType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ModelTypeCode"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Optionality"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#SerializationLabel"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isIdentifierForClass"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isPartialIdentifierForClass"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AttributeMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ClassMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DomainMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#ModelMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#hasClassMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#hasModelMapping"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#MappingKey"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#example"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#AbstractClass"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+            <Class IRI="#MasterDataModel"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#ConceptClass"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+            <Class IRI="#ConceptualDataModel"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#EntityMapping"/>
         <DataHasValue>
             <DataProperty IRI="#MappingSubType"/>
-            <Literal>Property</Literal>
+            <Literal>Entity</Literal>
         </DataHasValue>
-    </ObjectIntersectionOf>
-</EquivalentClasses>
-<SubClassOf>
-    <Class IRI="#AbstractClass"/>
-    <Class IRI="#Class"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Attribute"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Boolean"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Bytes"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Cardinality"/>
-    <Class IRI="#MetaReference"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Class"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Compound"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#ConceptClass"/>
-    <Class IRI="#Class"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#ConceptualDataModel"/>
-    <Class IRI="#DataModel"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Context"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#DataModel"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#DataType"/>
-    <Class IRI="#MetaReference"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#DataTypeSchema"/>
-    <Class IRI="#MetaReference"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Empty"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#EntityMapping"/>
-    <Class IRI="#Mapping"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Enumeration"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Identifier"/>
-    <Class IRI="#Attribute"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#LogicalDataModel"/>
-    <Class IRI="#DataModel"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#LogicalEntityClass"/>
-    <Class IRI="#Class"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Mapping"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#MasterDataModel"/>
-    <Class IRI="#DataModel"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#ModelDomain"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Numeric"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Optionality"/>
-    <Class IRI="#MetaReference"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#PartialIdentifier"/>
-    <Class IRI="#Attribute"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#PhysicalDataModel"/>
-    <Class IRI="#DataModel"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#PhysicalEntityClass"/>
-    <Class IRI="#Class"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#PropertyMapping"/>
-    <Class IRI="#Mapping"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Relationship"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Serialization"/>
-    <Class IRI="#Definition"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#String"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<SubClassOf>
-    <Class IRI="#Temporal"/>
-    <Class IRI="#DataType"/>
-</SubClassOf>
-<DisjointClasses>
-    <Class IRI="#Attribute"/>
-    <Class IRI="#Class"/>
-    <Class IRI="#Context"/>
-    <Class IRI="#DataModel"/>
-    <Class IRI="#MetaReference"/>
-    <Class IRI="#ModelDomain"/>
-    <Class IRI="#Relationship"/>
-</DisjointClasses>
-<DisjointClasses>
-    <Class IRI="#EntityMapping"/>
-    <Class IRI="#PropertyMapping"/>
-</DisjointClasses>
-<DisjointClasses>
-    <Class IRI="#Identifier"/>
-    <Class IRI="#PartialIdentifier"/>
-</DisjointClasses>
-<ClassAssertion>
-    <Class IRI="#DataTypeSchema"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#AttributeMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#ClassMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#DataTypeSchema"/>
-    <NamedIndividual IRI="#DB2"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#DomainMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Serialization"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#DataTypeSchema"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Optionality"/>
-    <NamedIndividual IRI="#Mandatory"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Cardinality"/>
-    <NamedIndividual IRI="#Many"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#ModelMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Cardinality"/>
-    <NamedIndividual IRI="#One"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Optionality"/>
-    <NamedIndividual IRI="#Optional"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#DataTypeSchema"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#DataModel"/>
-    <NamedIndividual IRI="#PersonModel"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#DataTypeSchema"/>
-    <NamedIndividual IRI="#Python"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#DataTypeSchema"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#ansi_CHAR"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#ansi_CHARACTER"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_DECIMAL"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_DOUBLE_PRECISION"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_FLOAT"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_INT"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_INTEGER"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#ansi_NCHAR"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_NUMERIC"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_REAL"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#ansi_SMALLINT"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#db2_BIGINT"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Bytes"/>
-    <NamedIndividual IRI="#db2_BINARY"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Bytes"/>
-    <NamedIndividual IRI="#db2_BLOB"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Boolean"/>
-    <NamedIndividual IRI="#db2_BOOLEAN"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#db2_CHAR"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#db2_CLOB"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Temporal"/>
-    <NamedIndividual IRI="#db2_DATE"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#db2_DECFLOAT"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#db2_DECIMAL"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#db2_DOUBLE"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#db2_INTEGER"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#db2_REAL"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#db2_SMALLINT"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Temporal"/>
-    <NamedIndividual IRI="#db2_TIME"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Temporal"/>
-    <NamedIndividual IRI="#db2_TIMESTAMP"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Bytes"/>
-    <NamedIndividual IRI="#db2_VARBINARY"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#db2_VARCHAR"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#hasClassMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#hasDataType"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#hasModelMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Mapping"/>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Compound"/>
-    <NamedIndividual IRI="#json_array"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Boolean"/>
-    <NamedIndividual IRI="#json_boolean"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#json_integer"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Empty"/>
-    <NamedIndividual IRI="#json_null"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#json_number"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Compound"/>
-    <NamedIndividual IRI="#json_object"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#json_string"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#oracle_BINARY_DOUBLE"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#oracle_BINARY_FLOAT"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#oracle_CHAR"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#oracle_DEC"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#oracle_LONG"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#oracle_NCHAR"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#oracle_NUMBER"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#oracle_NVARCHAR2"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Bytes"/>
-    <NamedIndividual IRI="#oracle_RAW"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#oracle_VARCHAR"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#oracle_VARCHAR2"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Empty"/>
-    <NamedIndividual IRI="#python_None"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Boolean"/>
-    <NamedIndividual IRI="#python_bool"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Compound"/>
-    <NamedIndividual IRI="#python_dict"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#python_float"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#python_int"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Compound"/>
-    <NamedIndividual IRI="#python_list"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#python_string"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Compound"/>
-    <NamedIndividual IRI="#python_tuple"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Bytes"/>
-    <NamedIndividual IRI="#xmls_base64Binary"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Boolean"/>
-    <NamedIndividual IRI="#xmls_boolean"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_byte"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Temporal"/>
-    <NamedIndividual IRI="#xmls_date"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Temporal"/>
-    <NamedIndividual IRI="#xmls_dateTime"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_decimal"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_double"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Temporal"/>
-    <NamedIndividual IRI="#xmls_duration"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_float"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Bytes"/>
-    <NamedIndividual IRI="#xmls_hexBinary"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_int"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_integer"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_long"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Numeric"/>
-    <NamedIndividual IRI="#xmls_short"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#String"/>
-    <NamedIndividual IRI="#xmls_string"/>
-</ClassAssertion>
-<ClassAssertion>
-    <Class IRI="#Temporal"/>
-    <NamedIndividual IRI="#xmls_time"/>
-</ClassAssertion>
-<DifferentIndividuals>
-    <NamedIndividual IRI="#json_string"/>
-    <NamedIndividual IRI="#python_string"/>
-</DifferentIndividuals>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#AttributeMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#ClassMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#DomainMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#ModelMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#hasClassMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#hasDataType"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#hasModelMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_CHAR"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_CHARACTER"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_DECIMAL"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_DOUBLE_PRECISION"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_FLOAT"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_INT"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_INTEGER"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_NCHAR"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_NUMERIC"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_REAL"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#ansi_SMALLINT"/>
-    <NamedIndividual IRI="#ANSISQL"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_BIGINT"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_BINARY"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_BLOB"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_BOOLEAN"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_CHAR"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_CLOB"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_DATE"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_DECFLOAT"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_DECIMAL"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_DOUBLE"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_INTEGER"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_REAL"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_SMALLINT"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_TIME"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_TIMESTAMP"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_VARBINARY"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#db2_VARCHAR"/>
-    <NamedIndividual IRI="#DB2"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#json_array"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#json_boolean"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#json_integer"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#json_null"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#json_number"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#json_object"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#json_string"/>
-    <NamedIndividual IRI="#JSONSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_BINARY_DOUBLE"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_BINARY_FLOAT"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_CHAR"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_DEC"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_LONG"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_NCHAR"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_NUMBER"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_NVARCHAR2"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_RAW"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_VARCHAR"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#oracle_VARCHAR2"/>
-    <NamedIndividual IRI="#Oracle"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_None"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_bool"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_dict"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_float"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_int"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_list"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_string"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#python_tuple"/>
-    <NamedIndividual IRI="#Python"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_base64Binary"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_boolean"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_byte"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_date"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_dateTime"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_decimal"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_double"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_duration"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_float"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_hexBinary"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_int"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_integer"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_long"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_short"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_string"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<ObjectPropertyAssertion>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <NamedIndividual IRI="#xmls_time"/>
-    <NamedIndividual IRI="#XMLSchema"/>
-</ObjectPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#AttributeMapping"/>
-    <Literal>Attribute</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#AttributeMapping"/>
-    <Literal>Attribute</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#AttributeMapping"/>
-    <Literal>Entity</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#AttributeMapping"/>
-    <Literal>Attribute</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#ClassMapping"/>
-    <Literal>Class</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#ClassMapping"/>
-    <Literal>Class</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#ClassMapping"/>
-    <Literal>Entity</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#ClassMapping"/>
-    <Literal>Entity</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#DomainMapping"/>
-    <Literal>Domain</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#DomainMapping"/>
-    <Literal>Domain</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#DomainMapping"/>
-    <Literal>Entity</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#DomainMapping"/>
-    <Literal>Business Domain</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#ModelMapping"/>
-    <Literal>DataModel</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#ModelMapping"/>
-    <Literal>DataModel</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#ModelMapping"/>
-    <Literal>Entity</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#ModelMapping"/>
-    <Literal>Property</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#ModelMapping"/>
-    <Literal>Model</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingDomain"/>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-    <Literal>Class</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-    <Literal>hasAttribute</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-    <Literal>Attribute</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-    <Literal>Property</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#hasAttributeMapping"/>
-    <Literal>Attribute</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingDomain"/>
-    <NamedIndividual IRI="#hasClassMapping"/>
-    <Literal>DataModel</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#hasClassMapping"/>
-    <Literal>hasClass</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#hasClassMapping"/>
-    <Literal>Class</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#hasClassMapping"/>
-    <Literal>Property</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#hasClassMapping"/>
-    <Literal>Entity</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingDomain"/>
-    <NamedIndividual IRI="#hasDataType"/>
-    <Literal>Attribute</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#hasDataType"/>
-    <Literal>hasDataType</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#hasDataType"/>
-    <Literal>DataType</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#hasDataType"/>
-    <Literal>Property</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#hasDataType"/>
-    <Literal>DataType</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingDomain"/>
-    <NamedIndividual IRI="#hasModelMapping"/>
-    <Literal>Domain</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#hasModelMapping"/>
-    <Literal>hasModel</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#hasModelMapping"/>
-    <Literal>DataModel</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#hasModelMapping"/>
-    <Literal>Property</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#hasModelMapping"/>
-    <Literal>Model</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingDomain"/>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-    <Literal>DataModel</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingLabel"/>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-    <Literal>hasModelType</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingRange"/>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-    <Literal>ModelTypeCode</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#MappingSubType"/>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-    <Literal>Property</Literal>
-</DataPropertyAssertion>
-<DataPropertyAssertion>
-    <DataProperty IRI="#SerializationLabel"/>
-    <NamedIndividual IRI="#hasModelTypeMapping"/>
-    <Literal>ModelType</Literal>
-</DataPropertyAssertion>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
-    <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
-</InverseObjectProperties>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
-    <ObjectProperty IRI="#ClassHasAttribute"/>
-</InverseObjectProperties>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
-    <ObjectProperty IRI="#RelationshipHasDomain"/>
-</InverseObjectProperties>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#ClassIsMemberOfModel"/>
-    <ObjectProperty IRI="#ModelContainsClass"/>
-</InverseObjectProperties>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
-    <ObjectProperty IRI="#RelationshipHasRange"/>
-</InverseObjectProperties>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <ObjectProperty IRI="#DataTypeSchemaContainsDataType"/>
-</InverseObjectProperties>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#ModelDomainContainsModel"/>
-    <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
-</InverseObjectProperties>
-<InverseObjectProperties>
-    <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
-    <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
-</InverseObjectProperties>
-<TransitiveObjectProperty>
-    <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
-</TransitiveObjectProperty>
-<TransitiveObjectProperty>
-    <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
-</TransitiveObjectProperty>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
-    <Class IRI="#AbstractClass"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#AttributeHasDataType"/>
-    <Class IRI="#Attribute"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
-    <Class IRI="#Attribute"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassHasAttribute"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassHasIdentifier"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassHasRelationshipWith"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassIsMemberOfModel"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
-    <ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Identifier"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Attribute"/>
+            <DataHasValue>
+                <DataProperty IRI="#isIdentifierForClass"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+            </DataHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Identifier"/>
+        <ObjectHasSelf>
+            <ObjectProperty IRI="#r_Identifier"/>
+        </ObjectHasSelf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#LogicalEntityClass"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+            <Class IRI="#LogicalDataModel"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#PartialIdentifier"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Attribute"/>
+            <ObjectUnionOf>
+                <DataSomeValuesFrom>
+                    <DataProperty IRI="#isPartialIdentifierForClass"/>
+                    <Datatype abbreviatedIRI="xsd:integer"/>
+                </DataSomeValuesFrom>
+                <DataHasValue>
+                    <DataProperty IRI="#isPartialIdentifierForClass"/>
+                    <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+                </DataHasValue>
+            </ObjectUnionOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#PartialIdentifier"/>
+        <ObjectHasSelf>
+            <ObjectProperty IRI="#r_PartialIdentifier"/>
+        </ObjectHasSelf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#PhysicalEntityClass"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+            <Class IRI="#PhysicalDataModel"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#PropertyMapping"/>
+        <ObjectIntersectionOf>
+            <ObjectIntersectionOf>
+                <DataSomeValuesFrom>
+                    <DataProperty IRI="#MappingDomain"/>
+                    <Datatype abbreviatedIRI="xsd:string"/>
+                </DataSomeValuesFrom>
+                <DataSomeValuesFrom>
+                    <DataProperty IRI="#MappingLabel"/>
+                    <Datatype abbreviatedIRI="xsd:string"/>
+                </DataSomeValuesFrom>
+                <DataSomeValuesFrom>
+                    <DataProperty IRI="#MappingRange"/>
+                    <Datatype abbreviatedIRI="xsd:string"/>
+                </DataSomeValuesFrom>
+            </ObjectIntersectionOf>
+            <DataHasValue>
+                <DataProperty IRI="#MappingSubType"/>
+                <Literal>Property</Literal>
+            </DataHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#AbstractClass"/>
         <Class IRI="#Class"/>
-        <ObjectComplementOf>
-            <Class IRI="#AbstractClass"/>
-        </ObjectComplementOf>
-    </ObjectIntersectionOf>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <Class IRI="#DataType"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#DataTypeSchemaContainsDataType"/>
-    <Class IRI="#DataTypeSchema"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ModelContainsClass"/>
-    <Class IRI="#DataModel"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ModelDomainContainsModel"/>
-    <Class IRI="#ModelDomain"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
-    <Class IRI="#ModelDomain"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
-    <Class IRI="#ModelDomain"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ModelHasModelTypeCode"/>
-    <Class IRI="#DataModel"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
-    <Class IRI="#DataModel"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipFromCardinality"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipFromOptionality"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipHasDomain"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipHasRange"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipToCardinality"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#RelationshipToOptionality"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyDomain>
-<ObjectPropertyDomain>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <Class IRI="#Serialization"/>
-</ObjectPropertyDomain>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
-    <ObjectIntersectionOf>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Attribute"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#Class"/>
-        <ObjectComplementOf>
-            <Class IRI="#AbstractClass"/>
-        </ObjectComplementOf>
-    </ObjectIntersectionOf>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#AttributeHasDataType"/>
-    <Class IRI="#DataType"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
-    <ObjectMaxCardinality cardinality="1">
-        <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConceptClass"/>
         <Class IRI="#Class"/>
-    </ObjectMaxCardinality>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassHasAttribute"/>
-    <Class IRI="#Attribute"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassHasIdentifier"/>
-    <Class IRI="#Identifier"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
-    <Class IRI="#PartialIdentifier"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassHasRelationshipWith"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassIsMemberOfModel"/>
-    <ObjectMaxCardinality cardinality="1">
-        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConceptualDataModel"/>
         <Class IRI="#DataModel"/>
-    </ObjectMaxCardinality>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
-    <Class IRI="#Relationship"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
-    <Class IRI="#AbstractClass"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#DataTypeIsMemberOfDataTypeSchema"/>
-    <Class IRI="#DataTypeSchema"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#DataTypeSchemaContainsDataType"/>
-    <Class IRI="#DataType"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ModelContainsClass"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ModelDomainContainsModel"/>
-    <Class IRI="#DataModel"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
-    <Class IRI="#ModelDomain"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
-    <Class IRI="#ModelDomain"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ModelHasModelTypeCode"/>
-    <DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Context"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DataModel"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EntityMapping"/>
+        <Class IRI="#Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Identifier"/>
+        <Class IRI="#Attribute"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LogicalDataModel"/>
+        <Class IRI="#DataModel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LogicalEntityClass"/>
+        <Class IRI="#Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mapping"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MasterDataModel"/>
+        <Class IRI="#DataModel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ModelDomain"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PartialIdentifier"/>
+        <Class IRI="#Attribute"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PhysicalDataModel"/>
+        <Class IRI="#DataModel"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PhysicalEntityClass"/>
+        <Class IRI="#Class"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PropertyMapping"/>
+        <Class IRI="#Mapping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Relationship"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Serialization"/>
+        <Class IRI="#Definition"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#EntityMapping"/>
+        <Class IRI="#PropertyMapping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Identifier"/>
+        <Class IRI="#PartialIdentifier"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#AttributeMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#ClassMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#DomainMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Serialization"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#ModelMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#hasClassMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#hasModelMapping"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mapping"/>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#AttributeMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#ClassMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#DomainMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#ModelMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#hasClassMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#hasModelMapping"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <NamedIndividual IRI="#DomainModelClassEntityRecord"/>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#AttributeMapping"/>
+        <Literal>Attribute</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#AttributeMapping"/>
+        <Literal>Attribute</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#AttributeMapping"/>
+        <Literal>Entity</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#AttributeMapping"/>
+        <Literal>Attribute</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#ClassMapping"/>
+        <Literal>Class</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#ClassMapping"/>
+        <Literal>Class</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#ClassMapping"/>
+        <Literal>Entity</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#ClassMapping"/>
+        <Literal>Entity</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#DomainMapping"/>
+        <Literal>Domain</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#DomainMapping"/>
+        <Literal>Domain</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#DomainMapping"/>
+        <Literal>Entity</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#DomainMapping"/>
+        <Literal>Business Domain</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#ModelMapping"/>
+        <Literal>DataModel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#ModelMapping"/>
+        <Literal>DataModel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#ModelMapping"/>
+        <Literal>Entity</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#ModelMapping"/>
+        <Literal>Property</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#ModelMapping"/>
+        <Literal>Model</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingDomain"/>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+        <Literal>Class</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+        <Literal>hasAttribute</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+        <Literal>Attribute</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+        <Literal>Property</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#hasAttributeMapping"/>
+        <Literal>Attribute</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingDomain"/>
+        <NamedIndividual IRI="#hasClassMapping"/>
+        <Literal>DataModel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#hasClassMapping"/>
+        <Literal>hasClass</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#hasClassMapping"/>
+        <Literal>Class</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#hasClassMapping"/>
+        <Literal>Property</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#hasClassMapping"/>
+        <Literal>Entity</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingDomain"/>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+        <Literal>Attribute</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+        <Literal>hasDataType</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+        <Literal>DataType</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+        <Literal>Property</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#hasDataTypeMapping"/>
+        <Literal>DataType</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingDomain"/>
+        <NamedIndividual IRI="#hasModelMapping"/>
+        <Literal>Domain</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#hasModelMapping"/>
+        <Literal>hasModel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#hasModelMapping"/>
+        <Literal>DataModel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#hasModelMapping"/>
+        <Literal>Property</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#hasModelMapping"/>
+        <Literal>Model</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingDomain"/>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+        <Literal>DataModel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingLabel"/>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+        <Literal>hasModelType</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingRange"/>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+        <Literal>ModelTypeCode</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#MappingSubType"/>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+        <Literal>Property</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#SerializationLabel"/>
+        <NamedIndividual IRI="#hasModelTypeMapping"/>
+        <Literal>ModelType</Literal>
+    </DataPropertyAssertion>
+    <EquivalentObjectProperties>
+        <ObjectProperty IRI="#IdentityAttributeParentClass"/>
+        <ObjectInverseOf>
+            <ObjectProperty IRI="#ClassHasAttribute"/>
+        </ObjectInverseOf>
+    </EquivalentObjectProperties>
+    <EquivalentObjectProperties>
+        <ObjectProperty IRI="#IdentityClassParentModel"/>
+        <ObjectInverseOf>
+            <ObjectProperty IRI="#ModelContainsClass"/>
+        </ObjectInverseOf>
+    </EquivalentObjectProperties>
+    <EquivalentObjectProperties>
+        <ObjectProperty IRI="#IdentityRelationshipParentModel"/>
+        <ObjectInverseOf>
+            <ObjectProperty IRI="#ModelContainsRelationship"/>
+        </ObjectInverseOf>
+    </EquivalentObjectProperties>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#IdentityAttributeParentClass"/>
+        <ObjectProperty IRI="#IdentityParent"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#IdentityClassParentModel"/>
+        <ObjectProperty IRI="#IdentityParent"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#IdentityRelationshipParentModel"/>
+        <ObjectProperty IRI="#IdentityParent"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
+        <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
+        <ObjectProperty IRI="#ClassHasAttribute"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
+        <ObjectProperty IRI="#RelationshipHasDomain"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+        <ObjectProperty IRI="#ModelContainsClass"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
+        <ObjectProperty IRI="#RelationshipHasRange"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ModelContainsRelationship"/>
+        <ObjectProperty IRI="#RelationshipFeaturesInModel"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ModelDomainContainsModel"/>
+        <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
+        <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
+    </InverseObjectProperties>
+    <TransitiveObjectProperty>
+        <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
+    </TransitiveObjectProperty>
+    <TransitiveObjectProperty>
+        <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
+    </TransitiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
+        <Class IRI="#AbstractClass"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
+        <Class IRI="#Attribute"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassHasAttribute"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassHasIdentifier"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassHasRelationshipWith"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Class"/>
+            <ObjectComplementOf>
+                <Class IRI="#AbstractClass"/>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#IdentityAttributeParentClass"/>
+        <Class IRI="#Attribute"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#IdentityClassParentModel"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#IdentityParent"/>
+        <Class IRI="#Definition"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#IdentityRelationshipParentModel"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ModelContainsClass"/>
+        <Class IRI="#DataModel"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ModelContainsRelationship"/>
+        <Class IRI="#DataModel"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ModelDomainContainsModel"/>
+        <Class IRI="#ModelDomain"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
+        <Class IRI="#ModelDomain"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
+        <Class IRI="#ModelDomain"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
+        <Class IRI="#DataModel"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipFeaturesInModel"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipFromCardinality"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipFromOptionality"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipHasDomain"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipHasRange"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipToCardinality"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#RelationshipToOptionality"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <Class IRI="#Serialization"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Class"/>
+            <ObjectComplementOf>
+                <Class IRI="#AbstractClass"/>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="#AttributeIsMemberOfClass"/>
+            <Class IRI="#Class"/>
+        </ObjectMaxCardinality>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassHasAttribute"/>
+        <Class IRI="#Attribute"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassHasIdentifier"/>
+        <Class IRI="#Identifier"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
+        <Class IRI="#PartialIdentifier"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassHasRelationshipWith"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassIsDomainOfRelationship"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="#ClassIsMemberOfModel"/>
+            <Class IRI="#DataModel"/>
+        </ObjectMaxCardinality>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassIsRangeOfRelationship"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
+        <Class IRI="#AbstractClass"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#IdentityAttributeParentClass"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#IdentityClassParentModel"/>
+        <Class IRI="#DataModel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#IdentityParent"/>
+        <Class IRI="#Definition"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#IdentityRelationshipParentModel"/>
+        <Class IRI="#DataModel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ModelContainsClass"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ModelContainsRelationship"/>
+        <Class IRI="#Relationship"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ModelDomainContainsModel"/>
+        <Class IRI="#DataModel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ModelDomainContainsSubDomain"/>
+        <Class IRI="#ModelDomain"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ModelDomainIsSubDomainOf"/>
+        <Class IRI="#ModelDomain"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
+        <ObjectMaxCardinality cardinality="1">
+            <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
+            <Class IRI="#ModelDomain"/>
+        </ObjectMaxCardinality>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipFeaturesInModel"/>
+        <Class IRI="#DataModel"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipFromCardinality"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#Cardinality"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipFromOptionality"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#Optionality"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipHasDomain"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipHasRange"/>
+        <Class IRI="#Class"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
+        <Class IRI="#Attribute"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
+        <Class IRI="#Attribute"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipToCardinality"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#Cardinality"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#RelationshipToOptionality"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#Optionality"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <Class IRI="#Mapping"/>
+    </ObjectPropertyRange>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#ClassHasAttribute"/>
+            <ObjectProperty IRI="#r_Identifier"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#ClassHasIdentifier"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#ClassHasAttribute"/>
+            <ObjectProperty IRI="#r_PartialIdentifier"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#RelationshipHasDomain"/>
+            <ObjectProperty IRI="#ClassHasIdentifier"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#RelationshipHasDomain"/>
+            <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#RelationshipPartialKeyFromAttribute"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#RelationshipHasRange"/>
+            <ObjectProperty IRI="#ClassHasIdentifier"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectProperty IRI="#RelationshipHasRange"/>
+            <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#RelationshipPartialKeyToAttribute"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectPropertyChain>
+            <ObjectInverseOf>
+                <ObjectProperty IRI="#RelationshipHasDomain"/>
+            </ObjectInverseOf>
+            <ObjectProperty IRI="#RelationshipHasRange"/>
+        </ObjectPropertyChain>
+        <ObjectProperty IRI="#ClassHasRelationshipWith"/>
+    </SubObjectPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Cardinality"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#RelationshipFromCardinality"/>
+            <Class IRI="#Relationship"/>
+        </ObjectSomeValuesFrom>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Cardinality"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#RelationshipToCardinality"/>
+            <Class IRI="#Relationship"/>
+        </ObjectSomeValuesFrom>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#DataType"/>
+        <Class IRI="#Attribute"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Description"/>
+        <Class IRI="#Definition"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Identifier"/>
+        <Class IRI="#Definition"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#MappingDomain"/>
+        <Class IRI="#Mapping"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#MappingLabel"/>
+        <Class IRI="#Mapping"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#MappingRange"/>
+        <Class IRI="#Mapping"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#MappingSubType"/>
+        <Class IRI="#Mapping"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ModelTypeCode"/>
+        <Class IRI="#DataModel"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Name"/>
+        <Class IRI="#Definition"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Optionality"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#RelationshipFromOptionality"/>
+            <Class IRI="#Relationship"/>
+        </ObjectSomeValuesFrom>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Optionality"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#RelationshipToOptionality"/>
+            <Class IRI="#Relationship"/>
+        </ObjectSomeValuesFrom>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#SerializationLabel"/>
+        <Class IRI="#Mapping"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isIdentifierForClass"/>
+        <Class IRI="#Attribute"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isPartialIdentifierForClass"/>
+        <Class IRI="#Attribute"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#Cardinality"/>
+        <DataOneOf>
+            <Literal>Many</Literal>
+            <Literal>One</Literal>
+        </DataOneOf>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#DataType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Description"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Identifier"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#MappingDomain"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#MappingLabel"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#MappingRange"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#MappingSubType"/>
+        <DataOneOf>
+            <Literal>Entity</Literal>
+            <Literal>Property</Literal>
+        </DataOneOf>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#ModelTypeCode"/>
         <Datatype abbreviatedIRI="xsd:string"/>
-    </DataSomeValuesFrom>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
-    <ObjectMaxCardinality cardinality="1">
-        <ObjectProperty IRI="#ModelIsMemberOfModelDomain"/>
-        <Class IRI="#ModelDomain"/>
-    </ObjectMaxCardinality>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipFromCardinality"/>
-    <Class IRI="#Cardinality"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipFromOptionality"/>
-    <Class IRI="#Optionality"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipHasDomain"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipHasRange"/>
-    <Class IRI="#Class"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
-    <Class IRI="#Attribute"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
-    <Class IRI="#Attribute"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipToCardinality"/>
-    <Class IRI="#Cardinality"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#RelationshipToOptionality"/>
-    <Class IRI="#Optionality"/>
-</ObjectPropertyRange>
-<ObjectPropertyRange>
-    <ObjectProperty IRI="#SerializationContainsMapping"/>
-    <Class IRI="#Mapping"/>
-</ObjectPropertyRange>
-<SubObjectPropertyOf>
-    <ObjectPropertyChain>
-        <ObjectProperty IRI="#ClassHasAttribute"/>
-        <ObjectProperty IRI="#r_Identifier"/>
-    </ObjectPropertyChain>
-    <ObjectProperty IRI="#ClassHasIdentifier"/>
-</SubObjectPropertyOf>
-<SubObjectPropertyOf>
-    <ObjectPropertyChain>
-        <ObjectProperty IRI="#ClassHasAttribute"/>
-        <ObjectProperty IRI="#r_PartialIdentifier"/>
-    </ObjectPropertyChain>
-    <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
-</SubObjectPropertyOf>
-<SubObjectPropertyOf>
-    <ObjectPropertyChain>
-        <ObjectProperty IRI="#RelationshipHasDomain"/>
-        <ObjectProperty IRI="#ClassHasIdentifier"/>
-    </ObjectPropertyChain>
-    <ObjectProperty IRI="#RelationshipKeyFromAttribute"/>
-</SubObjectPropertyOf>
-<SubObjectPropertyOf>
-    <ObjectPropertyChain>
-        <ObjectProperty IRI="#RelationshipHasDomain"/>
-        <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
-    </ObjectPropertyChain>
-    <ObjectProperty IRI="#RelationshipPartialKeyFromAttribute"/>
-</SubObjectPropertyOf>
-<SubObjectPropertyOf>
-    <ObjectPropertyChain>
-        <ObjectProperty IRI="#RelationshipHasRange"/>
-        <ObjectProperty IRI="#ClassHasIdentifier"/>
-    </ObjectPropertyChain>
-    <ObjectProperty IRI="#RelationshipKeyToAttribute"/>
-</SubObjectPropertyOf>
-<SubObjectPropertyOf>
-    <ObjectPropertyChain>
-        <ObjectProperty IRI="#RelationshipHasRange"/>
-        <ObjectProperty IRI="#ClassHasPartialIdentifier"/>
-    </ObjectPropertyChain>
-    <ObjectProperty IRI="#RelationshipPartialKeyToAttribute"/>
-</SubObjectPropertyOf>
-<SubObjectPropertyOf>
-    <ObjectPropertyChain>
-        <ObjectInverseOf>
-            <ObjectProperty IRI="#RelationshipHasDomain"/>
-        </ObjectInverseOf>
-        <ObjectProperty IRI="#RelationshipHasRange"/>
-    </ObjectPropertyChain>
-    <ObjectProperty IRI="#ClassHasRelationshipWith"/>
-</SubObjectPropertyOf>
-<DataPropertyDomain>
-    <DataProperty IRI="#Description"/>
-    <Class IRI="#Definition"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#MappingDomain"/>
-    <Class IRI="#Mapping"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#MappingLabel"/>
-    <Class IRI="#Mapping"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#MappingRange"/>
-    <Class IRI="#Mapping"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#MappingSubType"/>
-    <Class IRI="#Mapping"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#ModelTypeCode"/>
-    <Class IRI="#DataModel"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#Name"/>
-    <Class IRI="#Definition"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#SerializationLabel"/>
-    <Class IRI="#Mapping"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#isIdentifierForClass"/>
-    <Class IRI="#Attribute"/>
-</DataPropertyDomain>
-<DataPropertyDomain>
-    <DataProperty IRI="#isPartialIdentifierForClass"/>
-    <Class IRI="#Attribute"/>
-</DataPropertyDomain>
-<DataPropertyRange>
-    <DataProperty IRI="#Description"/>
-    <Datatype abbreviatedIRI="xsd:string"/>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#MappingDomain"/>
-    <Datatype abbreviatedIRI="xsd:string"/>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#MappingLabel"/>
-    <Datatype abbreviatedIRI="xsd:string"/>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#MappingRange"/>
-    <Datatype abbreviatedIRI="xsd:string"/>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#MappingSubType"/>
-    <DataOneOf>
-        <Literal>Entity</Literal>
-        <Literal>Property</Literal>
-    </DataOneOf>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#ModelTypeCode"/>
-    <DataOneOf>
-        <Literal>Abstract</Literal>
-        <Literal>Conceptual</Literal>
-        <Literal>Logical</Literal>
-        <Literal>Physical</Literal>
-    </DataOneOf>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#Name"/>
-    <Datatype abbreviatedIRI="xsd:string"/>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#SerializationLabel"/>
-    <Datatype abbreviatedIRI="xsd:string"/>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#isIdentifierForClass"/>
-    <Datatype abbreviatedIRI="xsd:boolean"/>
-</DataPropertyRange>
-<DataPropertyRange>
-    <DataProperty IRI="#isPartialIdentifierForClass"/>
-    <Datatype abbreviatedIRI="xsd:boolean"/>
-</DataPropertyRange>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#AbstractClass</IRI>
-    <Literal>An Abstract is a type of class used to represent a single abstracted version of classes that might be present across multiple models or domains. Its use comes about as a result from the assumption that every class is unique to its given model. Multuple model-level classes are mapped to a single Abstract class inheriting all the model-level details.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#Attribute</IRI>
-    <Literal>Attribute</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#Attribute</IRI>
-    <Literal>Attribute</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#Attribute</IRI>
-    <Literal>An attribute represents a particular data point associated with an entity. It will often have a value that conforms to a primitive data type - but for enumerations, might be associated with some other class or controlled list. For modelling purposes, use the attribute and express it as its primitive form, and consider annotating the associated Relationship relation between entities to reference the attributes used to perform the link.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#AttributeHasDataType</IRI>
-    <Literal>hasDataType</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#Cardinality</IRI>
-    <Literal>Cardinality</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#Class</IRI>
-    <Literal>Class</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#Class</IRI>
-    <Literal>Class</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#Class</IRI>
-    <Literal>A class is a set of things having some property or attribute in common.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#ClassHasAttribute</IRI>
-    <Literal>hasAttribute</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#ClassHasRelationshipWith</IRI>
-    <Literal>This is an Inferred Relationship: ClassHasRelationshipWith provides a simplified direct pointer to classes linked via a Relationship.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#ConceptClass</IRI>
-    <Literal>A concept in this context is a high level class describing some concept, idea or thing that is of interest to the business. Concepts form the nodes of a conceptual data model. Each model will consist of a unique set of concepts - so if two models reference a &quot;user&quot; concept, there would exist two versions of this, one per model - enabling an independence of definition.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#Context</IRI>
-    <Literal>Context</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#Context</IRI>
-    <Literal>Context</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#Context</IRI>
-    <Literal>A context is some grouping of entities, schema or concepts. In physical data models, this might describe an IBM DB2 or Oracle schema (i.e. a collection of tables, views and other objects into an administrative package), an application or a collection of datasets. For logical or conceptual models, it would be used to form an informal grouping within a larger model. For more formal groupings, expect to use Domain, or Model.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#DataModel</IRI>
-    <Literal>DataModel</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#DataType</IRI>
-    <Literal>DataType</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#DataType</IRI>
-    <Literal>DataType</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#DataTypeSchema</IRI>
-    <Literal>DataTypeSchema</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#DataTypeSchema</IRI>
-    <Literal>DataTypeSchema</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#Definition</IRI>
-    <Literal>Definition</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#Definition</IRI>
-    <Literal>A definition is the description of some kind of representation.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#LogicalEntityClass</IRI>
-    <Literal>A logical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#Mapping</IRI>
-    <Literal>Mapping</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#Mapping</IRI>
-    <Literal>A mapping contains all the information required to interpret content on a row of data and convert it into an individual in the ontology.
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Optionality"/>
+        <DataOneOf>
+            <Literal>Mandatory</Literal>
+            <Literal>Optional</Literal>
+        </DataOneOf>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#SerializationLabel"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isIdentifierForClass"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isPartialIdentifierForClass"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#AbstractClass</IRI>
+        <Literal>An Abstract is a type of class used to represent a single abstracted version of classes that might be present across multiple models or domains. Its use comes about as a result from the assumption that every class is unique to its given model. Multuple model-level classes are mapped to a single Abstract class inheriting all the model-level details.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#Attribute</IRI>
+        <Literal>Attribute</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Attribute</IRI>
+        <Literal>Attribute</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Attribute</IRI>
+        <Literal>An attribute represents a particular data point associated with an entity. It will often have a value that conforms to a primitive data type - but for enumerations, might be associated with some other class or controlled list. For modelling purposes, use the attribute and express it as its primitive form, and consider annotating the associated Relationship relation between entities to reference the attributes used to perform the link.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#Class</IRI>
+        <Literal>Class</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Class</IRI>
+        <Literal>Class</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Class</IRI>
+        <Literal>A class is a set of things having some property or attribute in common.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#ClassHasAttribute</IRI>
+        <Literal>hasAttribute</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#ClassHasRelationshipWith</IRI>
+        <Literal>This is an Inferred Relationship: ClassHasRelationshipWith provides a simplified direct pointer to classes linked via a Relationship.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#ConceptClass</IRI>
+        <Literal>A concept in this context is a high level class describing some concept, idea or thing that is of interest to the business. Concepts form the nodes of a conceptual data model. Each model will consist of a unique set of concepts - so if two models reference a &quot;user&quot; concept, there would exist two versions of this, one per model - enabling an independence of definition.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#Context</IRI>
+        <Literal>Context</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Context</IRI>
+        <Literal>Context</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Context</IRI>
+        <Literal>A context is some grouping of entities, schema or concepts. In physical data models, this might describe an IBM DB2 or Oracle schema (i.e. a collection of tables, views and other objects into an administrative package), an application or a collection of datasets. For logical or conceptual models, it would be used to form an informal grouping within a larger model. For more formal groupings, expect to use Domain, or Model.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#DataModel</IRI>
+        <Literal>DataModel</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#DataType</IRI>
+        <Literal>hasDataType</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Definition</IRI>
+        <Literal>Definition</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Definition</IRI>
+        <Literal>A definition is the description of some kind of representation.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Identifier</IRI>
+        <Literal>An Identifier is indended to be a unique name that identifies similarly named objects across different contexts.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#IdentityAttributeParentClass</IRI>
+        <Literal>isAttributeParent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#IdentityClassParentModel</IRI>
+        <Literal>isClassParent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#IdentityParent</IRI>
+        <Literal>Every definition object should be uniquely identified within the range established by its IdentityParent&apos;s namespace.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#IdentityRelationshipParentModel</IRI>
+        <Literal>isRelationshipParent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#LogicalEntityClass</IRI>
+        <Literal>A logical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#Mapping</IRI>
+        <Literal>Mapping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Mapping</IRI>
+        <Literal>A mapping contains all the information required to interpret content on a row of data and convert it into an individual in the ontology.
 
 Some mappings relate to entitiy creation, while others describe relations - relation-describing mappings are Inferred to be PropertyMappings by virtue of their possession of both MappingRange and MappingDomain data properties.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-    <IRI>#MappingKey</IRI>
-    <Literal>The MappingLabel is a pointer to the internal label value used to identify serializable concepts within the model.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#ModelContainsClass</IRI>
-    <Literal>hasClass</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#ModelDomain</IRI>
-    <Literal>Domain</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#ModelDomain</IRI>
-    <Literal>ModelDomain</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#ModelDomainContainsModel</IRI>
-    <Literal>hasModel</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#ModelHasModelTypeCode</IRI>
-    <Literal>hasModelType</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#ModelTypeCode</IRI>
-    <Literal>ModelTypeCode</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#Optionality</IRI>
-    <Literal>Optionality</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#PhysicalEntityClass</IRI>
-    <Literal>A physical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#Relationship</IRI>
-    <Literal>Relationship</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-    <IRI>#Relationship</IRI>
-    <Literal>Relationship</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#Relationship</IRI>
-    <Literal>A relationship class describes a possible interaction, association or property shared between a pair of class definitions.
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#MappingKey</IRI>
+        <Literal>The MappingLabel is a pointer to the internal label value used to identify serializable concepts within the model.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#ModelContainsClass</IRI>
+        <Literal>hasClass</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#ModelDomain</IRI>
+        <Literal>Domain</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#ModelDomain</IRI>
+        <Literal>ModelDomain</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#ModelDomainContainsModel</IRI>
+        <Literal>hasModel</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#ModelTypeCode</IRI>
+        <Literal>hasModelType</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#PhysicalEntityClass</IRI>
+        <Literal>A physical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#Relationship</IRI>
+        <Literal>Relationship</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Relationship</IRI>
+        <Literal>Relationship</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#Relationship</IRI>
+        <Literal>A relationship class describes a possible interaction, association or property shared between a pair of class definitions.
 
 Each *instance* of relationship class will have a Range and Domain associated with it that constrain the anticipated class types that are acceptable for the relationship.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
-    <IRI>#RelationshipKeyFromAttribute</IRI>
-    <Literal>The attribute that acts as a pointer (i.e. the foreign key) to the target entity for this relationship.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-    <IRI>#RelationshipKeyToAttribute</IRI>
-    <Literal>The attribute that acts as the primary key for the entity being referenced in the relationship.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <IRI>#Serialization</IRI>
-    <Literal>Serialization</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-    <IRI>#Serialization</IRI>
-    <Literal>A serialization is a specification for mapping of data into the ontologies object model. An initial serialization is provided for use with instantiating content for the model, but it&apos;s anticipated that additional serializations be defined for alternate use-cases.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-    <IRI>#SerializationLabel</IRI>
-    <Literal>The SerializationLabel is the label or value used as an attribute header in some serialised file used to populate or extract data from the ontology.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-    <IRI>#isIdentifierForClass</IRI>
-    <Literal>For attributes that can be used to uniquely identify members of this class, set to true.</Literal>
-</AnnotationAssertion>
-<AnnotationAssertion>
-    <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-    <IRI>#isPartialIdentifierForClass</IRI>
-    <Literal>Used for attributes that, in combination, are used as a unique identifier for the class.</Literal>
-</AnnotationAssertion>
-<SubAnnotationPropertyOf>
-    <AnnotationProperty IRI="#MappingKey"/>
-    <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-</SubAnnotationPropertyOf>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
+        <IRI>#RelationshipKeyFromAttribute</IRI>
+        <Literal>The attribute that acts as a pointer (i.e. the foreign key) to the target entity for this relationship.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#RelationshipKeyToAttribute</IRI>
+        <Literal>The attribute that acts as the primary key for the entity being referenced in the relationship.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#Serialization</IRI>
+        <Literal>Serialization</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Serialization</IRI>
+        <Literal>A serialization is a specification for mapping of data into the ontology&apos;s object model. An initial serialization is provided for use with instantiating content for the model, but it&apos;s anticipated that additional serializations be defined for alternate use-cases.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#SerializationLabel</IRI>
+        <Literal>The SerializationLabel is the label or value used as an attribute header in some serialised file used to populate or extract data from the ontology.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#isIdentifierForClass</IRI>
+        <Literal>For attributes that can be used to uniquely identify members of this class, set to true.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#isPartialIdentifierForClass</IRI>
+        <Literal>Used for attributes that, in combination, are used as a unique identifier for the class.</Literal>
+    </AnnotationAssertion>
+    <SubAnnotationPropertyOf>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+    </SubAnnotationPropertyOf>
 </Ontology>
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi -->
+
