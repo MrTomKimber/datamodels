@@ -107,6 +107,9 @@
         <ObjectProperty IRI="#ClassIsRepresentationOfAbstract"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#Contains"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#IdentityAttributeParentClass"/>
     </Declaration>
     <Declaration>
@@ -201,6 +204,9 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="#MappingSubType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ModelType"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#ModelTypeCode"/>
@@ -726,7 +732,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#MappingRange"/>
         <NamedIndividual IRI="#hasModelTypeMapping"/>
-        <Literal>ModelTypeCode</Literal>
+        <Literal>ModelType</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#MappingSubType"/>
@@ -757,6 +763,10 @@
         </ObjectInverseOf>
     </EquivalentObjectProperties>
     <SubObjectPropertyOf>
+        <ObjectProperty IRI="#ClassHasAttribute"/>
+        <ObjectProperty IRI="#Contains"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
         <ObjectProperty IRI="#IdentityAttributeParentClass"/>
         <ObjectProperty IRI="#IdentityParent"/>
     </SubObjectPropertyOf>
@@ -767,6 +777,22 @@
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#IdentityRelationshipParentModel"/>
         <ObjectProperty IRI="#IdentityParent"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#ModelContainsClass"/>
+        <ObjectProperty IRI="#Contains"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#ModelContainsRelationship"/>
+        <ObjectProperty IRI="#Contains"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#ModelDomainContainsModel"/>
+        <ObjectProperty IRI="#Contains"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#SerializationContainsMapping"/>
+        <ObjectProperty IRI="#Contains"/>
     </SubObjectPropertyOf>
     <InverseObjectProperties>
         <ObjectProperty IRI="#AbstractIsRepresentedBy"/>
@@ -1171,6 +1197,10 @@
         <Class IRI="#Mapping"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#ModelType"/>
+        <Class IRI="#DataModel"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#ModelTypeCode"/>
         <Class IRI="#DataModel"/>
     </DataPropertyDomain>
@@ -1241,6 +1271,10 @@
             <Literal>Entity</Literal>
             <Literal>Property</Literal>
         </DataOneOf>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ModelType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#ModelTypeCode"/>
@@ -1342,6 +1376,11 @@
     <AnnotationAssertion>
         <AnnotationProperty IRI="#MappingKey"/>
         <IRI>#DataType</IRI>
+        <Literal>DataType</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#DataType</IRI>
         <Literal>hasDataType</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
@@ -1423,8 +1462,18 @@ Some mappings relate to entitiy creation, while others describe relations - rela
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty IRI="#MappingKey"/>
-        <IRI>#ModelTypeCode</IRI>
+        <IRI>#ModelType</IRI>
+        <Literal>ModelType</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#ModelType</IRI>
         <Literal>hasModelType</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#MappingKey"/>
+        <IRI>#ModelTypeCode</IRI>
+        <Literal>hasModelType_obsolete</Literal>
     </AnnotationAssertion>
     <AnnotationAssertion>
         <AnnotationProperty IRI="http://www.w3.org/2004/02/skos/core#definition"/>
