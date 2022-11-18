@@ -55,309 +55,38 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractIsRepresentedBy -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractIsRepresentedBy">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsRepresentationOfAbstract"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractClass"/>
-        <rdfs:range>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-                    <owl:Class>
-                        <owl:complementOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractClass"/>
-                    </owl:Class>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:range>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AttributeIsMemberOfClass -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromAttribute -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AttributeIsMemberOfClass">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasAttribute"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AttributeIsMemberOfClass"/>
-                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-            </owl:Restriction>
-        </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasAttribute -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasAttribute">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HierarchicalRelations"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
-        <dm:MappingKey>hasAttribute</dm:MappingKey>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasIdentifier -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasIdentifier">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FunctionalIdentifier"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasAttribute"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_Identifier"/>
-        </owl:propertyChainAxiom>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasPartialIdentifier -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasPartialIdentifier">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FunctionalPartialIdentifier"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasAttribute"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_PartialIdentifier"/>
-        </owl:propertyChainAxiom>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasRelationshipWith -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasRelationshipWith">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description>
-                <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasDomain"/>
-            </rdf:Description>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasRange"/>
-        </owl:propertyChainAxiom>
-        <skos:definition>This is an Inferred Relationship: ClassHasRelationshipWith provides a simplified direct pointer to classes linked via a Relationship.</skos:definition>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsDomainOfRelationship -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsDomainOfRelationship">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasDomain"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsClass"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel"/>
-                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-            </owl:Restriction>
-        </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsRangeOfRelationship -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsRangeOfRelationship">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasRange"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsRepresentationOfAbstract -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsRepresentationOfAbstract">
-        <rdfs:domain>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-                    <owl:Class>
-                        <owl:complementOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractClass"/>
-                    </owl:Class>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:domain>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractClass"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HierarchicalRelations -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HierarchicalRelations"/>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityAttributeParentClass -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityAttributeParentClass">
-        <owl:equivalentProperty>
-            <rdf:Description>
-                <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasAttribute"/>
-            </rdf:Description>
-        </owl:equivalentProperty>
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityParent"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <dm:MappingKey>isAttributeParent</dm:MappingKey>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityClassParentModel -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityClassParentModel">
-        <owl:equivalentProperty>
-            <rdf:Description>
-                <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsClass"/>
-            </rdf:Description>
-        </owl:equivalentProperty>
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityParent"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-        <dm:MappingKey>isClassParent</dm:MappingKey>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityParent -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityParent">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <rdfs:comment>Every definition object should be uniquely identified within the range established by its IdentityParent&apos;s namespace.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityRelationshipParentModel -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityRelationshipParentModel">
-        <owl:equivalentProperty>
-            <rdf:Description>
-                <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsRelationship"/>
-            </rdf:Description>
-        </owl:equivalentProperty>
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#IdentityParent"/>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-        <dm:MappingKey>isRelationshipParent</dm:MappingKey>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsClass -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsClass">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HierarchicalRelations"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <dm:MappingKey>hasClass</dm:MappingKey>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsRelationship -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromOptionality -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsRelationship">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HierarchicalRelations"/>
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFeaturesInModel"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <dm:MappingKey>hasRelationship</dm:MappingKey>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainContainsModel -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainContainsModel">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#HierarchicalRelations"/>
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelIsMemberOfModelDomain"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-        <dm:MappingKey>hasModel</dm:MappingKey>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainContainsSubDomain -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainContainsSubDomain">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainIsSubDomainOf"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainIsSubDomainOf -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomainIsSubDomainOf">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelIsMemberOfModelDomain -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelIsMemberOfModelDomain">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelIsMemberOfModelDomain"/>
-                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
-            </owl:Restriction>
-        </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFeaturesInModel -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFeaturesInModel">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromCardinality -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromCardinality">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-            </owl:Restriction>
-        </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromOptionality -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromOptionality">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromOptionality">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
         <rdfs:range>
             <owl:Restriction>
@@ -369,95 +98,53 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasDomain -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingMetaTarget -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasDomain">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <dm:MappingKey>hasRelationshipDomain</dm:MappingKey>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingMetaTarget">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Meta"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasRange -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasRange">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-        <dm:MappingKey>hasRelationshipRange</dm:MappingKey>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyFromAttribute -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToAttribute -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyFromAttribute">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasDomain"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasIdentifier"/>
-        </owl:propertyChainAxiom>
-        <dm:MappingKey>hasRelationshipKeyFromAttribute</dm:MappingKey>
-        <skos:definition>The attribute that acts as a pointer (i.e. the foreign key) to the target entity for this relationship.</skos:definition>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyToAttribute -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipKeyToAttribute">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasRange"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasIdentifier"/>
-        </owl:propertyChainAxiom>
-        <dm:MappingKey>hasRelationshipKeyToAttribute</dm:MappingKey>
-        <rdfs:comment>The attribute that acts as the primary key for the entity being referenced in the relationship.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipPartialKeyFromAttribute -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipPartialKeyFromAttribute">
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasDomain"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasPartialIdentifier"/>
-        </owl:propertyChainAxiom>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipPartialKeyToAttribute -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipPartialKeyToAttribute">
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipHasRange"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassHasPartialIdentifier"/>
-        </owl:propertyChainAxiom>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToCardinality -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToCardinality">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <rdfs:range>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-            </owl:Restriction>
-        </rdfs:range>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToOptionality -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToOptionality -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToOptionality">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToOptionality">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipLinkage"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
         <rdfs:range>
             <owl:Restriction>
@@ -466,38 +153,6 @@
             </owl:Restriction>
         </rdfs:range>
     </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RowNodeParticipant -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RowNodeParticipant">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RowNode"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <dm:MappingKey>isParticipant</dm:MappingKey>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#SerializationContainsMapping -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#SerializationContainsMapping">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Serialization"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_Identifier -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_Identifier"/>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_PartialIdentifier -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_PartialIdentifier"/>
     
 
 
@@ -532,7 +187,6 @@
                 </owl:oneOf>
             </rdfs:Datatype>
         </rdfs:range>
-        <dm:MappingKey>hasCardinality</dm:MappingKey>
     </owl:DatatypeProperty>
     
 
@@ -542,8 +196,6 @@
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <dm:MappingKey>DataType</dm:MappingKey>
-        <dm:MappingKey>hasDataType</dm:MappingKey>
     </owl:DatatypeProperty>
     
 
@@ -612,20 +264,8 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <dm:MappingKey>ModelType</dm:MappingKey>
-        <dm:MappingKey>hasModelType</dm:MappingKey>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelTypeCode -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelTypeCode">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <dm:MappingKey>hasModelType_obsolete</dm:MappingKey>
     </owl:DatatypeProperty>
     
 
@@ -659,7 +299,6 @@
                 </owl:oneOf>
             </rdfs:Datatype>
         </rdfs:range>
-        <dm:MappingKey>hasOptionality</dm:MappingKey>
     </owl:DatatypeProperty>
     
 
@@ -674,13 +313,20 @@
     
 
 
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#SerializationParentLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#SerializationParentLabel">
+        <rdfs:comment>For establishing unique IRIs within some kind of Hierarchy</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#UniqueIdentifier -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#UniqueIdentifier">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <dm:MappingKey>UniqueIdentifier</dm:MappingKey>
         <rdfs:comment>An Identifier is indended to be a unique name that distinguishes similarly named objects across different contexts.</rdfs:comment>
     </owl:DatatypeProperty>
     
@@ -720,12 +366,6 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractClass -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AbstractClass">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MasterDataModel"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
         <skos:definition>An Abstract is a type of class used to represent a single abstracted version of classes that might be present across multiple models or domains. Its use comes about as a result from the assumption that every class is unique to its given model. Multuple model-level classes are mapped to a single Abstract class inheriting all the model-level details.</skos:definition>
     </owl:Class>
@@ -736,9 +376,6 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <dm:MappingKey>Attribute</dm:MappingKey>
-        <rdfs:label>Attribute</rdfs:label>
-        <skos:definition>An attribute represents a particular data point associated with an entity. It will often have a value that conforms to a primitive data type - but for enumerations, might be associated with some other class or controlled list. For modelling purposes, use the attribute and express it as its primitive form, and consider annotating the associated Relationship relation between entities to reference the attributes used to perform the link.</skos:definition>
     </owl:Class>
     
 
@@ -747,9 +384,20 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <dm:MappingKey>Class</dm:MappingKey>
-        <rdfs:label>Class</rdfs:label>
-        <skos:definition>A class is a set of things having some property or attribute in common.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#CompoundAttribute -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#CompoundAttribute">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
     </owl:Class>
     
 
@@ -757,12 +405,6 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ConceptClass -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ConceptClass">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ConceptualDataModel"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
         <skos:definition>A concept in this context is a high level class describing some concept, idea or thing that is of interest to the business. Concepts form the nodes of a conceptual data model. Each model will consist of a unique set of concepts - so if two models reference a &quot;user&quot; concept, there would exist two versions of this, one per model - enabling an independence of definition.</skos:definition>
     </owl:Class>
@@ -772,7 +414,7 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ConceptualDataModel -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ConceptualDataModel">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model"/>
     </owl:Class>
     
 
@@ -781,18 +423,25 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <dm:MappingKey>Context</dm:MappingKey>
-        <rdfs:label>Context</rdfs:label>
-        <skos:definition>A context is some grouping of entities, schema or concepts. In physical data models, this might describe an IBM DB2 or Oracle schema (i.e. a collection of tables, views and other objects into an administrative package), an application or a collection of datasets. For logical or conceptual models, it would be used to form an informal grouping within a larger model. For more formal groupings, expect to use Domain, or Model.</skos:definition>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataPropertyMapping -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <dm:MappingKey>DataModel</dm:MappingKey>
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataPropertyMapping">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingMetaTarget"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaDataProperty"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
     </owl:Class>
     
 
@@ -810,13 +459,17 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#EntityMapping">
         <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingSubType"/>
-                <owl:hasValue>Entity</owl:hasValue>
-            </owl:Restriction>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingMetaTarget"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PropertyMapping"/>
     </owl:Class>
     
 
@@ -834,12 +487,6 @@
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
-        </owl:equivalentClass>
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_Identifier"/>
-                <owl:hasSelf rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasSelf>
-            </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FunctionalPartialIdentifier"/>
@@ -869,12 +516,6 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#r_PartialIdentifier"/>
-                <owl:hasSelf rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasSelf>
-            </owl:Restriction>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
     </owl:Class>
     
@@ -900,7 +541,7 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#LogicalDataModel -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#LogicalDataModel">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model"/>
     </owl:Class>
     
 
@@ -908,12 +549,6 @@
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#LogicalEntityClass -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#LogicalEntityClass">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#LogicalDataModel"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
         <skos:definition>A logical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</skos:definition>
     </owl:Class>
@@ -935,7 +570,24 @@ Some mappings relate to entitiy creation, while others describe relations - rela
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MasterDataModel -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MasterDataModel">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Meta -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Meta">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaData"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Meta"/>
+        <rdfs:comment>A Class of objects whose individuals represent Classes within the Ontology using the convention of &quot;punning&quot; - such individuals share the exact same names as the classes they represent.</rdfs:comment>
     </owl:Class>
     
 
@@ -946,12 +598,34 @@ Some mappings relate to entitiy creation, while others describe relations - rela
     
 
 
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaDataProperty -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaDataProperty">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Meta"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaProperty -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaProperty">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Meta"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <dm:MappingKey>Domain</dm:MappingKey>
-        <rdfs:label>ModelDomain</rdfs:label>
     </owl:Class>
     
 
@@ -959,7 +633,7 @@ Some mappings relate to entitiy creation, while others describe relations - rela
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PhysicalDataModel -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PhysicalDataModel">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataModel"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model"/>
     </owl:Class>
     
 
@@ -967,12 +641,6 @@ Some mappings relate to entitiy creation, while others describe relations - rela
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PhysicalEntityClass -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PhysicalEntityClass">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassIsMemberOfModel"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PhysicalDataModel"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
         <skos:definition>A physical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</skos:definition>
     </owl:Class>
@@ -985,25 +653,10 @@ Some mappings relate to entitiy creation, while others describe relations - rela
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingDomain"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingLabel"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingRange"/>
-                                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingSubType"/>
-                        <owl:hasValue>Property</owl:hasValue>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MappingMetaTarget"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaProperty"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1017,7 +670,6 @@ Some mappings relate to entitiy creation, while others describe relations - rela
 
     <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <dm:MappingKey>Relationship</dm:MappingKey>
     </owl:Class>
     
 
@@ -1042,15 +694,6 @@ Some mappings relate to entitiy creation, while others describe relations - rela
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Version -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Version">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Definition"/>
-        <rdfs:comment>A version is a point-in-time index for a particular snapshot of a definition.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -1062,38 +705,50 @@ Some mappings relate to entitiy creation, while others describe relations - rela
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AttributeMapping -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AttributeMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingLabel>Attribute</dm:MappingLabel>
-        <dm:MappingRange>Attribute</dm:MappingRange>
-        <dm:MappingSubType>Entity</dm:MappingSubType>
-        <dm:SerializationLabel>Attribute</dm:SerializationLabel>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassMapping -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingLabel>Class</dm:MappingLabel>
-        <dm:MappingRange>Class</dm:MappingRange>
-        <dm:MappingSubType>Entity</dm:MappingSubType>
-        <dm:SerializationLabel>Entity</dm:SerializationLabel>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaDataProperty"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DomainMapping -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DomainMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingLabel>Domain</dm:MappingLabel>
-        <dm:MappingRange>Domain</dm:MappingRange>
-        <dm:MappingSubType>Entity</dm:MappingSubType>
-        <dm:SerializationLabel>Business Domain</dm:SerializationLabel>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaProperty"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaDataProperty"/>
     </owl:NamedIndividual>
     
 
@@ -1102,39 +757,290 @@ Some mappings relate to entitiy creation, while others describe relations - rela
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#EntityAttributeRecord">
         <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Serialization"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#AttributeMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DomainMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasAttributeMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasClassMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasDataTypeMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasModelMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasModelTypeMapping"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Attribute"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_AttributeHasDataType"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Class"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ClassContainsAttribute"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Context"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsClass"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_DomainContainsModel"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Model"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsClass"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsContext"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelDomain"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelHasModelType"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelMapping -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromAttribute -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelMapping">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromClass -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Attribute -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Attribute">
         <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingLabel>DataModel</dm:MappingLabel>
-        <dm:MappingRange>DataModel</dm:MappingRange>
-        <dm:MappingSubType>Entity</dm:MappingSubType>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
+        <dm:SerializationLabel>Attribute</dm:SerializationLabel>
+        <dm:SerializationParentLabel>Class</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_AttributeHasDataType -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_AttributeHasDataType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType"/>
+        <dm:MappingDomain>Attribute</dm:MappingDomain>
+        <dm:MappingRange>DataType</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Class -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Class">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
+        <dm:SerializationLabel>Class</dm:SerializationLabel>
+        <dm:SerializationParentLabel>Model</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ClassContainsAttribute -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ClassContainsAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <dm:MappingDomain>Class</dm:MappingDomain>
+        <dm:MappingRange>Attribute</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Context -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Context">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context"/>
+        <dm:SerializationLabel>Context</dm:SerializationLabel>
+        <dm:SerializationParentLabel>Model</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsClass -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <dm:MappingDomain>Context</dm:MappingDomain>
+        <dm:MappingRange>Class</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsSubContext -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsSubContext">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <dm:MappingDomain>Context</dm:MappingDomain>
+        <dm:MappingRange>SubContext</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_DomainContainsModel -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_DomainContainsModel">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <dm:MappingDomain>ModelDomain</dm:MappingDomain>
+        <dm:MappingRange>Model</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromAttribute -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromAttribute"/>
+        <dm:SerializationLabel>FromAttribute</dm:SerializationLabel>
+        <dm:SerializationParentLabel>FromClass</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromClass -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromClass"/>
+        <dm:SerializationLabel>FromClass</dm:SerializationLabel>
+        <dm:SerializationParentLabel>Model</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Model -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Model">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model"/>
         <dm:SerializationLabel>Model</dm:SerializationLabel>
+        <dm:SerializationParentLabel>ModelDomain</dm:SerializationParentLabel>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipMapping -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsClass -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipMapping">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsClass">
         <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingLabel>Relationship</dm:MappingLabel>
-        <dm:MappingRange>Relationship</dm:MappingRange>
-        <dm:MappingSubType>Entity</dm:MappingSubType>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <dm:MappingDomain>Model</dm:MappingDomain>
+        <dm:MappingRange>Class</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsContext -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsContext">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <dm:MappingDomain>Model</dm:MappingDomain>
+        <dm:MappingRange>Context</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelDomain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelDomain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
+        <dm:SerializationLabel>ModelDomain</dm:SerializationLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelHasModelType -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelHasModelType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType"/>
+        <dm:MappingDomain>Model</dm:MappingDomain>
+        <dm:MappingRange>ModelType</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Relationship -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Relationship">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
         <dm:SerializationLabel>Relationship</dm:SerializationLabel>
+        <dm:SerializationParentLabel>Model</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToAttribute -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToAttribute"/>
+        <dm:SerializationLabel>ToAttribute</dm:SerializationLabel>
+        <dm:SerializationParentLabel>ToClass</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToClass -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToClass"/>
+        <dm:SerializationLabel>ToClass</dm:SerializationLabel>
+        <dm:SerializationParentLabel>Model</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaProperty"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsRelationship -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelContainsRelationship">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <dm:MappingDomain>Model</dm:MappingDomain>
+        <dm:MappingRange>Relationship</dm:MappingRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaDataProperty"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Optionality -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Optionality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaDataProperty"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
     </owl:NamedIndividual>
     
 
@@ -1143,202 +1049,68 @@ Some mappings relate to entitiy creation, while others describe relations - rela
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipRecord">
         <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Serialization"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DomainMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasModelTypeMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipDomainMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipFromCardinalityMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipFromOptionalityMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipKeyFromMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipKeyToMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipRangeMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipToCardinalityMapping"/>
-        <dm:SerializationContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipToOptionalityMapping"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasAttributeMapping -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToAttribute -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasAttributeMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Class</dm:MappingDomain>
-        <dm:MappingLabel>hasAttribute</dm:MappingLabel>
-        <dm:MappingRange>Attribute</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>Attribute</dm:SerializationLabel>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasClassMapping -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToClass -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasClassMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>DataModel</dm:MappingDomain>
-        <dm:MappingLabel>hasClass</dm:MappingLabel>
-        <dm:MappingRange>Class</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>Entity</dm:SerializationLabel>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaClass"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasDataTypeMapping -->
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasDataTypeMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Attribute</dm:MappingDomain>
-        <dm:MappingLabel>hasDataType</dm:MappingLabel>
-        <dm:MappingRange>DataType</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>DataType</dm:SerializationLabel>
-    </owl:NamedIndividual>
+    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context">
+        <rdfs:label>Context</rdfs:label>
+        <skos:definition>A context is some grouping of entities, schema or concepts. In physical data models, this might describe an IBM DB2 or Oracle schema (i.e. a collection of tables, views and other objects into an administrative package), an application or a collection of datasets. For logical or conceptual models, it would be used to form an informal grouping within a larger model. For more formal groupings, expect to use Domain, or Model.</skos:definition>
+        <dm:MappingKey>Context</dm:MappingKey>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model">
+        <dm:MappingKey>DataModel</dm:MappingKey>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain">
+        <dm:MappingKey>Domain</dm:MappingKey>
+        <rdfs:label>ModelDomain</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship">
+        <dm:MappingKey>Relationship</dm:MappingKey>
+    </rdf:Description>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasModelMapping -->
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasModelMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Domain</dm:MappingDomain>
-        <dm:MappingLabel>hasModel</dm:MappingLabel>
-        <dm:MappingRange>DataModel</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>Model</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasModelTypeMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasModelTypeMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>DataModel</dm:MappingDomain>
-        <dm:MappingLabel>hasModelType</dm:MappingLabel>
-        <dm:MappingRange>ModelType</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>ModelType</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipDomainMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipDomainMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasRelationshipDomain</dm:MappingLabel>
-        <dm:MappingRange>Class</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>FromClass</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipFromCardinalityMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipFromCardinalityMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasCardinality</dm:MappingLabel>
-        <dm:MappingRange>Cardinality</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>FromCardinality</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipFromOptionalityMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipFromOptionalityMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasOptionality</dm:MappingLabel>
-        <dm:MappingRange>Optionality</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>FromOptionality</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipKeyFromMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipKeyFromMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasRelationshipKeyFromAttribute</dm:MappingLabel>
-        <dm:MappingRange>Attribute</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>FromAttribute</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipKeyToMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipKeyToMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasRelationshipKeyToAttribute</dm:MappingLabel>
-        <dm:MappingRange>Attribute</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>ToAttribute</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>DataModel</dm:MappingDomain>
-        <dm:MappingLabel>hasRelationship</dm:MappingLabel>
-        <dm:MappingRange>Relationship</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>Relationship</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipRangeMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipRangeMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasRelationshipRange</dm:MappingLabel>
-        <dm:MappingRange>Class</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>ToClass</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipToCardinalityMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipToCardinalityMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasCardinality</dm:MappingLabel>
-        <dm:MappingRange>Cardinality</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>ToCardinality</dm:SerializationLabel>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipToOptionalityMapping -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#hasRelationshipToOptionalityMapping">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
-        <dm:MappingDomain>Relationship</dm:MappingDomain>
-        <dm:MappingLabel>hasOptionality</dm:MappingLabel>
-        <dm:MappingRange>Optionality</dm:MappingRange>
-        <dm:MappingSubType>Property</dm:MappingSubType>
-        <dm:SerializationLabel>ToOptionality</dm:SerializationLabel>
-    </owl:NamedIndividual>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataPropertyMapping"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#EntityMapping"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#PropertyMapping"/>
+        </owl:members>
+    </rdf:Description>
 </rdf:RDF>
 
 
