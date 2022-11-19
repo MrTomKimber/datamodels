@@ -763,12 +763,14 @@ Some mappings relate to entitiy creation, while others describe relations - rela
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ClassContainsAttribute"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Context"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsClass"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsSubContext"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_DomainContainsModel"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Model"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsClass"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsContext"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelDomain"/>
         <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelHasModelType"/>
+        <dm:Contains rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_SubContext"/>
     </owl:NamedIndividual>
     
 
@@ -959,6 +961,17 @@ Some mappings relate to entitiy creation, while others describe relations - rela
         <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
         <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
         <dm:SerializationLabel>Relationship</dm:SerializationLabel>
+        <dm:SerializationParentLabel>Model</dm:SerializationParentLabel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_SubContext -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_SubContext">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping"/>
+        <dm:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context"/>
+        <dm:SerializationLabel>SubContext</dm:SerializationLabel>
         <dm:SerializationParentLabel>Model</dm:SerializationParentLabel>
     </owl:NamedIndividual>
     
