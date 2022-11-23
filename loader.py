@@ -84,7 +84,7 @@ def load_data(onto, batch_manifest=None, rdflib_graph=None, serial_key=None):
                     reify_triples.extend(reify_triple(onto, row_header, individual))
 
         # Reify triples to the Row_Node:
-        print (len(triples), len(reify_triples))
+        #print (len(triples), len(reify_triples))
 
         triples.extend(reify_triples)
 
@@ -117,12 +117,12 @@ def get_contents_matching_subclass(s, subclass):
 def get_schema_labels(s, onto):
     labels=[]
     for m in get_contents_matching_subclass(s,[onto.EntityMapping]):
-        print(m)
+        #print(m)
         if len(m.SerializationLabel)>0:
             labels.extend(m.SerializationLabel)
 
     for m in get_contents_matching_subclass(s,[onto.DataPropertyMapping]):
-        print(m)
+        #print(m)
         if len(m.MappingRange)>0:
             labels.extend(m.MappingRange)
 
@@ -211,7 +211,7 @@ def reify_triple(onto, collection_node, triple):
     fact_links.append ((unique_id, URIRef(onto.MemberOf.iri),collection_node))
     fact_links.append ((collection_node, URIRef(onto.Contains.iri),unique_id))
     triples.extend(fact_links)
-    print(triple)
+    #print(triple)
     s,p,o = triple
     triples.append((unique_id, URIRef(onto.FactSubject.iri),s))
     triples.append((unique_id, URIRef(onto.FactPredicate.iri),p))

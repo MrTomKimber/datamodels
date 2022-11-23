@@ -1,0 +1,18 @@
+,Business Domain,Model,ModelType,Entity,Attribute,DataType,Context,SubContext
+0,Core,Principal Interactions,Conceptual,Person,PersonID,string,,
+1,Core,Principal Interactions,Conceptual,Person,FirstName,string,,
+2,Core,Principal Interactions,Conceptual,Person,FamilyName,string,,
+3,Core,Principal Interactions,Conceptual,Person,DateOfBirth,date,,
+4,Core,Principal Interactions,Conceptual,Person,DateOfDeath,date,,
+5,Core,Principal Interactions,Conceptual,Address,Address Line 1,string,,
+6,Core,Principal Interactions,Conceptual,Address,Address Line 2,string,,
+7,Core,Principal Interactions,Conceptual,Address,Address Line Three,string,,
+8,Core,Principal Interactions,Conceptual,Address,Postal Code,string,,
+9,Core,Principal Interactions,Conceptual,Address,Country,string,,
+10,Core,Principal Interactions,Conceptual,Address,Country,string,,
+11,Core,Principal Interactions,Conceptual,Insurance Product,Coverage Type,string,,
+12,Core,Principal Interactions,Conceptual,Insurance Policy,Policy ID,string,,
+13,Core,Principal Interactions,Conceptual,Insurance Policy,Start Date,string,,
+14,Core,Principal Interactions,Conceptual,Insurance Policy,End Date,string,,
+15,Core,Principal Interactions,Conceptual,Insurance Policy,,,Policy Types,
+16,Core,Principal Interactions,Conceptual,,,,All Types,Policy Types
