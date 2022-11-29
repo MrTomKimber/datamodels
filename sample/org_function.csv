@@ -1,0 +1,8 @@
+org_function_code,parent_org_function_code,description
+ALL,,Root Function Code
+Finance,ALL,Finance
+HR,ALL,Human Resources
+IT,ALL,Information Technology
+LOB,ALL,Lines of Business
+Products,LOB,Products
+Services,LOB,Services

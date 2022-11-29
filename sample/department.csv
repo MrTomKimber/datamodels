@@ -1,0 +1,12 @@
+department_code,org_function_code,description
+SLT,ALL,Senior Leadership Team
+Procurement,Finance,Procurement
+Accounting,Finance,Accounting
+Billing,Finance,Accounting
+Accounts Receivable,Finance,Accounts Receivable
+Human Resources,HR,Human Resources
+IT Infrastructure,IT,IT
+Sales,LOB,Sales
+Development,Products,Development
+Customer Support,Products,Customer Support
+Consultancy,Services,Consultancy
