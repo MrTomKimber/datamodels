@@ -624,7 +624,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#SerializationSpecs"/>
         <skos:definition>A mapping contains all the information required to interpret content on a row of data and convert it into an individual in the ontology.
 
-Some mappings relate to entitiy creation, while others describe relations - relation-describing mappings are Inferred to be PropertyMappings by virtue of their possession of both MappingRange and MappingDomain data properties.</skos:definition>
+Some mappings relate to entity creation, while others describe relations - relation-describing mappings are Inferred to be PropertyMappings by virtue of their possession of both MappingRange and MappingDomain data properties.</skos:definition>
     </owl:Class>
     
 
