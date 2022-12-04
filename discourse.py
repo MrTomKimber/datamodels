@@ -50,6 +50,9 @@ class Posit(object):
         self.predicate = p
         self.object = o
 
+    # Where a Posit turns out to already exist in the graph,
+    # use this method to edit the uri of this representation
+    # to align it to the graph
     def update_uri_from_graph(self, graph):
         search = list(graph.triples((None,URIRef(onto.Digest.iri), self.longform)))
         if len(search) > 0 :

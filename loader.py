@@ -196,7 +196,7 @@ def load_data(batch_name, batch_manifest=None, rdflib_graph=None):
             #print("r", len(raw_row_triples))
 
             mastered_row_triples = master_triples(working_graph, raw_row_triples)
-            print ("count of mastered_row_triples", len (mastered_row_triples))
+            #print ("count of mastered_row_triples", len (mastered_row_triples))
 
             row_discourse = discourse.Discourse(row_header.name, is_proposed_by=row_header.uri)
             job_discourse.members.append(row_discourse.uri)
