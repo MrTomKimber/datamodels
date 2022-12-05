@@ -805,16 +805,6 @@ Some mappings relate to entity creation, while others describe relations - relat
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#A_to_B -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#A_to_B">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
-        <RelationshipFromClass rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#TestClassA"/>
-        <RelationshipToClass rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#TestClassB"/>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute">
@@ -1274,22 +1264,6 @@ Some mappings relate to entity creation, while others describe relations - relat
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToClass">
         <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MetaProperty"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#TestClassA -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#TestClassA">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#TestClassB -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#TestClassB">
-        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
     </owl:NamedIndividual>
     
 
