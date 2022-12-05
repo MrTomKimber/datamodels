@@ -121,6 +121,7 @@ def serialize_row(row, serialization):
     entity_mappings = get_contents_matching_subclass(serialization, onto.EntityMapping)
     data_property_mappings = get_contents_matching_subclass(serialization, onto.DataPropertyMapping)
     property_mappings = get_contents_matching_subclass(serialization, onto.PropertyMapping)
+
     lineage_tree = {e.SerializationLabel.first():e.SerializationParentLabel.first() for e in entity_mappings}
 
     row_extracts = {}
@@ -136,11 +137,13 @@ def serialize_row(row, serialization):
             row_extracts[data_header]=Entity(class_pointer, data, lineage)
 
     for d in data_property_mappings:
+
         subj = row_extracts.get(d.MappingDomain.first())
         if subj is not None:
             prop = URIRef(d.MappingMetaTarget.first().iri)
-            obj = Literal(row[d.MappingRange.first()])
-            subj.data_properties.append((d.name, prop, obj))
+            if row[d.MappingRange.first()] is not None:
+                obj = Literal(row[d.MappingRange.first()])
+                subj.data_properties.append((d.name, prop, obj))
 
     for p in property_mappings:
         subj = row_extracts.get(p.MappingDomain.first())
@@ -148,6 +151,7 @@ def serialize_row(row, serialization):
         if subj is not None and obj is not None:
             prop = URIRef(p.MappingMetaTarget.first().iri)
             subj.properties.append((p.name, prop, URIRef(obj.uri)))
+
 
     return list(chain (*[e.to_triples() for e in row_extracts.values()]))
 
