@@ -1,0 +1,32 @@
+digraph pdp_graph {
+	graph [bb="0,0,866.67,260",
+		ratio=0.3,
+		sep=2
+	];
+	node [label="\N"];
+	Person	 [height=0.5,
+		pos="86.111,23.715",
+		type=Class,
+		width=0.99297];
+	Address	 [height=0.5,
+		pos="768.31,18.31",
+		type=Class,
+		width=1.1193];
+	Person -> Address	 [label=ResidesAt,
+		lp="391.04,28.57",
+		pos="e,727.97,18.63 122.31,23.428 236.02,22.527 586.33,19.752 717.78,18.711"];
+	"Insurance Policy"	 [height=0.5,
+		pos="319.67,132.71",
+		type=Class,
+		width=1.9859];
+	Person -> "Insurance Policy"	 [label=hasPolicy,
+		lp="166.87,81.736",
+		pos="e,285.51,116.77 112.45,36.007 152.27,54.588 228.22,90.036 276.29,112.47"];
+	"Insurance Product"	 [height=0.5,
+		pos="289.69,241.96",
+		type=Class,
+		width=2.1304];
+	"Insurance Policy" -> "Insurance Product"	 [label=ConveysProduct,
+		lp="259.52,189.95",
+		pos="e,294.65,223.9 314.72,150.75 309.99,167.99 302.79,194.22 297.33,214.14"];
+}

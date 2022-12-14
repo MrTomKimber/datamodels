@@ -1,8 +1,5 @@
 import owlready2 as owlr
 import rdflib
-
-import discourse
-
 from rdflib import URIRef, Literal, Graph
 from rdflib.term import _is_valid_uri
 from rdflib.util import from_n3
@@ -10,11 +7,16 @@ from rdflib.namespace import RDF, RDFS
 from rdflib import Namespace
 from rdflib.extras.external_graph_libs import rdflib_to_networkx_multidigraph
 
+import graphviz
+import pandas as pd
 from collections import Counter
 from itertools import chain
 from datetime import datetime, timezone
-
 import uuid
+
+import discourse
+
+
 
 onto = owlr.get_ontology("datamodels_rdf.owl").load()
 def flush(onto):
@@ -24,6 +26,19 @@ flush(onto)
 owlr.sync_reasoner(onto)
 
 namespace = onto.base_iri
+
+def spawn_rdflib_graph():
+    # Create Empty Graph and populate it with required ontologies
+    graph = Graph()
+    graph.parse ("datamodels_rdf.owl", format='xml')
+    graph.parse ("discourse.owl", format='xml')
+    dmns = Namespace(onto.base_iri)
+    graph.bind('dm', dmns, override=True, replace=True)
+    discns = Namespace(discourse.onto.base_iri)
+    graph.bind('disc', discns, override=True, replace=True)
+    graph.bind('rdfs', RDFS)
+    return graph
+    #namespace_d = {'dm': dmns, 'rdfs' : RDFS, 'rdf' : RDF}
 
 def datetime_literal(dt=None):
     if dt is None:
@@ -161,16 +176,9 @@ def load_data(batch_name, batch_manifest=None, rdflib_graph=None):
     batch_discourse = discourse.Discourse(batch_header.name, is_proposed_by=batch_header.uri)
 
     if rdflib_graph is None:
-        working_graph=Graph()
+        working_graph=spawn_rdflib_graph()
     else:
-        working_graph=Graph()
-        working_graph.parse ("datamodels_rdf.owl", format='xml')
-        dmns = Namespace(onto.base_iri)
-        working_graph.bind('dm', dmns, override=True, replace=True)
-        discns = Namespace(discourse.onto.base_iri)
-        working_graph.bind('disc', discns, override=True, replace=True)
-        working_graph.bind('rdfs', RDFS)
-        #namespace_d = {'dm': dmns, 'rdfs' : RDFS, 'rdf' : RDF}
+        working_graph=spawn_rdflib_graph()
         for t in rdflib_graph.triples((None, None, None)):
             working_graph.add(t)
 
@@ -237,9 +245,13 @@ def load_data(batch_name, batch_manifest=None, rdflib_graph=None):
     for dt in batch_discourse.to_triples():
         working_graph.add(dt)
 
+    all_is_well = True
+    if all_is_well:
+        for t in working_graph.triples((None, None, None)):
+            if t not in rdflib_graph.triples((t[0], t[1], t[2])):
+                rdflib_graph.add(t)
 
-
-    return working_graph
+    return rdflib_graph
 
 
 
@@ -320,3 +332,126 @@ def get_lineage(d, l, acc=None):
         acc.append(q)
         acc = get_lineage(d, q, acc)
     return acc
+
+
+# =============================================
+# ||                                         ||
+# ||                                         ||
+# ||       Reporting and                     ||
+# ||          sparql queries                 ||
+# ||                                         ||
+# =============================================
+
+
+def report_object_type_counts(graph):
+    data_load_objects_sparql = """
+    SELECT (count(?s) as ?count) ?t
+    WHERE
+        {
+            ?s a ?t .
+        }
+    GROUP BY ?t
+    """
+    results = graph.query(data_load_objects_sparql)
+    return results
+
+def report_batch_node_names(graph):
+    q="""SELECT ?batch_node ?batch_name
+    WHERE {
+        ?batch_node a dm:BatchNode.
+        ?batch_node dm:Name ?batch_name
+    }"""
+    batch_nodes = list(graph.query(q))
+    return batch_nodes
+
+def report_digests_from_discourse(graph, batch_node_uri):
+    # Retrieve s,p,o digests from declared posits linked to individual data loads.
+
+    discourse_q = """       SELECT ?digest
+                            WHERE
+                                {
+                                    BIND (%%bn%% as ?batch_node).
+                                    ?job_node dm:MemberOf ?batch_node.
+                                    ?row_node dm:MemberOf ?job_node.
+                                    ?row_node disc:Proposes ?discourse.
+                                    ?discourse disc:DiscourseContains ?decl.
+                                    ?decl disc:Posits ?p.
+                                    ?p disc:Digest ?digest
+                                }
+                            """
+
+    qq = discourse_q.replace("%%bn%%", batch_node_uri)
+    results = graph.query(qq)
+    return results
+
+def convert_longform_to_triples(results):
+    return [discourse.longform_to_triple(r[0]) for r in results]
+
+
+def report_and_generate_diagram(graph, batch_node_uri, graphviz_engine="dot"):
+    digests = report_digests_from_discourse(graph, batch_node_uri)
+    ent_graph = spawn_rdflib_graph()
+
+    b_entities_q = """
+    SELECT ?s ?p ?o
+    WHERE{
+        {
+        VALUES ?ent_types { dm:ModelDomain dm:Model dm:Class dm:Context  }
+        VALUES ?p { rdf:type rdfs:label }
+        ?s a ?ent_types.
+        ?s ?p ?o.
+        }
+
+    }
+    """
+
+    b_rels_q = """
+    SELECT ?from ?froml ?rel ?to ?tol ?rel_from_card ?rel_to_card
+    WHERE{
+        {
+            ?from ^dm:RelationshipFromClass/dm:RelationshipToClass  ?to .
+            ?from rdfs:label ?froml.
+            ?to rdfs:label ?tol.
+            ?r dm:RelationshipToClass ?to.
+            ?r rdfs:label ?rel .
+            ?r a dm:Relationship .
+            BIND (?rel as ?p)
+            OPTIONAL {?r dm:ToCardinality ?rel_to_card}
+            OPTIONAL {?r dm:FromCardinality ?rel_from_card}
+        }
+
+    }
+    """
+
+    b_entities_results = graph.query(b_entities_q)
+    b_rels_results = graph.query(b_rels_q)
+
+    ents_df = pd.DataFrame(b_entities_results, columns=['s','p','o']).sort_values(by='s')#.groupby(1)
+    ents_df = ents_df.pivot(index='s', columns='p')#.reset_index()
+    flat_cols = ['_'.join(col).split("#")[1] for col in ents_df.columns.values]
+    ents_df.columns=flat_cols
+    ents_df['type']=ents_df['type'].apply(lambda x : x.split("#")[1])
+    ents_df=ents_df.sort_values(by='type')
+
+    ents_df = ents_df[ents_df['type']=="Class"]
+    cardinality_codes = {"One" : "1",
+                         "Many" : "M",
+                         "None": ""}
+
+    b_rels_df = pd.DataFrame(b_rels_results, columns=["from", "froml", "rel", "to", "tol", "fromcard", "tocard"])
+    b_rels_df["fromcard_"]=b_rels_df["fromcard"].apply(lambda x : cardinality_codes.get(str(x)))
+    b_rels_df["tocard_"]=b_rels_df["tocard"].apply(lambda x : cardinality_codes.get(str(x)))
+
+    print(b_rels_df)
+
+    gv_graph = graphviz.Digraph(name="pdp_graph", engine=graphviz_engine)
+
+    for i,e in b_rels_df.iterrows():
+        edge, edge_kwargs = (e['froml'], e['tol']), {"label":e['rel'], "headlabel":e['tocard_'], "taillabel":e['fromcard_']}
+        gv_graph.edge(*edge, **edge_kwargs)
+
+    for i,n in ents_df.iterrows():
+        node, node_kwargs = n['label'], {"type":n['type']}
+        gv_graph.node(node, **node_kwargs)
+
+    return gv_graph

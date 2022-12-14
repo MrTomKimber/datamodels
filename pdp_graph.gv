@@ -1,0 +1,9 @@
+digraph pdp_graph {
+	"Insurance Policy" -> "Insurance Product" [label=ConveysProduct]
+	Person -> "Insurance Policy" [label=hasPolicy]
+	Person -> Address [label=ResidesAt]
+	Address [type=Class]
+	"Insurance Policy" [type=Class]
+	Person [type=Class]
+	"Insurance Product" [type=Class]
+}
