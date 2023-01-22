@@ -40,6 +40,15 @@ def spawn_rdflib_graph():
     return graph
     #namespace_d = {'dm': dmns, 'rdfs' : RDFS, 'rdf' : RDF}
 
+def copy_rdflib_graph(g, master=None):
+    c = Graph()
+    for t in g.triples((None, None, None)):
+        c.add(t)
+    for ns in g.namespaces():
+        c.bind(*g, override=True, replace=True)
+    return c
+
+
 def datetime_literal(dt=None):
     if dt is None:
         dt_s = datetime.now(timezone.utc).strftime("%Y-%M-%dT%H:%M:%S")
@@ -132,11 +141,54 @@ class Entity(object):
             triples.append((subj, p[1], p[2]))
         return triples
 
-def serialize_row(row, serialization):
-    entity_mappings = get_contents_matching_subclass(serialization, onto.EntityMapping)
-    data_property_mappings = get_contents_matching_subclass(serialization, onto.DataPropertyMapping)
-    property_mappings = get_contents_matching_subclass(serialization, onto.PropertyMapping)
 
+def serialize_row(row, serialization):
+
+    entity_mappings = onto_get_contents_matching_subclass(serialization, onto.EntityMapping)
+    data_property_mappings = onto_get_contents_matching_subclass(serialization, onto.DataPropertyMapping)
+    property_mappings = onto_get_contents_matching_subclass(serialization, onto.PropertyMapping)
+
+    # Label : ParentLabel dictionary for building unique keys from chained concepts
+    lineage_tree = {e.SerializationLabel.first():e.SerializationParentLabel.first() for e in entity_mappings}
+
+    row_extracts = {}
+    extracted_labels = {}
+    for e in entity_mappings:
+        # Create a dictionary containing raw Entity Objects in memory
+        data_header = e.SerializationLabel.first()
+        class_pointer = e.MappingMetaTarget.first()
+        data = row.get(e.SerializationLabel.first())
+        lineage = get_lineage(lineage_tree, e.SerializationLabel.first())
+        lineage = ".".join([row.get(l) if row.get(l) is not None else "_" for l in lineage][::-1])
+        if data is not None:
+            row_extracts[data_header]=Entity(class_pointer, data, lineage)
+
+    for d in data_property_mappings:
+
+        subj = row_extracts.get(d.MappingDomain.first())
+        if subj is not None:
+            prop = URIRef(d.MappingMetaTarget.first().iri)
+            if row[d.MappingRange.first()] is not None:
+                obj = Literal(row[d.MappingRange.first()])
+                subj.data_properties.append((d.name, prop, obj))
+
+    for p in property_mappings:
+        subj = row_extracts.get(p.MappingDomain.first())
+        obj = row_extracts.get(p.MappingRange.first())
+        if subj is not None and obj is not None:
+            prop = URIRef(p.MappingMetaTarget.first().iri)
+            subj.properties.append((p.name, prop, URIRef(obj.uri)))
+
+
+    return list(chain (*[e.to_triples() for e in row_extracts.values()]))
+
+
+def old_serialize_row(row, serialization):
+    entity_mappings = onto_get_contents_matching_subclass(serialization, onto.EntityMapping)
+    data_property_mappings = onto_get_contents_matching_subclass(serialization, onto.DataPropertyMapping)
+    property_mappings = onto_get_contents_matching_subclass(serialization, onto.PropertyMapping)
+
+    # Label : ParentLabel dictionary for building unique keys from chained concepts
     lineage_tree = {e.SerializationLabel.first():e.SerializationParentLabel.first() for e in entity_mappings}
 
     row_extracts = {}
@@ -279,6 +331,7 @@ def master_triples(graph, triples):
     dmns = Namespace(onto.base_iri)
     t_graph.bind('dm', dmns, override=True, replace=True)
     t_graph.bind('rdfs', RDFS)
+    # Make a temporary graph of the new set of triples
     for t in triples:
         t_graph.add(t)
     target_dict = dict([(k,v) for v,k in list(t_graph.query(subj_unique_q))])
@@ -293,7 +346,7 @@ def master_triples(graph, triples):
 
 
 # Collect mappings from a given serializatin
-def get_contents_matching_subclass(s, subclass):
+def onto_get_contents_matching_subclass(s, subclass):
     m_list = []
     if not isinstance(subclass, list):
         subclass = [subclass]
@@ -302,14 +355,14 @@ def get_contents_matching_subclass(s, subclass):
             m_list.append(m)
     return m_list
 
-def get_schema_labels(s, onto):
+def onto_get_schema_labels(s, onto):
     labels=[]
-    for m in get_contents_matching_subclass(s,[onto.EntityMapping]):
+    for m in onto_get_contents_matching_subclass(s,[onto.EntityMapping]):
         #print(m)
         if len(m.SerializationLabel)>0:
             labels.extend(m.SerializationLabel)
 
-    for m in get_contents_matching_subclass(s,[onto.DataPropertyMapping]):
+    for m in onto_get_contents_matching_subclass(s,[onto.DataPropertyMapping]):
         #print(m)
         if len(m.MappingRange)>0:
             labels.extend(m.MappingRange)

@@ -147,9 +147,14 @@ class Discourse(object):
                     ]
         for m in self.members:
             triples.append((subj, URIRef(onto.DiscourseContains.iri), m))
+
         if self.is_proposed_by:
             #print(self.is_proposed_by)
             triples.append((subj, URIRef(onto.isProposedBy.iri), self.is_proposed_by))
             # Inverse property written here, since this side is the many in the many-to-one
             triples.append((self.is_proposed_by, URIRef(onto.Proposes.iri), subj))
+            # And now for the transitive fact that any members of this discourse are also proposeby the same thing:
+            for m in self.members:
+                triples.append((m, URIRef(onto.isProposedBy.iri), self.is_proposed_by))
+                triples.append((self.is_proposed_by, URIRef(onto.Proposes.iri), m))
         return triples

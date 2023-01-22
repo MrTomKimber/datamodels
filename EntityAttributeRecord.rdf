@@ -1,0 +1,587 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:ns1="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <Ontology/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsMapping -->
+
+    <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsMapping"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingDomain -->
+
+    <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingDomain"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget -->
+
+    <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingRange -->
+
+    <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingRange"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationLabel -->
+
+    <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationLabel"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationParentLabel -->
+
+    <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationParentLabel"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping -->
+
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass -->
+
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty -->
+
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty -->
+
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization -->
+
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Cardinality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#EntityAttributeRecord -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#EntityAttributeRecord">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Attribute"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_AttributeHasDataType"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Class"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ClassContainsAttribute"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Context"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsClass"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsSubContext"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_DomainContainsModel"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromAttribute"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromClass"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Model"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsClass"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsContext"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsRelationship"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelDomain"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelHasModelType"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Relationship"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromAttribute"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromCardinality"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromClass"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToAttribute"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToCardinality"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToClass"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_SubContext"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToAttribute"/>
+        <ns1:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToClass"/>
+        <rdfs:label>EntityAttributeRecord</rdfs:label>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromCardinality -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromCardinality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Attribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Attribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
+        <ns1:SerializationLabel>Attribute</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>Class</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_AttributeHasDataType -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_AttributeHasDataType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Attribute</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#DataType"/>
+        <ns1:MappingRange>DataType</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Class -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Class">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
+        <ns1:SerializationLabel>Class</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>Model</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ClassContainsAttribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ClassContainsAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Class</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <ns1:MappingRange>Attribute</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Context -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Context">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context"/>
+        <ns1:SerializationLabel>Context</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>Model</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Context</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <ns1:MappingRange>Class</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsSubContext -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ContextContainsSubContext">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Context</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <ns1:MappingRange>SubContext</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_DomainContainsModel -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_DomainContainsModel">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>ModelDomain</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <ns1:MappingRange>Model</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromAttribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
+        <ns1:SerializationLabel>FromAttribute</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>FromClass</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_FromClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
+        <ns1:SerializationLabel>FromClass</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>Model</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Model -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Model">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model"/>
+        <ns1:SerializationLabel>Model</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>ModelDomain</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Model</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <ns1:MappingRange>Class</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsContext -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsContext">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Model</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <ns1:MappingRange>Context</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsRelationship -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelContainsRelationship">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Model</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Contains"/>
+        <ns1:MappingRange>Relationship</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelDomain -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelDomain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain"/>
+        <ns1:SerializationLabel>ModelDomain</ns1:SerializationLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelHasModelType -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ModelHasModelType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Model</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType"/>
+        <ns1:MappingRange>ModelType</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Relationship -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_Relationship">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
+        <ns1:SerializationLabel>Relationship</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>Model</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromAttribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Relationship</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromAttribute"/>
+        <ns1:MappingRange>FromAttribute</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromCardinality -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromCardinality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Relationship</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#FromCardinality"/>
+        <ns1:MappingRange>FromCardinality</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipFromClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Relationship</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromClass"/>
+        <ns1:MappingRange>FromClass</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToAttribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Relationship</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToAttribute"/>
+        <ns1:MappingRange>ToAttribute</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToCardinality -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToCardinality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Relationship</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToCardinality"/>
+        <ns1:MappingRange>ToCardinality</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_RelationshipToClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingDomain>Relationship</ns1:MappingDomain>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToClass"/>
+        <ns1:MappingRange>ToClass</ns1:MappingRange>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_SubContext -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_SubContext">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Context"/>
+        <ns1:SerializationLabel>SubContext</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>Model</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToAttribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
+        <ns1:SerializationLabel>ToAttribute</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>ToClass</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Mapping_ToClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <ns1:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
+        <ns1:SerializationLabel>ToClass</ns1:SerializationLabel>
+        <ns1:SerializationParentLabel>Model</ns1:SerializationParentLabel>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Model">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelType">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Optionality -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Optionality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromAttribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipRecord -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipRecord">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToAttribute -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToAttribute">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToClass -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToClass">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToCardinality -->
+
+    <NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ToCardinality">
+        <rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+    </NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi -->
+
