@@ -134,9 +134,9 @@ class Mapping(object):
         for p,v in mapping_properties.items():
             setattr(self, p.replace("_uri",""),v.toPython())
 
-        print (" -----------------------")
-        print(s_uri, self.mapping_subtype, mapping_properties)
-        print (" -----------------------")
+        #print (" -----------------------")
+        #print(s_uri, self.mapping_subtype, mapping_properties)
+        #print (" -----------------------")
         # All these mapping data-properties should be packaged into some
         # utility data-object for traversal/configuration at load-time.
 
@@ -210,6 +210,28 @@ class Serialization(object):
             self.mappings.append(Mapping(self, m))
 
         return self.mappings
+
+    def delta_triples_to_target_graph(self, row_set, target_graph, deltas=False, in_place=False):
+        if not in_place:
+            temp_graph=Graph()
+            serns = Namespace(serial.base_iri)
+            temp_graph.bind('ser', serns, override=True, replace=True)
+            for t in target_graph.triples((None, None, None)):
+                temp_graph.add(t)
+        else:
+            temp_graph=target_graph
+        mastered_triples=[]
+        for row in row_set:
+            t = self.extract_raw_triples(row)
+            if deltas:
+                triples = set(self.master_triples(temp_graph, t)).difference(set(temp_graph.triples((None, None, None))))
+            else:
+                triples = set(self.master_triples(temp_graph, t))
+            for m in triples:
+                temp_graph.add(m)
+                mastered_triples.append(m)
+        return mastered_triples
+
 
     def extract_raw_triples(self, row):
         entities={}
