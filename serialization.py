@@ -174,6 +174,7 @@ class Mapping(object):
 # This graph is decomposed into a dict-like object, for convenience
 
 class Serialization(object):
+
     def __init__(self, s_graph, s_name):
         self.ontology = serial
         self.graph = s_graph
@@ -184,6 +185,7 @@ class Serialization(object):
         if s_name in serial_dict:
             self.serialization = serial_dict.get(s_name)
         else:
+            print(serial_dict)
             assert False # Serialization name should match up
         self.mappings = self.get_mappings()
         self.lineage_tree = {m.SerializationLabel: m.SerializationParentLabel for m in self.mappings if m.mapping_subtype=="class" and hasattr(m, "SerializationParentLabel")}
@@ -240,6 +242,7 @@ class Serialization(object):
 #        input_graph.parse (serial_onto_file, format='xml')
         serns = Namespace(serial.base_iri)
         input_graph.bind('ser', serns, override=True, replace=True)
+        master_graph.bind('ser', serns, override=True, replace=True)
 
         for t in triples:
             input_graph.add(t)
@@ -250,6 +253,7 @@ class Serialization(object):
                                 ?s ser:UniqueIdentifier ?u .
                                 OPTIONAL {?s a ?t.}
                                 } """
+
             master_keys = dict([((t,u),s) for s,t,u in list(master_graph.query(subj_unique_q))])
             input_keys = dict([((t,u),s) for s,t,u in list(input_graph.query(subj_unique_q))])
 
