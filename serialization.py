@@ -11,8 +11,8 @@ from itertools import chain
 
 import owlready2 as owlr
 
-# This file is coupled with Serialization.owl, an ontology that defines the specification
-# for translating between row-based content and graph-content.
+# This file is coupled with Serialization.owl, an ontology that defines
+# the specification for translating between row-based content and graph-content.
 
 serial_onto_file = "Serialization.owl"
 serial = owlr.get_ontology(serial_onto_file).load()
@@ -63,7 +63,7 @@ def ontology_definitions():
 
 class Entity(object):
 
-    def __init__(self,e_type,label,unique_label=None):
+    def __init__(self, e_type, label, unique_label=None, entity_map=None):
         if unique_label is None:
             unique_label=label
         uid = uuid.uuid4().hex
@@ -72,6 +72,14 @@ class Entity(object):
         self.type = e_type
         self.label = Literal(label)
         self.unique_label = Literal(unique_label)
+        if entity_map is None:
+            entity_map = { self.unique_label : self.uri }
+
+        if self.unique_label in entity_map.keys():
+            self.uri = entity_map[self.unique_label]
+        elif self.unique_label not in entity_map.keys():
+            entity_map[self.unique_label]=self.uri
+
         self.data_properties=[]
         self.properties=[]
 
@@ -140,21 +148,21 @@ class Mapping(object):
         # All these mapping data-properties should be packaged into some
         # utility data-object for traversal/configuration at load-time.
 
-    def _apply_mapping(self, row_dict, entity_context):
+    def _apply_mapping(self, row_dict, row_entity_context, entity_mappings=None):
 
         if self.mapping_subtype=="class" and hasattr(self, "SerializationLabel"):
             label = row_dict.get(self.SerializationLabel)
             lineage = get_lineage(self.serialization.lineage_tree, self.SerializationLabel)
             unique_label = ".".join([row_dict.get(l) if row_dict.get(l) is not None else "_" for l in lineage][::-1])
 
-            return Entity(self.mapping_meta_target, label, unique_label)
+            return Entity(self.mapping_meta_target, label, unique_label, entity_mappings)
 
         else:
-            subj = entity_context.get(self.MappingDomain)
+            subj = row_entity_context.get(self.MappingDomain)
             prop = URIRef(self.mapping_meta_target)
             if subj is not None:
                 if self.mapping_subtype=="property":
-                    obj = entity_context.get(self.MappingRange)
+                    obj = row_entity_context.get(self.MappingRange)
                     if obj is not None:
                         subj.properties.append((subj.name, prop, URIRef(obj.uri)))
                     else:
@@ -235,19 +243,25 @@ class Serialization(object):
         return mastered_triples
 
 
-    def extract_raw_triples(self, row):
+
+
+    def extract_raw_triples(self, row, entity_mappings=None):
         entities={}
+        if entity_mappings is None:
+            entity_mappings={}
         for m in self.mappings:
             if hasattr(m, "SerializationLabel"):
                 if row.get(m.SerializationLabel) is not None:
-                    entities[m.SerializationLabel]=m._apply_mapping(row, None)
+                    ent=m._apply_mapping(row, None, entity_mappings)
+                    entities[m.SerializationLabel]=ent
+                    entity_mappings[ent.unique_label]=ent.uri
 
         for m in self.mappings:
 
             if not hasattr(m, "SerializationLabel"):
-                m._apply_mapping(row, entities)
+                m._apply_mapping(row, entities, entity_mappings)
 
-        return list(chain (*[e.to_triples() for e in entities.values()]))
+        return list(chain (*[e.to_triples() for e in entities.values()])), entity_mappings
 
     # Given a graph that already exists, and a set of new triples for mastering,
     # update that triple-set so that they use the equivalent mastered object-identifiers.

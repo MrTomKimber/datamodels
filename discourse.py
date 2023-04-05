@@ -1,3 +1,5 @@
+from typing import Optional
+
 import owlready2 as owlr
 import rdflib
 from rdflib import URIRef, Literal, Graph
@@ -9,7 +11,10 @@ from rdflib.extras.external_graph_libs import rdflib_to_networkx_multidigraph
 from collections import Counter
 import uuid
 from datetime import datetime, timezone
+import hashlib
 
+def uuid_format(hx):
+    return hx[0:12]+"-"+hx[12:16]+"-"+hx[16:20]+"-"+hx[20:]
 
 def datetime_literal(dt=None):
     if dt is None:
@@ -35,17 +40,24 @@ def longform_to_triple(longform):
     s,p,o = [n3_to_term(t) for t in longform.split("~~~")]
     return tuple((s,p,o))
 
-onto = owlr.get_ontology("discourse.owl").load()
-namespace = onto.base_iri
+disco = owlr.get_ontology("discourse.owl").load()
+namespace = disco.base_iri
+serial_onto_file = "Serialization.owl"
+serial = owlr.get_ontology(serial_onto_file).load()
+
 
 class Posit(object):
     def __init__(self, triple):
         s,p,o = triple
-        uid = uuid.uuid4().hex
+        #uid = uuid.uuid4().hex
+        #self.uri = URIRef(uid, namespace+"#")
+        self.type = URIRef(disco.Posit.iri)
+
+        self.longform = Literal(triple_to_longform(triple ))
+        uid = uuid_format(hashlib.md5(self.longform.n3().encode("utf-8")).hexdigest())
+        self.uid = Literal(uid)
         self.uri = URIRef(uid, namespace+"#")
-        self.type = URIRef(onto.Posit.iri)
         self.label = Literal(f"posit_{uid}")
-        self.longform = Literal(triple_to_longform(triple))
         self.subject = s
         self.predicate = p
         self.object = o
@@ -54,7 +66,7 @@ class Posit(object):
     # use this method to edit the uri of this representation
     # to align it to the graph
     def update_uri_from_graph(self, graph):
-        search = list(graph.triples((None,URIRef(onto.Digest.iri), self.longform)))
+        search = list(graph.triples((None,URIRef(disco.Digest.iri), self.longform)))
         if len(search) > 0 :
             longform = search[0][0]
         else:
@@ -73,7 +85,7 @@ class Posit(object):
     def peek_longform(self, graph): # Does the posit identified by the longform already exist in the graph?
         s,p,o = self.subject, self.predicate, self.object
         #print (len (list(graph.triples((None,URIRef(onto.Digest.iri), self.longform)))))
-        if len (list(graph.triples((None,URIRef(onto.Digest.iri), self.longform))))>0:
+        if len (list(graph.triples((None,URIRef(disco.Digest.iri), self.longform))))>0:
             return True
         else:
             return False
@@ -103,58 +115,85 @@ class Posit(object):
         subj = self.uri
         triples = [ (subj, RDF.type, self.type),
                     (subj, RDFS.label, self.label),
-                    (subj, URIRef(onto.Subject.iri), self.subject),
-                    (subj, URIRef(onto.Predicate.iri), self.predicate),
-                    (subj, URIRef(onto.Object.iri), self.object),
-                    (subj, URIRef(onto.Digest.iri), self.longform)
+                    (subj, URIRef(disco.Subject.iri), self.subject),
+                    (subj, URIRef(disco.Predicate.iri), self.predicate),
+                    (subj, URIRef(disco.Object.iri), self.object),
+                    (subj, URIRef(disco.Digest.iri), self.longform),
+                    (subj, URIRef(serial.UniqueIdentifier.iri), self.uid)
                     ]
         return triples
 
 
 class Declaration(object):
-    def __init__(self, posit_uri):
+
+    def __init__(self, posit_uri, asserts : Optional[bool]=None):
+        # Asserts flag is used to either positively Assert, negatively Refute, or neutrally Posit
+        # asserts expects a boolean value
         uid = uuid.uuid4().hex
         self.uri = URIRef(uid, namespace+"#")
-        self.type = URIRef(onto.Declaration.iri)
+        self.type = URIRef(disco.Declaration.iri)
         self.label = Literal(f"declaration_{uid}")
         self.generated = datetime_literal()
         self.posit = posit_uri
+        self.asserts = asserts
 
     def to_triples(self):
         subj = self.uri
-        triples = [ (subj, RDF.type, self.type),
-                    (subj, RDFS.label, self.label),
-                    (subj, URIRef(onto.Posits.iri), URIRef(self.posit)),
-                    (subj, URIRef(onto.GeneratedOn.iri), self.generated)
-                    ]
+        if self.asserts is None:
+            triples = [ (subj, RDF.type, self.type),
+                        (subj, RDFS.label, self.label),
+                        (subj, URIRef(disco.Posits.iri), URIRef(self.posit)),
+                        (subj, URIRef(disco.GeneratedOn.iri), self.generated)
+                        ]
+        elif self.asserts == True:
+            triples = [ (subj, RDF.type, self.type),
+                        (subj, RDFS.label, self.label),
+                        (subj, URIRef(disco.Asserts.iri), URIRef(self.posit)),
+                        (subj, URIRef(disco.GeneratedOn.iri), self.generated)
+                        ]
+        elif self.asserts == False:
+            triples = [ (subj, RDF.type, self.type),
+                        (subj, RDFS.label, self.label),
+                        (subj, URIRef(disco.Refutes.iri), URIRef(self.posit)),
+                        (subj, URIRef(disco.GeneratedOn.iri), self.generated)
+                        ]
+        else:
+            # Not true, not false, not None - what is it?
+            assert False
         return triples
 
 class Discourse(object):
-    def __init__(self, name, is_proposed_by = None):
+
+    def unpack_payload(self, payload):
+        payload_m=set()
+        for k,v in payload.items() :
+            payload_m.add ((self.uri, k , v))
+        return payload_m
+
+    def __init__(self, name, payload=None):
         uid = uuid.uuid4().hex
         self.uri = URIRef(uid, namespace+"#")
-        self.type = URIRef(onto.Discourse.iri)
+        self.type = URIRef(disco.Discourse.iri)
         self.label = Literal(f"discourse_{name}")
         self.generated = datetime_literal()
-        self.members = []
-        self.is_proposed_by = is_proposed_by
+        self.members = set()
+        if payload is None:
+            payload={}
+        self.payload = self.unpack_payload(payload)
+
+    def add_member_uri(self, member_uri):
+        self.members.add(member_uri)
 
     def to_triples(self):
         subj = self.uri
         triples = [ (subj, RDF.type, self.type),
                     (subj, RDFS.label, self.label),
-                    (subj, URIRef(onto.GeneratedOn.iri), self.generated)
+                    (subj, URIRef(disco.GeneratedOn.iri), self.generated)
                     ]
         for m in self.members:
-            triples.append((subj, URIRef(onto.DiscourseContains.iri), m))
+            triples.append((subj, URIRef(disco.DiscourseContains.iri), m))
 
-        if self.is_proposed_by:
-            #print(self.is_proposed_by)
-            triples.append((subj, URIRef(onto.isProposedBy.iri), self.is_proposed_by))
-            # Inverse property written here, since this side is the many in the many-to-one
-            triples.append((self.is_proposed_by, URIRef(onto.Proposes.iri), subj))
-            # And now for the transitive fact that any members of this discourse are also proposeby the same thing:
-            for m in self.members:
-                triples.append((m, URIRef(onto.isProposedBy.iri), self.is_proposed_by))
-                triples.append((self.is_proposed_by, URIRef(onto.Proposes.iri), m))
+        for t in self.payload:
+            triples.append(t)
+
         return triples
