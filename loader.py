@@ -24,7 +24,7 @@ from datetime import datetime
 # 8. With some standardised meta-data to be applied at runtime.
 # 9. Apply triple sets to their target locations.
 
-def get_quads(serialization_graph, serialization_name, data_rows, master_graph, new_triples):
+def get_triples(serialization_graph, serialization_name, data_rows, master_graph, new_triples):
     # Load Process Starts Here
 
     S = serialization.Serialization(serialization_graph, serialization_name)
@@ -55,9 +55,9 @@ def get_quads(serialization_graph, serialization_name, data_rows, master_graph, 
 
 
     mgid = master_graph._Graph__get_identifier()
-    quads = [(s,p,o,mgid) for s,p,o in row_triples]
+    triples = [(s,p,o) for s,p,o in row_triples]
 
-    return quads, e_mappings
+    return triples, e_mappings
 
 def master_on_predicate_g(master_q, process_q, predicate=None):
     # Compare process_q against content in master_q and return mastered_q

@@ -177,12 +177,16 @@ class Discourse(object):
         self.label = Literal(f"discourse_{name}")
         self.generated = datetime_literal()
         self.members = set()
+        self.exclusions = set()
         if payload is None:
             payload={}
         self.payload = self.unpack_payload(payload)
 
     def add_member_uri(self, member_uri):
         self.members.add(member_uri)
+
+    def add_exclusion_uri(self, exclusion_uri):
+        self.exclusions.add(member_uri)
 
     def to_triples(self):
         subj = self.uri
@@ -192,6 +196,9 @@ class Discourse(object):
                     ]
         for m in self.members:
             triples.append((subj, URIRef(disco.DiscourseContains.iri), m))
+
+        for m in self.exclusions:
+            triples.append((subj, URIRef(disco.DiscourseExcludes.iri), m))
 
         for t in self.payload:
             triples.append(t)
