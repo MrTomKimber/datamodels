@@ -3,6 +3,8 @@ import discourse
 import rdflib
 from rdflib import URIRef, Literal, Graph, Dataset
 import uuid
+from itertools import chain
+
 
 import owlready2 as owlr
 
@@ -58,6 +60,37 @@ def get_triples(serialization_graph, serialization_name, data_rows, master_graph
     triples = [(s,p,o) for s,p,o in row_triples]
 
     return triples, e_mappings
+
+
+# Given a discourse name, a set of mastered triples and some payload duals
+# Create all the required triples to express a discourse, set of declarations, posits and links to mastered triples
+def generate_discourse(d_name, triples, payload):
+    posits = set()
+    declarations = set()
+    for triple in triples:
+        t_pos = discourse.Posit(triple)
+        posits.add(t_pos)
+        t_dec = discourse.Declaration(t_pos.uri, asserts=True)
+        declarations.add(t_dec)
+
+    t_disc = discourse.Discourse(d_name, payload)
+    for t_dec in declarations:
+        t_disc.add_member_uri(t_dec.uri)
+
+    #triples = set([(s,p,o) for s,p,o in triples])
+    posit_triples = set(chain(*[p.to_triples() for p in posits]))
+    declaration_triples = set(chain(*[p.to_triples() for p in declarations]))
+    discourse_triples = set(t_disc.to_triples())
+
+    # Need to return separate sets of triples, or attach quad graph names to these ones so they can be
+    # separated out later.
+    return posit_triples, declaration_triples, discourse_triples
+
+
+
+
+
+
 
 def master_on_predicate_g(master_q, process_q, predicate=None):
     # Compare process_q against content in master_q and return mastered_q
