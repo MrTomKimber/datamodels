@@ -169,7 +169,7 @@ class Discourse(object):
         for k,v in payload.items() :
             payload_m.add ((self.uri, k , v))
         return payload_m
-
+    # Payload is the additional metadata provided by the author that can be used to index the discourse
     def __init__(self, name, payload=None):
         uid = uuid.uuid4().hex
         self.uri = URIRef(uid, namespace+"#")
@@ -181,18 +181,36 @@ class Discourse(object):
         if payload is None:
             payload={}
         self.payload = self.unpack_payload(payload)
+        self.member_assertions = { None : set(),
+                           True : set(),
+                           False : set()}
+        self.member_exclusions = { None : set(),
+                           True : set(),
+                           False : set()}
 
-    def add_member_uri(self, member_uri):
-        self.members.add(member_uri)
+    def add_member(self, member, assertion=None):
+        self.members.add(member.uri)
+        self.member_assertions[assertion].add(member.posit)
 
-    def add_exclusion_uri(self, exclusion_uri):
-        self.exclusions.add(member_uri)
+    def add_exclusion(self, exclusion_member, assertion=None):
+        self.exclusions.add(exclusion_member.uri)
+        self.member_exclusions[assertion].add(exclusion_member.posit)
+
+    def member_hash(self):
+        hash_object = []
+        key_set = [None, True, False]
+        for k in key_set:
+            k_list = sorted(list(self.member_assertions[k]))
+            hash_object.append(k_list)
+        return uuid_format(hashlib.md5(bytes(str(hash_object),encoding="utf-8")).hexdigest())
+
 
     def to_triples(self):
         subj = self.uri
         triples = [ (subj, RDF.type, self.type),
                     (subj, RDFS.label, self.label),
-                    (subj, URIRef(disco.GeneratedOn.iri), self.generated)
+                    (subj, URIRef(disco.GeneratedOn.iri), self.generated),
+                    (subj, URIRef(disco.DiscourseHash.iri), Literal(self.member_hash())),
                     ]
         for m in self.members:
             triples.append((subj, URIRef(disco.DiscourseContains.iri), m))

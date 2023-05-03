@@ -7,11 +7,11 @@
     <uri id="Imports Wizard Entry" name="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel" uri="datamodels_rdf.owl"/>
     <uri id="Imports Wizard Entry" name="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse" uri="discourse.owl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1681314958823" name="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse" uri="discourse.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1681314958823" name="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization" uri="Serialization.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1681314958823" name="duplicate:http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel" uri="datamodels.rdf"/>
-        <uri id="Automatically generated entry, Timestamp=1681314958823" name="duplicate:http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel" uri="datamodels_rdf.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1681314958823" name="duplicate:http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel" uri="datamodels_rdf.owl.backup.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1681314958823" name="http://www.w3.org/2002/07/owl" uri="DMEAR_ser.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1683072059646" name="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse" uri="Discourse.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1683072059646" name="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization" uri="Serialization.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1683072059646" name="duplicate:http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel" uri="datamodels.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1683072059646" name="duplicate:http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel" uri="datamodels_rdf.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1683072059646" name="duplicate:http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel" uri="datamodels_rdf.owl.backup.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1683072059646" name="http://www.w3.org/2002/07/owl" uri="DMEAR_ser.rdf"/>
     </group>
 </catalog>

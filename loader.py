@@ -64,6 +64,10 @@ def get_triples(serialization_graph, serialization_name, data_rows, master_graph
 
 # Given a discourse name, a set of mastered triples and some payload duals
 # Create all the required triples to express a discourse, set of declarations, posits and links to mastered triples
+# Returns posit_triples
+#         declaration_triples
+#         discourse_triples
+
 def generate_discourse(d_name, triples, payload):
     posits = set()
     declarations = set()
@@ -75,21 +79,17 @@ def generate_discourse(d_name, triples, payload):
 
     t_disc = discourse.Discourse(d_name, payload)
     for t_dec in declarations:
-        t_disc.add_member_uri(t_dec.uri)
+        t_disc.add_member(t_dec, t_dec.asserts)
 
     #triples = set([(s,p,o) for s,p,o in triples])
     posit_triples = set(chain(*[p.to_triples() for p in posits]))
+
     declaration_triples = set(chain(*[p.to_triples() for p in declarations]))
     discourse_triples = set(t_disc.to_triples())
 
     # Need to return separate sets of triples, or attach quad graph names to these ones so they can be
     # separated out later.
-    return posit_triples, declaration_triples, discourse_triples
-
-
-
-
-
+    return posit_triples, declaration_triples, discourse_triples, t_disc.member_hash()
 
 
 def master_on_predicate_g(master_q, process_q, predicate=None):
