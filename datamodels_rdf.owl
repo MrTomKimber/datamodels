@@ -51,9 +51,7 @@
 
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassToClassRelationship -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassToClassRelationship">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ClassToClassRelationship"/>
     
 
 
@@ -72,6 +70,50 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#MemberOf">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipProperty"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipFromClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipProperty"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipProperty -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipProperty">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Relationship"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipProperty"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Attribute"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipToClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#RelationshipProperty"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#Class"/>
     </owl:ObjectProperty>
     
 

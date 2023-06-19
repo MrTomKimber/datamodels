@@ -187,14 +187,32 @@ class Discourse(object):
         self.member_exclusions = { None : set(),
                            True : set(),
                            False : set()}
+        # Not strictly a posit, but named as such to align the DiscourseContains
+        # membership api to allow Discourses to reference one another.
+        self.posit = self.uri
 
     def add_member(self, member, assertion=None):
-        self.members.add(member.uri)
-        self.member_assertions[assertion].add(member.posit)
+        
+        if isinstance(member, rdflib.URIRef):
+
+            self.members.add(member)
+            self.member_assertions[assertion].add(member)
+        elif isinstance(member, Declaration):
+            self.members.add(member.uri)
+            self.member_assertions[assertion].add(member.posit)
 
     def add_exclusion(self, exclusion_member, assertion=None):
         self.exclusions.add(exclusion_member.uri)
         self.member_exclusions[assertion].add(exclusion_member.posit)
+
+    def clear_members(self):
+        self.members=set()
+        self.member_assertions={ None : set(),
+                                True : set(),
+                                False : set()}
+        print("Cleared Members")
+        print("Member Count:", len(self.members))
+
 
     def member_hash(self):
         hash_object = []
@@ -212,6 +230,7 @@ class Discourse(object):
                     (subj, URIRef(disco.GeneratedOn.iri), self.generated),
                     (subj, URIRef(disco.DiscourseHash.iri), Literal(self.member_hash())),
                     ]
+        print("self.members:", len(self.members))
         for m in self.members:
             triples.append((subj, URIRef(disco.DiscourseContains.iri), m))
 

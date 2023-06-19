@@ -26,14 +26,16 @@ from datetime import datetime
 # 8. With some standardised meta-data to be applied at runtime.
 # 9. Apply triple sets to their target locations.
 
-def get_triples(serialization_graph, serialization_name, data_rows, master_graph, new_triples):
+def get_triples(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri):
     # Load Process Starts Here
-
+    serialization_graph = dataset_object.graph(URIRef(serialization_graph_uri))
     S = serialization.Serialization(serialization_graph, serialization_name)
     temp_master = Graph() # Take offline copy of existing mastered triple set
-    if master_graph is None:
+    if master_graph_uri is None:
         gid = uuid.uuid4().hex
         master_graph = Graph(identifier=gid)
+    else:
+        master_graph = dataset_object.graph(URIRef(master_graph_uri))
     row_triples=[]
     for t in master_graph:
         temp_master.add(t)
@@ -89,8 +91,47 @@ def generate_discourse(d_name, triples, payload):
 
     # Need to return separate sets of triples, or attach quad graph names to these ones so they can be
     # separated out later.
-    return posit_triples, declaration_triples, discourse_triples, t_disc.member_hash()
+    return posit_triples, declaration_triples, discourse_triples, t_disc
 
+def triples_to_quads(triples, graph_uri="http://master"):
+    for s,p,o, *_ in triples:
+        yield (s,p,o,URIRef(graph_uri))
+
+def load_to_graph(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri, discourse_graph_uri, title, metadata_payload, fingerprint_hashes=None, override_duplicate=False):
+    start_ts = datetime.now()
+    mastered_triples, entity_mappings = get_triples(dataset_object,serialization_graph_uri, serialization_name, data_rows, master_graph_uri)
+    posits, declarations, discourse, disco_obj = generate_discourse(title, mastered_triples, metadata_payload)
+    if fingerprint_hashes is not None:
+        fingerprint = disco_obj.member_hash()
+        if fingerprint in fingerprint_hashes:
+            #This data has been uploaded previously
+            if override_duplicate:
+                # Get the existing discourse that contains the matching fingerprint to this one
+                # and create a new discourse that points directly at that one
+                print("doing this")
+
+                alt_discourse_pointer = fingerprint_hashes[disco_obj.member_hash()]
+                print(alt_discourse_pointer)
+
+                print("Clearing members")
+                disco_obj.clear_members()
+                disco_obj.add_member(alt_discourse_pointer)
+                print("now this")
+                discourse = disco_obj.to_triples()
+                posits = set()
+                declarations = set()
+
+            else:
+                print("This data is already loaded! - Aborting")
+                return None
+    dataset_object.addN(triples_to_quads(mastered_triples, URIRef(master_graph_uri)))
+    dataset_object.addN(triples_to_quads(posits, URIRef(discourse_graph_uri)))
+    dataset_object.addN(triples_to_quads(declarations, URIRef(discourse_graph_uri)))
+    dataset_object.addN(triples_to_quads(discourse, URIRef(discourse_graph_uri)))
+    triple_count = len(mastered_triples)+len(posits)+len(declarations)+len(discourse)
+    end_ts = datetime.now()
+    print(end_ts-start_ts, "for", triple_count, "triples" )
+    return True
 
 def master_on_predicate_g(master_q, process_q, predicate=None):
     # Compare process_q against content in master_q and return mastered_q
@@ -123,6 +164,6 @@ def master_on_predicate_g(master_q, process_q, predicate=None):
         conversion_lookup = { vp : master_lookup.get(kp,kp) for kp,vp in process_lookup.items()}
         mastered_q = [(conversion_lookup.get(s,s), conversion_lookup.get(p,p), conversion_lookup.get(o,o)) for s,p,o in process_q]
     end_ts = datetime.now()
-    print(end_ts-start_ts, "for", len(process_q) )
+
 
     return mastered_q
