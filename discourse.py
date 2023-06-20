@@ -40,7 +40,7 @@ def longform_to_triple(longform):
     s,p,o = [n3_to_term(t) for t in longform.split("~~~")]
     return tuple((s,p,o))
 
-disco = owlr.get_ontology("discourse.owl").load()
+disco = owlr.get_ontology("Discourse.owl").load()
 namespace = disco.base_iri
 serial_onto_file = "Serialization.owl"
 serial = owlr.get_ontology(serial_onto_file).load()
