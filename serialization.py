@@ -194,6 +194,7 @@ class Serialization(object):
             self.serialization = serial_dict.get(s_name)
         else:
             print(serial_dict)
+            print(s_graph, s_name)
             assert False # Serialization name should match up
         self.mappings = self.get_mappings()
         self.lineage_tree = {m.SerializationLabel: m.SerializationParentLabel for m in self.mappings if m.mapping_subtype=="class" and hasattr(m, "SerializationParentLabel")}
