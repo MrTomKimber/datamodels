@@ -8,10 +8,19 @@ from itertools import chain
 
 import owlready2 as owlr
 
+
 serial_onto_file = "Serialization.owl"
 discourse_onto_file = "Discourse.owl"
-serial = owlr.get_ontology(serial_onto_file).load()
-disco = owlr.get_ontology(discourse_onto_file).load()
+
+try:
+    serial = owlr.get_ontology(serial_onto_file).load()
+except FileNotFoundError:
+    serial = owlr.get_ontology("../" + serial_onto_file).load()
+
+try:
+    disco = owlr.get_ontology(discourse_onto_file).load()
+except FileNotFoundError:
+    serial = owlr.get_ontology("../" + serial_onto_file).load()
 
 from datetime import datetime
 
@@ -57,8 +66,10 @@ def get_triples(dataset_object, serialization_graph_uri, serialization_name, dat
     print(end_ts-start_ts, "for", len(data_rows) )
 
 
-
-    mgid = master_graph._Graph__get_identifier()
+    try:
+        mgid = master_graph._Graph__get_identifier()
+    except AttributeError:
+        mgid = master_graph._Graph__identifier
     triples = [(s,p,o) for s,p,o in row_triples]
 
     return triples, e_mappings
@@ -167,3 +178,4 @@ def master_on_predicate_g(master_q, process_q, predicate=None):
 
 
     return mastered_q
+
