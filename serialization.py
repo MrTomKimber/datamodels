@@ -1,4 +1,6 @@
 
+
+
 import rdflib
 from rdflib import URIRef, Literal, Graph, Namespace
 from rdflib.namespace import RDF, RDFS
@@ -7,15 +9,17 @@ from datetime import datetime, timezone
 import uuid
 from itertools import chain
 
-
-
 import owlready2 as owlr
 
 # This file is coupled with Serialization.owl, an ontology that defines
 # the specification for translating between row-based content and graph-content.
 
 serial_onto_file = "Serialization.owl"
-serial = owlr.get_ontology(serial_onto_file).load()
+try:
+    serial = owlr.get_ontology(serial_onto_file).load()
+except FileNotFoundError:
+    serial = owlr.get_ontology("../" + serial_onto_file).load()
+
 namespace = serial.base_iri
 
 def flush(onto):

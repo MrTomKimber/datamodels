@@ -40,11 +40,17 @@ def longform_to_triple(longform):
     s,p,o = [n3_to_term(t) for t in longform.split("~~~")]
     return tuple((s,p,o))
 
-disco = owlr.get_ontology("Discourse.owl").load()
+try:
+    disco = owlr.get_ontology("Discourse.owl").load()
+except FileNotFoundError:
+    disco = owlr.get_ontology("../Discourse.owl").load()
 namespace = disco.base_iri
 serial_onto_file = "Serialization.owl"
-serial = owlr.get_ontology(serial_onto_file).load()
 
+try:
+    serial = owlr.get_ontology(serial_onto_file).load()
+except FileNotFoundError:
+    serial = owlr.get_ontology("../" + serial_onto_file).load()
 
 class Posit(object):
     def __init__(self, triple):
