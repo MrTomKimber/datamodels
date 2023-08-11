@@ -328,10 +328,10 @@ e.g. A &quot;Manager&quot; within &quot;Development&quot; would have one Enterpr
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/5/entarchmodel#EnterpriseRoleTenure -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2023/5/entarchmodel#EnterpriseTenure -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/5/entarchmodel#EnterpriseRoleTenure">
-        <rdfs:comment>An EnterpriseRoleTenure is an associative object linking an EnterpriseRole with an EnterpriseIndividual, along with some temporal information (e.g. StartDate, EndDate and optional PointInTime references) describing the time period over which an Individual performed/officiated in that Role&apos;s capacity.</rdfs:comment>
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/5/entarchmodel#EnterpriseTenure">
+        <rdfs:comment>An EnterpriseTenure is an associative object linking some Role or Membership association to an Entity, where that relation has some temporal component (e.g. StartDate, EndDate and optional PointInTime references) describing the time period over which an Entity participated in that associative relation.</rdfs:comment>
     </owl:Class>
 </rdf:RDF>
 

@@ -55,10 +55,12 @@ def ontology_definitions():
             "MetaClass_uri" : URIRef(serial.MetaClass.iri),
             "MetaProperty_uri" : URIRef(serial.MetaProperty.iri),
             "MetaDataProperty_uri" : URIRef(serial.MetaDataProperty.iri),
+            "MetaStaticProperty_uri" : URIRef(serial.MetaStaticProperty.iri),
             "MappingDomain_uri" : URIRef(serial.MappingDomain.iri),
             "MappingRange_uri" : URIRef(serial.MappingRange.iri),
             "SerializationLabel_uri" : URIRef(serial.SerializationLabel.iri),
             "SerializationParentLabel_uri" : URIRef(serial.SerializationParentLabel.iri),
+            "TranslationMapping_uri" : URIRef(serial.TranslationMapping.iri),
             "ContainsMapping_uri" : URIRef(serial.ContainsMapping.iri),
             "UniqueIdentifier_uri" : URIRef(serial.UniqueIdentifier.iri)
     }
@@ -117,6 +119,8 @@ class Mapping(object):
             self.mapping_subtype = "property"
         elif self.defs["MetaDataProperty_uri"] in class_set:
             self.mapping_subtype = "dataproperty"
+        elif self.defs["MetaStaitcProperty_uri"] in class_set:
+            self.mapping_subtype = "staticproperty"
         else:
             print (class_set)
             print( s_uri )
@@ -132,6 +136,7 @@ class Mapping(object):
 
         mapping_properties = {p:o for q in [self.defs["MappingDomain_uri"],
                                             self.defs["MappingRange_uri"],
+                                            self.defs["TranslationMapping_uri"],
                                             self.defs["SerializationLabel_uri"],
                                             self.defs["SerializationParentLabel_uri"]] \
                                   for s,p,o in self.graph.triples((URIRef(s_uri), q, None))}
@@ -139,6 +144,7 @@ class Mapping(object):
         mapping_properties = {q[0]:o for q in [(n,self.defs[n]) for n in
                                             ["MappingDomain_uri",
                                             "MappingRange_uri",
+                                            "TranslationMapping_uri",
                                             "SerializationLabel_uri",
                                             "SerializationParentLabel_uri"]] \
                                   for s,p,o in self.graph.triples((URIRef(s_uri), q[1], None))}
@@ -175,6 +181,9 @@ class Mapping(object):
                     obj = row_dict.get(self.MappingRange)
                     if obj is not None:
                         subj.data_properties.append((subj.name, prop, Literal(obj)))
+                elif self.mapping_subtype=='staticproperty':
+                    # This is where the dereferencing of staticproperties goes.
+
                 return subj
             else:
                 # No matching subject -
@@ -202,6 +211,7 @@ class Serialization(object):
             assert False # Serialization name should match up
         self.mappings = self.get_mappings()
         self.lineage_tree = {m.SerializationLabel: m.SerializationParentLabel for m in self.mappings if m.mapping_subtype=="class" and hasattr(m, "SerializationParentLabel")}
+        self.translation_mappings = self.get_translation_mappings()
 
 
 
@@ -213,6 +223,13 @@ class Serialization(object):
         serial_instance_dict_by_label = { l.value : s.toPython() for i in serialization_instances for s,p,l in self.graph.triples((i, RDFS.label, None))}
         return serial_instance_dict_by_label
 
+    def get_translation_mappings(self):
+        self.translation_mappings = {}
+        translation_mapping_ids = [m.toPython() for s,p,m in self.graph.triples((None,
+                                                                        RDF.type,
+                                                                        ontology_definitions.get("TranslationMapping_uri")))]
+        
+        
 
     def get_mappings(self):
         self.mappings=[]

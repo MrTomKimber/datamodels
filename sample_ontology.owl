@@ -59,9 +59,52 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SomeClass -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SomeClass"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC"/>
+        </owl:members>
+    </rdf:Description>
 </rdf:RDF>
 
 

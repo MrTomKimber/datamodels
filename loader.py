@@ -20,7 +20,7 @@ except FileNotFoundError:
 try:
     disco = owlr.get_ontology(discourse_onto_file).load()
 except FileNotFoundError:
-    serial = owlr.get_ontology("../" + serial_onto_file).load()
+    disco = owlr.get_ontology("../" + discourse_onto_file).load()
 
 from datetime import datetime
 

@@ -23,14 +23,34 @@
      xmlns:xx_target__xx="target_ontology.owl"
      >
 
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes - these should remain static
+    // High level serialization classes defined to describe a given Serialization
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization -->
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization"/>
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping -->
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass -->
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty -->
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty -->
+    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+
     <!--
     ///////////////////////////////////////////////////////////////////////////////////////
     //
     // Annotation properties - these should remain static
+    // These are the internal technical components used by the loading/serialization process
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
-
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsMapping -->
     <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsMapping"/>
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingDomain -->
@@ -43,30 +63,6 @@
     <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationLabel"/>
     <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationParentLabel -->
     <AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationParentLabel"/>
-
-
-
-    <!--
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes - these should remain static
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-
-
-
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping -->
-    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass -->
-    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty -->
-    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty -->
-    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization -->
-    <Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization"/>
 
 
     <!--
