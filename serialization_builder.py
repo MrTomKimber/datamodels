@@ -93,23 +93,42 @@ def construct_translation_mapping(serialization_iri, translation_mapping_name, t
     q.set("rdf:resource", serial.TranslationMapping.iri)
     q = ET.SubElement(X,"rdfs:label")
     q.text=translation_mapping_name
+    kv_components = []
     
     for k,v in translation_mapping_dict.items():
-        item_element = ET.SubElement(X, "NamedIndividual")
-        item_element.set("rdf:about", serialization_iri + uuid.uuid4().hex)
-        item_key = ET.SubElement(item_element, "ser:Key")
-        item_key.text=k
-        item_value = ET.SubElement(item_element, "ser:Value")
-        item_value.text=v
+        kv_id = serialization_iri + uuid.uuid4().hex
+        q = ET.SubElement(X,"ser:ContainsTranslationMappingKVPair")
+        q.set("rdf:resource", kv_id)
+        kv_components.append((kv_id,k,v))
+
+    c = ET.Comment("""///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // KVP sub elements associated with the above Translation Mapping
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////""") 
+    X.append(c)
+    kvp_elements=[]
+    Ylist=[]
     
-    return X        
+    for i,k,v in kv_components:
+        kvp_elem = ET.Element("NamedIndividual")    
+        kvp_elem.set("rdf:about", i)
+        q = ET.SubElement(kvp_elem, "rdf:type")
+        q.set("rdf:resource", serial.MappingKVPair.iri)
+        q = ET.SubElement(kvp_elem,"ser:Key")
+        q.text = k
+        q = ET.SubElement(kvp_elem,"ser:Value")
+        q.text = v
+        Ylist.append(kvp_elem)
+
+    return [X,*Ylist]
         
     
 def generate_elemtree_header(serialization_label, serialization_iri, namespaces, ontology, mappings, translation_mappings):
     X = ET.Element('rdf:RDF')
     default_namespace='http://www.company.com'
     for prefix, uri  in namespaces:
-        X.set("xmlns:" + prefix, uri)
+        X.set(prefix, uri)
     test = ET.tostring(X).decode()
     c = ET.Comment("""///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -240,13 +259,13 @@ def process_serialisation(json_data):
     ontol = owlr.get_ontology(_fix_me_ontology_file).load()
     uri_base = ontol.base_iri
     
-    ns_map = [('',"http://www.w3.org/2002/07/owl#"),
+    ns_map = [('xmlns',"http://www.w3.org/2002/07/owl#"),
               ('xml:base',"http://www.w3.org/2002/07/owl"),
-              ('rdf',"http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
-              ('xml:owl',"http://www.w3.org/2002/07/owl#"),
-              ('dc',"http://purl.org/dc/elements/1.1/"),
-              ('rdfs',"http://www.w3.org/2000/01/rdf-schema#"), 
-              ('ser', serial.base_iri)
+              ('xmlns:rdf',"http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
+              ('xmlns:owl',"http://www.w3.org/2002/07/owl#"),
+              ('xmlns:dc',"http://purl.org/dc/elements/1.1/"),
+              ('xmlns:rdfs',"http://www.w3.org/2000/01/rdf-schema#"), 
+              ('xmlns:ser', serial.base_iri)
              ]
 
     o_classes = [c.iri for c in ontol.classes()]
@@ -317,7 +336,7 @@ def process_serialisation(json_data):
     translation_mapping_list = []
     for t_mapping_name, t_mapping_content in json_data.get("translation_mappings",{}).items():
         
-        translation_mapping_list.append(construct_translation_mapping(uri_base, t_mapping_name, t_mapping_content))
+        translation_mapping_list.extend(construct_translation_mapping(uri_base, t_mapping_name, t_mapping_content))
 
     X = generate_elemtree_header(s_label, s_iri, ns_map, ontol, mapping_list, translation_mapping_list)
                 

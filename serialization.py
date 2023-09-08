@@ -51,6 +51,7 @@ def ontology_definitions():
     return {
             "Mapping_uri" : URIRef(serial.Mapping.iri),
             "Serialization_uri" : URIRef(serial.Serialization.iri),
+            "IsSerializationComponent_uri" : URIRef(serial.IsComponentOfSerialization.iri),
             "MappingMetaTarget_uri" : URIRef(serial.MappingMetaTarget.iri),
             "MetaClass_uri" : URIRef(serial.MetaClass.iri),
             "MetaProperty_uri" : URIRef(serial.MetaProperty.iri),
@@ -60,8 +61,15 @@ def ontology_definitions():
             "MappingRange_uri" : URIRef(serial.MappingRange.iri),
             "SerializationLabel_uri" : URIRef(serial.SerializationLabel.iri),
             "SerializationParentLabel_uri" : URIRef(serial.SerializationParentLabel.iri),
+            "TranslationMappingName_uri" : URIRef(serial.TranslationMappingName.iri),
             "TranslationMapping_uri" : URIRef(serial.TranslationMapping.iri),
+            "MappingKVPair" : URIRef(serial.MappingKVPair.iri),
             "ContainsMapping_uri" : URIRef(serial.ContainsMapping.iri),
+            "ContainsTranslationMapping_uri" : URIRef(serial.ContainsTranslationMapping.iri),
+            "ContainsTranslationMappingKVPair_uri" : URIRef(serial.ContainsTranslationMappingKVPair.iri),
+            "Key_uri" : URIRef(serial.Key.iri),
+            "Value_uri" : URIRef(serial.Value.iri),
+            "ContainsTranslationMappingKVPair_uri" : URIRef(serial.ContainsTranslationMappingKVPair.iri),
             "UniqueIdentifier_uri" : URIRef(serial.UniqueIdentifier.iri)
     }
 
@@ -118,16 +126,20 @@ class Mapping(object):
         elif self.defs["MetaProperty_uri"] in class_set:
             self.mapping_subtype = "property"
         elif self.defs["MetaDataProperty_uri"] in class_set:
+            print(class_set)
+            print("dataproperty")
+            print(self.name)
             self.mapping_subtype = "dataproperty"
-        elif self.defs["MetaStaitcProperty_uri"] in class_set:
+        elif self.defs["MetaStaticProperty_uri"] in class_set:
             self.mapping_subtype = "staticproperty"
         else:
+            print( mapping_meta_target )
             print (class_set)
             print( s_uri )
             self.mapping_subtype = "unexpected_thing"
             print()
             assert False
-
+        print( self.name, "is a ", self.mapping_subtype)
         # Create a mapping_properties dictionary to hold the extracted mapping details
         # SerializationLabel --> Data Header
         # SerializationParentLabel --> Used to construct "lineage tree"
@@ -136,7 +148,7 @@ class Mapping(object):
 
         mapping_properties = {p:o for q in [self.defs["MappingDomain_uri"],
                                             self.defs["MappingRange_uri"],
-                                            self.defs["TranslationMapping_uri"],
+                                            self.defs["TranslationMappingName_uri"],
                                             self.defs["SerializationLabel_uri"],
                                             self.defs["SerializationParentLabel_uri"]] \
                                   for s,p,o in self.graph.triples((URIRef(s_uri), q, None))}
@@ -144,7 +156,7 @@ class Mapping(object):
         mapping_properties = {q[0]:o for q in [(n,self.defs[n]) for n in
                                             ["MappingDomain_uri",
                                             "MappingRange_uri",
-                                            "TranslationMapping_uri",
+                                            "TranslationMappingName_uri",
                                             "SerializationLabel_uri",
                                             "SerializationParentLabel_uri"]] \
                                   for s,p,o in self.graph.triples((URIRef(s_uri), q[1], None))}
@@ -173,9 +185,13 @@ class Mapping(object):
             if subj is not None:
                 if self.mapping_subtype=="property":
                     obj = row_entity_context.get(self.MappingRange)
+                    print(self.MappingRange, "processing property", prop, obj)
                     if obj is not None:
                         subj.properties.append((subj.name, prop, URIRef(obj.uri)))
                     else:
+                        print(row_entity_context)
+                        for k,v in row_entity_context.items():
+                            print(k,v.name)
                         pass
                 elif self.mapping_subtype=="dataproperty":
                     obj = row_dict.get(self.MappingRange)
@@ -183,11 +199,32 @@ class Mapping(object):
                         subj.data_properties.append((subj.name, prop, Literal(obj)))
                 elif self.mapping_subtype=='staticproperty':
                     # This is where the dereferencing of staticproperties goes.
+                    print("/////STATICPROPERTY/////")
+                    print( subj, prop)
+                    print ("********")
+                    try:    
+                        print( self.TranslationMapping )
+                    except:
+                        print (dir (self))
+                    print ("********")
+                    print( row_entity_context , row_dict, self.TranslationMappingName )
+                    
+                    mapping_name = self.TranslationMappingName
+                    print (mapping_name, self.serialization.translation_mappings.get(mapping_name))
+                    print()
 
+                    obj = self.serialization.translation_mappings.get(mapping_name).get( row_dict.get(self.MappingRange), None)
+                    if obj is not None:
+                        subj.properties.append((subj.name, prop, obj))
+                    else:
+                        assert False # Returned an obj of None
                 return subj
             else:
                 # No matching subject -
                 return None
+
+
+
 
 # A serialization spec is a data structure used to convert serial (row-based) data
 # into a graph (and maybe back again? tbd)
@@ -209,11 +246,41 @@ class Serialization(object):
             print(serial_dict)
             print(s_graph, s_name)
             assert False # Serialization name should match up
+
         self.mappings = self.get_mappings()
+
         self.lineage_tree = {m.SerializationLabel: m.SerializationParentLabel for m in self.mappings if m.mapping_subtype=="class" and hasattr(m, "SerializationParentLabel")}
+        self.meta_classes, self.meta_properties, self.meta_data_properties, self.meta_static_properties = self.get_meta_targets()
+        self.meta_objects = [v for m in [self.meta_classes, self.meta_properties, self.meta_data_properties, self.meta_static_properties] for v in m]
+        
         self.translation_mappings = self.get_translation_mappings()
 
 
+        # Capture dereferencing Translation Mapping sets
+        print("****************************************")
+        print(self.graph)
+        print("This is the Serialization __init__ method")
+        print(s_graph, s_name)
+        print(type(s_graph))
+        print(self.meta_classes, self.meta_properties, self.meta_data_properties, self.meta_static_properties)
+        print("****************************************")
+        #translation_mappings
+
+    def get_meta_targets(self):
+        meta_classes = [s.toPython() for s,p,m in self.graph.triples((None,
+                                                                        RDF.type,
+                                                                        ontology_definitions().get("MetaClass_uri")))]
+        meta_properties = [s.toPython() for s,p,m in self.graph.triples((None,
+                                                                                RDF.type,
+                                                                                ontology_definitions().get("MetaProperty_uri")))]
+        meta_data_properties = [s.toPython() for s,p,m in self.graph.triples((None,
+                                                                                RDF.type,
+                                                                                ontology_definitions().get("MetaDataProperty_uri")))]
+        meta_static_properties = [s.toPython() for s,p,m in self.graph.triples((None,
+                                                                                RDF.type,
+                                                                                ontology_definitions().get("MetaStaticProperty_uri")))]
+        
+        return meta_classes, meta_properties, meta_data_properties, meta_static_properties
 
 
     def return_serialization_labels(self):
@@ -225,9 +292,45 @@ class Serialization(object):
 
     def get_translation_mappings(self):
         self.translation_mappings = {}
-        translation_mapping_ids = [m.toPython() for s,p,m in self.graph.triples((None,
+        trans_mappings = {}
+        translation_mapping_ids = [s.toPython() for s,p,m in self.graph.triples((None,
                                                                         RDF.type,
-                                                                        ontology_definitions.get("TranslationMapping_uri")))]
+                                                                        ontology_definitions().get("TranslationMapping_uri")))]
+        for tmid in translation_mapping_ids:
+            print(tmid)
+            tmk_def={}
+            tmk_ids = [o.toPython() for s,p,o in self.graph.triples((URIRef(tmid),
+                                                                    ontology_definitions().get("ContainsTranslationMappingKVPair_uri"),
+                                                                    None))]
+            
+            tm_names = {s.toPython():o.toPython() for s,p,o in self.graph.triples((URIRef(tmid),
+                                                                    RDFS.label,
+                                                                    None))}
+            for tmk_id in tmk_ids:
+                k = [o.toPython() for s,p,o in self.graph.triples((URIRef(tmk_id),
+                                                                    ontology_definitions().get("Key_uri"),
+                                                                    None))]
+                v = [o.toPython() for s,p,o in self.graph.triples((URIRef(tmk_id),
+                                                                    ontology_definitions().get("Value_uri"),
+                                                                    None))]
+                if len(k)==1 and len(v)==1:
+                    k,v=k[0], v[0]
+                else:
+                    print(k,v)
+                    assert False # Length of k,v lists is not == 1
+                if v in self.meta_objects:
+                    # This means the values are canonical uris for this serialization, convert them from text.
+                    v = URIRef(v)
+                else:
+                    v = str(v)
+                tmk_def[k]=v
+            trans_mappings[tm_names[tmid]]=tmk_def
+        print (trans_mappings)
+        return trans_mappings
+
+    
+        
+
         
         
 
@@ -272,15 +375,19 @@ class Serialization(object):
         if entity_mappings is None:
             entity_mappings={}
         for m in self.mappings:
+            
             if hasattr(m, "SerializationLabel"):
+                
                 if row.get(m.SerializationLabel) is not None:
                     ent=m._apply_mapping(row, None, entity_mappings)
                     entities[m.SerializationLabel]=ent
                     entity_mappings[ent.unique_label]=ent.uri
+        print([(k) for k,v in entity_mappings.items()])
 
         for m in self.mappings:
 
             if not hasattr(m, "SerializationLabel"):
+                print(m.name)
                 m._apply_mapping(row, entities, entity_mappings)
 
         return list(chain (*[e.to_triples() for e in entities.values()])), entity_mappings

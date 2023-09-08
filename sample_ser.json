@@ -35,6 +35,11 @@
                 "domain" :  "Class",
                 "range" : "Property"
                 }, 
+            {   "mapping_name": "Property_Class_Mapping",
+                "target" :  "http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass", 
+                "label" : "Property",
+                "parent_label": "ParentClass"
+                }, 
             {   "mapping_name": "DataProperty_Mapping",
                 "target" :  "http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someDataProperty",
                 "domain" :  "Class",
