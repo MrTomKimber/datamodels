@@ -7,19 +7,22 @@ import owlready2 as owlr
 import xml.etree.ElementTree as ET
 import uuid
 import re
+from rdflib import URIRef
+from itertools import chain
+
 
 sample_ser_file = "../Serialization.owl"
 serial = owlr.get_ontology(sample_ser_file).load()
 
-
-def process_json_serialization(schemafilename):
+def process_json_serialization(jsonfilename):
+    """Given a filename pointing to a json data file, read it and convert into a formatted XML/RDF file containing the Serialization specifications for appliction in a load-process. """
     # Identify/Validate that the file exists, and is in the right format:
-    if validate_serialization_schema(schemafilename):
-        with open(schemafilename, 'r') as file:
+    if validate_schema(jsonfilename, '/home/tomk/Documents/Coding/gitHub/datamodels/serialisation_schema.json'):
+        with open(jsonfilename, 'r') as file:
             data = json.load(file)
 
-        r = process_serialisation(data)
-
+        r = process_serialisation_to_elementtree(data)
+        #return r
         ET.indent(r, space="\t", level=0)
 
         print(r)
@@ -35,11 +38,12 @@ def process_json_serialization(schemafilename):
 
 
 
-def validate_serialization_schema(schemafilename):
-    with open('/home/tomk/Documents/Coding/gitHub/datamodels/serialisation_schema.json', 'r') as file:
+def validate_schema(datafilename, schemafilename):
+    """Given a datafile, and associated json schema filename, perform commodity level validation check"""
+    with open(schemafilename, 'r') as file:
         schema = json.load(file)
     
-    with open(schemafilename, 'r') as file:
+    with open(datafilename, 'r') as file:
         data = json.load(file)
 
     
@@ -50,86 +54,69 @@ def validate_serialization_schema(schemafilename):
         raise e
 
 
+def process_serialisation_to_elementtree(jdata):
+    """Given the data provided from a validated file, proceed to convert from the json data into elementtree format for 
+    a number of separate blocks of information
+    1) Serialization Top Level
+    2) Mapping Level
+    3) Meta Targets
+    4) Translation Mappings
+    5) KVPair Elements
+    6) Serialization Ontology Objects (Classes)
+    7) Serialization Ontology Objects (Properties and Data Properties)
+    """
 
-
-def create_mapping(name, target, ttype, properties={}):
-    X = ET.Element("NamedIndividual")
-    X.set("rdf:about", name)
-    q = ET.SubElement(X,"rdf:type")
-    q.set("rdf:resource", serial.Mapping.iri)
-    q = ET.SubElement(X,"ser:MappingMetaTarget")
-    q.set("rdf:resource", target)
-    
-    for k,v in properties.items():
-        q = ET.SubElement(X,k)
-        q.text =str(v)
-    return X
-
-def generate_meta_definitions(onto):
-    meta_defs = []
-    for mc in [(serial.MetaClass, onto.classes), (serial.MetaProperty, onto.object_properties), (serial.MetaDataProperty, onto.data_properties)]:
-        for c in mc[1]():
-            meta_defs.append((c.iri,mc[0].iri))
-    return meta_defs
-
-def generate_serialization_contents(serialization_label, serialization_iri, mappings):
-    X = ET.Element("NamedIndividual")
-    X.set("rdf:about", serialization_iri)
-    q = ET.SubElement(X,"rdf:type")
-    q.set("rdf:resource", serial.Serialization.iri)
-    for m in mappings:
-        q = ET.SubElement(X,"ser:ContainsMapping")
-        q.set("rdf:resource", m[0])
         
-    q = ET.SubElement(X,"rdfs:label")
-    q.text=serialization_label
-    return X
-
-
-def construct_translation_mapping(serialization_iri, translation_mapping_name, translation_mapping_dict):
-    X = ET.Element("NamedIndividual")
-    X.set("rdf:about", serialization_iri + uuid.uuid4().hex)
-    q = ET.SubElement(X,"rdf:type")
-    q.set("rdf:resource", serial.TranslationMapping.iri)
-    q = ET.SubElement(X,"rdfs:label")
-    q.text=translation_mapping_name
-    kv_components = []
+    ns_map = [('xmlns',"http://www.w3.org/2002/07/owl#"),
+              ('xml:base',"http://www.w3.org/2002/07/owl"),
+              ('xmlns:rdf',"http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
+              ('xmlns:owl',"http://www.w3.org/2002/07/owl#"),
+              ('xmlns:dc',"http://purl.org/dc/elements/1.1/"),
+              ('xmlns:rdfs',"http://www.w3.org/2000/01/rdf-schema#"), 
+              ('xmlns:ser', serial.base_iri)
+             ]
     
-    for k,v in translation_mapping_dict.items():
-        kv_id = serialization_iri + uuid.uuid4().hex
-        q = ET.SubElement(X,"ser:ContainsTranslationMappingKVPair")
-        q.set("rdf:resource", kv_id)
-        kv_components.append((kv_id,k,v))
+    serialization_iri = jdata["serialization_iri"]
 
-    c = ET.Comment("""///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // KVP sub elements associated with the above Translation Mapping
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////""") 
-    X.append(c)
-    kvp_elements=[]
-    Ylist=[]
-    
-    for i,k,v in kv_components:
-        kvp_elem = ET.Element("NamedIndividual")    
-        kvp_elem.set("rdf:about", i)
-        q = ET.SubElement(kvp_elem, "rdf:type")
-        q.set("rdf:resource", serial.MappingKVPair.iri)
-        q = ET.SubElement(kvp_elem,"ser:Key")
-        q.text = k
-        q = ET.SubElement(kvp_elem,"ser:Value")
-        q.text = v
-        Ylist.append(kvp_elem)
+    # A list of extracted mapping value details, extracted for use in preparing a number of sub-blocks in addition to itself
+    mapping_value_list = fetch_mapping_values(jdata)
+    translation_mappings = [(k,v) for k,v in jdata.get("translation_mappings", {}).items()]
+    print(translation_mappings)
 
-    return [X,*Ylist]
-        
-    
-def generate_elemtree_header(serialization_label, serialization_iri, namespaces, ontology, mappings, translation_mappings):
+    ## Collect a list of appendable elements to be included in the final RDF file
+    ## *************************************************************************** ##
+    ## *************************************************************************** ##
+    serialization_classes = gen_serialization_classes()
+    annotation_properties = gen_annotation_properties()
+    meta_targets = gen_meta_targets(jdata)
+    mapping_headers = gen_mappings(mapping_value_list, jdata)
+    if len(translation_mappings)>0:
+        translation_mapping_headers=gen_translation_mappings(jdata, translation_mappings)
+    serialization_definition = gen_serialization_def(mapping_value_list,jdata)
+
+
+    combined_definitions = list(chain(*[serialization_definition, serialization_classes, annotation_properties, meta_targets, mapping_headers, translation_mapping_headers]))
+    ## End of collection functions.
+    ## *************************************************************************** ##
+    ## *************************************************************************** ##
+
+
     X = ET.Element('rdf:RDF')
     default_namespace='http://www.company.com'
-    for prefix, uri  in namespaces:
+    for prefix, uri  in ns_map:
         X.set(prefix, uri)
-    test = ET.tostring(X).decode()
+    
+    
+    print(combined_definitions)
+    for element in combined_definitions:
+        #e = ET.SubElement(X, element)
+        X.append(element)
+    return X
+
+
+
+def gen_serialization_classes():
+    X = []
     c = ET.Comment("""///////////////////////////////////////////////////////////////////////////////////////
     //
     // Serialization Classes - these should remain static
@@ -145,10 +132,16 @@ def generate_elemtree_header(serialization_label, serialization_iri, namespaces,
               serial.MetaDataProperty.iri, 
               serial.MetaStaticProperty.iri, 
               serial.TranslationMapping.iri, 
-              serial.MappingKVPair.iri ]:
-        q = ET.SubElement(X, "Class")
+              serial.MappingKVPair.iri
+              ]:
+        q = ET.Element("Class")
         q.set("rdf:about", iri)
-    
+        X.append(q)
+    return X
+
+
+def gen_annotation_properties():
+    X = []
     comment = """///////////////////////////////////////////////////////////////////////////////////////
     //
     // Annotation properties - these should remain static
@@ -158,7 +151,7 @@ def generate_elemtree_header(serialization_label, serialization_iri, namespaces,
     ///////////////////////////////////////////////////////////////////////////////////////"""
     c = ET.Comment(comment)
     X.append(c)
-    test = ET.tostring(X).decode()
+    
     for iri in [ serial.ContainsMapping.iri,               
                  serial.MappingMetaTarget.iri,
                  serial.MappingDomain.iri,
@@ -167,11 +160,18 @@ def generate_elemtree_header(serialization_label, serialization_iri, namespaces,
                  serial.SerializationLabel.iri,
                  serial.SerializationParentLabel.iri, 
                  serial.Key.iri, 
-                 serial.Value.iri]:
-        q = ET.SubElement(X, "AnnotationProperty")
+                 serial.Value.iri,
+                 serial.TranslationMappingName.iri ]:
+        q = ET.Element("AnnotationProperty")
         q.set("rdf:about", iri)
-        print (iri)
-    test = ET.tostring(X).decode()    
+        X.append(q)
+    return X
+
+def gen_meta_targets(jdata):
+    X = []
+
+    serialization_iri = jdata["serialization_iri"]
+
     comment = """
     
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -187,139 +187,71 @@ def generate_elemtree_header(serialization_label, serialization_iri, namespaces,
      """
     c = ET.Comment(comment)
     X.append(c)
-    test = ET.tostring(X).decode()
-    for iri,tp in generate_meta_definitions(ontology):
-        q = ET.SubElement(X, "NamedIndividual")
-        q.set("rdf:about", iri)
-        p = ET.SubElement(q, "rdf:type")
-        p.set("rdf:resource", tp)
-    test = ET.tostring(X).decode()     
-    comment = """
-    
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Mappings - define all the Mappings that will be collated by this serialisation to
-    // pull content from the `flat` recordset and assign it to classes, properties or 
-    // data properties as defined in the overarching ontology. 
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     """
-    c = ET.Comment(comment)
-    X.append(c)
+    meta_defs = []
+    cls_uri_decodes={
+        "targetClasses" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass",
+        "targetProperties" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty", 
+        "targetDataProperties" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty", 
+        "targetStaticProperties" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaStaticProperty"
+    }
 
-    for m in mappings:
-        X.append(m[1])
+    for cls in ["targetClasses","targetProperties", "targetDataProperties", "targetStaticProperties"]:
+        cls_defs = jdata.get(cls)
+        for c in cls_defs:
+            meta_defs.append((c, cls_uri_decodes[cls]))
 
-    if len(translation_mappings)>0:
-        comment = """   
-        ///////////////////////////////////////////////////////////////////////////////////////
-        //
-        // Translation Mappings - optional static decode tables used to translate from input
-        // values found in the serialization to target values expected by the ontology.
-        //
-        ///////////////////////////////////////////////////////////////////////////////////////"""
-        c = ET.Comment(comment)
-        X.append(c)
+    for iri,tp in meta_defs:
+        p = ET.Element("NamedIndividual")
+        p.set("rdf:about", iri)
+        q = ET.SubElement(p, "rdf:type")
+        q.set("rdf:resource", tp)
+        r = ET.SubElement(p, "ser:IsComponentOfSerialization")
+        r.set("rdf:resource", serialization_iri)
+        X.append(p)
 
-        print("\\\\\\\\TRANSLATION MAPPINGS\\\\\\\\\\")
-        for t in translation_mappings:
-            print (t)
-            X.append(t)
-
-
-
-    comment = """   
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Serialization - define the named Serialization Object and assign the set of 
-    // mappings that belong to that object.
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////"""
-    c = ET.Comment(comment)
-    X.append(c)
-
-    X.append(generate_serialization_contents(serialization_label, serialization_iri, mappings))
-
-    ET.indent(X, space="\t", level=0)
     return X
+
 
 def find_match(value, match_set_list):
     for e,t_set in enumerate(match_set_list):
         if value in t_set:
             return e
     return None
-        
 
-
-def process_serialisation(json_data):
-    s_label = json_data['serialization_label']
-    s_iri = json_data['serialization_iri']
-    s_onto = json_data['targetOntology']
-    _fix_me_ontology_file = "../sample_ontology.owl"
-    ontol = owlr.get_ontology(_fix_me_ontology_file).load()
-    uri_base = ontol.base_iri
-    
-    ns_map = [('xmlns',"http://www.w3.org/2002/07/owl#"),
-              ('xml:base',"http://www.w3.org/2002/07/owl"),
-              ('xmlns:rdf',"http://www.w3.org/1999/02/22-rdf-syntax-ns#"),
-              ('xmlns:owl',"http://www.w3.org/2002/07/owl#"),
-              ('xmlns:dc',"http://purl.org/dc/elements/1.1/"),
-              ('xmlns:rdfs',"http://www.w3.org/2000/01/rdf-schema#"), 
-              ('xmlns:ser', serial.base_iri)
-             ]
-
-    o_classes = [c.iri for c in ontol.classes()]
-    o_properties =[p.iri for p in ontol.object_properties()]
-    o_dataproperties = [d.iri for d in ontol.data_properties()]
-    t_classes, t_properties, t_data_properties = json_data['targetClasses'], json_data['targetProperties'], json_data['targetDataProperties']
-    # Optional Fetch of StaticProperties
-    t_static_properties = json_data.get('targetStaticProperties', [])
-    if all([c in o_classes for c in t_classes]):
-        print("classes ok")
-    else:
-        print(set(o_classes).symmetric_difference(set(t_classes)))
-        
-    if all([c in o_properties for c in t_properties]):
-        print("properties ok")
-    else:
-        print(set(o_properties).symmetric_difference(set(t_properties)))
-        
-        
-    if all([d in o_dataproperties for d in t_data_properties]):
-        print("data properties ok")
-    else:
-        print(set(o_dataproperties).symmetric_difference(set(t_data_properties)))
-    #print (t_classes, t_properties, t_data_properties)
+def fetch_mapping_values(jdata):
     mapping_list = []
-    for mapping in json_data['serialization_mappings']:
+    t_classes, t_properties, t_data_properties = jdata['targetClasses'], jdata['targetProperties'], jdata['targetDataProperties']
+    t_static_properties = jdata.get('targetStaticProperties', [])
+    uri_base = jdata['serialization_iri'][:jdata['serialization_iri'].find("#")]+"#"
+    for mapping in jdata['serialization_mappings']:
         t_match=find_match(mapping['target'],[t_classes, t_properties, t_data_properties, t_static_properties])
-        print(mapping, t_match)
+        
         mapping_name = "".join([uri_base, mapping['mapping_name']])
         match t_match:
             case 0:
                 # Classes
                 properties = {k:v for k,v in {"ser:SerializationLabel" : mapping.get("label"),
-                              "ser:SerializationParentLabel" : mapping.get("parent_label")}.items() if v is not None}
+                            "ser:SerializationParentLabel" : mapping.get("parent_label")}.items() if v is not None}
                 
-                mapping_list.append((mapping_name, create_mapping(mapping_name, mapping['target'], t_match, properties)))
+                mapping_list.append((mapping_name, mapping['target'], t_match, properties))
             case 1:
                 # Properties
                 properties = {k:v for k,v in {"ser:MappingDomain" : mapping.get("domain"),
-                              "ser:MappingRange" : mapping.get("range")}.items() if v is not None}
-                mapping_list.append((mapping_name,create_mapping(mapping_name, mapping['target'], t_match, properties)))
+                            "ser:MappingRange" : mapping.get("range")}.items() if v is not None}
+                mapping_list.append((mapping_name,mapping['target'], t_match, properties))
                 
             case 2:
                 # Data Properties
                 properties = {k:v for k,v in {"ser:MappingDomain" : mapping.get("domain"),
-                              "ser:MappingRange" : mapping.get("range")}.items() if v is not None}
-                mapping_list.append((mapping_name,create_mapping(mapping_name, mapping['target'], t_match, properties)))
+                            "ser:MappingRange" : mapping.get("range")}.items() if v is not None}
+                mapping_list.append((mapping_name,mapping['target'], t_match, properties))
             case 3:
                 # Static Properties
                 properties = {k:v for k,v in {"ser:MappingDomain" : mapping.get("domain"),
-                              "ser:MappingRange" : mapping.get("range"),
-                              "ser:TranslationMappingName" : mapping.get("translation_mapping_name")}.items() if v is not None}
-                mapping_list.append((mapping_name,create_mapping(mapping_name, mapping['target'], t_match, properties)))
-                print( properties )
+                            "ser:MappingRange" : mapping.get("range"),
+                            "ser:TranslationMappingName" : mapping.get("translation_mapping_name")}.items() if v is not None}
+                mapping_list.append((mapping_name, mapping['target'], t_match, properties))
+                
             case None:
                 # No Match
                 print("**********************************************")
@@ -332,12 +264,142 @@ def process_serialisation(json_data):
                 print()
                 print()
                 assert False
-    
-    translation_mapping_list = []
-    for t_mapping_name, t_mapping_content in json_data.get("translation_mappings",{}).items():
-        
-        translation_mapping_list.extend(construct_translation_mapping(uri_base, t_mapping_name, t_mapping_content))
+    return mapping_list
 
-    X = generate_elemtree_header(s_label, s_iri, ns_map, ontol, mapping_list, translation_mapping_list)
-                
+def gen_mapping_element(mapping_tuple, jdata):
+    name, target, ttype, properties = mapping_tuple
+    serialization_iri = jdata["serialization_iri"]
+    X = ET.Element("NamedIndividual")
+    X.set("rdf:about", name)
+    q = ET.SubElement(X,"rdf:type")
+    q.set("rdf:resource", serial.Mapping.iri)
+    q = ET.SubElement(X,"ser:MappingMetaTarget")
+    q.set("rdf:resource", target)
+    q = ET.SubElement(X, "ser:IsComponentOfSerialization")
+    q.set("rdf:resource", serialization_iri)
+    
+    for k,v in properties.items():
+        q = ET.SubElement(X,k)
+        q.text =str(v)
     return X
+
+def gen_mappings(mapping_list, jdata):
+    element_list = []
+    comment = """
+    
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Mappings - define all the Mappings that will be collated by this serialisation to
+    // pull content from the `flat` recordset and assign it to classes, properties or 
+    // data properties as defined in the overarching ontology. 
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     """
+    c = ET.Comment(comment)
+    element_list.append(c)
+    for mapping in mapping_list:
+        element_list.append(gen_mapping_element(mapping, jdata))
+    return element_list
+
+
+
+def gen_translation_mappings(jdata, translation_mappings_list):
+    serialization_iri = jdata["serialization_iri"]
+    manifest={}
+    elements = []
+    comment = """   
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Translation Mappings - optional static decode tables used to translate from input
+    // values found in the serialization to target values expected by the ontology.
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////"""
+    c = ET.Comment(comment)
+    elements.append(c)
+
+    for list_item in translation_mappings_list:
+        print(list_item)
+        name, d = list_item
+        tm_id = serialization_iri + uuid.uuid4().hex
+        tm_type = serial.TranslationMapping.iri
+        tm_label = name
+        manifest[name]={"id": tm_id, "type" : tm_type, "label" : tm_label, "kvpairs" : [] }
+        for k,v in d.items():
+            kv_id = serialization_iri + uuid.uuid4().hex
+            kv_type = serial.MappingKVPair.iri
+            manifest[name]['kvpairs'].append((kv_id, kv_type, k, v))
+        print("////////////////////")
+        print(manifest[name])
+        print("////////////////////")
+        d = manifest[name]
+        X = ET.Element("NamedIndividual")
+        X.set("rdf:about", d['id'])
+        q = ET.SubElement(X,"rdf:type")
+        q.set("rdf:resource", d['type'])    
+        q = ET.SubElement(X,"rdfs:label")
+        q.text=name    
+        q = ET.SubElement(X,"ser:IsComponentOfSerialization")
+        q.set("rdf:resource", serialization_iri)    
+        
+        for kv_id, kv_type, k,v in d['kvpairs']:
+            q = ET.SubElement(X,"ser:ContainsTranslationMappingKVPair")
+            q.set("rdf:resource", kv_id)
+        
+        elements.append(X)
+
+
+    c = ET.Comment("""///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // KVP sub elements associated with the above Translation Mappings
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////""") 
+    elements.append(c)
+
+    for name, d in manifest.items():
+        for kv_id, kv_type, k, v in d['kvpairs']:
+            kvp_elem = ET.Element("NamedIndividual")    
+            kvp_elem.set("rdf:about", kv_id)
+            q = ET.SubElement(kvp_elem,"ser:IsComponentOfSerialization")
+            q.set("rdf:resource", serialization_iri)    
+            q = ET.SubElement(kvp_elem, "rdf:type")
+            q.set("rdf:resource", kv_type)
+            q = ET.SubElement(kvp_elem,"ser:Key")
+            q.text = k
+            q = ET.SubElement(kvp_elem,"ser:Value")
+            q.text = v
+            elements.append(kvp_elem)
+
+
+    return elements
+
+def gen_serialization_def(mapping_value_list, jdata):
+    elements = []
+
+    serialization_iri = jdata['serialization_iri']
+
+
+    comment = """   
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Serialization - define the named Serialization Object and assign the set of 
+    // mappings that belong to that object.
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////"""
+    c = ET.Comment(comment)
+    elements.append(c)
+
+    X = ET.Element("NamedIndividual")
+    X.set("rdf:about", serialization_iri)
+    q = ET.SubElement(X,"rdf:type")
+    q.set("rdf:resource", serial.Serialization.iri)
+    q = ET.SubElement(X,"ser:IsComponentOfSerialization")
+    q.set("rdf:resource", serialization_iri)    
+    for m in mapping_value_list:
+        q = ET.SubElement(X,"ser:ContainsMapping")
+        q.set("rdf:resource", m[0])
+        
+    q = ET.SubElement(X,"rdfs:label")
+    q.text=jdata['serialization_label']
+    elements.append(X)
+    return elements
+

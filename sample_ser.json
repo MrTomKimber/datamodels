@@ -12,7 +12,10 @@
    "source_headers": ["ParentClass", "Class", "Property", "DataProperty","SubClassPointer"],
    "translation_mappings" : { "subclasses" : { "a" : "http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA",
                                                "b" : "http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB", 
-                                               "c" : "http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC" }},
+                                               "c" : "http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC" }, 
+                              "testcontents" : { "1" : "X",
+                                                 "2" : "Y", 
+                                                 "3" : "Z" }},
    "serialization_mappings" : 
             [ { "mapping_name": "Parent_Class_Mapping",
                 "label" : "ParentClass", 

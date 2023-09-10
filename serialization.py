@@ -111,16 +111,30 @@ class Entity(object):
 
 
 class Mapping(object):
+    @staticmethod
+    def unbind_ns_strings(value, ns_list):
+        for nsc,nsf in ns_list:
+            if value.replace(nsc+":", nsf) != value:
+                return value.replace(nsc+":", nsf)
+        return value
+
     def __init__(self, parent_serialization, s_uri):
         self.ontology = serial
         self.serialization = parent_serialization
         self.graph = parent_serialization.graph
+
+        serns = Namespace(serial.base_iri)
+        ns_list = [('ser', serns)]
+
         self.defs = ontology_definitions()
         self.name = s_uri.split("#")[-1]
         # Class Pointer
         mapping_meta_target = first([o for s,p,o in self.graph.triples((URIRef(s_uri), self.defs["MappingMetaTarget_uri"], None)) ])
         self.mapping_meta_target = mapping_meta_target
-        class_set = set([t for r,s,t in self.graph.triples((mapping_meta_target, RDF.type, None)) ])
+        
+        class_set = set([URIRef(Mapping.unbind_ns_strings(t, ns_list)) for r,s,t in self.graph.triples((mapping_meta_target, RDF.type, None)) ])
+
+
         if self.defs["MetaClass_uri"] in class_set:
             self.mapping_subtype = "class"
         elif self.defs["MetaProperty_uri"] in class_set:
@@ -133,9 +147,12 @@ class Mapping(object):
         elif self.defs["MetaStaticProperty_uri"] in class_set:
             self.mapping_subtype = "staticproperty"
         else:
-            print( mapping_meta_target )
-            print (class_set)
-            print( s_uri )
+            print( "meta_target", mapping_meta_target )
+            print ("class_set", class_set)
+            print ( "mc_uri", self.defs["MetaClass_uri"])
+            print(self.defs["MetaClass_uri"] in class_set)
+            print(type(self.defs["MetaClass_uri"]), [type(n) for n in class_set])
+            print( "uri", s_uri )
             self.mapping_subtype = "unexpected_thing"
             print()
             assert False
@@ -210,10 +227,14 @@ class Mapping(object):
                     print( row_entity_context , row_dict, self.TranslationMappingName )
                     
                     mapping_name = self.TranslationMappingName
+                    print("/////////\\\\\\\\\\")
+                    print(self.serialization.translation_mappings)
+                    print("/////////\\\\\\\\\\")
                     print (mapping_name, self.serialization.translation_mappings.get(mapping_name))
                     print()
-
-                    obj = self.serialization.translation_mappings.get(mapping_name).get( row_dict.get(self.MappingRange), None)
+                    print(mapping_name, self.MappingRange)
+                    print(row_dict)
+                    obj = self.serialization.translation_mappings.get(mapping_name,{}).get(row_dict.get(self.MappingRange), None)
                     if obj is not None:
                         subj.properties.append((subj.name, prop, obj))
                     else:
@@ -293,14 +314,19 @@ class Serialization(object):
     def get_translation_mappings(self):
         self.translation_mappings = {}
         trans_mappings = {}
+        
+        serns = Namespace(serial.base_iri)
+        self.graph.bind('ser', serns, override=True, replace=True)
         translation_mapping_ids = [s.toPython() for s,p,m in self.graph.triples((None,
                                                                         RDF.type,
-                                                                        ontology_definitions().get("TranslationMapping_uri")))]
+                                                                        URIRef(serial.TranslationMapping.iri)))]
+        
+        print("translation_mapping_ids", translation_mapping_ids)
         for tmid in translation_mapping_ids:
             print(tmid)
             tmk_def={}
             tmk_ids = [o.toPython() for s,p,o in self.graph.triples((URIRef(tmid),
-                                                                    ontology_definitions().get("ContainsTranslationMappingKVPair_uri"),
+                                                                    URIRef(serial.ContainsTranslationMappingKVPair.iri),
                                                                     None))]
             
             tm_names = {s.toPython():o.toPython() for s,p,o in self.graph.triples((URIRef(tmid),
@@ -308,10 +334,10 @@ class Serialization(object):
                                                                     None))}
             for tmk_id in tmk_ids:
                 k = [o.toPython() for s,p,o in self.graph.triples((URIRef(tmk_id),
-                                                                    ontology_definitions().get("Key_uri"),
+                                                                    URIRef(serial.Key.iri),
                                                                     None))]
                 v = [o.toPython() for s,p,o in self.graph.triples((URIRef(tmk_id),
-                                                                    ontology_definitions().get("Value_uri"),
+                                                                    URIRef(serial.Value.iri),
                                                                     None))]
                 if len(k)==1 and len(v)==1:
                     k,v=k[0], v[0]
@@ -325,7 +351,7 @@ class Serialization(object):
                     v = str(v)
                 tmk_def[k]=v
             trans_mappings[tm_names[tmid]]=tmk_def
-        print (trans_mappings)
+
         return trans_mappings
 
     

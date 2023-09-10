@@ -110,7 +110,8 @@ def triples_to_quads(triples, graph_uri="http://master"):
 
 def load_to_graph(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri, discourse_graph_uri, title, metadata_payload, fingerprint_hashes=None, override_duplicate=False):
     start_ts = datetime.now()
-    mastered_triples, entity_mappings = get_triples(dataset_object,serialization_graph_uri, serialization_name, data_rows, master_graph_uri)
+    mastered_triples, entity_mappings = get_triples(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri)
+
     print(mastered_triples)
     posits, declarations, discourse, disco_obj = generate_discourse(title, mastered_triples, metadata_payload)
     if fingerprint_hashes is not None:

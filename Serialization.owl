@@ -389,14 +389,6 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#BatchNode"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#JobNode"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#RowNode"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataLoad"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs"/>
