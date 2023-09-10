@@ -92,6 +92,8 @@ def process_serialisation_to_elementtree(jdata):
     mapping_headers = gen_mappings(mapping_value_list, jdata)
     if len(translation_mappings)>0:
         translation_mapping_headers=gen_translation_mappings(jdata, translation_mappings)
+    else:
+        translation_mapping_headers=[]
     serialization_definition = gen_serialization_def(mapping_value_list,jdata)
 
 

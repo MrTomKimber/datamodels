@@ -117,7 +117,10 @@ class Mapping(object):
             if value.replace(nsc+":", nsf) != value:
                 return value.replace(nsc+":", nsf)
         return value
-
+    
+    def __repr__(self):
+        return "<" + ">" + str(dict((name, value) for name, value in self.__dict__.items() if not name.startswith('__')))
+    
     def __init__(self, parent_serialization, s_uri):
         self.ontology = serial
         self.serialization = parent_serialization
@@ -287,6 +290,8 @@ class Serialization(object):
         print("****************************************")
         #translation_mappings
 
+
+
     def get_meta_targets(self):
         meta_classes = [s.toPython() for s,p,m in self.graph.triples((None,
                                                                         RDF.type,
@@ -408,6 +413,9 @@ class Serialization(object):
                     ent=m._apply_mapping(row, None, entity_mappings)
                     entities[m.SerializationLabel]=ent
                     entity_mappings[ent.unique_label]=ent.uri
+            
+            else:
+                print(m, " has no SerializationLabel!!")
         print([(k) for k,v in entity_mappings.items()])
 
         for m in self.mappings:
@@ -415,6 +423,8 @@ class Serialization(object):
             if not hasattr(m, "SerializationLabel"):
                 print(m.name)
                 m._apply_mapping(row, entities, entity_mappings)
+            else:
+                print(m, " has no SerializationLabel!!")
 
         return list(chain (*[e.to_triples() for e in entities.values()])), entity_mappings
 
