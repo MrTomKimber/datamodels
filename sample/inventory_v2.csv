@@ -1,4 +1,4 @@
-Sequence,ModelDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,Is PK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
+Sequence,ModelDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
 1,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_id,Id field of the product by which it is coded,integer,,,No,Yes,,,,,,,
 2,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_name,Name of the product.,string,,,No,No,,,,,,,
 3,Inventory,Simple ERD Model - Inventory,Physical,Location,Facility/Building operated by the organisation,loc_id,Id field of the location.,integer,,,No,Yes,,,,,,,
@@ -14,6 +14,6 @@ Sequence,ModelDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeD
 13,Inventory,Simple ERD Model - Inventory,Physical,Staff,Members of staff,loc_id,Location base of this member of staff.,integer,,,No,No,,,,,,,
 14,Inventory,Simple ERD Model - Inventory,Physical,Staff,Members of staff,role_id,Assigned role to this member of staff,integer,,,No,No,,,,,,,
 15,Inventory,Simple ERD Model - Inventory,Physical,Roles,Working Roles,role_id,Role Identifier.,integer,,,No,Yes,,,,,,,
-16,Inventory,Simple ERD Model - Inventory,Physical,Roles,Working Roles,role_name,Role Name.,,,,,,,,,,,,
+16,Inventory,Simple ERD Model - Inventory,Physical,Roles,Working Roles,role_name,Role Name.,string,,,No,No,,,,,,,
 17,Inventory,Simple ERD Model - Inventory,,,,,,,,,,,Staff --> Location,Staff,loc_id,Many,Location,loc_id,One
-18,Inventory,Simple ERD Model - Inventory,,,,,,,,,,,Staff --> Role,Staff,role_id,Many,Role,role_id,One
+18,Inventory,Simple ERD Model - Inventory,,,,,,,,,,,Staff --> Role,Staff,role_id,Many,Roles,role_id,One
