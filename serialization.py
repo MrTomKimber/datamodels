@@ -143,23 +143,23 @@ class Mapping(object):
         elif self.defs["MetaProperty_uri"] in class_set:
             self.mapping_subtype = "property"
         elif self.defs["MetaDataProperty_uri"] in class_set:
-            print(class_set)
-            print("dataproperty")
-            print(self.name)
+            #print(class_set)
+            #print("dataproperty")
+            #print(self.name)
             self.mapping_subtype = "dataproperty"
         elif self.defs["MetaStaticProperty_uri"] in class_set:
             self.mapping_subtype = "staticproperty"
         else:
-            print( "meta_target", mapping_meta_target )
-            print ("class_set", class_set)
-            print ( "mc_uri", self.defs["MetaClass_uri"])
-            print(self.defs["MetaClass_uri"] in class_set)
-            print(type(self.defs["MetaClass_uri"]), [type(n) for n in class_set])
-            print( "uri", s_uri )
+            #print( "meta_target", mapping_meta_target )
+            #print ("class_set", class_set)
+            #print ( "mc_uri", self.defs["MetaClass_uri"])
+            #print(self.defs["MetaClass_uri"] in class_set)
+            #print(type(self.defs["MetaClass_uri"]), [type(n) for n in class_set])
+            #print( "uri", s_uri )
             self.mapping_subtype = "unexpected_thing"
-            print()
+            #print()
             assert False
-        print( self.name, "is a ", self.mapping_subtype)
+        #print( self.name, "is a ", self.mapping_subtype)
         # Create a mapping_properties dictionary to hold the extracted mapping details
         # SerializationLabel --> Data Header
         # SerializationParentLabel --> Used to construct "lineage tree"
@@ -205,13 +205,14 @@ class Mapping(object):
             if subj is not None:
                 if self.mapping_subtype=="property":
                     obj = row_entity_context.get(self.MappingRange)
-                    print(self.MappingRange, "processing property", prop, obj)
+                    #print(self.MappingRange, "processing property", prop, obj)
                     if obj is not None:
                         subj.properties.append((subj.name, prop, URIRef(obj.uri)))
                     else:
-                        print(row_entity_context)
-                        for k,v in row_entity_context.items():
-                            print(k,v.name)
+                        #print(row_entity_context)
+                        #for k,v in row_entity_context.items():
+                            #print(k,v.name)
+
                         pass
                 elif self.mapping_subtype=="dataproperty":
                     obj = row_dict.get(self.MappingRange)
@@ -219,24 +220,24 @@ class Mapping(object):
                         subj.data_properties.append((subj.name, prop, Literal(obj)))
                 elif self.mapping_subtype=='staticproperty':
                     # This is where the dereferencing of staticproperties goes.
-                    print("/////STATICPROPERTY/////")
-                    print( subj, prop)
-                    print ("********")
-                    try:    
-                        print( self.TranslationMapping )
-                    except:
-                        print (dir (self))
-                    print ("********")
-                    print( row_entity_context , row_dict, self.TranslationMappingName )
+                    #print("/////STATICPROPERTY/////")
+                    #print( subj, prop)
+                    #print ("********")
+                    #try:    
+                    #    print( self.TranslationMapping )
+                    #except:
+                    #    print (dir (self))
+                    #print ("********")
+                    #print( row_entity_context , row_dict, self.TranslationMappingName )
                     
                     mapping_name = self.TranslationMappingName
-                    print("/////////\\\\\\\\\\")
-                    print(self.serialization.translation_mappings)
-                    print("/////////\\\\\\\\\\")
-                    print (mapping_name, self.serialization.translation_mappings.get(mapping_name))
-                    print()
-                    print(mapping_name, self.MappingRange)
-                    print(row_dict)
+                    #print("/////////\\\\\\\\\\")
+                    #print(self.serialization.translation_mappings)
+                    #print("/////////\\\\\\\\\\")
+                    #print (mapping_name, self.serialization.translation_mappings.get(mapping_name))
+                    #print()
+                    #print(mapping_name, self.MappingRange)
+                    #print(row_dict)
                     obj = self.serialization.translation_mappings.get(mapping_name,{}).get(row_dict.get(self.MappingRange), None)
                     if obj is not None:
                         subj.properties.append((subj.name, prop, obj))
@@ -267,8 +268,8 @@ class Serialization(object):
         if s_name in serial_dict:
             self.serialization = serial_dict.get(s_name)
         else:
-            print(serial_dict)
-            print(s_graph, s_name)
+            #print(serial_dict)
+            #print(s_graph, s_name)
             assert False # Serialization name should match up
 
         self.mappings = self.get_mappings()
@@ -281,13 +282,13 @@ class Serialization(object):
 
 
         # Capture dereferencing Translation Mapping sets
-        print("****************************************")
-        print(self.graph)
-        print("This is the Serialization __init__ method")
-        print(s_graph, s_name)
-        print(type(s_graph))
-        print(self.meta_classes, self.meta_properties, self.meta_data_properties, self.meta_static_properties)
-        print("****************************************")
+        #print("****************************************")
+        #print(self.graph)
+        #print("This is the Serialization __init__ method")
+        #print(s_graph, s_name)
+        #print(type(s_graph))
+        #print(self.meta_classes, self.meta_properties, self.meta_data_properties, self.meta_static_properties)
+        #print("****************************************")
         #translation_mappings
 
 
@@ -326,9 +327,9 @@ class Serialization(object):
                                                                         RDF.type,
                                                                         URIRef(serial.TranslationMapping.iri)))]
         
-        print("translation_mapping_ids", translation_mapping_ids)
+        #print("translation_mapping_ids", translation_mapping_ids)
         for tmid in translation_mapping_ids:
-            print(tmid)
+            #print(tmid)
             tmk_def={}
             tmk_ids = [o.toPython() for s,p,o in self.graph.triples((URIRef(tmid),
                                                                     URIRef(serial.ContainsTranslationMappingKVPair.iri),
@@ -347,7 +348,7 @@ class Serialization(object):
                 if len(k)==1 and len(v)==1:
                     k,v=k[0], v[0]
                 else:
-                    print(k,v)
+                    #print(k,v)
                     assert False # Length of k,v lists is not == 1
                 if v in self.meta_objects:
                     # This means the values are canonical uris for this serialization, convert them from text.
@@ -415,16 +416,18 @@ class Serialization(object):
                     entity_mappings[ent.unique_label]=ent.uri
             
             else:
-                print(m, " has no SerializationLabel!!")
-        print([(k) for k,v in entity_mappings.items()])
+                pass
+                #print(m, " has no SerializationLabel!!")
+        #print([(k) for k,v in entity_mappings.items()])
 
         for m in self.mappings:
 
             if not hasattr(m, "SerializationLabel"):
-                print(m.name)
+                #print(m.name)
                 m._apply_mapping(row, entities, entity_mappings)
             else:
-                print(m, " has no SerializationLabel!!")
+                pass
+                #print(m, " has no SerializationLabel!!")
 
         return list(chain (*[e.to_triples() for e in entities.values()])), entity_mappings
 

@@ -42,7 +42,7 @@
 		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serializatio#AttributeHasDataTypeDataPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serializatio#ContextHasDescriptionDataPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serializatio#AttributeOptionalityDataPropertyMapping" />
-		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serializatio#AttributeOptionalityDataPropertyMapping" />
+		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serializatio#AttributeisIdentifierForClassDataPropertyMapping" />
 		<rdfs:label>Data Model Entity Attribute Relation Serialization</rdfs:label>
 	</NamedIndividual>
 	<!--///////////////////////////////////////////////////////////////////////////////////////
@@ -409,11 +409,11 @@
 		<ser:MappingDomain>Attribute</ser:MappingDomain>
 		<ser:MappingRange>Nulls</ser:MappingRange>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serializatio#AttributeOptionalityDataPropertyMapping">
+	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serializatio#AttributeisIdentifierForClassDataPropertyMapping">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isIdentifierForClass" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization" />
 		<ser:MappingDomain>Attribute</ser:MappingDomain>
-		<ser:MappingRange>Is PK</ser:MappingRange>
+		<ser:MappingRange>IsPK</ser:MappingRange>
 	</NamedIndividual>
 </rdf:RDF>

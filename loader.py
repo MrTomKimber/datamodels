@@ -48,7 +48,7 @@ def get_triples(dataset_object, serialization_graph_uri, serialization_name, dat
     row_triples=[]
     for t in master_graph:
         temp_master.add(t)
-
+    print("//////LOCATE1/////")
     # Cycle over data rows, and using the appropriate Serialization, convert to a set of
     # Mastered triples, ready to add to the master dataset.
     e=0
@@ -64,7 +64,7 @@ def get_triples(dataset_object, serialization_graph_uri, serialization_name, dat
 
     end_ts = datetime.now()
     print(end_ts-start_ts, "for", len(row_triples), "from", len(data_rows) )
-
+    print("//////LOCATE2/////")
 
     try:
         mgid = master_graph._Graph__get_identifier()
@@ -112,7 +112,7 @@ def load_to_graph(dataset_object, serialization_graph_uri, serialization_name, d
     start_ts = datetime.now()
     mastered_triples, entity_mappings = get_triples(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri)
 
-    print(mastered_triples)
+    #print(mastered_triples)
     posits, declarations, discourse, disco_obj = generate_discourse(title, mastered_triples, metadata_payload)
     if fingerprint_hashes is not None:
         fingerprint = disco_obj.member_hash()
@@ -121,15 +121,14 @@ def load_to_graph(dataset_object, serialization_graph_uri, serialization_name, d
             if override_duplicate:
                 # Get the existing discourse that contains the matching fingerprint to this one
                 # and create a new discourse that points directly at that one
-                print("doing this")
-
+                
                 alt_discourse_pointer = fingerprint_hashes[disco_obj.member_hash()]
-                print(alt_discourse_pointer)
+                #print(alt_discourse_pointer)
 
-                print("Clearing members")
+                #print("Clearing members")
                 disco_obj.clear_members()
                 disco_obj.add_member(alt_discourse_pointer)
-                print("now this")
+                
                 discourse = disco_obj.to_triples()
                 posits = set()
                 declarations = set()

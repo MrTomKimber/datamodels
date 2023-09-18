@@ -179,10 +179,10 @@
          "domain": "Attribute",
          "range": "Nulls"},
 
-         {"mapping_name": "AttributeOptionalityDataPropertyMapping",
+         {"mapping_name": "AttributeisIdentifierForClassDataPropertyMapping",
          "target": "http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#isIdentifierForClass",
          "domain": "Attribute",
-         "range": "Is PK"}
+         "range": "IsPK"}
 
     ]
 }
