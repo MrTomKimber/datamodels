@@ -143,7 +143,7 @@ def load_to_graph(dataset_object, serialization_graph_uri, serialization_name, d
     triple_count = len(mastered_triples)+len(posits)+len(declarations)+len(discourse)
     end_ts = datetime.now()
     print(end_ts-start_ts, "for", triple_count, "triples" )
-    return True
+    return (fingerprint, disco_obj.uri)
 
 def master_on_predicate_g(master_q, process_q, predicate=None):
     # Compare process_q against content in master_q and return mastered_q

@@ -34,6 +34,8 @@ class Repository(object):
         self.discourse_graph = self.ds.graph(URIRef(self.discourse_graph_uri))
         if len(self.discourse_graph)==0:
             self.discourse_graph.parse("discourse_graph.rdf")   
+        
+        self.update_discourse_hashes()
 
     @staticmethod
     def meta_data_package_template(field_d):
@@ -48,7 +50,7 @@ class Repository(object):
         for s,p,o, *_ in triples:
             yield (s,p,o,URIRef(graph))
 
-    def get_discourse_hashes(self):
+    def _get_discourse_hashes(self):
         loc_dir = os.path.dirname(os.path.realpath(__file__))
         with open(os.path.join(loc_dir,"SPARQL", "get_discourse_details.sparql"),"r") as f:
             discourse_details_sparql = f.read()
@@ -56,6 +58,9 @@ class Repository(object):
         qr = self.ds.query(discourse_details_sparql)
         results = list([{k:v[e] for e,k in enumerate([v.n3()[1:] for v in qr.vars])} for v in qr])
         return [(v['hash'].n3()[1:-1], v['discourse'].n3()[1:-1]) for v in results]
+    
+    def update_discourse_hashes(self):
+        self.discourse_hashes=self._get_discourse_hashes()
     
     def register_serialization(self, serialization_path):
         self.serialization_graph.parse(serialization_path)
@@ -66,6 +71,10 @@ class Repository(object):
         #3) Compute new hash
         #4) Test pre-existence
         #5) Load data
-        hashes = [h[0] for h in self.get_discourse_hashes()]
+        hashes = [h[0] for h in self.discourse_hashes]
+
         loader.load_to_graph(self.ds, self.registered_serializations_uri, serialization_name, datarows, self.master_graph_uri, self.discourse_graph_uri, title , metadata_payload, fingerprint_hashes=hashes, override_duplicate=False)
+        self.update_discourse_hashes()
+
+
         

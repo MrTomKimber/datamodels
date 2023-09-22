@@ -1,0 +1,48 @@
+Sequence,ModelDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
+1,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_id,Id field of the product by which it is coded,integer,,,No,Yes,,,,,,,
+2,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_name,Name of the product.,string,,,No,No,,,,,,,
+3,Inventory,Simple ERD Model - Inventory,Physical,Location,Facility/Building operated by the organisation,loc_id,Id field of the location.,integer,,,No,Yes,,,,,,,
+4,Inventory,Simple ERD Model - Inventory,Physical,Location,Facility/Building operated by the organisation,loc_name,Name by which the location is known.,string,,,No,No,,,,,,,
+5,Inventory,Simple ERD Model - Inventory,Physical,Inventory,Inventory of products located at a location,loc_id,Identity of the location.,integer,,,No,Yes,,,,,,,
+6,Inventory,Simple ERD Model - Inventory,Physical,Inventory,Inventory of products located at a location,p_id,Identity of the product.,integer,,,No,Yes,,,,,,,
+7,Inventory,Simple ERD Model - Inventory,Physical,Inventory,Inventory of products located at a location,p_loc_count,Count of the product at this location.,integer,,,No,No,,,,,,,
+8,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,isInventoryOfItem,Inventory,p_id,Many,Product,p_id,Many
+9,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,isInventoryLocatedAt,Inventory,loc_id,Many,Location,loc_id,Many
+10,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,description,Description of the product.,string,,,No,No,,,,,,,
+11,Inventory,Simple ERD Model - Inventory,Physical,Staff,Members of staff,staff_id,Id number of the staff member.,integer,,,No,Yes,,,,,,,
+12,Inventory,Simple ERD Model - Inventory,Physical,Staff,Members of staff,staff_name,Name of the staff member.,string,,,No,No,,,,,,,
+13,Inventory,Simple ERD Model - Inventory,Physical,Staff,Members of staff,loc_id,Location base of this member of staff.,integer,,,No,No,,,,,,,
+14,Inventory,Simple ERD Model - Inventory,Physical,Staff,Members of staff,role_id,Assigned role to this member of staff,integer,,,No,No,,,,,,,
+15,Inventory,Simple ERD Model - Inventory,Physical,Roles,Working Roles,role_id,Role Identifier.,integer,,,No,Yes,,,,,,,
+16,Inventory,Simple ERD Model - Inventory,Physical,Roles,Working Roles,role_name,Role Name.,string,,,No,No,,,,,,,
+17,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,worksAtLocation,Staff,loc_id,Many,Location,loc_id,One
+18,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,isEmployedInRole,Staff,role_id,Many,Roles,role_id,One
+19,Inventory,Simple ERD Model - Inventory,Physical,PriceHistory,Prices for each product over time.,p_id,Product Id.,integer,,,No,Yes,,,,,,,
+20,Inventory,Simple ERD Model - Inventory,Physical,PriceHistory,Prices for each product over time.,start_date,Date the price came into effect.,datetime,,,No,Yes,,,,,,,
+21,Inventory,Simple ERD Model - Inventory,Physical,PriceHistory,Prices for each product over time.,price,Cash value associated with the product.,float,,,No,No,,,,,,,
+22,Inventory,Simple ERD Model - Inventory,Physical,PriceHistory,Prices for each product over time.,price_currency,Currency code of the price.,string,,,No,No,,,,,,,
+23,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,orderitem_id,Unique Id for this order item,integer,,,No,Yes,,,,,,,
+24,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,qorder_id,Identifier for the parent quote/order.,integer,,,No,Yes,,,,,,,
+25,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,p_id,Product Identifier.,integer,,,No,No,,,,,,,
+26,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,price_per_unit,Base price per unit.,float,,,No,No,,,,,,,
+27,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,units,Count of product units quoted/ordered.,integer,,,No,No,,,,,,,
+28,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,discount,Proportion of discount to be applied to base price,float,,,No,No,,,,,,,
+29,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,total_price,Final total price for this line item after discounting,float,,,No,No,,,,,,,
+30,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quorder_id,Unique Identifier for this qoute/order.,integer,,,No,Yes,,,,,,,
+31,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,sales_staff_id,Staff id of salesperson responsible for sale or quote.,integer,,,No,No,,,,,,,
+32,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_date,Date used for calculating base prices.,datetime,,,No,No,,,,,,,
+33,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,customer_id,Individual customer identifier,integer,,,No,No,,,,,,,
+34,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_order_status,Indicator showing if this record is an order or a quote.,string,,,No,No,,,,,,,
+35,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,payment_status,Indicator showing if the order has been paid.,boolean,,,No,No,,,,,,,
+36,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,referencesProduct,OrderItem,order_item_id,One,Product,p_id,One
+37,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,referencesLineItem,QOrder,qorder_id,One,OrderItem,qorder_id,Many
+38,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,soldBy,QOrder,sales_staff_id,One,Staff,staff_id,Many
+39,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_id,Individual customer identifier,integer,,,No,Yes,,,,,,,
+40,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_name,Name of customer.,string,,,No,No,,,,,,,
+41,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_address_line_1,First line of customer address.,string,,,No,No,,,,,,,
+42,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_address_line_2,Second line of customer address.,string,,,No,No,,,,,,,
+43,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_address_line_3,Third line of customer address.,string,,,No,No,,,,,,,
+44,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_postal_town,Customer address town.,string,,,No,No,,,,,,,
+45,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_postal_code,Customer address post-code.,string,,,No,No,,,,,,,
+46,Inventory,Simple ERD Model - Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_phone_number,Customer Phone Number.,string,,,No,No,,,,,,,
+47,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,IsOrderedBy,QOrder,customer_id,Many,Customer,customer_id,One
