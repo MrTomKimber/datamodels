@@ -37,6 +37,11 @@ class Repository(object):
         
         self.update_discourse_hashes()
 
+    def truncate_graph(self, graph_uri):
+        self.ds.update("""CLEAR GRAPH <{g}>""".format(g=graph_uri))
+        self.ds.update("""CREATE GRAPH <{g}>""".format(g=graph_uri))
+
+
     @staticmethod
     def meta_data_package_template(field_d):
         dc_terms_base = "http://purl.org/dc/terms/"
@@ -76,5 +81,34 @@ class Repository(object):
         loader.load_to_graph(self.ds, self.registered_serializations_uri, serialization_name, datarows, self.master_graph_uri, self.discourse_graph_uri, title , metadata_payload, fingerprint_hashes=hashes, override_duplicate=False)
         self.update_discourse_hashes()
 
+    @staticmethod    
+    def _un_rdflib(value):
+        if isinstance(value, URIRef):
+            return value.n3()[1:-1]
+        elif isinstance(value, Literal):
+            return value.toPython()
+        else:
+            return value
+        
+    @staticmethod
+    def _flatten_rdflib_query_results(query_results, native_rdflib=False):
+        for row in query_results:
+            if native_rdflib:
+                yield {query_results.vars[e].toPython()[1:]:v for e,v in enumerate(row)}
+            else:
+                yield {query_results.vars[e].toPython()[1:]:Repository._un_rdflib(v) for e,v in enumerate(row)}
 
+    def run_cached_query(self, q_name, parameters=None, native_rdflib=None):
+        if native_rdflib is None:
+            native_rdflib = False
+        loc_dir = os.path.dirname(os.path.realpath(__file__))
+        with open(os.path.join(loc_dir,"SPARQL", q_name),"r") as f:
+            query_sparql = f.read()
+        if isinstance(parameters, (list)) and len (parameters)>0:
+            for e,p in enumerate(parameters):
+                print(("%%p{e}%%".format(e=e), p))
+                query_sparql = query_sparql.replace("%%p{e}%%".format(e=e), p)
+        print(query_sparql)
+        qr = list(Repository._flatten_rdflib_query_results(self.ds.query(query_sparql),native_rdflib))
+        return qr
         
