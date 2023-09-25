@@ -1,6 +1,6 @@
 Sequence,ModelDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
 1,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_id,Id field of the product by which it is coded,integer,,,No,Yes,,,,,,,
-2,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_name,Name of the product.,string,,,No,No,,,,,,,
+2,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_name,Unique name of the product.,string,,,No,No,,,,,,,
 3,Inventory,Simple ERD Model - Inventory,Physical,Location,Facility/Building operated by the organisation,loc_id,Id field of the location.,integer,,,No,Yes,,,,,,,
 4,Inventory,Simple ERD Model - Inventory,Physical,Location,Facility/Building operated by the organisation,loc_name,Name by which the location is known.,string,,,No,No,,,,,,,
 5,Inventory,Simple ERD Model - Inventory,Physical,Inventory,Inventory of products located at a location,loc_id,Identity of the location.,integer,,,No,Yes,,,,,,,
@@ -28,10 +28,10 @@ Sequence,ModelDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeD
 27,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,units,Count of product units quoted/ordered.,integer,,,No,No,,,,,,,
 28,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,discount,Proportion of discount to be applied to base price,float,,,No,No,,,,,,,
 29,Inventory,Simple ERD Model - Inventory,Physical,OrderItem,A line item that exists on a quote or order,total_price,Final total price for this line item after discounting,float,,,No,No,,,,,,,
-30,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quorder_id,Unique Identifier for this qoute/order.,integer,,,No,Yes,,,,,,,
-31,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,sales_staff_id,Staff id of salesperson responsible for sale or quote.,integer,,,No,No,,,,,,,
+30,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quorder_id,"Unique Identifier for this qoute/order. Previously, customer was denormalised(?)",integer,,,No,Yes,,,,,,,
+31,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,sales_staff_id,Who made the quote or order?,integer,,,No,No,,,,,,,
 32,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_date,Date used for calculating base prices.,datetime,,,No,No,,,,,,,
-33,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,customer_id,Individual customer identifier,integer,,,No,No,,,,,,,
+33,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,customer_id,Individual customer identifier.,integer,,,No,No,,,,,,,
 34,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_order_status,Indicator showing if this record is an order or a quote.,string,,,No,No,,,,,,,
 35,Inventory,Simple ERD Model - Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,payment_status,Indicator showing if the order has been paid.,boolean,,,No,No,,,,,,,
 36,Inventory,Simple ERD Model - Inventory,Physical,,,,,,,,,,referencesProduct,OrderItem,order_item_id,One,Product,p_id,One
