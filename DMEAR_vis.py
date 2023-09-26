@@ -4,13 +4,17 @@ import pydotplus
 from rdflib.tools.rdf2dot import rdf2dot
 import difflib
 
-def DMEAR_vizdiff_to_graph(S1, S2, option_dict=None, v_type="png"):
-    g = pydotplus.graph_from_dot_data(DMEAR_vizdiff_to_dot(S1, S2, option_dict))
-    match v_type.lower():
-        case "png":
-            output = g.create_png()
-        case "svg":
-            output = g.create_svg()
+def DMEAR_vizdiff_to_graph(S1, S2, option_dict=None, engine="dot", graph_options=None, v_type="png"):
+    g = pydotplus.graph_from_dot_data(DMEAR_vizdiff_to_dot(S1, S2, option_dict, graph_options))
+    try:
+        output = g.create(prog=engine, format=v_type)
+    except Exception as e:
+        print (g.to_string())
+        print(e)
+        raise e
+
+
+    
     return output
         
     
@@ -141,7 +145,7 @@ def DMEAR_attribute_string(parent_lir, attr_obj, option_dict=None, header=False)
     
 
 
-def DMEAR_vizdiff_to_dot(S1, S2, option_dict=None):
+def DMEAR_vizdiff_to_dot(S1, S2, option_dict=None, graph_options_dict=None):
 
     if option_dict is None:
         option_dict = { "u_label" : False, 
@@ -251,7 +255,14 @@ def DMEAR_vizdiff_to_dot(S1, S2, option_dict=None):
     fg_col_dir = { 0 : "#880606", 1 : "#000000", 2 : "#068806"}
     alt_col_dir = { 0 : "#EE8888", 1 : "#AAAAAA", 2 : "#88EE88"}
     #start = """digraph { \n graph [fontname = "helvetica"]; \n node [ fontname="DejaVu Sans" ] ; \n edge [fontname = "helvetica"]; \n"""
-    start = """digraph { \n graph [fontname = "helvetica"]; \n node [ fontname="helvetica" ] ; \n edge [fontname = "helvetica"]; \n"""
+
+    if graph_options_dict is None:
+        start = """digraph { \n graph [fontname = "helvetica"]; \n node [ fontname="helvetica" ] ; \n edge [fontname = "helvetica"]; \n"""
+    else:
+        g_opts = "\n ".join(["{k}={v};".format(k=k,v=v) for k,v in graph_options_dict.items()])
+        start = "digraph {{ \n {g_opts} graph [fontname = \"helvetica\"]; \n node [ fontname=\"helvetica\" ] ; \n edge [fontname = \"helvetica\"]; \n".format(g_opts=g_opts)
+
+    
      
  
  
