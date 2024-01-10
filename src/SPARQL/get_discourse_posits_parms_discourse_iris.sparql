@@ -1,0 +1,31 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX disco: <http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+
+select ?g ?discourse ?assertion ?refutation ?posit ?s ?p ?o
+WHERE {
+  GRAPH ?g
+  {
+      ?discourse a disco:Discourse.
+      ?discourse disco:DiscourseContains+ ?declaration .
+      ?declaration a disco:Declaration .
+        OPTIONAL { ?declaration disco:Asserts ?assertion. 
+                   ?assertion disco:Subject ?s.
+                   ?assertion disco:Predicate ?p.
+                   ?assertion disco:Object ?o.
+                   }
+        OPTIONAL { ?declaration disco:Refutes ?refutation. 
+                   ?refutation disco:Subject ?s.
+                   ?refutation disco:Predicate ?p.
+                   ?refutation disco:Object ?o.
+                   }
+        OPTIONAL { ?declaration disco:Posits ?posit. 
+                   ?posit disco:Subject ?s.
+                   ?posit disco:Predicate ?p.
+                   ?posit disco:Object ?o.
+        }
+      FILTER (?discourse IN ( %%p0%% )) .
+      
+  }
+}

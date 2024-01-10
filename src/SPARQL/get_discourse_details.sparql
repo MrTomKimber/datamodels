@@ -1,0 +1,24 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX disco: <http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+
+select ?g ?discourse ?name ?title ?description ?created ?hash (COUNT(?declaration) as ?declarations) (COUNT(distinct ?psubject) as ?entities)
+
+WHERE {
+  GRAPH ?g
+  {
+      ?discourse a disco:Discourse.
+      ?discourse dcterms:title ?title.
+      ?discourse rdfs:label ?name.
+      ?discourse dcterms:description ?description.
+      ?discourse dcterms:created ?created .
+      ?discourse disco:DiscourseHash ?hash .
+      ?discourse disco:DiscourseContains+ ?declaration .
+      ?declaration a disco:Declaration .
+      ?posit_type rdfs:subPropertyOf* disco:Posits .
+      ?declaration disco:Asserts ?assertion.
+      ?assertion disco:Subject ?psubject.
+  }
+}
+GROUP BY ?g ?discourse ?name ?title ?description ?created ?hash

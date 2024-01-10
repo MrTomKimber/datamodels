@@ -1,6 +1,0 @@
-# :title: get_named_graphs
-# :description: return all named graphs from the database that have triples associated with them
-# :parameters: none
-# :returns: g
-# :query:
-select distinct ?g WHERE { GRAPH ?g { ?s ?p ?o .}}

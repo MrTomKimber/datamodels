@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#"
+     xml:base="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#duration -->
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#duration"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Asserts -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Asserts">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posits"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Refutes"/>
+        <rdfs:comment>A Declaration Asserts some Posit, and in doing so, decares that posit positively. In other words, such assertion declares that in whatever context the declaration is made, the referenced posit can be considered Truthful.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Atom -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Atom">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+        <rdfs:comment>An Atom is any single constituant element of a triple.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseContains -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseContains">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseHierarchy"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+        <rdfs:comment>A Discourse is a hierarchical container, whose members can be other sub-discourses, or root-level Declarations.
+
+When determining the contents of a Discourse, all members of Discources referenced by a DiscourseContains are OR&apos;ed together according to the following logic.
+
+Posits are included.
+Assertions are included as assertions. 
+Refutations are included as refutations.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseExcludes -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseExcludes">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseHierarchy"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+        <rdfs:comment>When composing discourse hierarchies - it might be appropriate to make explicit exclusions from some subset of contents.
+
+For the purposes of dealing with Posits, Assertions and Refutations, the following inversion logic applies:
+
+Posits Excluded have their existance NOTed from the Discourse - they do not appear. 
+Assertions are Refuted (that is they are included, but as Refutations)
+Refutations are Asserted (that is, they are included, but as Assertions)</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseHierarchy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseHierarchy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:comment>A DiscourseHierarchy is some property by which a Discourse is constructed. Most often this will be exclusively positively by referencing Declarations or sub-Discourses that will be all considered as containing elements to be grouped together, but occasionally, allowing exclusion sets to be defined to determine negative elements that will be excluded from a given Discourse.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Object -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Object">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Atom"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posits -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posits">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+        <rdfs:comment>A Declaration Posits some Posit. This relationship links the act of stating some posit, and the Posit itself. The same Posit can be Posited by multiple Declarations.
+
+Posit should be referred for strictly neutral referencing of posits - Each Posit can (and should) be explicitly Asserted or Refuted, even if in practice, most Posits will be Asserted by default.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Predicate -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Predicate">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Atom"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Proposes -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Proposes">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#isProposedBy"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Interlocutor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Refutes -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Refutes">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posits"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+        <rdfs:comment>A Declaration Refutes some posit by declaring that this posit is NOT true.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#SequenceHasStage -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#SequenceHasStage">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#StageBelongsToSequence"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Sequence"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#SequencePosition -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#SequencePosition">
+        <rdfs:comment>Expresses the index position in the sequence that this stage occupies. 
+
+Index position starts at zero.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#StageBelongsToSequence -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#StageBelongsToSequence">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Sequence"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#StageHasDiscourse -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#StageHasDiscourse">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Subject -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Subject">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Atom"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#isProposedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#isProposedBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Interlocutor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/created"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/creator -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/modified -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/modified"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/source -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/source"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Digest -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Digest">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>The Digest is a longform string representation of a triple, where each Atom is expressed in n3 notation, delimited by 3 tildes &apos;~~~&apos;, and is normally assigned to a Posit.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseHash -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#DiscourseHash">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>The DiscourseHash is a hash of the affirmative and refutational posits referenced by the declarations in a discourse. It is used to identify duplicate discourses and provide a means to filter them out at runtime should a duplicate upload be initiated.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Duration -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Duration">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#duration"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Finish -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Finish">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#GeneratedOn -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#GeneratedOn">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>A DateTime value describing the datetime when the associated information was generated within the ontology.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Start -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Start">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#VersionString -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#VersionString">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In cases where a discourse might change over time, it may be convenient to tag the discourse with some string value indicating its version number. Differing numbering schemes exist, it is up to the consumer/provider to adopt and use one appropriately.
+
+For more controlled versioning, use the Sequence construct.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Assertion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Assertion">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Asserts"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration">
+        <rdfs:comment>A Declaration is an instance of a posit being made at some point in time. It provides a context for when and how a posit might be repeatably referenced.
+
+The posit that it might refer to is a platonic object, existing without time or context, so a Declaration is an instance of usage with reference to the posit with which it is associated.
+
+Any number of declarations can exist that reference a single posit. Their existance represents individual statements of the factual possibility defined by the the posit, each made at independent times, potentially by different Interlocutors and in different contexts.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Discourse">
+        <rdfs:comment>A Discourse is a collection of Declarations that might be considered a set. These Declarations are linked to the Discourse via the DiscourseContains property.
+
+Discourses can themselves contain sub-discourses, enabling a hierarchy of discourse to be established.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Interlocutor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Interlocutor">
+        <rdfs:comment>An Interlocutor can be someone, something, or some expressable perspective that has the capacity to Propose Declarations - either individually, or as part of a wider Discourse.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit">
+        <rdfs:comment>A Posit is a representation of a single piece of information that might be expressed as a semantic triple. It is a platonic object, in that it simply exists as a possibility, without possessing any context.
+
+Given a universe of possibility, any subject-predicate-object relationship can be Posited. The existence or otherwise of a given posit shouldn&apos;t be interpreted as being anything meaningful beyond it not being formally expressed at sometime by someone or something. It might even be posited in a negative form where the &lt;TheCat satOn TheMat&gt; is refuted by the person stating the posit - the posit remains in its decontextualised form. The only thing we can infer from its existance is that there may be some universe in which TheCat has the possibility of sitting on TheMat. 
+
+There might be semantic barriers as to why a given posit might be more meaningful than another one - &lt;&quot;My Car&quot; &lt;hasNumberOfWheels&gt; &quot;Tuesday&quot;&gt; consists of s-p-o content, but is likely to violate one or more ontological expectations. Similarly the Posit &lt;&quot;The Universe&quot; &lt;IsInfinite&gt; True&gt; can coexist with another posit &lt;&quot;The Universe&quot; &lt;IsInfinite&gt; False&gt; but that they contradict one another should not be cause for concern. 
+
+To pull meaning from a collection of posits, we must extract and form graphs from selected onces, based on specific Declarations that exist within the contexts of their Discourses.
+
+One use-case for directly accessing Posits is to gain an understanding, if not of the real-world, then of what a given system might think is possible within its realm of experience.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Refutation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Refutation">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Refutes"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Posit"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Declaration"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Sequence -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Sequence">
+        <rdfs:comment>A sequence groups a set of Stages into an ordered list. The order in which the  Stages are interpreted is determined by the SequenceProperty Property.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#Stage">
+        <rdfs:comment>A stage is a discrete node in an ordered Sequence.
+
+Each stage is unique to, and intimately associated with its parent Sequence.</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi -->
+
