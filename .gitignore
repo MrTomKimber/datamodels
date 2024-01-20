@@ -1,4 +1,4 @@
 .ipynb_checkpoints/
 __pycache__/
 sample/company_names.csv
-
+jena-fuseki-docker-4.9.0/databases/

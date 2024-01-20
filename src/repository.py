@@ -13,11 +13,20 @@ loc_dir = os.path.dirname(os.path.realpath(__file__))
 
 class Repository(object):
     def __init__(self, store_type="memory", **kwargs):
+        if 'query_url' in kwargs:
+            QUERYURL=kwargs['query_url']
+        else:
+            QUERYURL="http://localhost:3030/modelg/query"
+        if 'update_url' in kwargs:
+            UPDATEURL=kwargs['update_url']
+        else:
+            UPDATEURL="http://localhost:3030/modelg/update"
+        
         if store_type=="memory":
             self.store = memory.Memory()
         elif store_type=="jena":
-            self.store = sparqlstore.SPARQLUpdateStore("http://localhost:3030/modelg/query",context_aware=True)
-            self.store.open(("http://localhost:3030/modelg/query", "http://localhost:3030/modelg/update"))
+            self.store = sparqlstore.SPARQLUpdateStore(QUERYURL,context_aware=True)
+            self.store.open((QUERYURL, UPDATEURL))
         self.ds = Dataset(store=self.store, default_union=True, default_graph_base="http://base.raw")
         self.registered_serializations_uri = "http://config"
         self.master_graph_uri = "http://master"
@@ -87,7 +96,7 @@ class Repository(object):
     @staticmethod    
     def _un_rdflib(value):
         if isinstance(value, URIRef):
-            return value.n3()[1:-1]
+            return value.toPython()
         elif isinstance(value, Literal):
             return value.toPython()
         else:

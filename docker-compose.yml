@@ -15,6 +15,8 @@ services:
       - ./jena-fuseki-docker-4.9.0/logs:/fuseki/logs
       - ./jena-fuseki-docker-4.9.0/databases:/fuseki/databases
     command: ["--update", "--loc", "databases/MEM", "/modelg"]
+    networks:
+      - backend
 
   flask:
     build: 
@@ -34,3 +36,8 @@ services:
 
     depends_on:
       - fuseki
+    networks:
+      - backend
+
+networks:
+  backend:

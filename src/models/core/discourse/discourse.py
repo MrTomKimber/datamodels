@@ -21,9 +21,9 @@ def uuid_format(hx):
 
 def datetime_literal(dt=None):
     if dt is None:
-        dt_s = datetime.now(timezone.utc).strftime("%Y-%M-%dT%H:%M:%S")
+        dt_s = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S")
     else:
-        dt_s = dt.strftime("%Y-%M-%dT%H:%M:%S")
+        dt_s = dt.strftime("%Y-%m-%dT%H:%M:%S")
     return Literal(dt_s)
 
 def triple_to_longform(rdf_triple):

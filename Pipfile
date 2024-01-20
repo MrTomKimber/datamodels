@@ -18,7 +18,7 @@ matplotlib = "*"
 networkx = "*"
 simpy = "*"
 flask = "*"
-
+owlready2 = "*"
 
 [dev-packages]
 
