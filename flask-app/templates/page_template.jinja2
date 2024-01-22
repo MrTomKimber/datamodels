@@ -1,0 +1,15 @@
+{% extends "html_base.jinja2" %}
+{% block meta %}{% include "meta.jinja2"%}{% endblock %}
+
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="static/reset.css">
+<link rel="stylesheet" type="text/css" href="static/tkl_style.css">
+{%endblock%}
+{% block script %}
+<script>
+
+</script>
+{%endblock%}
+{%block body%} {% include "nav_template.jinja2"%} {% include "content_template.jinja2"%} {%endblock body%}
+

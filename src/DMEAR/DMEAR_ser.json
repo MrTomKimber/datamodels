@@ -1,5 +1,5 @@
 {  "$schema" : "serialisation_schema.json",
-    "serialization_iri": "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization",
+    "serialization_iri": "http://www.tkl.org/2022/11/DMEAR",
     "serialization_label": "Data Model Entity Attribute Relation Serialization",
     "targetOntology": "http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel",
     "targetClasses": ["http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#ModelDomain",

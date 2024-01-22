@@ -9,15 +9,18 @@ import uuid
 import re
 from rdflib import URIRef
 from itertools import chain
+import os
 
 
-sample_ser_file = "../Serialization.owl"
-serial = owlr.get_ontology(sample_ser_file).load()
+ser_file = "Serialization.owl"
+MODPATH=os.path.split(__file__)[0]
+serial = owlr.get_ontology(os.path.join(MODPATH,ser_file)).load()
+serialization_schema_filename = os.path.join(MODPATH, "serialisation_schema.json")
 
 def process_json_serialization(jsonfilename):
     """Given a filename pointing to a json data file, read it and convert into a formatted XML/RDF file containing the Serialization specifications for appliction in a load-process. """
     # Identify/Validate that the file exists, and is in the right format:
-    if validate_schema(jsonfilename, '/home/tomk/Documents/Coding/gitHub/datamodels/serialisation_schema.json'):
+    if validate_schema(jsonfilename, serialization_schema_filename):
         with open(jsonfilename, 'r') as file:
             data = json.load(file)
 

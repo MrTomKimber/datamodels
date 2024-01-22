@@ -110,6 +110,8 @@ RUN \
     mkdir -p $DATA && \
     chmod a+x entrypoint.sh
 
+RUN chown -R fuseki $DATA
+
 ## Default environment variables.
 ENV \
     JAVA_HOME=${JAVA_MINIMAL}           \
