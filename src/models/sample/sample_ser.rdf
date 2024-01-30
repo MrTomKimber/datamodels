@@ -2,7 +2,7 @@
 <!--
         Sample Schema Name
         -->
-<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#" xml:base="http://www.w3.org/2002/07/owl" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ser="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#">
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#" xml:base="http://www.w3.org/2002/07/owl" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ser="http://www.tkltd.org/ontologies/serialization#">
 	<!--   
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -10,15 +10,15 @@
     // mappings that belong to that object.
     //
     ///////////////////////////////////////////////////////////////////////////////////////-->
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Parent_Class_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Class_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassProperty_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Property_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Property_Class_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#DataProperty_Mapping" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisation">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Serialization" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisatio#Parent_Class_Mapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisatio#Class_Mapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisatio#SubClassProperty_Mapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisatio#Property_Mapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisatio#Property_Class_Mapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisatio#DataProperty_Mapping" />
 		<rdfs:label>Sample Serialisation</rdfs:label>
 	</NamedIndividual>
 	<!--///////////////////////////////////////////////////////////////////////////////////////
@@ -27,14 +27,14 @@
     // High level serialization classes defined to describe a given Serialization
     //
     ///////////////////////////////////////////////////////////////////////////////////////-->
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization" />
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass" />
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty" />
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty" />
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaStaticProperty" />
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMapping" />
-	<Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#Serialization" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#Mapping" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaClass" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaDataProperty" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaStaticProperty" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#TranslationMapping" />
+	<Class rdf:about="http://www.tkltd.org/ontologies/serialization#MappingKVPair" />
 	<!--///////////////////////////////////////////////////////////////////////////////////////
     //
     // Annotation properties - these should remain static
@@ -42,16 +42,16 @@
     // that map onto the Serialization Ontology's Data Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////-->
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsMapping" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingDomain" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingRange" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationLabel" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationParentLabel" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Key" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Value" />
-	<AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMappingName" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#ContainsMapping" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingMetaTarget" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingDomain" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingRange" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingMetaTarget" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#SerializationLabel" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#SerializationParentLabel" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#Key" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#Value" />
+	<AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#TranslationMappingName" />
 	<!--
     
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -65,37 +65,37 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#OrphanClass">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/sample#OrphanClass">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/sample#someClass">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/sample#SubClassA">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/sample#SubClassB">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/sample#SubClassC">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someProperty">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/sample#someProperty">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someDataProperty">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/sample#someDataProperty">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
 		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaStaticProperty" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 	</NamedIndividual>
 	<!--
     
@@ -107,45 +107,45 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Parent_Class_Mapping">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
-		<ser:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisatio#Parent_Class_Mapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/sample#someClass" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 		<ser:SerializationLabel>ParentClass</ser:SerializationLabel>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Class_Mapping">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
-		<ser:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisatio#Class_Mapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/sample#someClass" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 		<ser:SerializationLabel>Class</ser:SerializationLabel>
 		<ser:SerializationParentLabel>ParentClass</ser:SerializationParentLabel>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassProperty_Mapping">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisatio#SubClassProperty_Mapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 		<ser:MappingDomain>Class</ser:MappingDomain>
 		<ser:MappingRange>SubClassPointer</ser:MappingRange>
 		<ser:TranslationMappingName>subclasses</ser:TranslationMappingName>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Property_Mapping">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
-		<ser:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someProperty" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisatio#Property_Mapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/sample#someProperty" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 		<ser:MappingDomain>Class</ser:MappingDomain>
 		<ser:MappingRange>Property</ser:MappingRange>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Property_Class_Mapping">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
-		<ser:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisatio#Property_Class_Mapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/sample#someClass" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 		<ser:SerializationLabel>Property</ser:SerializationLabel>
 		<ser:SerializationParentLabel>ParentClass</ser:SerializationParentLabel>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#DataProperty_Mapping">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping" />
-		<ser:MappingMetaTarget rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someDataProperty" />
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisatio#DataProperty_Mapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/sample#someDataProperty" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
 		<ser:MappingDomain>Class</ser:MappingDomain>
 		<ser:MappingRange>DataProperty</ser:MappingRange>
 	</NamedIndividual>
@@ -156,60 +156,60 @@
     // values found in the serialization to target values expected by the ontology.
     //
     ///////////////////////////////////////////////////////////////////////////////////////-->
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation3eb2874543a34d5c841f80c83c7375ea">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMapping" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisation36f27a110dd64f84a8d48b5503e6b6d7">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#TranslationMapping" />
 		<rdfs:label>subclasses</rdfs:label>
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisationb0a3ed2c68f14cf0a81d6940138eddac" />
-		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation35b84fc9abcf450b87fb72a1ed87dae4" />
-		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisationaff8cb52549f461598d5e8679ab4e10b" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation9a2f316aa94649da9e9b3f1dad18928d" />
+		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisationda382ff629dc4d0ea17d58cba5ca56a0" />
+		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisationd930a48cfd0541bda3eb51ac0b818ae5" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation6edc723aac714482b635da2ad4aeadee">
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMapping" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisationf0e7b73f9f8a4884bc90d0198853857b">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#TranslationMapping" />
 		<rdfs:label>testcontents</rdfs:label>
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation5442bee407f84d55bc87e626090300cd" />
-		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation7d601ead27ea47b1b537898bbf8dbcc1" />
-		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisationbdf34deda0c74a6191cb0f78499ecb2e" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisationcdb5485ee94d41b6ab3d5398dfd9cecb" />
+		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation244a97bcf6ad4309a7f0a3bde21c222e" />
+		<ser:ContainsTranslationMappingKVPair rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation2899a747bce24b7fb297633b6db2a68a" />
 	</NamedIndividual>
 	<!--///////////////////////////////////////////////////////////////////////////////////////
     //
     // KVP sub elements associated with the above Translation Mappings
     //
     ///////////////////////////////////////////////////////////////////////////////////////-->
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisationb0a3ed2c68f14cf0a81d6940138eddac">
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisation9a2f316aa94649da9e9b3f1dad18928d">
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingKVPair" />
 		<ser:Key>a</ser:Key>
-		<ser:Value>http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA</ser:Value>
+		<ser:Value>http://www.tkltd.org/ontologies/sample#SubClassA</ser:Value>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation35b84fc9abcf450b87fb72a1ed87dae4">
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisationda382ff629dc4d0ea17d58cba5ca56a0">
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingKVPair" />
 		<ser:Key>b</ser:Key>
-		<ser:Value>http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB</ser:Value>
+		<ser:Value>http://www.tkltd.org/ontologies/sample#SubClassB</ser:Value>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisationaff8cb52549f461598d5e8679ab4e10b">
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisationd930a48cfd0541bda3eb51ac0b818ae5">
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingKVPair" />
 		<ser:Key>c</ser:Key>
-		<ser:Value>http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC</ser:Value>
+		<ser:Value>http://www.tkltd.org/ontologies/sample#SubClassC</ser:Value>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation5442bee407f84d55bc87e626090300cd">
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisationcdb5485ee94d41b6ab3d5398dfd9cecb">
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingKVPair" />
 		<ser:Key>1</ser:Key>
 		<ser:Value>X</ser:Value>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation7d601ead27ea47b1b537898bbf8dbcc1">
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisation244a97bcf6ad4309a7f0a3bde21c222e">
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingKVPair" />
 		<ser:Key>2</ser:Key>
 		<ser:Value>Y</ser:Value>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisationbdf34deda0c74a6191cb0f78499ecb2e">
-		<ser:IsComponentOfSerialization rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#Sample_Serialisation" />
-		<rdf:type rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair" />
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/Sample_Serialisation2899a747bce24b7fb297633b6db2a68a">
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/Sample_Serialisation" />
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingKVPair" />
 		<ser:Key>3</ser:Key>
 		<ser:Value>Z</ser:Value>
 	</NamedIndividual>

@@ -1,5 +1,6 @@
 # Import flask module
-from flask import Flask, request, render_template_string
+from flask import Flask, flash, redirect, request, render_template_string, url_for
+from werkzeug.utils import secure_filename
 import jinja2
 import pandas as pd
 
@@ -9,15 +10,21 @@ MODPATH=os.path.split(__file__)[0]
 sys.path.append(os.path.join(MODPATH,"..","src"))
 
 import repository
+import vis_owl
+import gravis as gv
+from rdflib import Graph
 
 file_loader = jinja2.FileSystemLoader("templates/")
 static_folder = jinja2.FileSystemLoader("static/")
 env = jinja2.Environment(loader=file_loader)
 template = env.get_template('page_template.jinja2')
 
+UPLOAD_FOLDER="uploads/"
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','rdf','owl','xlsx','csv'}
+
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 STORETYPE = 'jena'
 QUERYENDPOINT="http://fuseki:3030/modelg/query"
@@ -27,16 +34,98 @@ repo = repository.Repository(store_type=STORETYPE,query_url=QUERYENDPOINT, updat
 
 @app.route('/')
 def index():
-    content = render_template_string("""
-    <p>
-    <a href="{{url_for('about')}}">about</a>
-    </p>
-    """)
+    content = """index"""
     return template.render(language_code="en", 
                            title="Modelg", 
                            appname="modelg", 
                            navigation=nav_bar(),
                            content=content)
+
+@app.route('/view')
+def view():
+    content = """view"""
+    return template.render(language_code="en", 
+                           title="Modelg", 
+                           appname="modelg", 
+                           navigation=nav_bar(),
+                           content=content)
+
+@app.route('/admin')
+def admin():
+    content = """admin"""
+    return template.render(language_code="en", 
+                           title="Modelg", 
+                           appname="modelg", 
+                           navigation=nav_bar(),
+                           content=content)
+
+@app.route('/visualise')
+def visualise():
+    content = """visualise"""
+    g = Graph()
+
+    g.parse (MODPATH+'/../src/models/DMEAR/datamodels_rdf.owl', format='xml')
+    gjgf=vis_owl.gen_gjgf_from_owl_model_graph(g)
+
+    model_html = gv.d3(gjgf, 
+      node_label_data_source='label',
+      show_edge_label=True,
+      edge_label_size_factor=0.7,
+      edge_label_data_source='label',
+      edge_curvature=0.25,
+     links_force_strength=0.1, 
+     links_force_distance=100, 
+     use_collision_force=True, 
+     collision_force_radius=25, 
+     many_body_force_strength=-500,
+     ).to_html_partial()
+
+    return template.render(language_code="en", 
+                           title="Modelg", 
+                           appname="modelg", 
+                           navigation=nav_bar(),
+                           content=model_html)
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('download_file', name=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
+from flask import send_from_directory
+
+@app.route('/uploads/<name>')
+def download_file(name):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+
+app.add_url_rule(
+    "/uploads/<name>", endpoint="download_file", build_only=True
+)
 
 def nav_bar():
     nav_content = render_template_string("""
@@ -44,6 +133,9 @@ def nav_bar():
     <thead>
         <tr>
             <th><a href="{{url_for('index')}}">Home</a></th>
+            <th><a href="{{url_for('view')}}">View</a></th>
+            <th><a href="{{url_for('admin')}}">Admin</a></th>
+            <th><a href="{{url_for('visualise')}}">Visualise</a></th>
             <th><a href="{{url_for('about')}}">About</a></th>
     </thead>
 </table>

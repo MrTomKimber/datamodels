@@ -134,12 +134,33 @@ i {
   font-style: italic;
 }
 
-table {
+table.border {
   border: 1px solid black;
   border-collapse: collapse;
   height: auto;
   margin-left:auto;
   margin-right:auto;
+}
+
+table {
+  border: none;
+  border-collapse: collapse;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+
+tr:hover {
+  background-color: #ceefff;
 }
 
 th  {
@@ -154,8 +175,8 @@ th  {
 }
 
 td  {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 12px;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;

@@ -1,0 +1,660 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.tkltd.org/ontologies/datamodel#"
+     xml:base="http://www.tkltd.org/ontologies/datamodel"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:datamodel="http://www.tkltd.org/ontologies/datamodel#">
+    <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/datamodel">
+        <rdfs:comment>This ontology contains markup for data models.</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#isRequisiteProperty -->
+
+    <owl:AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#isRequisiteProperty">
+        <rdfs:comment>Some entities have existential dependencies on others. This annotation is used to tag Properties that serve as links to their requisite entities. 
+Where isRequisiteProperty is True, this means that the Object at the end of this Property *must* exist for this entity to have a full and proper existence. Application logic should consider deletion of any entities that are the subjects of broken Requisite Property triples.</rdfs:comment>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#definition -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#example -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#example"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#AlsoKnownAs -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#AlsoKnownAs">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MetaRelationship"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:comment>Entities are normally defined within specific domains and diagrams, however despite this, entities might reflect the same underlying object or concept. In cases like this, they can be linked using the AlsoKnownAs MetaRelationship.
+
+This is a symmetric relation, if X is AKA Y, then Y must also be AKA Z.
+It&apos;s probably transitive as well.</rdfs:comment>
+        <rdfs:label xml:lang="en">AlsoKnownAs</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <isRequisiteProperty rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</isRequisiteProperty>
+        <rdfs:label xml:lang="en">MemberOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:label xml:lang="en">Contains</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ClassToClassRelationship -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ClassToClassRelationship">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Contains -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Contains">
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label xml:lang="en">Contains</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Defines -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Defines">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MetaRelationship"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Realizes"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:comment>Defines is the relationship that a higher-level model entity has with its lower-level counterpart. So the conceptual entity &quot;Person&quot; *defines* the logical entity &quot;Person&quot;, and this in turn might *define* the physical table &quot;person&quot; in a database. 
+
+The inverse of Defines is Realizes.</rdfs:comment>
+        <rdfs:label xml:lang="en">Defines</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Generalization -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Generalization">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#StructuralRelationship"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Specialization"/>
+        <rdfs:comment>A Generalization is a case where one or more entities are recouched in more general terms to reflect shared properties, behaviour or composition. Conversely, Specializations of more general entities can be defined, extending some core set of properties from a common definition or template.
+
+The inverse of Generalization is Specialization.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#MemberOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#MemberOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label xml:lang="en">MemberOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#MetaRelationship -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#MetaRelationship">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Realizes -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Realizes">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MetaRelationship"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:comment>&quot;Materializes&quot; was an alternative name for this relationship.</rdfs:comment>
+        <rdfs:comment>Realizes is the relationship that an entity has with its higher level counterparts. A physical table definition will Realize a similar entity as defined at a logical level. And the logical entity might be a Realizeation of a more abstract conceptual entity. 
+
+Realizes is the inverse of Defines.</rdfs:comment>
+        <rdfs:label xml:lang="en">Realizes</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipFromAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipFromAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:label xml:lang="en">FromAttribute</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <isRequisiteProperty rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</isRequisiteProperty>
+        <rdfs:label xml:lang="en">FromClass</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipProperty -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/datamodel#Class"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:label xml:lang="en">ToAttribute</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipToClass -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipToClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <isRequisiteProperty rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</isRequisiteProperty>
+        <rdfs:label xml:lang="en">ToClass</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Specialization -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Specialization">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#StructuralRelationship"/>
+        <rdfs:comment>A Specialization is the relationship between an entity that&apos;s been created from a more generalized template. Often used to express inheritance.
+
+The inverse of Specialization is Generalization.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#StructuralRelationship -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#StructuralRelationship">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Cardinality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Cardinality">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>Many</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>One</rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#DataType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#DataType">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">DataType</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Description -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Description">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">Description</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#FromCardinality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#FromCardinality">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Cardinality"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>Many</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>One</rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:label xml:lang="en">FromCardinality</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#GeneratedOn -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#GeneratedOn">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ModelType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ModelType">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">ModelType</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Name">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">Name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#NullsOptional -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#NullsOptional">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Optionality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Optionality">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>Mandatory</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>Optional</rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:label xml:lang="en">Optionality</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ToCardinality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ToCardinality">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Cardinality"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>Many</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>One</rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <rdfs:label xml:lang="en">ToCardinality</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#UniqueIdentifier -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#UniqueIdentifier">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>An Identifier is indended to be a unique name that distinguishes similarly named objects across different contexts.</rdfs:comment>
+        <rdfs:label xml:lang="en">UniqueIdentifier</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#isIdentifierForClass -->
+
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#isIdentifierForClass">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>For attributes that can be used to uniquely identify members of this class, set to true.</rdfs:comment>
+        <rdfs:label xml:lang="en">isIdentifierForClass</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#AbstractClass -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#AbstractClass">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:label>Abstract</rdfs:label>
+        <skos:definition>An Abstract is a type of class used to represent a single abstracted version of classes that might be present across multiple models or domains. Its use comes about as a result from the assumption that every class is unique to its given model. Multuple model-level classes are mapped to a single Abstract class inheriting all the model-level details.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Attribute -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Attribute">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Attribute</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Class -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Class">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Class</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#CompoundAttribute -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#CompoundAttribute">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains"/>
+                <owl:someValuesFrom rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ConceptClass -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#ConceptClass">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:label>Concept</rdfs:label>
+        <skos:definition>A concept in this context is a high level class describing some concept, idea or thing that is of interest to the business. Concepts form the nodes of a conceptual data model. Each model will consist of a unique set of concepts - so if two models reference a &quot;user&quot; concept, there would exist two versions of this, one per model - enabling an independence of definition.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ConceptualDataModel -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#ConceptualDataModel">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Conceptual Data Model</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Context -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Context">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Context</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Definition -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Definition">
+        <rdfs:label>Definition</rdfs:label>
+        <skos:definition>A definition is the description of some kind of representation.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#FunctionalIdentifier -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#FunctionalIdentifier">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.tkltd.org/ontologies/datamodel#isIdentifierForClass"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#LogicalDataModel -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#LogicalDataModel">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Logical Data Model</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#LogicalEntityClass -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#LogicalEntityClass">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:label>LogicalEntity</rdfs:label>
+        <skos:definition>A logical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#MasterDataModel -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#MasterDataModel">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Master Data Model</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Model -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Model">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ModelDomain -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#ModelDomain">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model Domain</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#PhysicalDataModel -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#PhysicalDataModel">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physical Data Model</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#PhysicalEntityClass -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#PhysicalEntityClass">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:label>PhysicalEntity</rdfs:label>
+        <skos:definition>A physical entity describes some business concept, defining a series of attributes commonly associated with it. Entities form the nodes of logical and physical data models.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Relationship -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Relationship">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relationship</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

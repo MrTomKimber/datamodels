@@ -1,5 +1,5 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX disco: <http://www.semanticweb.org/tomk/ontologies/2022/11/discourse#> 
+PREFIX disco: <http://www.tkltd.org/ontologies/discourse#> 
 PREFIX dcterms: <http://purl.org/dc/terms/> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 

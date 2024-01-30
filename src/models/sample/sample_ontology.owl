@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#"
-     xml:base="http://www.semanticweb.org/tomk/ontologies/2023/6/sample"
+<rdf:RDF xmlns="http://www.tkltd.org/ontologies/sample#"
+     xml:base="http://www.tkltd.org/ontologies/sample"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample"/>
+    <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/sample"/>
     
 
 
@@ -21,9 +21,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someProperty -->
+    <!-- http://www.tkltd.org/ontologies/sample#someProperty -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someProperty">
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/sample#someProperty">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </owl:ObjectProperty>
     
@@ -40,9 +40,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someDataProperty -->
+    <!-- http://www.tkltd.org/ontologies/sample#someDataProperty -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someDataProperty">
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/sample#someDataProperty">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     </owl:DatatypeProperty>
     
@@ -59,33 +59,33 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA -->
+    <!-- http://www.tkltd.org/ontologies/sample#SubClassA -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/sample#SubClassA">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/sample#someClass"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB -->
+    <!-- http://www.tkltd.org/ontologies/sample#SubClassB -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/sample#SubClassB">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/sample#someClass"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC -->
+    <!-- http://www.tkltd.org/ontologies/sample#SubClassC -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/sample#SubClassC">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/sample#someClass"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass -->
+    <!-- http://www.tkltd.org/ontologies/sample#someClass -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#someClass"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/sample#someClass"/>
     
 
 
@@ -100,9 +100,9 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassA"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassB"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2023/6/sample#SubClassC"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/sample#SubClassA"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/sample#SubClassB"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/sample#SubClassC"/>
         </owl:members>
     </rdf:Description>
 </rdf:RDF>

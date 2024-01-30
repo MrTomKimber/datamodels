@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#"
-     xml:base="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization"
-     xmlns:dm="http://www.semanticweb.org/tomk/ontologies/2022/9/datamodel#"
+<rdf:RDF xmlns="http://www.tkltd.org/ontologies/serialization#"
+     xml:base="http://www.tkltd.org/ontologies/serialization"
+     xmlns:dm="http://www.tkltd.org/ontologies/datamodel#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:seri="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#"
+     xmlns:seri="http://www.tkltd.org/ontologies/serialization#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization"/>
+    <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/serialization"/>
     
 
 
@@ -24,10 +24,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingMetaTarget -->
 
-    <owl:AnnotationProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget">
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta"/>
+    <owl:AnnotationProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingMetaTarget">
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/serialization#Meta"/>
     </owl:AnnotationProperty>
     
 
@@ -43,51 +43,51 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsMapping -->
+    <!-- http://www.tkltd.org/ontologies/serialization#ContainsMapping -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsMapping">
-        <owl:inverseOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMemberOf"/>
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/serialization#ContainsMapping">
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingMemberOf"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsTranslationMapping -->
+    <!-- http://www.tkltd.org/ontologies/serialization#ContainsTranslationMapping -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsTranslationMapping">
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/serialization#ContainsTranslationMapping">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsTranslationMappingKVPair -->
+    <!-- http://www.tkltd.org/ontologies/serialization#ContainsTranslationMappingKVPair -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#ContainsTranslationMappingKVPair">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMapping"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair"/>
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/serialization#ContainsTranslationMappingKVPair">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/serialization#TranslationMapping"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingKVPair"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#IsComponentOfSerialization -->
+    <!-- http://www.tkltd.org/ontologies/serialization#IsComponentOfSerialization -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#IsComponentOfSerialization">
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/serialization#IsComponentOfSerialization">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/serialization#Serialization"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMemberOf -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingMemberOf -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMemberOf"/>
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingMemberOf"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingMetaTarget -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget">
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingMetaTarget">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping"/>
     </owl:ObjectProperty>
     
 
@@ -103,74 +103,74 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#GeneratedOn -->
+    <!-- http://www.tkltd.org/ontologies/serialization#GeneratedOn -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#GeneratedOn"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#GeneratedOn"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Key -->
+    <!-- http://www.tkltd.org/ontologies/serialization#Key -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Key">
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#Key">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingDomain -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingDomain -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingDomain"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingDomain"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingLabel -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingLabel -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingLabel"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingLabel"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingRange -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingRange -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingRange"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingRange"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingSubType -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingSubType -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingSubType"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#MappingSubType"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationLabel -->
+    <!-- http://www.tkltd.org/ontologies/serialization#SerializationLabel -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationLabel"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#SerializationLabel"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationParentLabel -->
+    <!-- http://www.tkltd.org/ontologies/serialization#SerializationParentLabel -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationParentLabel"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#SerializationParentLabel"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMappingName -->
+    <!-- http://www.tkltd.org/ontologies/serialization#TranslationMappingName -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMappingName">
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#TranslationMappingName">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#UniqueIdentifier -->
+    <!-- http://www.tkltd.org/ontologies/serialization#UniqueIdentifier -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#UniqueIdentifier"/>
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#UniqueIdentifier"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Value -->
+    <!-- http://www.tkltd.org/ontologies/serialization#Value -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Value">
+    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/serialization#Value">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     </owl:DatatypeProperty>
     
@@ -187,185 +187,185 @@
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#BatchDefinition -->
+    <!-- http://www.tkltd.org/ontologies/serialization#BatchDefinition -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#BatchDefinition">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#BatchDefinition">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationSpecs"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#BatchNode -->
+    <!-- http://www.tkltd.org/ontologies/serialization#BatchNode -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#BatchNode">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataLoad"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#BatchNode">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#DataLoad"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataLoad -->
+    <!-- http://www.tkltd.org/ontologies/serialization#DataLoad -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataLoad">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationMetaData"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#DataLoad">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationMetaData"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataPropertyMapping -->
+    <!-- http://www.tkltd.org/ontologies/serialization#DataPropertyMapping -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataPropertyMapping">
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#DataPropertyMapping">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#Mapping"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
+                        <owl:onProperty rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingMetaTarget"/>
+                        <owl:someValuesFrom rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaDataProperty"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#EntityMapping -->
+    <!-- http://www.tkltd.org/ontologies/serialization#EntityMapping -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#EntityMapping">
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#EntityMapping">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#Mapping"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
+                        <owl:onProperty rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingMetaTarget"/>
+                        <owl:someValuesFrom rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaClass"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#JobNode -->
+    <!-- http://www.tkltd.org/ontologies/serialization#JobNode -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#JobNode">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataLoad"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#JobNode">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#DataLoad"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping -->
+    <!-- http://www.tkltd.org/ontologies/serialization#Mapping -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#Mapping">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationSpecs"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MappingKVPair -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingKVPair">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#MappingKVPair">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationSpecs"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta -->
+    <!-- http://www.tkltd.org/ontologies/serialization#Meta -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationMetaData"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#Meta">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationMetaData"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MetaClass -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaClass">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#Meta"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MetaDataProperty -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaDataProperty">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#Meta"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MetaProperty -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaProperty">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#Meta"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaStaticProperty -->
+    <!-- http://www.tkltd.org/ontologies/serialization#MetaStaticProperty -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaStaticProperty">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#MetaStaticProperty">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#Meta"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#PropertyMapping -->
+    <!-- http://www.tkltd.org/ontologies/serialization#PropertyMapping -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#PropertyMapping">
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#PropertyMapping">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#Mapping"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MappingMetaTarget"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
+                        <owl:onProperty rdf:resource="http://www.tkltd.org/ontologies/serialization#MappingMetaTarget"/>
+                        <owl:someValuesFrom rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#RowNode -->
+    <!-- http://www.tkltd.org/ontologies/serialization#RowNode -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#RowNode">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataLoad"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#RowNode">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#DataLoad"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization -->
+    <!-- http://www.tkltd.org/ontologies/serialization#Serialization -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#Serialization">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationSpecs"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationMetaData -->
+    <!-- http://www.tkltd.org/ontologies/serialization#SerializationMetaData -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationMetaData"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#SerializationMetaData"/>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs -->
+    <!-- http://www.tkltd.org/ontologies/serialization#SerializationSpecs -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationMetaData"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#SerializationSpecs">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationMetaData"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMapping -->
+    <!-- http://www.tkltd.org/ontologies/serialization#TranslationMapping -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#TranslationMapping">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs"/>
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/serialization#TranslationMapping">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/serialization#SerializationSpecs"/>
     </owl:Class>
     
 
@@ -381,34 +381,34 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#BatchDefinition"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Mapping"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Serialization"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#BatchDefinition"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#Mapping"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#Serialization"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataLoad"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#Meta"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#SerializationSpecs"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#DataLoad"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#Meta"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#SerializationSpecs"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#DataPropertyMapping"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#EntityMapping"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#PropertyMapping"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#DataPropertyMapping"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#EntityMapping"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#PropertyMapping"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaStaticProperty"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#MetaClass"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#MetaDataProperty"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#MetaProperty"/>
+            <rdf:Description rdf:about="http://www.tkltd.org/ontologies/serialization#MetaStaticProperty"/>
         </owl:members>
     </rdf:Description>
 </rdf:RDF>
