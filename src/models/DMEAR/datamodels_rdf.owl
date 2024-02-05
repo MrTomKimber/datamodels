@@ -10,7 +10,12 @@
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:datamodel="http://www.tkltd.org/ontologies/datamodel#">
     <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/datamodel">
-        <rdfs:comment>This ontology contains markup for data models.</rdfs:comment>
+        <rdfs:comment xml:lang="en">This ontology describes data models spanning Conceptual, Logical and Physical subtypes and aims to capture Entites, Attributes, Relationships in a framework that supports management and control workflows and operations.
+
+The ontology defines Domains which contain Models. Within a Model are defined Entities(Classes) and each Entity can have a number of Attributes defined within it. 
+
+Relationships are defined as directional links between Entities (i.e. with a `from` and `to` orientation and optionally define linking Attributes, and Cardinalities at the end of each link.</rdfs:comment>
+        <rdfs:label xml:lang="en">Data Modelling Ontology</rdfs:label>
     </owl:Ontology>
     
 
@@ -194,7 +199,7 @@ Realizes is the inverse of Defines.</rdfs:comment>
     <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipFromAttribute -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipFromAttribute">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
         <rdfs:label xml:lang="en">FromAttribute</rdfs:label>
@@ -205,7 +210,7 @@ Realizes is the inverse of Defines.</rdfs:comment>
     <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
@@ -215,26 +220,10 @@ Realizes is the inverse of Defines.</rdfs:comment>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipProperty -->
-
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty">
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
-        <rdfs:range>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
-                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/datamodel#Class"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
         <rdfs:label xml:lang="en">ToAttribute</rdfs:label>
@@ -245,7 +234,7 @@ Realizes is the inverse of Defines.</rdfs:comment>
     <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipToClass -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipToClass">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
@@ -334,24 +323,6 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#FromCardinality">
         <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Cardinality"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
-        <rdfs:range>
-            <rdfs:Datatype>
-                <owl:oneOf>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                        <rdf:first>Many</rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                <rdf:first>One</rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </owl:oneOf>
-            </rdfs:Datatype>
-        </rdfs:range>
         <rdfs:label xml:lang="en">FromCardinality</rdfs:label>
     </owl:DatatypeProperty>
     
@@ -426,24 +397,6 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ToCardinality">
         <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Cardinality"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
-        <rdfs:range>
-            <rdfs:Datatype>
-                <owl:oneOf>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                        <rdf:first>Many</rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                <rdf:first>One</rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </owl:oneOf>
-            </rdfs:Datatype>
-        </rdfs:range>
         <rdfs:label xml:lang="en">ToCardinality</rdfs:label>
     </owl:DatatypeProperty>
     

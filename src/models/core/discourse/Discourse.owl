@@ -6,7 +6,12 @@
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/discourse"/>
+    <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/discourse">
+        <rdfs:comment xml:lang="en">This ontology describes a framework in which an Interlocutor can assert statements defined as Discourses. A Discourse describes some number of Declarations each of which make a Posit of some &lt;subject predicate object&gt; unit of information.
+
+Discourses can point to sub-Discourses, and as such a single discourse can represent a collection of multiple other Discourses.</rdfs:comment>
+        <rdfs:label xml:lang="en">Discourse Ontology</rdfs:label>
+    </owl:Ontology>
     
 
 

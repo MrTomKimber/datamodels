@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.tkltd.org/ontologies/enterprise#"
+     xml:base="http://www.tkltd.org/ontologies/enterprise"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/enterprise">
+        <rdfs:comment xml:lang="en">This ontology aims to describe the primary components of interest within an enterprise.</rdfs:comment>
+        <rdfs:label xml:lang="en">Enterprise Ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#MappingSourceModel -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#MappingSourceModel">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamapping#DataMapping"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:label>SourceModel</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#MappingTargetModel -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#MappingTargetModel">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamapping#DataMapping"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:label>TargetModel</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#FlowMapping -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#FlowMapping">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Flow"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamapping#DataMapping"/>
+        <rdfs:label>FlowMapping</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#FlowSource -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#FlowSource">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Flow"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Component"/>
+        <rdfs:label>Source</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#FlowTarget -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#FlowTarget">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Flow"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Component"/>
+        <rdfs:label>Target</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#PersonHasTenure -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#PersonHasTenure">
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#TenurePerson"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Person"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Tenure"/>
+        <rdfs:label>hasTenure</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#TenurePerson -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#TenurePerson">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Tenure"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Person"/>
+        <rdfs:label>aPerson</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#TenureRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#TenureRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Tenure"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Role"/>
+        <rdfs:label>inRole</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#TenureUnit -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#TenureUnit">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Tenure"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit"/>
+        <rdfs:label>atUnit</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#UnitContains -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#UnitContains">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#UnitMemberOf"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit"/>
+        <rdfs:label>Contains</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#UnitGovernsComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#UnitGovernsComponent">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Component"/>
+        <rdfs:label>Governs</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#UnitMemberOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#UnitMemberOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit"/>
+        <rdfs:label>MemberOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#UnitRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#UnitRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Role"/>
+        <rdfs:label>containsRole</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#hasModel -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#hasModel">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/enterprise#Component"/>
+                    <rdf:Description rdf:about="http://www.tkltd.org/ontologies/enterprise#Flow"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:label>hasModel</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamapping#DataMapping -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamapping#DataMapping">
+        <rdfs:label>Mapping</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Model -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Model"/>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Capability -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Capability">
+        <rdfs:label>Capability</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Component -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Component">
+        <rdfs:comment>A tangible enterprise component that processes information and/or performs a task or function.</rdfs:comment>
+        <rdfs:label>Component</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Flow -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Flow">
+        <rdfs:comment>A flow of information or data from one enterprise component to another.</rdfs:comment>
+        <rdfs:label>Flow</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit">
+        <rdfs:comment>A unit of organisation defined by the enterprise.</rdfs:comment>
+        <rdfs:label>OrgUnit</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Person -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Person">
+        <rdfs:comment>An identifiable individual.</rdfs:comment>
+        <rdfs:label>Person</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Role -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Role">
+        <rdfs:comment>A role defined by the enterprise.</rdfs:comment>
+        <rdfs:label>Role</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Tenure -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Tenure">
+        <rdfs:comment>A tenure associates a person with a role within an organisation for some duration of time.</rdfs:comment>
+        <rdfs:label>Tenure</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
