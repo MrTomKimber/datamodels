@@ -5,6 +5,7 @@ from rdflib import URIRef, Literal, Graph, Dataset
 import uuid
 from itertools import chain
 import os
+from math import e
 
 import owlready2 as owlr
 
@@ -35,10 +36,10 @@ from datetime import datetime
 # 8. With some standardised meta-data to be applied at runtime.
 # 9. Apply triple sets to their target locations.
 
-def get_triples(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri):
+def get_triples(dataset_object, serialization_graph_uri, serialization_reference, data_rows, master_graph_uri):
     # Load Process Starts Here
     serialization_graph = dataset_object.graph(URIRef(serialization_graph_uri))
-    S = serialization.Serialization(serialization_graph, serialization_name)
+    S = serialization.Serialization(serialization_graph, serialization_reference)
     temp_master = Graph() # Take offline copy of existing mastered triple set
     if master_graph_uri is None:
         gid = uuid.uuid4().hex
@@ -108,11 +109,59 @@ def triples_to_quads(triples, graph_uri="http://master"):
     for s,p,o, *_ in triples:
         yield (s,p,o,URIRef(graph_uri))
 
-def load_to_graph(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri, discourse_graph_uri, title, metadata_payload, fingerprint_hashes=None, override_duplicate=False):
-    start_ts = datetime.now()
-    mastered_triples, entity_mappings = get_triples(dataset_object, serialization_graph_uri, serialization_name, data_rows, master_graph_uri)
+def diffset(S1, S2):
+    # Given two input sets, s1 and s2, return the Left difference, Intersection and Right difference between them
+    L = S1.difference(S2)
+    I = S1.intersection(S2)
+    R = S2.difference(S1)
+    return L,I,R
 
-    #print(mastered_triples)
+def sigmoid(x):
+    return 1/(1+(e**(-10*(x-0.5))))
+
+def score_diffset(S1,S2):
+    l,i,r = diffset(S1, S2)
+    ll,il,rl = len(l), len(i), len(r)
+    pos=(0.1*ll)+il+(0.6*rl)
+    return sigmoid(pos/(ll+il+rl))
+    
+
+def match_serialization_from_columns(dataset_object, serialization_graph_uri, column_set):
+    threshold=0.95
+    rs = dataset_object.query("""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+    PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+    PREFIX ser: <http://www.tkltd.org/ontologies/serialization#> 
+    select ?s ?p ?o
+    WHERE { GRAPH <http://config> { ?m ?p ?o. 
+    ?m ser:IsComponentOfSerialization ?s. 
+    VALUES ?p { ser:MappingDomain ser:MappingRange ser:SerializationLabel ser:SerializationParentLabel}}}""")
+
+    ser_label_set = set([(s.toPython(), o.toPython()) for s,p,o in rs])
+    ser_label_d = dict()
+    for s,o in ser_label_set:
+        if s in ser_label_d.keys():
+            ser_label_d[s].add(o)
+        else:
+            ser_label_d[s]=set([o])
+    matching_ser_scores = dict()
+    for k,v in ser_label_d.items():
+        score=score_diffset(column_set, v)
+        if score>threshold:
+            matching_ser_scores[k]=score
+    
+    if len(matching_ser_scores)==1:
+        return set(matching_ser_scores.keys()).pop()
+    elif len(matching_ser_scores)>1:
+        return sorted([(k,v) for k,v in matching_ser_scores.items()], key=lambda x : x[1])[-1]
+    raise ValueError(f"No matching serialization found for columns {set(column_set)}")
+
+
+
+def load_to_graph(dataset_object, serialization_graph_uri, serialization_reference, data_rows, master_graph_uri, discourse_graph_uri, title, metadata_payload, fingerprint_hashes=None, override_duplicate=False):
+    start_ts = datetime.now()
+    mastered_triples, entity_mappings = get_triples(dataset_object, serialization_graph_uri, serialization_reference, data_rows, master_graph_uri)
+
     posits, declarations, discourse, disco_obj = generate_discourse(title, mastered_triples, metadata_payload)
     if fingerprint_hashes is not None:
         fingerprint = disco_obj.member_hash()
@@ -123,9 +172,7 @@ def load_to_graph(dataset_object, serialization_graph_uri, serialization_name, d
                 # and create a new discourse that points directly at that one
                 
                 alt_discourse_pointer = fingerprint_hashes[disco_obj.member_hash()]
-                #print(alt_discourse_pointer)
 
-                #print("Clearing members")
                 disco_obj.clear_members()
                 disco_obj.add_member(alt_discourse_pointer)
                 

@@ -1,18 +1,23 @@
 # Import flask module
-from flask import Flask, flash, redirect, request, render_template_string, url_for
+from flask import Flask, flash, redirect
+from flask import request, render_template_string, url_for
+from flask import send_from_directory
+
+
 from werkzeug.utils import secure_filename
 import jinja2
+
+
 import pandas as pd
-
-
 import os, sys
+import gravis as gv
+from rdflib import Graph, URIRef, Literal, BNode
+
 MODPATH=os.path.split(__file__)[0]
 sys.path.append(os.path.join(MODPATH,"..","src"))
 
 import repository
 import vis_owl
-import gravis as gv
-from rdflib import Graph, URIRef, Literal, BNode
 
 file_loader = jinja2.FileSystemLoader("templates/")
 static_folder = jinja2.FileSystemLoader("static/")
@@ -34,21 +39,17 @@ repo = repository.Repository(store_type=STORETYPE,query_url=QUERYENDPOINT, updat
 
 @app.route('/')
 def index():
-    content = """index"""
+    preamble = """<p>index</p>"""
+    control = """"""
+    canvas = """"""
     return template.render(language_code="en", 
                            title="Modelg", 
                            appname="modelg", 
                            navigation=nav_bar(),
-                           content=content)
+                           preamble=preamble, 
+                           control=control,
+                           canvas=canvas)
 
-@app.route('/view')
-def view():
-    content = """view"""
-    return template.render(language_code="en", 
-                           title="Modelg", 
-                           appname="modelg", 
-                           navigation=nav_bar(),
-                           content=content)
 
 @app.route('/query', methods=['GET', 'POST'])
 def query():
@@ -56,7 +57,6 @@ def query():
         q = request.form.get('querytext','')
         rs=repo.run_adhoc_query(q)
         rs_tab_html=pd.DataFrame(rs).to_html()
-        #rs_tab_html=f"<p>{q}</p>"
     else:
         q="""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
@@ -71,24 +71,21 @@ ORDER BY ?g ?p"""
 
         rs_tab_html=""
 
-    content = f"""<div><p><a href="https://sparql.org/query-validator.html" target="_blank" rel="noopener noreferrer">https://sparql.org/query-validator.html</a></p></div>
-    
-    <form method=post enctype=multipart/form-data method="post">
+    preamble = """<p>Enter SPARQL query and see results.</p><p><a href="https://sparql.org/query-validator.html" target="_blank" rel="noopener noreferrer">https://sparql.org/query-validator.html</a></p>"""
+    control = f"""<form method=post enctype=multipart/form-data method="post">
     <div><textarea name="querytext" id="querytext" rows="10" cols="50" onkeydown="if(event.keyCode===9){{var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}}">{q}</textarea></div>
-    <div><input type=submit value=Query></div>
-    </form>{rs_tab_html}"""
+    <div><input type=submit value=Query></div></form>"""
+    canvas=rs_tab_html
 
     return template.render(language_code="en", 
                            title="Modelg", 
                            appname="modelg", 
                            navigation=nav_bar(),
-                           content=content)
+                           preamble=preamble, 
+                           control=control,
+                           canvas=canvas)
 
-
-
-@app.route('/ontologies', methods=['GET', 'POST'])
-def ontologies():
-
+def _registered_ontologies_control_table():
     q="""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
@@ -115,10 +112,17 @@ GROUP BY ?g ?ont ?label ?comment
                                     lambda x : f"""<input type="submit" id="{x.get('g')}" name="{x.get('ont')}" value="Delete"/>""")
     rs = repository.reorder_qr_columns(rs, {"Delete":"Delete", "Graph":"g", "Ontology" : "ont", "Label" :"label", "Comment" : "comment", "Triples" : "triples", "Visualise" : "Visualise"})
     rs_tab_html=repository.qr_to_html_table(rs)
+    return rs_tab_html
+
+@app.route('/ontologies', methods=['GET', 'POST'])
+def ontologies():
+
+    rs_tab_html=_registered_ontologies_control_table()
 
     preamble = """<p>Show a list of imported ontologies currently hosted by the system and provide the option to visualise them.</p>
     <p>Additionally, provide a link where additional ontologies can be registered by uploading a file in rdf or owl format.</p>"""
-    content = preamble + f"""<form method=post enctype=multipart/form-data method="post">
+    
+    control = f"""<form method=post enctype=multipart/form-data method="post">
     <div>{rs_tab_html}</div>
     </form>
     <form action="/upload">
@@ -126,11 +130,15 @@ GROUP BY ?g ?ont ?label ?comment
     </form>
     """
 
+    canvas=""""""
+
     if request.method == 'POST':
-        content = str(request.form.to_dict())
+        
         request_d = request.form.to_dict()
+        
         if "Visualise" in request_d.values():
             o_graph_uri = set([d for d,k in request_d.items() if k=="Visualise"]).pop()
+            
             q=f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
     PREFIX owl: <http://www.w3.org/2002/07/owl#> 
@@ -144,12 +152,11 @@ GROUP BY ?g ?ont ?label ?comment
             triples=repo.ds.query( q )
             for t in triples:
                 g.add(t)
-            #gjgf=vis_owl.gen_gjgf_from_owl_model_graph(g)
-            content="<h1>Hello Freddie</h1>" + visualise(g.de_skolemize())
+            canvas=f"""<p>{o_graph_uri}</p>"""+visualise(g.de_skolemize())
+        
         elif "Delete" in request_d.values():
             d_graph_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
-            content = f"Going to delete! {d_graph_uri}"
-            #repo.truncate_graph(d_graph_uri)
+            repo.truncate_graph(d_graph_uri)
             q=f"""WITH <http://ontologies>
             DELETE {{ ?s ?p ?o }}
             WHERE {{ ?s ?p ?o.
@@ -157,26 +164,27 @@ GROUP BY ?g ?ont ?label ?comment
             }}"""
             #rs=repo.ds.query(q)
             rs=repo.ds.update(q)
-            rs_tab_html=f"deleted {d_graph_uri}"
-            content=f"""<div>{rs_tab_html}</div>"""
+
+            rs_tab_html=_registered_ontologies_control_table()
+
+            control = f"""<form method=post enctype=multipart/form-data method="post">
+            <div>{rs_tab_html}</div>
+            </form>
+            <form action="/upload">
+            <div><input type=submit value=Upload></div>
+            </form>
+            """
+
+            canvas=""""""
 
     return template.render(language_code="en", 
                            title="Modelg", 
                            appname="modelg", 
                            navigation=nav_bar(),
-                           content=content)
+                           preamble=preamble, 
+                           control=control,
+                           canvas=canvas)
    
-
-
-@app.route('/admin')
-def admin():
-    content = """admin"""
-    return template.render(language_code="en", 
-                           title="Modelg", 
-                           appname="modelg", 
-                           navigation=nav_bar(),
-                           content=content)
-
 def visualise(g):
     content = """visualise"""
 
@@ -266,9 +274,6 @@ def upload_file():
     </form>
     '''
 
-from flask import send_from_directory
-
-
 
 
 def owl_file_to_graph(owlfile):
@@ -291,11 +296,8 @@ def nav_bar():
     <thead>
         <tr>
             <th><a href="{{url_for('index')}}">Home</a></th>
-            <th><a href="{{url_for('view')}}">View</a></th>
-            <th><a href="{{url_for('admin')}}">Admin</a></th>
             <th><a href="{{url_for('query')}}">Query</a></th>
             <th><a href="{{url_for('ontologies')}}">Ontologies</a></th>
-            <th><a href="{{url_for('upload_file')}}">Visualise</a></th>
             <th><a href="{{url_for('about')}}">About</a></th>
     </thead>
 </table>
@@ -304,7 +306,7 @@ def nav_bar():
 
 @app.route('/about')
 def about():
-    content = """
+    preamble = """
     <p><i>OWL models</i> are defined to express domain schemas. Once defined, 
     data in the domains of these models can be uploaded through a convenient flat format 
     which is mapped to the model via a <i>Serialization</i>. A <i>Serialization</i> 
@@ -334,11 +336,15 @@ def about():
     <p><i>Modelg</i> offers a number of visualisations. Some of these are generalised 
     views over RDF, while others are tailored to and coupled with specific model-types.</p>
     """
+    control=""
+    canvas=""
     return template.render(language_code="en", 
                            title="Modelg", 
                            appname="modelg", 
                            navigation=nav_bar(),
-                           content=content)
+                           preamble=preamble, 
+                           control=control,
+                           canvas=canvas)
 
 
 def test_content():

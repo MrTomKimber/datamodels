@@ -260,18 +260,19 @@ class Mapping(object):
 
 class Serialization(object):
 
-    def __init__(self, s_graph, s_name):
+    def __init__(self, s_graph, s_reference):
         self.ontology = serial
         self.graph = s_graph
 
         self.defs = ontology_definitions()
 
-        serial_dict = self.return_serialization_labels()
-        if s_name in serial_dict:
-            self.serialization = serial_dict.get(s_name)
+        serial_dict = {**self.return_serialization_labels(), **self.return_serialization_references()}
+
+        if s_reference in serial_dict:
+            self.serialization = serial_dict.get(s_reference)
         else:
             #print(serial_dict)
-            #print(s_graph, s_name)
+            #print(s_graph, s_reference)
             assert False # Serialization name should match up
 
         self.mappings = self.get_mappings()
@@ -287,7 +288,7 @@ class Serialization(object):
         #print("****************************************")
         #print(self.graph)
         #print("This is the Serialization __init__ method")
-        #print(s_graph, s_name)
+        #print(s_graph, s_reference)
         #print(type(s_graph))
         #print(self.meta_classes, self.meta_properties, self.meta_data_properties, self.meta_static_properties)
         #print("****************************************")
@@ -318,6 +319,15 @@ class Serialization(object):
         serialization_instances = [a for a,b,c in self.graph.triples((None,RDF.type,self.defs["Serialization_uri"]))]
         serial_instance_dict_by_label = { l.value : s.toPython() for i in serialization_instances for s,p,l in self.graph.triples((i, RDFS.label, None))}
         return serial_instance_dict_by_label
+    
+    def return_serialization_references(self):
+        """Return a dictionary of Serialization objects, keyed by label"""
+        # Makes use of serial.Serialization
+        serialization_instances = [a for a,b,c in self.graph.triples((None,RDF.type,self.defs["Serialization_uri"]))]
+        serial_instance_dict_by_uri = { s.toPython() : s.toPython() for i in serialization_instances for s,p,l in self.graph.triples((i, RDFS.label, None))}
+        return serial_instance_dict_by_uri
+    
+    
 
     def get_translation_mappings(self):
         self.translation_mappings = {}
