@@ -88,7 +88,11 @@ class Repository(object):
         self.discourse_hashes=self._get_discourse_hashes()
     
     def register_serialization(self, serialization_path):
-        self.serialization_graph.parse(serialization_path)
+        g=Graph()
+        g.parse(serialization_path)
+        for triple in g.triples((None, None, None)):
+            self.serialization_graph.add(triple)
+        #self.serialization_graph.parse(serialization_path)
 
     def load_serialization_to_discourse(self, serialization_name, title, metadata_payload, datarows):
         #1) Test Serialization Exists

@@ -1,0 +1,27 @@
+{ "self" : "PARAMETER(@selfuri)",
+    "contents" : {  "label" : "SPARQL(SELECT ?label WHERE {@selfuri <http://www.w3.org/2000/01/rdf-schema#label> ?label})", 
+                    "type" : "SPARQL(SELECT ?type WHERE {@selfuri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?type})",
+                    "description" : "SPARQL(SELECT ?description WHERE {@selfuri <http://www.tkltd.org/ontologies/datamodel#Description> ?description})",
+                    "@attributeuri" : "SPARQL(SELECT ?attributeuri WHERE {@selfuri <http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute> ?attributeuri})",
+                    "attributes" : { 
+                        "self" : "PARAMETER(@attributeuri)",
+                        "contents" : {
+                            "identifier" : "SPARQL(SELECT ?identifier WHERE {@attributeuri <http://www.tkltd.org/ontologies/datamodel#UniqueIdentifier> ?identifier})",
+                            "label" : "SPARQL(SELECT ?label WHERE {@attributeuri <http://www.w3.org/2000/01/rdf-schema#label> ?label})", 
+                            "description" : "SPARQL(SELECT ?description WHERE {@attributeuri <http://www.tkltd.org/ontologies/datamodel#Description> ?description})",
+                            "datatype" : "SPARQL(SELECT ?datatype WHERE {@attributeuri <http://www.tkltd.org/ontologies/datamodel#DataType> ?datatype})",
+                            "nulls" : "SPARQL(SELECT ?nulls WHERE {@attributeuri <http://www.tkltd.org/ontologies/datamodel#NullsOptional> ?nulls})",
+                            "optionality" : "SPARQL(SELECT ?optionality WHERE {@attributeuri <http://www.tkltd.org/ontologies/datamodel#Optionality> ?optionality})",
+                            "pk" : "SPARQL(SELECT ?pk WHERE {@attributeuri <http://www.tkltd.org/ontologies/datamodel#isIdentifierForClass> ?pk})",
+
+                            
+
+
+
+                        }
+                    }
+
+}
+    
+
+}

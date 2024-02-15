@@ -1,10 +1,10 @@
-Sequence,ModelDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
-1,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_id,Id field of the product by which it is coded,integer,,,No,Yes,,,,,,,
-2,Inventory,Simple ERD Model - Inventory,Physical,Product,Individual products and their descriptions,p_name,Name of the product.,string,,,No,No,,,,,,,
-3,Inventory,Simple ERD Model - Inventory,Physical,Location,Facility/Building operated by the organisation,loc_id,Id field of the location.,integer,,,No,Yes,,,,,,,
-4,Inventory,Simple ERD Model - Inventory,Physical,Location,Facility/Building operated by the organisation,loc_name,Name by which the location is known.,string,,,No,No,,,,,,,
-5,Inventory,Simple ERD Model - Inventory,Physical,Inventory,Inventory of products located at a location,loc_id,Identity of the location.,integer,,,No,Yes,,,,,,,
-6,Inventory,Simple ERD Model - Inventory,Physical,Inventory,Inventory of products located at a location,p_id,Identity of the product.,integer,,,No,Yes,,,,,,,
-7,Inventory,Simple ERD Model - Inventory,Physical,Inventory,Inventory of products located at a location,p_loc_count,Count of the product at this location.,integer,,,No,No,,,,,,,
-8,Inventory,Simple ERD Model - Inventory,,,,,,,,,,,Inventory --> Product,Inventory,p_id,Many,Product,p_id,Many
-9,Inventory,Simple ERD Model - Inventory,,,,,,,,,,,Inventory --> Location,Inventory,loc_id,Many,Location,loc_id,Many
+Sequence,Domain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
+1,Inventory,Inventory,Physical,Product,Individual products and their descriptions,p_id,Id field of the product by which it is coded,integer,,,No,Yes,,,,,,,
+2,Inventory,Inventory,Physical,Product,Individual products and their descriptions,p_name,Name of the product.,string,,,No,No,,,,,,,
+3,Inventory,Inventory,Physical,Location,Facility/Building operated by the organisation,loc_id,Id field of the location.,integer,,,No,Yes,,,,,,,
+4,Inventory,Inventory,Physical,Location,Facility/Building operated by the organisation,loc_name,Name by which the location is known.,string,,,No,No,,,,,,,
+5,Inventory,Inventory,Physical,Inventory,Inventory of products located at a location,loc_id,Identity of the location.,integer,,,No,Yes,,,,,,,
+6,Inventory,Inventory,Physical,Inventory,Inventory of products located at a location,p_id,Identity of the product.,integer,,,No,Yes,,,,,,,
+7,Inventory,Inventory,Physical,Inventory,Inventory of products located at a location,p_loc_count,Count of the product at this location.,integer,,,No,No,,,,,,,
+8,Inventory,Inventory,,,,,,,,,,,Inventory --> Product,Inventory,p_id,Many,Product,p_id,Many
+9,Inventory,Inventory,,,,,,,,,,,Inventory --> Location,Inventory,loc_id,Many,Location,loc_id,Many
