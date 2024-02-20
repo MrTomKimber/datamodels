@@ -3,9 +3,10 @@ PREFIX disco: <http://www.tkltd.org/ontologies/discourse#>
 PREFIX dcterms: <http://purl.org/dc/terms/> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 
-select ?g ?discourse ?assertion ?refutation ?posit ?s ?p ?o
+select ?discourse ?assertion ?refutation ?posit ?s ?p ?o
+FROM <http://discourse> 
 WHERE {
-  GRAPH ?g
+
   {
       ?discourse a disco:Discourse.
       ?discourse disco:DiscourseContains+ ?declaration .

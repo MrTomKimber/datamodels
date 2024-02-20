@@ -72,6 +72,24 @@ def resolve_uri_label(label, resolvers=None):
             return label.replace(v,k+":")
     return label
 
+def get_literals_to_table(graph, entity):
+    lit_kvs = [(t[1][t[1].find("#")+1:], t[2].toPython()) for t in graph.triples((entity, None, None)) if isinstance(t[2], Literal)]
+    table_html_template="""
+<table width="95%"><thead><tr><th width="20%">Property</th><th width="80%">Value</th></tr></thead>
+<tbody>
+{rows}
+</tbody>
+</table>
+    """
+    
+    rows=[]
+    row_html_template="""<tr><th>{k}</th><td>{v}</td></tr>"""
+    for k,v in lit_kvs:
+        
+        rows.append(row_html_template.format(k=k,v=v))
+    rows = "".join(rows)
+    return table_html_template.format(rows=rows)
+
 def process_graph(extended_g):
 
     resolvers = { "dcterms" : "http://purl.org/dc/terms/", 
@@ -102,6 +120,8 @@ def process_graph(extended_g):
     
     type_styles=dict()
     for t in type_set:
+        #skip a style to spread difference
+        next(node_styles_g)
         type_styles[t]=next(node_styles_g)
 
     property_styles=dict()
@@ -115,7 +135,8 @@ def process_graph(extended_g):
     for n in entities:
         label=entity_labels.get(n, n.toPython())
         t=entity_types.get(n, None)
-        nx_g.add_node(n, label=label, **type_styles.get(t, {"color" : "grey", "shape" : "circle"}))
+        metadata = """<div align="left">""" + get_literals_to_table(extended_g, n)+ """</div>"""
+        nx_g.add_node(n, label=label, **type_styles.get(t, {"color" : "grey", "shape" : "circle"}), click=metadata)
     
     for s,p,o in extended_g.triples((None, None, None)):
         if s in entities and o in entities:

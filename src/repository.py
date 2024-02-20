@@ -89,10 +89,17 @@ class Repository(object):
     
     def register_serialization(self, serialization_path):
         g=Graph()
-        g.parse(serialization_path)
-        for triple in g.triples((None, None, None)):
-            self.serialization_graph.add(triple)
+        print(serialization_path)
+        g.parse(serialization_path,format='xml')
+        #for triple in g.triples((None, None, None)):
+        #    self.serialization_graph.add(triple)
+        # Try faster load using addN quads
+        quads = []
+        for q in Repository.triples_to_quads(g.triples((None, None, None)), self.registered_serializations_uri ):
+            quads.append(q)
+        self.load_quads(quads)
         #self.serialization_graph.parse(serialization_path)
+        return len(g)
 
     def load_serialization_to_discourse(self, serialization_name, title, metadata_payload, datarows):
         #1) Test Serialization Exists
@@ -102,8 +109,9 @@ class Repository(object):
         #5) Load data
         hashes = [h[0] for h in self.discourse_hashes]
 
-        loader.load_to_graph(self.ds, self.registered_serializations_uri, serialization_name, datarows, self.master_graph_uri, self.discourse_graph_uri, title , metadata_payload, fingerprint_hashes=hashes, override_duplicate=False)
+        result = loader.load_to_graph(self.ds, self.registered_serializations_uri, serialization_name, datarows, self.master_graph_uri, self.discourse_graph_uri, title , metadata_payload, fingerprint_hashes=hashes, override_duplicate=False)
         self.update_discourse_hashes()
+        return result
 
     @staticmethod    
     def _un_rdflib(value):

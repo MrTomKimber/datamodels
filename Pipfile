@@ -19,7 +19,9 @@ networkx = "*"
 gravis = "*"
 simpy = "*"
 flask = "*"
+flask-login = "*"
 owlready2 = "*"
+django = "*"
 
 [dev-packages]
 

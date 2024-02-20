@@ -1,4 +1,4 @@
-Sequence,lDomain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
+Sequence,Domain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
 1,Inventory,Inventory,Physical,Product,Individual products and their descriptions,p_id,Id field of the product by which it is coded,integer,,,No,Yes,,,,,,,
 2,Inventory,Inventory,Physical,Product,Individual products and their descriptions,p_name,Name of the product.,string,,,No,No,,,,,,,
 3,Inventory,Inventory,Physical,Location,Facility/Building operated by the organisation,loc_id,Id field of the location.,integer,,,No,Yes,,,,,,,
