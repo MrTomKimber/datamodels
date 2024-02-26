@@ -8,6 +8,7 @@ from rdflib.namespace import RDF, RDFS
 from datetime import datetime, timezone
 import uuid
 import os
+import re
 from itertools import chain
 
 import owlready2 as owlr
@@ -41,6 +42,17 @@ def get_lineage(d, l, acc=None):
         acc = get_lineage(d, q, acc)
     return acc
 
+
+def resolve_label(label, row):
+    if not str(label).startswith("#"):
+        return row.get(label)
+    elif str(label).startswith("#LINK"):
+        # Perform LINK function to join input labels
+        payload_regex=re.compile("(?:#LINK)\((.+)\)")
+        payload_strings=payload_regex.findall(label)
+        if len(payload_strings)==1:
+            labels=[s.strip() for s in payload_strings[0].split(",")]
+            return ".".join([str(row.get(l,"_")) for l in labels])
 
 
 # Assume the convention that data is passed by dictionary
@@ -152,12 +164,12 @@ class Mapping(object):
         elif self.defs["MetaStaticProperty_uri"] in class_set:
             self.mapping_subtype = "staticproperty"
         else:
-            #print( "meta_target", mapping_meta_target )
-            #print ("class_set", class_set)
-            #print ( "mc_uri", self.defs["MetaClass_uri"])
-            #print(self.defs["MetaClass_uri"] in class_set)
-            #print(type(self.defs["MetaClass_uri"]), [type(n) for n in class_set])
-            #print( "uri", s_uri )
+            print( "meta_target", mapping_meta_target )
+            print ("class_set", class_set)
+            print ( "mc_uri", self.defs["MetaClass_uri"])
+            print(self.defs["MetaClass_uri"] in class_set)
+            print(type(self.defs["MetaClass_uri"]), [type(n) for n in class_set])
+            print( "uri", s_uri )
             self.mapping_subtype = "unexpected_thing"
             #print()
             assert False
@@ -195,18 +207,27 @@ class Mapping(object):
     def _apply_mapping(self, row_dict, row_entity_context, entity_mappings=None):
 
         if self.mapping_subtype=="class" and hasattr(self, "SerializationLabel"):
-            label = row_dict.get(self.SerializationLabel)
-            lineage = get_lineage(self.serialization.lineage_tree, self.SerializationLabel)
-            unique_label = ".".join([row_dict.get(l) if row_dict.get(l) is not None else "_" for l in lineage][::-1])
-
-            return Entity(self.mapping_meta_target, label, unique_label, entity_mappings)
+            orig_label = row_dict.get(self.SerializationLabel)
+            label = resolve_label(self.SerializationLabel,row_dict)
+            if orig_label==label:
+                lineage = get_lineage(self.serialization.lineage_tree, self.SerializationLabel)
+                unique_label = ".".join([resolve_label(l,row_dict) if resolve_label(l,row_dict) is not None else "_" for l in lineage][::-1])
+            else:
+                unique_label=None
+            return_entity=Entity(self.mapping_meta_target, label, unique_label, entity_mappings)
+            print(orig_label, label, return_entity.name, return_entity.unique_label)
+            return return_entity
 
         else:
             subj = row_entity_context.get(self.MappingDomain)
+            #mapping_domain_label = resolve_label(self.MappingDomain,row_dict)
+            #subj = row_entity_context.get(mapping_domain_label)
             prop = URIRef(self.mapping_meta_target)
             if subj is not None:
                 if self.mapping_subtype=="property":
                     obj = row_entity_context.get(self.MappingRange)
+                    #obj_label = resolve_label(self.MappingRange,row_dict)
+                    #obj = row_entity_context.get(obj_label)
                     #print(self.MappingRange, "processing property", prop, obj)
                     if obj is not None:
                         subj.properties.append((subj.name, prop, URIRef(obj.uri)))
@@ -248,6 +269,9 @@ class Mapping(object):
                 return subj
             else:
                 # No matching subject -
+                print("No Subject", self.MappingDomain, row_dict.get(self.MappingDomain))
+                print(row_entity_context)
+                print()
                 return None
 
 
@@ -413,7 +437,6 @@ class Serialization(object):
 
 
 
-
     def extract_raw_triples(self, row, entity_mappings=None):
         entities={}
         if entity_mappings is None:
@@ -422,9 +445,9 @@ class Serialization(object):
             
             if hasattr(m, "SerializationLabel"):
                 
-                if row.get(m.SerializationLabel) is not None:
+                if resolve_label(m.SerializationLabel,row) is not None:
                     ent=m._apply_mapping(row, None, entity_mappings)
-                    entities[m.SerializationLabel]=ent
+                    entities[m.SerializationLabel]=ent # suspect!!!!
                     entity_mappings[ent.unique_label]=ent.uri
             
             else:
@@ -441,6 +464,7 @@ class Serialization(object):
                 pass
                 #print(m, " has no SerializationLabel!!")
 
+        print([(str(k), str(v)) for k,v in entity_mappings.items()])
         return list(chain (*[e.to_triples() for e in entities.values()])), entity_mappings
 
     # Given a graph that already exists, and a set of new triples for mastering,

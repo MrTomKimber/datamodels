@@ -1,0 +1,50 @@
+Sequence,Domain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
+1,Inventory,Inventory,Physical,Product,Individual products and their descriptions,p_id,Id field of the product by which it is coded,integer,,,No,Yes,,,,,,,
+2,Inventory,Inventory,Physical,Product,Individual products and their descriptions,p_name,Unique name of the product.,string,,,No,No,,,,,,,
+3,Inventory,Inventory,Physical,Location,Facility/Building operated by the organisation,loc_id,Id field of the location.,integer,,,No,Yes,,,,,,,
+4,Inventory,Inventory,Physical,Location,Facility/Building operated by the organisation,loc_name,Name by which the location is known.,string,,,No,No,,,,,,,
+5,Inventory,Inventory,Physical,Inventory,Inventory of products located at a location,loc_id,Identity of the location.,integer,,,No,Yes,,,,,,,
+6,Inventory,Inventory,Physical,Inventory,Inventory of products located at a location,p_id,Identity of the product.,integer,,,No,Yes,,,,,,,
+7,Inventory,Inventory,Physical,Inventory,Inventory of products located at a location,p_loc_count,Count of the product at this location.,integer,,,No,No,,,,,,,
+8,Inventory,Inventory,Physical,,,,,,,,,,isInventoryOfItem,Inventory,p_id,Many,Product,p_id,Many
+9,Inventory,Inventory,Physical,,,,,,,,,,isInventoryLocatedAt,Inventory,loc_id,Many,Location,loc_id,Many
+10,Inventory,Inventory,Physical,Product,Individual products and their descriptions,description,Description of the product.,string,,,No,No,,,,,,,
+11,Inventory,Inventory,Physical,Staff,Members of staff,staff_id,Id number of the staff member.,integer,,,No,Yes,,,,,,,
+12,Inventory,Inventory,Physical,Staff,Members of staff,forename,Forename of the staff member.,string,,,No,No,,,,,,,
+13,Inventory,Inventory,Physical,Staff,Members of staff,surname,Surname of the staff member.,string,,,No,No,,,,,,,
+14,Inventory,Inventory,Physical,Staff,Members of staff,loc_id,Location base of this member of staff.,integer,,,No,No,,,,,,,
+15,Inventory,Inventory,Physical,Staff,Members of staff,role_id,Assigned role to this member of staff,integer,,,No,No,,,,,,,
+16,Inventory,Inventory,Physical,Roles,Working Roles,role_id,Role Identifier.,integer,,,No,Yes,,,,,,,
+17,Inventory,Inventory,Physical,Roles,Working Roles,role_name,Role Name.,string,,,No,No,,,,,,,
+18,Inventory,Inventory,Physical,,,,,,,,,,worksAtLocation,Staff,loc_id,Many,Location,loc_id,One
+19,Inventory,Inventory,Physical,,,,,,,,,,isEmployedInRole,Staff,role_id,Many,Roles,role_id,One
+20,Inventory,Inventory,Physical,PriceHistory,Prices for each product over time.,p_id,Product Id.,integer,,,No,Yes,,,,,,,
+21,Inventory,Inventory,Physical,PriceHistory,Prices for each product over time.,start_date,Date the price came into effect.,datetime,,,No,Yes,,,,,,,
+22,Inventory,Inventory,Physical,PriceHistory,Prices for each product over time.,price,Cash value associated with the product.,float,,,No,No,,,,,,,
+23,Inventory,Inventory,Physical,PriceHistory,Prices for each product over time.,price_currency,Currency code of the price.,string,,,No,No,,,,,,,
+24,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,order_item_id,Unique Id for this order item,integer,,,No,Yes,,,,,,,
+25,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,qorder_id,Identifier for the parent quote/order.,integer,,,No,Yes,,,,,,,
+26,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,p_id,Product Identifier.,integer,,,No,No,,,,,,,
+27,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,price_per_unit,Base price per unit.,float,,,No,No,,,,,,,
+28,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,units,Count of product units quoted/ordered.,integer,,,No,No,,,,,,,
+29,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,discount,Proportion of discount to be applied to base price,float,,,No,No,,,,,,,
+30,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,total_price,Final total price for this line item after discounting,float,,,No,No,,,,,,,
+31,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,qorder_id,"Unique Identifier for this qoute/order. Previously, customer was denormalised(?)",integer,,,No,Yes,,,,,,,
+32,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,sales_staff_id,Who made the quote or order?,integer,,,No,No,,,,,,,
+33,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_date,Date used for calculating base prices.,datetime,,,No,No,,,,,,,
+34,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,customer_id,Individual customer identifier.,integer,,,No,No,,,,,,,
+35,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_order_status,Indicator showing if this record is an order or a quote.,string,,,No,No,,,,,,,
+36,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,payment_status,Indicator showing if the order has been paid.,boolean,,,No,No,,,,,,,
+37,Inventory,Inventory,Physical,,,,,,,,,,referencesProduct,OrderItem,p_id,One,Product,p_id,One
+38,Inventory,Inventory,Physical,,,,,,,,,,referencesLineItem,QOrder,qorder_id,One,OrderItem,qorder_id,Many
+39,Inventory,Inventory,Physical,,,,,,,,,,soldBy,QOrder,sales_staff_id,One,Staff,staff_id,Many
+40,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_id,Individual customer identifier,integer,,,No,Yes,,,,,,,
+41,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,forename,Forename of customer.,string,,,No,No,,,,,,,
+42,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,surname,Surname of customer.,string,,,No,No,,,,,,,
+43,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,address_line_1,First line of customer address.,string,,,No,No,,,,,,,
+44,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,address_line_2,Second line of customer address.,string,,,No,No,,,,,,,
+45,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,address_line_3,Third line of customer address.,string,,,No,No,,,,,,,
+46,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,postal_town,Customer address town.,string,,,No,No,,,,,,,
+47,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,postal_code,Customer address post-code.,string,,,No,No,,,,,,,
+48,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,phone_number,Customer Phone Number.,string,,,No,No,,,,,,,
+49,Inventory,Inventory,Physical,,,,,,,,,,IsOrderedBy,QOrder,customer_id,Many,Customer,customer_id,One

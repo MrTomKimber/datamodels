@@ -1,0 +1,4 @@
+Sequence,Domain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescription,DataType,Context,SubContext,Nulls,IsPK,Relationship,FromClass,FromAttribute,FromCardinality,ToClass,ToAttribute,ToCardinality
+1,Sales,Reporting,Physical,StaffSales,Table containing sales attributred to individual staff members.,Name,Member of Staff,str,,,No,No,,,,,,,
+2,Sales,Reporting,Physical,StaffSales,Table containing sales attributred to individual staff members.,Role,Role of Staff,str,,,No,No,,,,,,,
+3,Sales,Reporting,Physical,StaffSales,Table containing sales attributred to individual staff members.,Total,Total Sales,float,,,No,No,,,,,,,

@@ -194,10 +194,10 @@ def gen_meta_targets(jdata):
     X.append(c)
     meta_defs = []
     cls_uri_decodes={
-        "targetClasses" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaClass",
-        "targetProperties" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaProperty", 
-        "targetDataProperties" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaDataProperty", 
-        "targetStaticProperties" : "http://www.semanticweb.org/tomk/ontologies/2022/11/serialization#MetaStaticProperty"
+        "targetClasses" : "http://www.tkltd.org/ontologies/serialization#MetaClass",
+        "targetProperties" : "http://www.tkltd.org/ontologies/serialization#MetaProperty", 
+        "targetDataProperties" : "http://www.tkltd.org/ontologies/serialization#MetaDataProperty", 
+        "targetStaticProperties" : "http://www.tkltd.org/ontologies/serialization#MetaStaticProperty"
     }
 
     for cls in ["targetClasses","targetProperties", "targetDataProperties", "targetStaticProperties"]:

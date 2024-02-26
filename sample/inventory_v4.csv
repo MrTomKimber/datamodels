@@ -21,20 +21,20 @@ Sequence,Domain,Model,ModelType,Class,ClassDescription,Attribute,AttributeDescri
 20,Inventory,Inventory,Physical,PriceHistory,Prices for each product over time.,start_date,Date the price came into effect.,datetime,,,No,Yes,,,,,,,
 21,Inventory,Inventory,Physical,PriceHistory,Prices for each product over time.,price,Cash value associated with the product.,float,,,No,No,,,,,,,
 22,Inventory,Inventory,Physical,PriceHistory,Prices for each product over time.,price_currency,Currency code of the price.,string,,,No,No,,,,,,,
-23,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,orderitem_id,Unique Id for this order item,integer,,,No,Yes,,,,,,,
+23,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,order_item_id,Unique Id for this order item,integer,,,No,Yes,,,,,,,
 24,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,qorder_id,Identifier for the parent quote/order.,integer,,,No,Yes,,,,,,,
 25,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,p_id,Product Identifier.,integer,,,No,No,,,,,,,
 26,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,price_per_unit,Base price per unit.,float,,,No,No,,,,,,,
 27,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,units,Count of product units quoted/ordered.,integer,,,No,No,,,,,,,
 28,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,discount,Proportion of discount to be applied to base price,float,,,No,No,,,,,,,
 29,Inventory,Inventory,Physical,OrderItem,A line item that exists on a quote or order,total_price,Final total price for this line item after discounting,float,,,No,No,,,,,,,
-30,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quorder_id,"Unique Identifier for this qoute/order. Previously, customer was denormalised(?)",integer,,,No,Yes,,,,,,,
+30,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,qorder_id,"Unique Identifier for this qoute/order. Previously, customer was denormalised(?)",integer,,,No,Yes,,,,,,,
 31,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,sales_staff_id,Who made the quote or order?,integer,,,No,No,,,,,,,
 32,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_date,Date used for calculating base prices.,datetime,,,No,No,,,,,,,
 33,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,customer_id,Individual customer identifier.,integer,,,No,No,,,,,,,
 34,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,quote_order_status,Indicator showing if this record is an order or a quote.,string,,,No,No,,,,,,,
 35,Inventory,Inventory,Physical,QOrder,A normalised quote or order. FK link to Customer. ,payment_status,Indicator showing if the order has been paid.,boolean,,,No,No,,,,,,,
-36,Inventory,Inventory,Physical,,,,,,,,,,referencesProduct,OrderItem,order_item_id,One,Product,p_id,One
+36,Inventory,Inventory,Physical,,,,,,,,,,referencesProduct,OrderItem,p_id,One,Product,p_id,One
 37,Inventory,Inventory,Physical,,,,,,,,,,referencesLineItem,QOrder,qorder_id,One,OrderItem,qorder_id,Many
 38,Inventory,Inventory,Physical,,,,,,,,,,soldBy,QOrder,sales_staff_id,One,Staff,staff_id,Many
 39,Inventory,Inventory,Physical,Customer,An individual who is involved in a quote or order. Subject to GDPR regulations. ,customer_id,Individual customer identifier,integer,,,No,Yes,,,,,,,

@@ -1,0 +1,167 @@
+{  "$schema" : "../core/serialization/serialisation_schema.json",
+    "serialization_iri": "http://www.tkltd.org/serializations/DataMapping_Serialisation",
+    "serialization_label": "DataMapping Serialisation",
+    "targetOntology": "http://www.tkltd.org/ontologies/datamapping",
+    "targetClasses": ["http://www.tkltd.org/ontologies/datamapping#DataMapping",
+                      "http://www.tkltd.org/ontologies/datamapping#DataMappingDetail",
+                      "http://www.tkltd.org/ontologies/datamodel#ModelDomain",
+                      "http://www.tkltd.org/ontologies/datamodel#Model",
+                      "http://www.tkltd.org/ontologies/datamodel#Class",
+                      "http://www.tkltd.org/ontologies/datamodel#Attribute",
+                      "http://www.tkltd.org/ontologies/datamapping#Translation"
+                ],
+    "targetProperties": ["http://www.tkltd.org/ontologies/datamapping#Applies",
+                         "http://www.tkltd.org/ontologies/datamapping#MappingContainsDetail",
+                         "http://www.tkltd.org/ontologies/datamapping#MappingDetailSource",
+                         "http://www.tkltd.org/ontologies/datamapping#MappingDetailTarget",
+                         "http://www.tkltd.org/ontologies/datamapping#MappingSourceModel",
+                         "http://www.tkltd.org/ontologies/datamapping#MappingTargetModel",
+                         "http://www.tomk.org/ontologies/datamodel#Contains",
+                         "http://www.tomk.org/ontologies/datamodel#ClassContainsAttribute"
+
+                        ],
+    "targetDataProperties": [],
+    "targetStaticProperties" : [],
+    "source_headers": ["Mapping","SourceDomain","SourceModel","TargetDomain","TargetModel","SourceClass","SourceAttribute","TargetClass","TargetAttribute","Translation"],
+    "serialization_mappings": [
+        { "mapping_name": "Mapping_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamapping#DataMapping", 
+         "label": "Mapping" 
+        },  
+
+        { "mapping_name": "SourceDomain_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#ModelDomain", 
+          "label": "SourceDomain" 
+        },
+
+        { "mapping_name": "TargetDomain_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#ModelDomain", 
+          "label": "TargetDomain" 
+        },  
+
+        { "mapping_name": "SourceModel_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#Model", 
+          "label": "SourceModel", 
+          "parent_label": "SourceDomain"
+        },
+
+        { "mapping_name": "TargetModel_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#Model", 
+          "label": "TargetModel",
+          "parent_label": "TargetDomain"
+        },  
+
+        { "mapping_name": "SourceClass_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#Class", 
+          "label": "SourceClass", 
+          "parent_label": "SourceModel"
+        },
+
+        { "mapping_name": "TargetClass_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#Class", 
+          "label": "TargetClass",
+          "parent_label": "TargetModel"
+        },  
+
+        { "mapping_name": "SourceAttribute_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#Attribute", 
+          "label": "SourceAttribute", 
+          "parent_label": "SourceClass"
+        },
+
+        { "mapping_name": "TargetAttribute_Mapping", 
+        "target": "http://www.tkltd.org/ontologies/datamodel#Attribute", 
+          "label": "TargetAttribute",
+          "parent_label": "TargetClass"
+        },  
+
+        { "mapping_name": "Translation_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamapping#Translation", 
+          "label": "Translation"
+        },  
+
+        { "mapping_name": "DataMappingDetail_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamapping#DataMappingDetail", 
+          "label": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)"
+        },  
+
+        { "mapping_name": "DetailAppliesTranslation_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamapping#Applies", 
+          "domain": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)",
+          "range": "Translation"
+        },
+
+        { "mapping_name": "MappingContainsDetail_Mapping",
+          "target": "http://www.tkltd.org/ontologies/datamapping#MappingContainsDetail",
+          "domain": "Mapping",
+          "range": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)"
+        },
+
+        { "mapping_name": "MappingDetailSourceClass_Mapping",
+          "target": "http://www.tkltd.org/ontologies/datamapping#MappingDetailSource",
+          "domain": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)",
+          "range": "SourceClass"
+        },
+
+        { "mapping_name": "MappingDetailSourceAttribute_Mapping",
+          "target": "http://www.tkltd.org/ontologies/datamapping#MappingDetailSource",
+          "domain": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)",
+          "range": "SourceAttribute"
+        },
+
+        { "mapping_name": "MappingDetailTargetClass_Mapping",
+          "target": "http://www.tkltd.org/ontologies/datamapping#MappingDetailTarget",
+          "domain": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)",
+          "range": "TargetClass"
+        },
+
+        { "mapping_name": "MappingDetailTargetAttribute_Mapping",
+          "target": "http://www.tkltd.org/ontologies/datamapping#MappingDetailTarget",
+          "domain": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)",
+          "range": "TargetAttribute"
+        },
+
+        { "mapping_name": "MappingSourceModel_Mapping",
+          "target": "http://www.tkltd.org/ontologies/datamapping#MappingSourceModel",
+          "domain": "Mapping",
+          "range": "SourceModel"
+        },
+
+        { "mapping_name": "MappingTargetModel_Mapping",
+          "target": "http://www.tkltd.org/ontologies/datamapping#MappingTargetModel",
+          "domain": "Mapping",
+          "range": "TargetModel"
+        },
+
+        {"mapping_name": "SourceDomainContainsModelPropertyMapping",
+        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "domain": "SourceDomain",
+        "range": "SourceModel"},
+
+        {"mapping_name": "SourceModelContainsClassPropertyMapping",
+        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "domain": "SourceModel",
+        "range": "SourceClass"},
+
+        {"mapping_name": "SourceClassContainsAttributePropertyMapping",
+        "target": "http://www.tomk.org/ontologies/datamodel#ClassContainsAttribute",
+        "domain": "SourceClass",
+        "range": "SourceAttribute"},
+
+        {"mapping_name": "TargetDomainContainsModelPropertyMapping",
+        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "domain": "TargetDomain",
+        "range": "TargetModel"},
+
+        {"mapping_name": "TargetModelContainsClassPropertyMapping",
+        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "domain": "TargetModel",
+        "range": "TargetClass"},
+
+        {"mapping_name": "TargetClassContainsAttributePropertyMapping",
+        "target": "http://www.tomk.org/ontologies/datamodel#ClassContainsAttribute",
+        "domain": "TargetClass",
+        "range": "TargetAttribute"}
+    ],
+    "translation_mappings": {}
+}

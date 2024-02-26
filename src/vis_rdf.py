@@ -74,6 +74,10 @@ def resolve_uri_label(label, resolvers=None):
 
 def get_literals_to_table(graph, entity):
     lit_kvs = [(t[1][t[1].find("#")+1:], t[2].toPython()) for t in graph.triples((entity, None, None)) if isinstance(t[2], Literal)]
+    type_kv = [(t[1][t[1].find("#")+1:], t[2].toPython()) for t in graph.triples((entity, URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'), None)) ]
+    for tkv in type_kv:
+        lit_kvs.append(tkv)
+
     table_html_template="""
 <table width="95%"><thead><tr><th width="20%">Property</th><th width="80%">Value</th></tr></thead>
 <tbody>
@@ -89,6 +93,12 @@ def get_literals_to_table(graph, entity):
         rows.append(row_html_template.format(k=k,v=v))
     rows = "".join(rows)
     return table_html_template.format(rows=rows)
+
+def get_zeroth(maybe_empty_list):
+    if len(maybe_empty_list)==0:
+        return None
+    else:
+        return maybe_empty_list[0]
 
 def process_graph(extended_g):
 
@@ -130,7 +140,9 @@ def process_graph(extended_g):
 
     entities = get_entities_set(extended_g)
     tagged_entities = get_entity_tag_d(extended_g, entities)
-    entity_labels = {k:resolve_uri_label(v.get("label",[k])[0],resolvers) for k,v in tagged_entities.items()}
+    label_contents = {k:v.get("label",[str(k)]) for k,v in tagged_entities.items()}
+    entity_labels = {k:resolve_uri_label(v,resolvers) for k,v in label_contents.items()}
+
     entity_types = {k:v.get("type",[None])[0] for k,v in tagged_entities.items()}
     for n in entities:
         label=entity_labels.get(n, n.toPython())

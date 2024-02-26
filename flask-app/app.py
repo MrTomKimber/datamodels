@@ -324,23 +324,48 @@ def serialisations():
         
         if "Visualise" in request_d.values():
             o_graph_uri = set([d for d,k in request_d.items() if k=="Visualise"]).pop()
-            
-            q="""
+            print(o_graph_uri)
+            q=f"""
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 PREFIX ser: <http://www.tkltd.org/ontologies/serialization#> 
-select ?s (count(?o) as ?mappinggs) WHERE { GRAPH <http://config> { ?s ?p ?o. 
-?s a <http://www.tkltd.org/ontologies/serialization#Serialization>.  
-VALUES ?p { <http://www.tkltd.org/ontologies/serialization#ContainsMapping> } }
-}
-GROUP BY ?s
+select ?s ?p ?o WHERE {{
+GRAPH <http://config> 
+{{ ?s ?p ?o. 
+?s ser:IsComponentOfSerialization ?c
+FILTER (?c=<{o_graph_uri}> )
+}}
+}}
 """
             g = Graph()
             triples=repo.ds.query( q )
             for t in triples:
                 g.add(t)
-            canvas=f"""<p>{o_graph_uri}</p>"""+visualise(g.de_skolemize())
+            gjgf=vis_rdf.process_graph(g)
+            visual = gv.d3(gjgf, 
+                node_label_data_source='label',
+                show_edge_label=True,
+                edge_label_size_factor=0.7,
+                edge_label_data_source='label',
+                edge_curvature=0.25,
+                links_force_strength=0.8, 
+                links_force_distance=55, 
+                use_collision_force=True, 
+                collision_force_radius=10, 
+                collision_force_strength=1.0,
+                many_body_force_strength=-1300,
+                            many_body_force_theta=1.61, 
+                            use_many_body_force_min_distance=True,
+                            many_body_force_min_distance=0.01,
+                            use_many_body_force_max_distance=False,
+                            many_body_force_max_distance=40000,
+                            use_x_positioning_force=True,
+                            x_positioning_force_strength=0.21,
+                            use_y_positioning_force=True,
+                            y_positioning_force_strength=0.21
+                ).to_html_partial()
+            canvas=f"""<p>{o_graph_uri}</p>"""+visual
         
         elif "Delete" in request_d.values():
             serialisation_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
@@ -388,7 +413,7 @@ def discourses():
                 g.add((row['s'], row['p'], row['o']))
             gjgf=vis_rdf.process_graph(g)
 
-            print(gjgf)
+            #print(gjgf)
 
             canvas = gv.d3(gjgf, 
                 node_label_data_source='label',
