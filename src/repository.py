@@ -9,6 +9,7 @@ from models.core.discourse import discourse
 import loader
 import os
 import uuid
+from datetime import datetime
 
 
 loc_dir = os.path.dirname(os.path.realpath(__file__))
@@ -60,6 +61,23 @@ class Repository(object):
     def truncate_graph(self, graph_uri):
         self.ds.update("""CLEAR GRAPH <{g}>""".format(g=graph_uri))
         self.ds.update("""CREATE GRAPH <{g}>""".format(g=graph_uri))
+
+    def generate_user_graph(self, description=None):
+        graph_id = URIRef("http://www.tkltd.org/graphs/"+uuid.uuid4().hex)
+        g_type = URIRef("http://www.tkltd.org/ontologies/graphs#UserGraph")
+        created_on=Literal(datetime.now().strftime("%Y-%m-%dT%H:%M"))
+        if description is None:
+            description = "No description provided at setup time."
+        #g = Graph() #self.ds.graph(graph_id)
+        triples=[]
+        triples.append((graph_id, URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'), g_type))
+        triples.append((graph_id, URIRef('http://purl.org/dc/elements/1.1/created'), created_on))
+        triples.append((graph_id, URIRef('http://purl.org/dc/elements/1.1/description'), Literal(description)))
+        quads = []
+        for q in Repository.triples_to_quads(triples,graph_id.toPython()):
+            quads.append(q)
+        self.load_quads(quads)
+        #print(len(list(g.triples((None, None, None)))))
 
 
     @staticmethod

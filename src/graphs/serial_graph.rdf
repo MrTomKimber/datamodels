@@ -11,6 +11,7 @@
     >
 
     <rdf:Description rdf:about="http://config">
+        <rdf:type rdf:resource="http://www.tkltd.org/ontologies/graphs#SystemGraph"/>
         <dc:created>2023</dc:created>
         <dc:description>The config graph is used to store all serialization ontologies.</dc:description>
     </rdf:Description>

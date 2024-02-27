@@ -380,7 +380,7 @@ FILTER (?c=<{o_graph_uri}> )
 
             rs_tab_html=_registered_serialisations_control_table()
 
-            control = f"""<form method=post enctype=multipart/form-data method="post">
+            control = f"""<form enctype=multipart/form-data method="post">
             <div>{rs_tab_html}</div>
             </form>
             <form action="/upload_serialisation">
@@ -474,7 +474,32 @@ def discourses():
                         preamble=preamble, 
                         control=control,
                         canvas=canvas)
+@app.route('/graphs', methods=['GET', 'POST'])
+def graphs():
+    canvas=""""""
+    preamble=""""""
+    control="""
+<form enctype="multipart/form-data" method="post">
 
+    <input type=submit value="Go" name="Go">
+</form>
+"""
+    print(request.form.to_dict())
+    if request.method=='POST':
+    
+        request_d = request.form.to_dict()
+
+        print(request_d)
+
+        if "Go" in request_d.values(): 
+            repo.generate_user_graph()
+    return template.render(language_code="en", 
+                        title="Modelg", 
+                        appname="modelg", 
+                        navigation=nav_bar(),
+                        preamble=preamble, 
+                        control=control,
+                        canvas=canvas)
 def visualise(g):
     content = """visualise"""
 
@@ -716,6 +741,7 @@ def nav_bar():
             <th><a href="{{url_for('serialisations')}}">Serialisations</a></th>
             <th><a href="{{url_for('discourses')}}">Discourses</a></th>
             <th><a href="{{url_for('about')}}">About</a></th>
+            <th><a href="{{url_for('graphs')}}">Graphs</a></th>
     </thead>
 </table>
 """)

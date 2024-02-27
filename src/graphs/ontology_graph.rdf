@@ -11,6 +11,7 @@
     >
 
     <rdf:Description rdf:about="http://ontologies">
+        <rdf:type rdf:resource="http://www.tkltd.org/ontologies/graphs#SystemGraph"/>
         <dc:created>2024</dc:created>
         <dc:description>The ontologies graph contains details of all registered ontologies.</dc:description>
     </rdf:Description>
