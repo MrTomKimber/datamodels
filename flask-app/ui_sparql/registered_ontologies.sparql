@@ -1,0 +1,16 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+
+select ?g ?ont ?label ?comment (COUNT (?p) as ?triples)
+        
+    WHERE
+    {GRAPH ?g { ?ont a owl:Ontology. 
+                OPTIONAL { ?ont rdfs:label ?label. 
+                FILTER (langMatches(lang(?label),"en") || lang(?label)='')}
+                OPTIONAL { ?ont rdfs:comment ?comment. 
+                FILTER (langMatches(lang(?comment),"en") || lang(?label)='')} }
+    GRAPH ?ont { ?s ?p ?o. }            
+   VALUES ?g { <http://ontologies> }
+}
+GROUP BY ?g ?ont ?label ?comment 

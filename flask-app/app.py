@@ -28,6 +28,7 @@ import vis_rdf
 
 file_loader = jinja2.FileSystemLoader("templates/")
 static_folder = jinja2.FileSystemLoader("static/")
+sparql_folder = "ui_sparql/"
 env = jinja2.Environment(loader=file_loader)
 template = env.get_template('page_template.jinja2')
 
@@ -49,6 +50,11 @@ STORETYPE = 'jena'
 QUERYENDPOINT="http://fuseki:3030/modelg/query"
 UPDATEENDPOINT="http://fuseki:3030/modelg/update"
 repo = repository.Repository(store_type=STORETYPE,query_url=QUERYENDPOINT, update_url=UPDATEENDPOINT)
+
+def get_sparql(filename):
+    with open(os.path.join(sparql_folder,filename)) as sparqlf:
+        sparql_text = sparqlf.read()
+    return sparql_text
 
 class User(UserMixin):
     def __init__(self, username):
@@ -116,17 +122,8 @@ def query():
         rs=repo.run_adhoc_query(q)
         rs_tab_html=pd.DataFrame(rs).to_html()
     else:
-        q="""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 
-select ?g ?p (COUNT (?p) as ?triples)
-    WHERE
-    {GRAPH ?g { ?s ?p ?o. }
-}
-GROUP BY ?g ?p
-ORDER BY ?g ?p"""
-
+        q=get_sparql("default_query.sparql")
         rs_tab_html=""
 
     preamble = """<p>Enter SPARQL query and see results.</p><p><a href="https://sparql.org/query-validator.html" target="_blank" rel="noopener noreferrer">https://sparql.org/query-validator.html</a></p>"""
@@ -144,23 +141,8 @@ ORDER BY ?g ?p"""
                            canvas=canvas)
 
 def _registered_ontologies_control_table():
-    q="""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
 
-select ?g ?ont ?label ?comment (COUNT (?p) as ?triples)
-        
-    WHERE
-    {GRAPH ?g { ?ont a owl:Ontology. 
-                OPTIONAL { ?ont rdfs:label ?label. 
-                FILTER (langMatches(lang(?label),"en") || lang(?label)='')}
-                OPTIONAL { ?ont rdfs:comment ?comment. 
-                FILTER (langMatches(lang(?comment),"en") || lang(?label)='')} }
-    GRAPH ?ont { ?s ?p ?o. }            
-   VALUES ?g { <http://ontologies> }
-}
-GROUP BY ?g ?ont ?label ?comment 
- """
+    q=get_sparql("registered_ontologies.sparql")
     rs=repo.run_adhoc_query(q)
     rs=repository.new_column_to_qr_from_function(rs,
                                       "Visualise",
@@ -173,22 +155,7 @@ GROUP BY ?g ?ont ?label ?comment
     return rs_tab_html
 
 def _registered_serialisations_control_table():
-    q="""
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX ser: <http://www.tkltd.org/ontologies/serialization#> 
-select ?g ?serialisation (SAMPLE(?s_label) as ?label) (count(distinct ?o) as ?mappings) 
-FROM <http://config>
-WHERE {  { ?serialisation ?p ?o. 
-
-?serialisation a <http://www.tkltd.org/ontologies/serialization#Serialization>.  
-?serialisation rdfs:label ?s_label.
-VALUES ?p { <http://www.tkltd.org/ontologies/serialization#ContainsMapping> }
- } 
-}
-GROUP BY ?g ?serialisation
- """
+    q=get_sparql("registered_serialisations.sparql")
     rs=repo.run_adhoc_query(q)
     rs=repository.new_column_to_qr_from_function(rs,
                                       "Visualise",
@@ -201,21 +168,8 @@ GROUP BY ?g ?serialisation
     return rs_tab_html
 
 def _uploaded_discourses_control_table():
-    q="""
-select ?g ?discourse (SAMPLE(?d_label) as ?label) (COUNT(?o) as ?declarations) (COUNT(?child_discourse) as ?sub_discourses) 
-FROM <http://discourse>
-WHERE  {      
-{ 
-?discourse <http://www.tkltd.org/ontologies/discourse#DiscourseContains> ?o.     
-?discourse a <http://www.tkltd.org/ontologies/discourse#Discourse>.     
-OPTIONAL { ?discourse rdfs:label ?d_label. }  
-OPTIONAL { ?child_discourse a <http://www.tkltd.org/ontologies/discourse#Discourse>.  
-		   ?discourse ?p ?child_discourse }      
-?o a <http://www.tkltd.org/ontologies/discourse#Declaration>.       
-}  
-} 
-GROUP BY ?g ?discourse
- """
+
+    q=get_sparql("uploaded_discourses.sparql")
     rs=repo.run_adhoc_query(q)
     rs=repository.new_column_to_qr_from_function(rs,
                                       "Visualise",
@@ -251,16 +205,7 @@ def ontologies():
         
         if "Visualise" in request_d.values():
             o_graph_uri = set([d for d,k in request_d.items() if k=="Visualise"]).pop()
-            
-            q=f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-    PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-
-    select ?s ?p ?o
-        WHERE
-        {{GRAPH ?g {{ ?s ?p ?o. 
-        VALUES ?g {{ <{o_graph_uri}> }} }}
-    }}"""
+            q=get_sparql("ontologies_by_graph.fsparql").format(o_graph_uri=o_graph_uri)
             g = Graph()
             triples=repo.ds.query( q )
             for t in triples:
@@ -270,12 +215,7 @@ def ontologies():
         elif "Delete" in request_d.values():
             d_graph_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
             repo.truncate_graph(d_graph_uri)
-            q=f"""WITH <http://ontologies>
-            DELETE {{ ?s ?p ?o }}
-            WHERE {{ ?s ?p ?o.
-            FILTER (?s=<{d_graph_uri}> )
-            }}"""
-            #rs=repo.ds.query(q)
+            q=get_sparql("delete_ontology_headers.fsparql").format(d_graph_uri=d_graph_uri)
             rs=repo.ds.update(q)
 
             rs_tab_html=_registered_ontologies_control_table()
@@ -324,25 +264,13 @@ def serialisations():
         
         if "Visualise" in request_d.values():
             o_graph_uri = set([d for d,k in request_d.items() if k=="Visualise"]).pop()
-            print(o_graph_uri)
-            q=f"""
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX owl: <http://www.w3.org/2002/07/owl#> 
-PREFIX ser: <http://www.tkltd.org/ontologies/serialization#> 
-select ?s ?p ?o WHERE {{
-GRAPH <http://config> 
-{{ ?s ?p ?o. 
-?s ser:IsComponentOfSerialization ?c
-FILTER (?c=<{o_graph_uri}> )
-}}
-}}
-"""
+            q = get_sparql("serialisation_contents_by_id.fsparql").format(o_graph_uri=o_graph_uri)
             g = Graph()
             triples=repo.ds.query( q )
             for t in triples:
                 g.add(t)
             gjgf=vis_rdf.process_graph(g)
+
             visual = gv.d3(gjgf, 
                 node_label_data_source='label',
                 show_edge_label=True,
@@ -365,17 +293,12 @@ FILTER (?c=<{o_graph_uri}> )
                             use_y_positioning_force=True,
                             y_positioning_force_strength=0.21
                 ).to_html_partial()
+            
             canvas=f"""<p>{o_graph_uri}</p>"""+visual
         
         elif "Delete" in request_d.values():
             serialisation_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
-            
-            q=f"""WITH <http://config>
-            DELETE {{ ?s ?p ?o }}
-            WHERE {{ ?s ?p ?o.
-            FILTER (?s=<{serialisation_uri}> )
-            }}"""
-            #rs=repo.ds.query(q)
+            q=get_sparql("delete_serialisation_by_id.fsparql").format(serialisation_uri=serialisation_uri)
             rs=repo.ds.update(q)
 
             rs_tab_html=_registered_serialisations_control_table()
@@ -407,6 +330,7 @@ def discourses():
 
         if "Visualise" in request_d.values():
             discourse_e=URIRef(set([d for d,k in request_d.items() if k=="Visualise"]).pop())
+
             qr = repo.run_cached_query("get_discourse_posits_parms_discourse_iris.sparql", parameters=[discourse_e.n3()], native_rdflib=True)
             g=Graph()
             for row in qr:
@@ -441,13 +365,7 @@ def discourses():
 
         elif "Delete" in request_d.values():
             discourse_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
-            
-            q=f"""WITH <http://discourse>
-            DELETE {{ ?s ?p ?o }}
-            WHERE {{ ?s ?p ?o.
-            FILTER (?s=<{discourse_uri}> )
-            }}"""
-            #rs=repo.ds.query(q)
+            q=get_sparql("delete_discourse_detail_by_id.fsparql").format(discourse_uri=discourse_uri)
             rs=repo.ds.update(q)
 
     rs_tab_html=_uploaded_discourses_control_table()

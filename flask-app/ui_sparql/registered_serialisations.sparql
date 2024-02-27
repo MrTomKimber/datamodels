@@ -1,0 +1,14 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX ser: <http://www.tkltd.org/ontologies/serialization#> 
+select ?g ?serialisation (SAMPLE(?s_label) as ?label) (count(distinct ?o) as ?mappings) 
+FROM <http://config>
+WHERE {  { ?serialisation ?p ?o. 
+
+?serialisation a <http://www.tkltd.org/ontologies/serialization#Serialization>.  
+?serialisation rdfs:label ?s_label.
+VALUES ?p { <http://www.tkltd.org/ontologies/serialization#ContainsMapping> }
+ } 
+}
+GROUP BY ?g ?serialisation

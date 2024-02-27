@@ -1,0 +1,13 @@
+select ?g ?discourse (SAMPLE(?d_label) as ?label) (COUNT(?o) as ?declarations) (COUNT(?child_discourse) as ?sub_discourses) 
+FROM <http://discourse>
+WHERE  {      
+{ 
+?discourse <http://www.tkltd.org/ontologies/discourse#DiscourseContains> ?o.     
+?discourse a <http://www.tkltd.org/ontologies/discourse#Discourse>.     
+OPTIONAL { ?discourse rdfs:label ?d_label. }  
+OPTIONAL { ?child_discourse a <http://www.tkltd.org/ontologies/discourse#Discourse>.  
+		   ?discourse ?p ?child_discourse }      
+?o a <http://www.tkltd.org/ontologies/discourse#Declaration>.       
+}  
+} 
+GROUP BY ?g ?discourse

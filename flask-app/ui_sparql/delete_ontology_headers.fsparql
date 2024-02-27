@@ -1,0 +1,5 @@
+WITH <http://ontologies>
+            DELETE {{ ?s ?p ?o }}
+            WHERE {{ ?s ?p ?o.
+            FILTER (?s=<{d_graph_uri}> )
+            }}
