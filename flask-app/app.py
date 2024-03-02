@@ -115,8 +115,8 @@ def index():
                            canvas=canvas)
 
 
-@app.route('/query', methods=['GET', 'POST'])
-def query():
+@app.route('/sparql', methods=['GET', 'POST'])
+def sparql():
     if request.method == 'POST':
         q = request.form.get('querytext','')
         rs=repo.run_adhoc_query(q)
@@ -169,6 +169,23 @@ def _registered_serialisations_control_table():
 
 def _uploaded_discourses_control_table():
 
+    g_q = get_sparql("user_graphs.sparql")
+    rs2 = repo.run_adhoc_query(g_q)
+    select_input = """
+<select id="{graph}" name="{name}">
+    {options}
+</select>
+"""
+    graph_labels=dict()
+    option_template="""<option value="{value}">{display}</option>"""
+    options=[]
+    options.append(option_template.format(value="None",display="---"))
+    for r in rs2:
+        graph_labels[r['g']]=r['label']
+        options.append(option_template.format(value=r['g'], display=r['label']))
+    #select_control=select_input.format(options="".join(options))
+    options="".join(options)
+
     q=get_sparql("uploaded_discourses.sparql")
     rs=repo.run_adhoc_query(q)
     rs=repository.new_column_to_qr_from_function(rs,
@@ -177,9 +194,33 @@ def _uploaded_discourses_control_table():
     rs=repository.new_column_to_qr_from_function(rs,
                                     "Delete",
                                     lambda x : f"""<input type="submit" id="{x.get('g')}" name="{x.get('discourse')}" value="Delete"/>""")
-    rs = repository.reorder_qr_columns(rs, {"Delete": "Delete", "Discourse":"discourse", "Name":"label", "Declarations" : "declarations", "Visualise" : "Visualise"})
+    rs=repository.new_column_to_qr_from_function(rs,
+                                    "Load to Graph",
+                                    lambda x : select_input.format(graph=x.get('discourse'),name=x.get('discourse'),options=options) + f"""<input type="submit" id="target" name="target" value="Load to Graph"/>""")
+
+    
+
+
+    rs = repository.reorder_qr_columns(rs, {"Delete": "Delete", "Discourse":"discourse", "Name":"label", "Declarations" : "declarations", "Visualise" : "Visualise", "Load to Graph" : "Load to Graph"})
     rs_tab_html=repository.qr_to_html_table(rs)
     return rs_tab_html
+
+
+def _user_graphs_control_table():
+
+    q=get_sparql("user_graphs.sparql")
+    rs=repo.run_adhoc_query(q)
+    rs=repository.new_column_to_qr_from_function(rs,
+                                      "Visualise",
+                                      lambda x : f"""<input type="submit" id="{x.get('g')}" name="{x.get('g')}" value="Visualise"/>""")
+    rs=repository.new_column_to_qr_from_function(rs,
+                                    "Delete",
+                                    lambda x : f"""<input type="submit" id="{x.get('g')}" name="{x.get('g')}" value="Delete"/>""")
+    rs = repository.reorder_qr_columns(rs, {"Delete": "Delete", "Name":"label", "Graph":"g", "Description": "description", "Triples" : "triples", "Visualise" : "Visualise"})
+    rs_tab_html=repository.qr_to_html_table(rs)
+    return rs_tab_html
+
+
 
 @app.route('/ontologies', methods=['GET', 'POST'])
 def ontologies():
@@ -321,13 +362,27 @@ def serialisations():
                            control=control,
                            canvas=canvas)
 
+def dict_strip_nones(dictolists):
+    stripped_dict=dict()
+    for k,l in dictolists.items():
+        if not isinstance(l, list):
+            l=[l]
+        if not all([v=="None" for v in l]):
+            stripped_dict[k]=[v for v in l if v != "None"]
+    return stripped_dict
+
+
+
 @app.route('/discourses', methods=['GET', 'POST'])
 def discourses():
     canvas=""""""
+    request_j=""
+    t_add=[]
     if request.method=='POST':
     
         request_d = request.form.to_dict()
-
+        request_j = dict_strip_nones(request.form.to_dict(flat=False))
+        
         if "Visualise" in request_d.values():
             discourse_e=URIRef(set([d for d,k in request_d.items() if k=="Visualise"]).pop())
 
@@ -367,6 +422,26 @@ def discourses():
             discourse_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
             q=get_sparql("delete_discourse_detail_by_id.fsparql").format(discourse_uri=discourse_uri)
             rs=repo.ds.update(q)
+        
+        elif "Load to Graph" in request_d.values():
+            # TODO: implement this 
+            # for every discourse:graph listed in k,v pairs whose k is not "target",
+            # perform an unpacking from that discourse into the target graph.
+            
+            for k,v in request_d.items():
+                if k != "target" and v!="None":
+                    discourse_e=URIRef(k)
+                    qr = repo.run_cached_query("get_discourse_posits_parms_discourse_iris.sparql", parameters=[discourse_e.n3()], native_rdflib=True)
+                    discourse_triples=[]
+                    for row in qr:
+                        discourse_triples.append((row['s'], row['p'], row['o']))
+                    t_add.extend(discourse_triples)
+                    t_add.extend(["<br>LOAD<br>",str(discourse_e),k,v,"<br>LOAD<br>"])
+                    repo.ds.addN(repo.triples_to_quads(discourse_triples,  URIRef(v)))
+
+
+            
+        
 
     rs_tab_html=_uploaded_discourses_control_table()
 
@@ -391,26 +466,53 @@ def discourses():
                         navigation=nav_bar(),
                         preamble=preamble, 
                         control=control,
-                        canvas=canvas)
+                        canvas=canvas + str(t_add))
+
+
+
 @app.route('/graphs', methods=['GET', 'POST'])
 def graphs():
     canvas=""""""
     preamble=""""""
-    control="""
-<form enctype="multipart/form-data" method="post">
+    default=""
 
-    <input type=submit value="Go" name="Go">
-</form>
-"""
     print(request.form.to_dict())
     if request.method=='POST':
     
         request_d = request.form.to_dict()
 
-        print(request_d)
-
         if "Go" in request_d.values(): 
-            repo.generate_user_graph()
+            payload = dict()
+            payload['label']=request_d.get("label")
+            payload['description']=request_d.get("description")
+            repo.generate_user_graph(payload=payload)
+        if "Delete" in request_d.values(): 
+            graph_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
+            q=get_sparql("delete_graph_by_id.fsparql").format(graph_uri=graph_uri)
+            rs=repo.ds.update(q)
+
+    rs_tab_html=_user_graphs_control_table()
+    control=f"""
+<form method=post enctype=multipart/form-data method="post">
+<div>{rs_tab_html}</div>
+</form>
+
+<form enctype="multipart/form-data" method="post">
+
+    <div>
+        <label for="label">Label:</label>
+        <input type="text" name="label">
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" rows="10" cols="50" onkeydown="if(event.keyCode===9){{var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}}">{default}</textarea>
+    </div>
+
+
+    <input type=submit value="Go" name="Go">
+</form>
+"""
+
     return template.render(language_code="en", 
                         title="Modelg", 
                         appname="modelg", 
@@ -654,7 +756,7 @@ def nav_bar():
     <thead>
         <tr>
             <th><a href="{{url_for('index')}}">Home</a></th>
-            <th><a href="{{url_for('query')}}">Query</a></th>
+            <th><a href="{{url_for('sparql')}}">Query</a></th>
             <th><a href="{{url_for('ontologies')}}">Ontologies</a></th>
             <th><a href="{{url_for('serialisations')}}">Serialisations</a></th>
             <th><a href="{{url_for('discourses')}}">Discourses</a></th>

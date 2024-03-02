@@ -62,17 +62,20 @@ class Repository(object):
         self.ds.update("""CLEAR GRAPH <{g}>""".format(g=graph_uri))
         self.ds.update("""CREATE GRAPH <{g}>""".format(g=graph_uri))
 
-    def generate_user_graph(self, description=None):
+    def generate_user_graph(self, payload=None):
         graph_id = URIRef("http://www.tkltd.org/graphs/"+uuid.uuid4().hex)
         g_type = URIRef("http://www.tkltd.org/ontologies/graphs#UserGraph")
         created_on=Literal(datetime.now().strftime("%Y-%m-%dT%H:%M"))
-        if description is None:
-            description = "No description provided at setup time."
+        mandatory_keys = { "description", "label" }
+        assert all([k in mandatory_keys for k in payload.keys()])
+        description =payload.get("description")
+        label =payload.get("label")
         #g = Graph() #self.ds.graph(graph_id)
         triples=[]
         triples.append((graph_id, URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'), g_type))
         triples.append((graph_id, URIRef('http://purl.org/dc/elements/1.1/created'), created_on))
         triples.append((graph_id, URIRef('http://purl.org/dc/elements/1.1/description'), Literal(description)))
+        triples.append((graph_id, URIRef('http://www.w3.org/2000/01/rdf-schema#label'), Literal(label)))
         quads = []
         for q in Repository.triples_to_quads(triples,graph_id.toPython()):
             quads.append(q)
