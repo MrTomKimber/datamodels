@@ -473,7 +473,7 @@ def discourses():
 @app.route('/graphs', methods=['GET', 'POST'])
 def graphs():
     canvas=""""""
-    preamble=""""""
+    preamble="""User defined graphs acting as containers for user curated content. """
     default=""
 
     print(request.form.to_dict())
@@ -486,10 +486,43 @@ def graphs():
             payload['label']=request_d.get("label")
             payload['description']=request_d.get("description")
             repo.generate_user_graph(payload=payload)
-        if "Delete" in request_d.values(): 
+        elif "Delete" in request_d.values(): 
             graph_uri = set([d for d,k in request_d.items() if k=="Delete"]).pop()
             q=get_sparql("delete_graph_by_id.fsparql").format(graph_uri=graph_uri)
             rs=repo.ds.update(q)
+        elif "Visualise" in request_d.values():
+            graph_e=URIRef(set([d for d,k in request_d.items() if k=="Visualise"]).pop())
+            q=get_sparql("graph_contents_by_graph.fsparql")
+            qr = repo.run_adhoc_query (q.format(graph=graph_e.toPython()), native_rdflib=True)
+            g=Graph()
+            for row in qr:
+                g.add((row['s'], row['p'], row['o']))
+            gjgf=vis_rdf.process_graph(g)
+
+            #print(gjgf)
+
+            canvas = gv.d3(gjgf, 
+                node_label_data_source='label',
+                show_edge_label=True,
+                edge_label_size_factor=0.7,
+                edge_label_data_source='label',
+                edge_curvature=0.25,
+                links_force_strength=0.8, 
+                links_force_distance=55, 
+                use_collision_force=True, 
+                collision_force_radius=10, 
+                collision_force_strength=1.0,
+                many_body_force_strength=-1300,
+                            many_body_force_theta=1.61, 
+                            use_many_body_force_min_distance=True,
+                            many_body_force_min_distance=0.01,
+                            use_many_body_force_max_distance=False,
+                            many_body_force_max_distance=40000,
+                            use_x_positioning_force=True,
+                            x_positioning_force_strength=0.21,
+                            use_y_positioning_force=True,
+                            y_positioning_force_strength=0.21
+                ).to_html_partial()
 
     rs_tab_html=_user_graphs_control_table()
     control=f"""

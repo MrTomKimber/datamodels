@@ -1,5 +1,5 @@
 Sequence,Mapping,SourceDomain,SourceModel,TargetDomain,TargetModel,SourceClass,SourceAttribute,TargetClass,TargetAttribute,Translation
-1,StaffSales,Inventory,Inventory,Sales,Reporting,Staff,forename,Sales,Name,Merge
-2,StaffSales,Inventory,Inventory,Sales,Reporting,Staff,surname,Sales,Name,Merge
-3,StaffSales,Inventory,Inventory,Sales,Reporting,Roles,role_name,Sales,Role,PassThrough
-4,StaffSales,Inventory,Inventory,Sales,Reporting,OrderItem,total_price,Sales,Total,PassThrough
+1,StaffSales,Inventory,Inventory,Sales,Reporting,Staff,forename,StaffSales,Name,Merge
+2,StaffSales,Inventory,Inventory,Sales,Reporting,Staff,surname,StaffSales,Name,Merge
+3,StaffSales,Inventory,Inventory,Sales,Reporting,Roles,role_name,StaffSales,Role,PassThrough
+4,StaffSales,Inventory,Inventory,Sales,Reporting,OrderItem,total_price,StaffSales,Total,PassThrough

@@ -22,8 +22,9 @@ def colour_scheme(name=None):
 
 def cartesian_product_dict_generator(**kwargs):
     k_names=list(kwargs.keys())
-    for d in [{k:v[e] for e,k in enumerate(k_names)} for v in product(*kwargs.values())]:
-        yield d
+    while True:
+        for d in [{k:v[e] for e,k in enumerate(k_names)} for v in product(*kwargs.values())]:
+            yield d
 
 def isLiteral(r):
     return isinstance(r, Literal) 
