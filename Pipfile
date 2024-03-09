@@ -22,6 +22,7 @@ flask = "*"
 flask-login = "*"
 owlready2 = "*"
 django = "*"
+selenium = "*"
 
 [dev-packages]
 
