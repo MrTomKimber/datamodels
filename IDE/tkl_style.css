@@ -1,5 +1,5 @@
 h1 {
-  font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Century Schoolbook L", serif;
+  font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 3em;
   font-style: normal;
   font-variant: normal;
@@ -8,7 +8,7 @@ h1 {
   word-spacing: normal;
   line-height: 2em; }
 
-h2 { font-family:Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Century Schoolbook L", serif;
+h2 { font-family:Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 2em;
   font-style: normal;
   font-variant: normal;
@@ -18,7 +18,7 @@ h2 { font-family:Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, Geo
   line-height: 1.5em; }
 
 
-h3 { font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Century Schoolbook L", serif;
+h3 { font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 1.5em;
   font-style: normal;
   font-variant: normal;
@@ -28,7 +28,7 @@ h3 { font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, Ge
   line-height: 1.0em; }
 
 
-p { font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Century Schoolbook L", serif;
+p { font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, serif;
     padding-top: 1em;
     font-size: 1.2em;
     font-style: normal;
@@ -42,7 +42,7 @@ p { font-family: Baskerville, "Palatino Linotype", "Book Antiqua", Palatino, Geo
     text-justify: inter-word;}
 
 
-blockquote { font-family: Baskerville, "Baskerville Old Face", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Century Schoolbook L", serif;
+blockquote { font-family: Baskerville, "Baskerville Old Face", "Palatino Linotype", "Book Antiqua", Palatino, serif;
     padding-top: 1em;
     padding-left: 1.5em;
     padding-right: 1.5em;
@@ -58,7 +58,7 @@ blockquote:before {content :open-quote; font-size: 2em; line-height: 0.5em;color
 blockquote:after {content :close-quote; font-size: 2em; line-height: 0.5em;color: goldenrod;}
 
 pre {
-  font-family: "DejaVu Sans Mono", Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "Bitstream Vera Sans Mono", "Courier New", FreeMono, monospace, serif;
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
   margin-bottom: 1em;
   margin-top: 1em;
   overflow: auto;
@@ -143,31 +143,13 @@ table.border {
 }
 
 table {
-  table-layout: auto;
   border: none;
   border-collapse: collapse;
   height: auto;
   margin-left:auto;
   margin-right:auto;
-  
 }
 
-caption {
-  display: table-caption;
-  text-align: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, FreeSans, sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: bold;
-  vertical-align: middle;
-  color:black;
-  padding-right: 6px;
-  padding-left: 6px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: darkgrey;
-}
 
 tr:nth-child(odd) {
   background-color: #ffffff;
@@ -185,21 +167,8 @@ th:hover {
   background-color: #89ffe9;
 }
 
-td.head{
-  padding-right: 20px;
-  padding-left: 20px;
-  
-}
-
-th.head{
-  background-color: darkgrey;
-  padding-right: 10px;
-  padding-left: 10px;
-  
-}
-
 th  {
-  font-family: "Helvetica Neue", Helvetica, Arial, FreeSans, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-variant: normal;
@@ -209,8 +178,6 @@ th  {
   color:black;
   padding-right: 3px;
   padding-left: 3px;
-  padding-top: 6px;
-  padding-bottom: 6px;
 }
 
 td:hover {
@@ -218,7 +185,7 @@ td:hover {
 }
 
 td  {
-  font-family: "DejaVu Sans Mono", "Lucida Console", Monaco, FreeMono, monospace;
+  font-family: "Lucida Console", Monaco, FreeMono, monospace;
   font-size: 12px;
   font-style: normal;
   font-variant: normal;
