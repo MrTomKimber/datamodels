@@ -9,16 +9,16 @@ WHERE {
   GRAPH ?g
   {
       ?discourse a disco:Discourse.
-      ?discourse dcterms:title ?title.
-      ?discourse rdfs:label ?name.
-      ?discourse dcterms:description ?description.
+      OPTIONAL {?discourse dcterms:title ?title.}
+      OPTIONAL {?discourse rdfs:label ?name.}
+      OPTIONAL {?discourse dcterms:description ?description.}
       ?discourse dcterms:created ?created .
       ?discourse disco:DiscourseHash ?hash .
       ?discourse disco:DiscourseContains+ ?declaration .
       ?declaration a disco:Declaration .
       ?posit_type rdfs:subPropertyOf* disco:Posits .
-      ?declaration disco:Asserts ?assertion.
-      ?assertion disco:Subject ?psubject.
+      OPTIONAL {?declaration disco:Asserts ?assertion.
+                ?assertion disco:Subject ?psubject.}
   }
 }
 GROUP BY ?g ?discourse ?name ?title ?description ?created ?hash
