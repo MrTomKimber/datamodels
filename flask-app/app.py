@@ -15,6 +15,7 @@ import pandas as pd
 import os, sys
 import gravis as gv
 from rdflib import Graph, URIRef, Literal, BNode
+from rdflib.query import Result
 import html
 from datetime import datetime
 
@@ -114,13 +115,52 @@ def index():
                            control=control,
                            canvas=canvas)
 
+def _get_recordset_vars(rs):
+    if isinstance(rs, list):
+        field_names = list(rs[0].keys())
+    elif isinstance(rs,Result):
+        field_names = [f.toPython().replace("?","") for f in rs.vars]
+    return field_names
+
+def test_rs_suitable_for_graph_construction(rs):
+    field_names = _get_recordset_vars(rs)
+    valid_field_set={'s','p','o','subject','predicate','object'}
+    test_rs_has_3_fields=len(field_names)==3
+    test_rs_has_appropriate_field_names=all([f in valid_field_set for f in field_names])
+    return test_rs_has_3_fields and test_rs_has_appropriate_field_names
 
 @app.route('/sparql', methods=['GET', 'POST'])
 def sparql():
+    select_dd=""
     if request.method == 'POST':
-        q = request.form.get('querytext','')
-        rs=repo.run_adhoc_query(q)
-        rs_tab_html=pd.DataFrame(rs).to_html()
+        request_d = request.form.to_dict()
+        
+        if "Query" in request_d.values() or "Load Results To Graph" in request_d.values() :
+
+            q = request.form.get('querytext','')
+            rs=repo._run_raw_query(q)
+            flat_rs = repo._flatten_rdflib_query_results(rs)
+            rs_tab_html=pd.DataFrame(flat_rs).to_html()
+            if test_rs_suitable_for_graph_construction(rs):
+                # Returned data is suitable for sending to named graph, construct a control
+                # to enable the user to perform such an action/
+                options=_gen_graph_dropdown()
+                select_input_template = """
+<select id="{graph}" name="{name}">
+    {options}
+</select>
+<input type=submit id="Load Results To Graph" name="Load Results To Graph" value="Load Results To Graph">
+"""         
+                select_dd = select_input_template.format(graph="Graph Choice",name="Graph Choice",options=options)
+            if "Load Results To Graph" in request_d.values() and request_d.get("Graph Choice") is not None:
+                triples=[]
+                v=request_d.get("Graph Choice")
+                for row in rs:
+                    triples.append((row['s'], row['p'], row['o']))
+                repo.ds.addN(repo.triples_to_quads(triples,  URIRef(v)))
+
+        else:
+            return request_d
     else:
 
         q=get_sparql("default_query.sparql")
@@ -129,7 +169,8 @@ def sparql():
     preamble = """<p>Enter SPARQL query and see results.</p><p><a href="https://sparql.org/query-validator.html" target="_blank" rel="noopener noreferrer">https://sparql.org/query-validator.html</a></p>"""
     control = f"""<form method=post enctype=multipart/form-data method="post">
     <div><textarea name="querytext" id="querytext" rows="10" cols="50" onkeydown="if(event.keyCode===9){{var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}}">{q}</textarea></div>
-    <div><input type=submit value=Query></div></form>"""
+    <div><input type=submit id="Query" name="Query" value="Query">""" + select_dd + """</div></form>"""
+
     canvas=rs_tab_html
 
     return template.render(language_code="en", 
@@ -167,24 +208,29 @@ def _registered_serialisations_control_table():
     rs_tab_html=repository.qr_to_html_table(rs)
     return rs_tab_html
 
-def _uploaded_discourses_control_table():
-
+def _gen_graph_dropdown():
     g_q = get_sparql("user_graphs.sparql")
     rs2 = repo.run_adhoc_query(g_q)
+    option_template="""<option value="{value}">{display}</option>"""
+    options=[]
+    options.append(option_template.format(value="None",display="---"))
+    graph_labels=dict()
+
+    for r in rs2:
+        graph_labels[r['g']]=r['label']
+        options.append(option_template.format(value=r['g'], display=r['label']))
+    options="".join(options)
+    return options
+
+def _uploaded_discourses_control_table():
+
     select_input = """
 <select id="{graph}" name="{name}">
     {options}
 </select>
 """
-    graph_labels=dict()
-    option_template="""<option value="{value}">{display}</option>"""
-    options=[]
-    options.append(option_template.format(value="None",display="---"))
-    for r in rs2:
-        graph_labels[r['g']]=r['label']
-        options.append(option_template.format(value=r['g'], display=r['label']))
-    #select_control=select_input.format(options="".join(options))
-    options="".join(options)
+
+    options=_gen_graph_dropdown()
 
     q=get_sparql("uploaded_discourses.sparql")
     rs=repo.run_adhoc_query(q)
@@ -197,9 +243,6 @@ def _uploaded_discourses_control_table():
     rs=repository.new_column_to_qr_from_function(rs,
                                     "Load to Graph",
                                     lambda x : select_input.format(graph=x.get('discourse'),name=x.get('discourse'),options=options) + f"""<input type="submit" id="target" name="target" value="Load to Graph"/>""")
-
-    
-
 
     rs = repository.reorder_qr_columns(rs, {"Delete": "Delete", "Discourse":"discourse", "Name":"label", "Declarations" : "declarations", "Visualise" : "Visualise", "Load to Graph" : "Load to Graph"})
     rs_tab_html=repository.qr_to_html_table(rs)

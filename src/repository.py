@@ -170,6 +170,12 @@ class Repository(object):
             native_rdflib = False
         qr = list(Repository._flatten_rdflib_query_results(self.ds.query(query),native_rdflib))
         return qr
+    
+    def _run_raw_query(self, query):
+        qr = self.ds.query(query)
+        return qr
+    
+    
         
     def load_quads(self, quads):
         self.ds.addN(quads)
