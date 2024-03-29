@@ -1,0 +1,171 @@
+// test
+graph {
+	graph [center=true esep=0.1 mode=ipsep overlap=ortho rankdir=TB sep=0.5 splines=True]
+	node [fontname="DejaVu Sans"]
+	"www.tkltd.org//ontologies/27f7c559482b45afa110eeba5518ff45" [label=< <table id="Inventory.Inventory.Product" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>Product</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">Individual products and their descriptions</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>p_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Id field of the product by which it is coded</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>description</B></td><td ALIGN="LEFT" BALIGN="LEFT">Description of the product.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>p_name</B></td><td ALIGN="LEFT" BALIGN="LEFT">Unique name of the product.</td><td>string</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/37bf07d15e264bdc8c3fb17369bef0c6" [label=< <table id="Inventory.Inventory.Inventory" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>Inventory</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">Inventory of products located at a location</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>loc_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Identity of the location.</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>p_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Identity of the product.</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>p_loc_count</B></td><td ALIGN="LEFT" BALIGN="LEFT">Count of the product at this location.</td><td>integer</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/f99a8e3897434f4eb9ba375b05ad182b" [label=< <table id="Inventory.Inventory.Location" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>Location</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">Facility/Building operated by the organisation</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>loc_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Id field of the location.</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>loc_name</B></td><td ALIGN="LEFT" BALIGN="LEFT">Name by which the location is known.</td><td>string</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/25ac78e9ccdf4bbdbd0a144a31e0a79e" [label=< <table id="Inventory.Inventory.Roles" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>Roles</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">Working Roles</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>role_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Role Identifier.</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>role_name</B></td><td ALIGN="LEFT" BALIGN="LEFT">Role Name.</td><td>string</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/e82395098d9b40f3b5c7c0d3458e887e" [label=< <table id="Inventory.Inventory.Staff" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>Staff</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">Members of staff</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>staff_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Id number of the staff member.</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>forename</B></td><td ALIGN="LEFT" BALIGN="LEFT">Forename of the staff member.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>loc_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Location base of this member of staff.</td><td>integer</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>role_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Assigned role to this member of staff</td><td>integer</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>surname</B></td><td ALIGN="LEFT" BALIGN="LEFT">Surname of the staff member.</td><td>string</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/8cec6c4c8ebf4b6da9bd2557d44aeaea" [label=< <table id="Inventory.Inventory.PriceHistory" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>PriceHistory</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">Prices for each product over time.</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>p_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Product Id.</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>start_date</B></td><td ALIGN="LEFT" BALIGN="LEFT">Date the price came into effect.</td><td>datetime</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>price</B></td><td ALIGN="LEFT" BALIGN="LEFT">Cash value associated with the product.</td><td>float</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>price_currency</B></td><td ALIGN="LEFT" BALIGN="LEFT">Currency code of the price.</td><td>string</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/0ca5aa25011b4d209bce931b35a9fe33" [label=< <table id="Inventory.Inventory.OrderItem" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>OrderItem</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">A line item that exists on a quote or order</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>order_item_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Unique Id for this order item</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>qorder_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Identifier for the parent quote/order.</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>discount</B></td><td ALIGN="LEFT" BALIGN="LEFT">Proportion of discount to be applied to base price</td><td>float</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>p_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Product Identifier.</td><td>integer</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>price_per_unit</B></td><td ALIGN="LEFT" BALIGN="LEFT">Base price per unit.</td><td>float</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>total_price</B></td><td ALIGN="LEFT" BALIGN="LEFT">Final total price for this line item after discounting</td><td>float</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>units</B></td><td ALIGN="LEFT" BALIGN="LEFT">Count of product units quoted/ordered.</td><td>integer</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/d35da2fdc8474d2eb99f73eb9f02f0f5" [label=< <table id="Inventory.Inventory.QOrder" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>QOrder</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">A normalised quote or order. FK link to Customer.</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>qorder_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Unique Identifier for this qoute/order. Previously, customer<br/>was denormalised(?)</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>customer_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Individual customer identifier.</td><td>integer</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>payment_status</B></td><td ALIGN="LEFT" BALIGN="LEFT">Indicator showing if the order has been paid.</td><td>boolean</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>quote_date</B></td><td ALIGN="LEFT" BALIGN="LEFT">Date used for calculating base prices.</td><td>datetime</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>quote_order_status</B></td><td ALIGN="LEFT" BALIGN="LEFT">Indicator showing if this record is an order or a quote.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>sales_staff_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Who made the quote or order?</td><td>integer</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/e8ec4d3d6c2f42ea9efea0509d98abc4" [label=< <table id="Inventory.Inventory.Customer" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
+
+            <tr>
+            <td colspan="5" bgcolor='grey'><font point-size='32' color='#ffffff'><B>Customer</B></font></td>
+             </tr>
+              <tr>
+            <td colspan="5" ALIGN="LEFT" BALIGN="LEFT">An individual who is involved in a quote or order. Subject to GDPR regulations.</td>
+        </tr>
+        <tr><td><B>Attribute</B></td><td><B>Description</B></td><td ><B>Datatype</B></td><td ><B>Nulls</B></td><td ><B>PK</B></td></tr>
+
+    <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>customer_id</B></td><td ALIGN="LEFT" BALIGN="LEFT">Individual customer identifier</td><td>integer</td><td></td><td >Yes</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>address_line_1</B></td><td ALIGN="LEFT" BALIGN="LEFT">First line of customer address.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>address_line_2</B></td><td ALIGN="LEFT" BALIGN="LEFT">Second line of customer address.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>address_line_3</B></td><td ALIGN="LEFT" BALIGN="LEFT">Third line of customer address.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>forename</B></td><td ALIGN="LEFT" BALIGN="LEFT">Forename of customer.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>phone_number</B></td><td ALIGN="LEFT" BALIGN="LEFT">Customer Phone Number.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>postal_code</B></td><td ALIGN="LEFT" BALIGN="LEFT">Customer address post-code.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>postal_town</B></td><td ALIGN="LEFT" BALIGN="LEFT">Customer address town.</td><td>string</td><td></td><td >No</td></tr>
+ <tr><td ALIGN="LEFT" BALIGN="LEFT"><B>surname</B></td><td ALIGN="LEFT" BALIGN="LEFT">Surname of customer.</td><td>string</td><td></td><td >No</td></tr>
+
+
+    </table>> shape=plaintext]
+	"www.tkltd.org//ontologies/d35da2fdc8474d2eb99f73eb9f02f0f5" -- "www.tkltd.org//ontologies/e82395098d9b40f3b5c7c0d3458e887e" [label=soldBy constraint=true]
+	"www.tkltd.org//ontologies/37bf07d15e264bdc8c3fb17369bef0c6" -- "www.tkltd.org//ontologies/27f7c559482b45afa110eeba5518ff45" [label=isInventoryOfItem constraint=true]
+	"www.tkltd.org//ontologies/37bf07d15e264bdc8c3fb17369bef0c6" -- "www.tkltd.org//ontologies/f99a8e3897434f4eb9ba375b05ad182b" [label=isInventoryLocatedAt constraint=true]
+	"www.tkltd.org//ontologies/d35da2fdc8474d2eb99f73eb9f02f0f5" -- "www.tkltd.org//ontologies/0ca5aa25011b4d209bce931b35a9fe33" [label=referencesLineItem constraint=true]
+	"www.tkltd.org//ontologies/d35da2fdc8474d2eb99f73eb9f02f0f5" -- "www.tkltd.org//ontologies/e8ec4d3d6c2f42ea9efea0509d98abc4" [label=IsOrderedBy constraint=true]
+	"www.tkltd.org//ontologies/e82395098d9b40f3b5c7c0d3458e887e" -- "www.tkltd.org//ontologies/25ac78e9ccdf4bbdbd0a144a31e0a79e" [label=isEmployedInRole constraint=true]
+	"www.tkltd.org//ontologies/0ca5aa25011b4d209bce931b35a9fe33" -- "www.tkltd.org//ontologies/27f7c559482b45afa110eeba5518ff45" [label=referencesProduct constraint=true]
+	"www.tkltd.org//ontologies/e82395098d9b40f3b5c7c0d3458e887e" -- "www.tkltd.org//ontologies/f99a8e3897434f4eb9ba375b05ad182b" [label=worksAtLocation constraint=true]
+}

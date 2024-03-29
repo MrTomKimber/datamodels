@@ -26,15 +26,14 @@ import repository
 import loader
 import vis_owl
 import vis_rdf
+from visualisations import visregistry
+from utils import *
 
 file_loader = jinja2.FileSystemLoader("templates/")
 static_folder = jinja2.FileSystemLoader("static/")
-sparql_folder = "ui_sparql/"
+
 env = jinja2.Environment(loader=file_loader)
 template = env.get_template('page_template.jinja2')
-
-UPLOAD_FOLDER="uploads/"
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','rdf','owl','xlsx','csv'}
 
 
 app = Flask(__name__)
@@ -47,10 +46,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-STORETYPE = 'jena'
-QUERYENDPOINT="http://fuseki:3030/modelg/query"
-UPDATEENDPOINT="http://fuseki:3030/modelg/update"
-repo = repository.Repository(store_type=STORETYPE,query_url=QUERYENDPOINT, update_url=UPDATEENDPOINT)
 
 def get_sparql(filename):
     with open(os.path.join(sparql_folder,filename)) as sparqlf:
@@ -596,6 +591,47 @@ def graphs():
                         preamble=preamble, 
                         control=control,
                         canvas=canvas)
+
+@app.route('/visualisations', methods=['GET', 'POST'])
+def visualisations():
+    
+    plugin_widget_devs=[]
+    for plugin in visregistry.registered_plugins:
+        widgets=[]
+        for w in plugin._gen_widgets():
+            widgets.append(w)
+        widgets="".join(widgets)
+        plugin_widget_devs.append("""<div>{widgets}</div>""".format(widgets=widgets))
+
+    plugin_widget_devs = "".join(plugin_widget_devs)
+    control_form = """<form method=post enctype=multipart/form-data method="post">
+{plugin_widget_devs}
+</form>"""
+    preamble = ""
+    control = control_form.format(plugin_widget_devs=plugin_widget_devs)
+    canvas = ""
+
+    if request.method == "POST":
+        identified_plugin=None
+        request_d = request.form.to_dict()
+        for plugin in visregistry.registered_plugins:
+            if plugin.trigger in request_d.keys():
+                identified_plugin = plugin
+                break
+        
+        if identified_plugin is not None:
+            data_g = identified_plugin._get_data(request_d)
+            vis_h = identified_plugin._gen_html(data_g)
+            canvas = vis_h
+
+    return template.render(language_code="en", 
+                    title="Modelg", 
+                    appname="modelg", 
+                    navigation=nav_bar(),
+                    preamble=preamble, 
+                    control=control,
+                    canvas=canvas)
+
 def visualise(g):
     content = """visualise"""
 
@@ -836,8 +872,9 @@ def nav_bar():
             <th><a href="{{url_for('ontologies')}}">Ontologies</a></th>
             <th><a href="{{url_for('serialisations')}}">Serialisations</a></th>
             <th><a href="{{url_for('discourses')}}">Discourses</a></th>
-            <th><a href="{{url_for('about')}}">About</a></th>
             <th><a href="{{url_for('graphs')}}">Graphs</a></th>
+            <th><a href="{{url_for('visualisations')}}">Visualisations</a></th>
+            <th><a href="{{url_for('about')}}">About</a></th>
     </thead>
 </table>
 """)

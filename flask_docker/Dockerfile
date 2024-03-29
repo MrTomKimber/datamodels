@@ -9,14 +9,14 @@ FROM base AS python-deps
 
 # Install pipenv and compilation dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends gcc libpq-dev
-RUN apt-get install graphviz -y
+RUN apt-get update && apt-get install graphviz -y
 RUN pip install pipenv
 
 # Install python dependencies in /.venv
 COPY Pipfile .
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
 
-FROM base AS runtime
+FROM python-deps AS runtime
 
 # Copy virtual env from python-deps stage
 COPY --from=python-deps /.venv /.venv

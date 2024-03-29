@@ -23,6 +23,7 @@ flask-login = "*"
 owlready2 = "*"
 django = "*"
 selenium = "*"
+graphviz = "*"
 
 [dev-packages]
 
