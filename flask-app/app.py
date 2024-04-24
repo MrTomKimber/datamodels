@@ -794,15 +794,20 @@ def upload_discourse_file():
                          "createdby" : request_d.get("createdby"), 
                          "createdon" : request_d.get("createdon") 
                          }
-            file_data = pd.read_csv(storage_filename, index_col="Sequence")
+            #file_data = pd.read_csv(storage_filename, index_col="Sequence")
+            file_data = pd.read_csv(storage_filename, index_col=False)
             datarows = [dict({rk:get_field(rv) for rk, rv in r.items()}) for i,r in file_data.iterrows()]
             col_set = set(repository.get_variables_from_flat_query_results( datarows))
             match_ser=loader.match_serialization_from_columns(repo.ds, repo.registered_serializations_uri,col_set)
+            print()
+            print(match_ser)
+            print()
             metadata_payload = repo.meta_data_package_template( meta_data )
             result=repo.load_serialization_to_discourse(match_ser, meta_data['title'], metadata_payload, datarows)
             if result is None:
                 result = "already loaded?"
-            return result
+                print(result)
+            return str(datarows)
 
 
 

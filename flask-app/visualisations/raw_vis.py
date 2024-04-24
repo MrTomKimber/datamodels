@@ -54,6 +54,16 @@ def gen_widgets():
     widgets.append("<hr>")
     return widgets
 
+def gen_widgets_3d():
+    widgets = []
+    widgets.append("<hr>")
+    widgets.append(gen_widget_label_title(plugin_3d.name))
+    widgets.append(gen_widget_label_description(plugin_3d.description))
+    widgets.append(gen_graph_dropdown_widget("test_vis_3d_graph"))
+    widgets.append(gen_submit_button_widget("test_vis_3d_button", "Go"))
+    widgets.append("<hr>")
+    return widgets
+
 def process_data(graphname=None):
     q=get_sparql("graph_contents_by_graph.fsparql")
     qr = repo.run_adhoc_query (q.format(graph=graphname), native_rdflib=True)
@@ -88,6 +98,25 @@ def gen_vis(graph):
         ).to_html_partial()
     return canvas
 
+def gen_vis_3d(graph):
+    gjgf=vis_rdf.process_graph(graph)
+    canvas = gv.three(gjgf, 
+        node_label_data_source='label',
+        show_edge_label=True,
+        edge_label_size_factor=0.7,
+        edge_label_data_source='label',
+        edge_curvature=0.25,
+        links_force_strength=0.8, 
+        links_force_distance=55,
+        many_body_force_strength=-1300,
+                    many_body_force_theta=1.61, 
+                    use_many_body_force_min_distance=True,
+                    many_body_force_min_distance=0.01,
+                    use_many_body_force_max_distance=False,
+                    many_body_force_max_distance=40000
+        ).to_html_partial()
+    return canvas
+
 
 plugin = Visualisation("Raw RDF Visualisation", 
                               "An interactive visualisation of raw rdf data, rolling literal properties into a tabular attachment linked to each node.", 
@@ -99,3 +128,12 @@ plugin = Visualisation("Raw RDF Visualisation",
                               gen_vis 
                               )
 
+plugin_3d = Visualisation("Raw RDF Visualisation in 3D", 
+                              "An interactive three-dimensional visualisation of raw rdf data, rolling literal properties into a tabular attachment linked to each node.", 
+                              150,
+                              "test_vis_3d_button",
+                              {"test_vis_3d_graph" : "graphname"},
+                              gen_widgets_3d,
+                              process_data, 
+                              gen_vis_3d 
+                              )

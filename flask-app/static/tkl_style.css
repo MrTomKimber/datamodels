@@ -251,3 +251,10 @@ td  {
 
 svg { max-height: 600px;}
 div.mid { width: 60%; margin: auto; }
+
+.container {
+  width: 1200px;
+  height: 800px;
+  overflow: hidden;
+  border: solid 1px black;
+}

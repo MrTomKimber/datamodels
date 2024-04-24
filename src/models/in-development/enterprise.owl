@@ -46,6 +46,35 @@
     
 
 
+    <!-- http://www.tkltd.org/ontologies/enterprise#Answers -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#Answers">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Purpose"/>
+        <rdfs:label>Answers</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Aspires -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#Aspires">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Organisation"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Purpose"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Elicits -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#Elicits">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Purpose"/>
+        <rdfs:label>Elicits</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.tkltd.org/ontologies/enterprise#FlowMapping -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#FlowMapping">
@@ -78,6 +107,17 @@
     
 
 
+    <!-- http://www.tkltd.org/ontologies/enterprise#Generates -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#Generates">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:comment>Initiates?</rdfs:comment>
+        <rdfs:label>Generates</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.tkltd.org/ontologies/enterprise#PersonHasTenure -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#PersonHasTenure">
@@ -85,6 +125,15 @@
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Person"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Tenure"/>
         <rdfs:label>hasTenure</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Substantiates -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/enterprise#Substantiates">
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/enterprise#Measure"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
     </owl:ObjectProperty>
     
 
@@ -210,10 +259,27 @@
     
 
 
+    <!-- http://www.tkltd.org/ontologies/enterprise#Business_Function -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Business_Function"/>
+    
+
+
     <!-- http://www.tkltd.org/ontologies/enterprise#Capability -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Capability">
+        <rdfs:comment>A Capbility is the ability to perform some Business Function within a specific situational Business Context to some measurable degree of success.</rdfs:comment>
         <rdfs:label>Capability</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Codification -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Codification">
+        <rdfs:comment>Any statement of rules, guidelines, principles, values or policy that helps define or guide some aspect of the enterprise.
+
+A Codification will tend to constrain, guide or inform the behaviours of an Organisational Agent in persuing the Enterprise&apos;s Purpose.</rdfs:comment>
     </owl:Class>
     
 
@@ -221,7 +287,7 @@
     <!-- http://www.tkltd.org/ontologies/enterprise#Component -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Component">
-        <rdfs:comment>A tangible enterprise component that processes information and/or performs a task or function.</rdfs:comment>
+        <rdfs:comment>An enterprise component processes information and/or performs an ongoing category of task or function.</rdfs:comment>
         <rdfs:label>Component</rdfs:label>
     </owl:Class>
     
@@ -236,11 +302,88 @@
     
 
 
+    <!-- http://www.tkltd.org/ontologies/enterprise#Goal -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Goal">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Purpose"/>
+        <rdfs:comment>A Goal is some broadly defined, often long-term outcome that would be beneficial for the enterprise or Organisational Unit to acheive in the persuit of its mission.</rdfs:comment>
+        <rdfs:label>Goal</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Initiative -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Initiative">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:comment>An initiative is some broad set of plans or steps to be taken in order to implement or enact parts of a strategy.
+
+Initiatives form the building blocks of a strategic roadmap. Each Initiative will serve to deliver on one or more defined goals, and define a number of Objectives that Projects generated by the Initiative will seek to address.</rdfs:comment>
+        <rdfs:label>Initiative</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Legal_Entity -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Legal_Entity">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Organisation"/>
+        <rdfs:label>Legal Entity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Measure -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Measure"/>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Metric -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Metric">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Measure"/>
+        <rdfs:label>Metric</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Mission -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Mission">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Purpose"/>
+        <rdfs:comment>A Mission is an overarching goal or outcome that an enterprise or Organisational Unit is aligned to achieve.</rdfs:comment>
+        <rdfs:label>Mission</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Objective -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Objective">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Purpose"/>
+        <rdfs:comment>An objective sets out a specific, measurable, attainable, relevant and time-bound target for achievement.</rdfs:comment>
+        <rdfs:label>Objective</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Organisation -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Organisation">
+        <rdfs:comment>Organisational Elements are the structures an Organisation puts in place to take ownership of a Function, Capability or Process and ensure it is carried out appropriately. 
+
+They describe the Operational structures that interact in order to perform the Enterprise&apos;s mission.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#OrganisationalUnit">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Organisation"/>
         <rdfs:comment>A unit of organisation defined by the enterprise.</rdfs:comment>
-        <rdfs:label>OrgUnit</rdfs:label>
+        <rdfs:label>Organisational Unit</rdfs:label>
     </owl:Class>
     
 
@@ -254,11 +397,93 @@
     
 
 
+    <!-- http://www.tkltd.org/ontologies/enterprise#Policy -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Policy">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Codification"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Principle -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Principle">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Codification"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Process -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Process"/>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Project -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Project">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:comment>A Project is a planned unit of work that will deliver some tangible set of objectives for an Initiative.
+
+A Project might typically elicit a number of Requirements, and generate a series of Tasks aligned to deliver outcomes that meet those requirements.</rdfs:comment>
+        <rdfs:label>Project</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Purpose -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Purpose">
+        <rdfs:comment>A Purpose describes an intention, objective or goal that provides a reason or driver to engage in an Undertaking.</rdfs:comment>
+        <rdfs:label>Purpose</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Requirement -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Requirement">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Purpose"/>
+        <rdfs:label>Requirement</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.tkltd.org/ontologies/enterprise#Role -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Role">
-        <rdfs:comment>A role defined by the enterprise.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Organisation"/>
+        <rdfs:comment>A role assigned to an individual within the enterprise.</rdfs:comment>
         <rdfs:label>Role</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Rule -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Rule">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Codification"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Strategy -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Strategy">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:comment>A strategy is a named approach for achieving a portion of the enterprise Mission, via the adoption of some kind of targeted plan of action.
+
+A Strategy might set out a number of goals to further describe the detail of the Mission, and generate a number of Initiatives whose purpose would be to deliver on those goals.</rdfs:comment>
+        <rdfs:label>Strategy</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Task -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Task">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Undertaking"/>
+        <rdfs:label>Task</rdfs:label>
     </owl:Class>
     
 
@@ -268,6 +493,34 @@
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Tenure">
         <rdfs:comment>A tenure associates a person with a role within an organisation for some duration of time.</rdfs:comment>
         <rdfs:label>Tenure</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Test -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Test">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Measure"/>
+        <rdfs:label>Test</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Undertaking -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Undertaking">
+        <rdfs:comment>An Undertaking is some deliberate action, plan or operation with a defined Purpose.
+
+Undertakings are the vehicles through which an enterprise effects change.</rdfs:comment>
+        <rdfs:label>Undertaking</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/enterprise#Value -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/enterprise#Value">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/enterprise#Codification"/>
     </owl:Class>
 </rdf:RDF>
 

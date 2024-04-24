@@ -96,8 +96,11 @@ def gen_vis(graph):
     return canvas
 
 
-plugin = Visualisation("Entity Relationship Diagram", 
-                              "An interactive visualisation of a datamodel. <br> Relationships link tables topographically and can give a quick overview of how a datamodel is constructed with interlinkages shown between key concepts.", 
+plugin = Visualisation("Interactive Entity Relationship Diagram", 
+                              """An interactive visualisation of a datamodel. <br>
+                              Relationships link tables topographically and give 
+                              an overview of how a datamodel is structured  
+                              with interlinkages shown between key concepts.""", 
                               200,
                               "erd_vis_button",
                               {"erd_vis_graph" : "graphname"},

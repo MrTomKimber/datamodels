@@ -16,13 +16,13 @@
                          "http://www.tkltd.org/ontologies/datamapping#MappingDetailTarget",
                          "http://www.tkltd.org/ontologies/datamapping#MappingSourceModel",
                          "http://www.tkltd.org/ontologies/datamapping#MappingTargetModel",
-                         "http://www.tomk.org/ontologies/datamodel#Contains",
-                         "http://www.tomk.org/ontologies/datamodel#ClassContainsAttribute"
+                         "http://www.tkltd.org/ontologies/datamodel#Contains",
+                         "http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute"
 
                         ],
-    "targetDataProperties": [],
+    "targetDataProperties": ["http://www.tkltd.org/ontologies/datamapping#Sequence"],
     "targetStaticProperties" : [],
-    "source_headers": ["Mapping","SourceDomain","SourceModel","TargetDomain","TargetModel","SourceClass","SourceAttribute","TargetClass","TargetAttribute","Translation"],
+    "source_headers": ["Sequence","Mapping","SourceDomain","SourceModel","TargetDomain","TargetModel","SourceClass","SourceAttribute","TargetClass","TargetAttribute","Translation"],
     "serialization_mappings": [
         { "mapping_name": "Mapping_Mapping", 
           "target": "http://www.tkltd.org/ontologies/datamapping#DataMapping", 
@@ -109,6 +109,12 @@
           "range": "SourceAttribute"
         },
 
+        { "mapping_name": "MappingDetailSequenceDataProperty_Mapping",
+        "target": "http://www.tkltd.org/ontologies/datamapping#Sequence",
+        "domain": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)",
+        "range": "Sequence"
+        },
+
         { "mapping_name": "MappingDetailTargetClass_Mapping",
           "target": "http://www.tkltd.org/ontologies/datamapping#MappingDetailTarget",
           "domain": "#LINK(Mapping,Translation,TargetClass,TargetAttribute)",
@@ -134,32 +140,32 @@
         },
 
         {"mapping_name": "SourceDomainContainsModelPropertyMapping",
-        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
         "domain": "SourceDomain",
         "range": "SourceModel"},
 
         {"mapping_name": "SourceModelContainsClassPropertyMapping",
-        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
         "domain": "SourceModel",
         "range": "SourceClass"},
 
         {"mapping_name": "SourceClassContainsAttributePropertyMapping",
-        "target": "http://www.tomk.org/ontologies/datamodel#ClassContainsAttribute",
+        "target": "http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute",
         "domain": "SourceClass",
         "range": "SourceAttribute"},
 
         {"mapping_name": "TargetDomainContainsModelPropertyMapping",
-        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
         "domain": "TargetDomain",
         "range": "TargetModel"},
 
         {"mapping_name": "TargetModelContainsClassPropertyMapping",
-        "target": "http://www.tomk.org/ontologies/datamodel#Contains",
+        "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
         "domain": "TargetModel",
         "range": "TargetClass"},
 
         {"mapping_name": "TargetClassContainsAttributePropertyMapping",
-        "target": "http://www.tomk.org/ontologies/datamodel#ClassContainsAttribute",
+        "target": "http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute",
         "domain": "TargetClass",
         "range": "TargetAttribute"}
     ],

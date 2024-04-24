@@ -1,6 +1,6 @@
 // test
 graph {
-	graph [center=true esep=0.1 mode=ipsep overlap=ortho rankdir=TB sep=0.5 splines=True]
+	graph [beautify=true center=true esep=0.1 mode=hier model=subset overlap=ortho pad=1 rankdir=LR sep=0.5]
 	node [fontname="DejaVu Sans"]
 	"www.tkltd.org//ontologies/27f7c559482b45afa110eeba5518ff45" [label=< <table id="Inventory.Inventory.Product" BORDER="0" CELLBORDER="1" CELLSPACING="0" STYLE="ROUNDED">
 
