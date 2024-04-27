@@ -509,20 +509,20 @@ The inverse of Specialization is Generalization.</rdfs:comment>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#Context -->
-
-    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Context">
-        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Context</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.tkltd.org/ontologies/datamodel#Definition -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Definition">
         <rdfs:label>Definition</rdfs:label>
         <skos:definition>A definition is the description of some kind of representation.</skos:definition>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Domain -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Domain">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Domain</rdfs:label>
     </owl:Class>
     
 
@@ -583,11 +583,11 @@ The inverse of Specialization is Generalization.</rdfs:comment>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#ModelDomain -->
+    <!-- http://www.tkltd.org/ontologies/datamodel#Namespace -->
 
-    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#ModelDomain">
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Namespace">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model Domain</rdfs:label>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Namespace</rdfs:label>
     </owl:Class>
     
 

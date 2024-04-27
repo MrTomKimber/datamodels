@@ -4,7 +4,7 @@
     "targetOntology": "http://www.tkltd.org/ontologies/datamapping",
     "targetClasses": ["http://www.tkltd.org/ontologies/datamapping#DataMapping",
                       "http://www.tkltd.org/ontologies/datamapping#DataMappingDetail",
-                      "http://www.tkltd.org/ontologies/datamodel#ModelDomain",
+                      "http://www.tkltd.org/ontologies/datamodel#Namespace",
                       "http://www.tkltd.org/ontologies/datamodel#Model",
                       "http://www.tkltd.org/ontologies/datamodel#Class",
                       "http://www.tkltd.org/ontologies/datamodel#Attribute",
@@ -22,33 +22,38 @@
                         ],
     "targetDataProperties": ["http://www.tkltd.org/ontologies/datamapping#Sequence"],
     "targetStaticProperties" : [],
-    "source_headers": ["Sequence","Mapping","SourceDomain","SourceModel","TargetDomain","TargetModel","SourceClass","SourceAttribute","TargetClass","TargetAttribute","Translation"],
+    "source_headers": ["Sequence","Namespace","Mapping","SourceNamespace","SourceModel","TargetNamespace","TargetModel","SourceClass","SourceAttribute","TargetClass","TargetAttribute","Translation"],
     "serialization_mappings": [
+        {"mapping_name": "Namespace_Mapping",
+        "target": "http://www.tkltd.org/ontologies/datamodel#Namespace",
+        "label": "Namespace"},
+
         { "mapping_name": "Mapping_Mapping", 
           "target": "http://www.tkltd.org/ontologies/datamapping#DataMapping", 
-         "label": "Mapping" 
+         "label": "Mapping",
+         "parent_label": "Namespace"
         },  
 
-        { "mapping_name": "SourceDomain_Mapping", 
-          "target": "http://www.tkltd.org/ontologies/datamodel#ModelDomain", 
-          "label": "SourceDomain" 
+        { "mapping_name": "SourceNamespace_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#Namespace", 
+          "label": "SourceNamespace" 
         },
 
-        { "mapping_name": "TargetDomain_Mapping", 
-          "target": "http://www.tkltd.org/ontologies/datamodel#ModelDomain", 
-          "label": "TargetDomain" 
+        { "mapping_name": "TargetNamespace_Mapping", 
+          "target": "http://www.tkltd.org/ontologies/datamodel#Namespace", 
+          "label": "TargetNamespace" 
         },  
 
         { "mapping_name": "SourceModel_Mapping", 
           "target": "http://www.tkltd.org/ontologies/datamodel#Model", 
           "label": "SourceModel", 
-          "parent_label": "SourceDomain"
+          "parent_label": "SourceNamespace"
         },
 
         { "mapping_name": "TargetModel_Mapping", 
           "target": "http://www.tkltd.org/ontologies/datamodel#Model", 
           "label": "TargetModel",
-          "parent_label": "TargetDomain"
+          "parent_label": "TargetNamespace"
         },  
 
         { "mapping_name": "SourceClass_Mapping", 
@@ -139,9 +144,9 @@
           "range": "TargetModel"
         },
 
-        {"mapping_name": "SourceDomainContainsModelPropertyMapping",
+        {"mapping_name": "SourceNamespaceContainsModelPropertyMapping",
         "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
-        "domain": "SourceDomain",
+        "domain": "SourceNamespace",
         "range": "SourceModel"},
 
         {"mapping_name": "SourceModelContainsClassPropertyMapping",
@@ -154,9 +159,9 @@
         "domain": "SourceClass",
         "range": "SourceAttribute"},
 
-        {"mapping_name": "TargetDomainContainsModelPropertyMapping",
+        {"mapping_name": "TargetNamespaceContainsModelPropertyMapping",
         "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
-        "domain": "TargetDomain",
+        "domain": "TargetNamespace",
         "range": "TargetModel"},
 
         {"mapping_name": "TargetModelContainsClassPropertyMapping",

@@ -13,9 +13,10 @@
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisation">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Serialization" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#Namespace_Mapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#Mapping_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceDomain_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetDomain_Mapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceNamespace_Mapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetNamespace_Mapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceModel_Mapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetModel_Mapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceClass_Mapping" />
@@ -33,10 +34,10 @@
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#MappingDetailTargetAttribute_Mapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#MappingSourceModel_Mapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#MappingTargetModel_Mapping" />
-		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceDomainContainsModelPropertyMapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceNamespaceContainsModelPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceModelContainsClassPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceClassContainsAttributePropertyMapping" />
-		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetDomainContainsModelPropertyMapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetNamespaceContainsModelPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetModelContainsClassPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetClassContainsAttributePropertyMapping" />
 		<rdfs:label>DataMapping Serialisation</rdfs:label>
@@ -93,7 +94,7 @@
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaClass" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#ModelDomain">
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#Namespace">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaClass" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
 	</NamedIndividual>
@@ -159,37 +160,44 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#Namespace_Mapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Namespace" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
+		<ser:SerializationLabel>Namespace</ser:SerializationLabel>
+	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#Mapping_Mapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamapping#DataMapping" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
 		<ser:SerializationLabel>Mapping</ser:SerializationLabel>
+		<ser:SerializationParentLabel>Namespace</ser:SerializationParentLabel>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceDomain_Mapping">
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceNamespace_Mapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
-		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#ModelDomain" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Namespace" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
-		<ser:SerializationLabel>SourceDomain</ser:SerializationLabel>
+		<ser:SerializationLabel>SourceNamespace</ser:SerializationLabel>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetDomain_Mapping">
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetNamespace_Mapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
-		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#ModelDomain" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Namespace" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
-		<ser:SerializationLabel>TargetDomain</ser:SerializationLabel>
+		<ser:SerializationLabel>TargetNamespace</ser:SerializationLabel>
 	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceModel_Mapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
 		<ser:SerializationLabel>SourceModel</ser:SerializationLabel>
-		<ser:SerializationParentLabel>SourceDomain</ser:SerializationParentLabel>
+		<ser:SerializationParentLabel>SourceNamespace</ser:SerializationParentLabel>
 	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetModel_Mapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
 		<ser:SerializationLabel>TargetModel</ser:SerializationLabel>
-		<ser:SerializationParentLabel>TargetDomain</ser:SerializationParentLabel>
+		<ser:SerializationParentLabel>TargetNamespace</ser:SerializationParentLabel>
 	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceClass_Mapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
@@ -294,11 +302,11 @@
 		<ser:MappingDomain>Mapping</ser:MappingDomain>
 		<ser:MappingRange>TargetModel</ser:MappingRange>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceDomainContainsModelPropertyMapping">
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceNamespaceContainsModelPropertyMapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
-		<ser:MappingDomain>SourceDomain</ser:MappingDomain>
+		<ser:MappingDomain>SourceNamespace</ser:MappingDomain>
 		<ser:MappingRange>SourceModel</ser:MappingRange>
 	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#SourceModelContainsClassPropertyMapping">
@@ -315,11 +323,11 @@
 		<ser:MappingDomain>SourceClass</ser:MappingDomain>
 		<ser:MappingRange>SourceAttribute</ser:MappingRange>
 	</NamedIndividual>
-	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetDomainContainsModelPropertyMapping">
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetNamespaceContainsModelPropertyMapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DataMapping_Serialisation" />
-		<ser:MappingDomain>TargetDomain</ser:MappingDomain>
+		<ser:MappingDomain>TargetNamespace</ser:MappingDomain>
 		<ser:MappingRange>TargetModel</ser:MappingRange>
 	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DataMapping_Serialisatio#TargetModelContainsClassPropertyMapping">
