@@ -63,26 +63,9 @@ Where isRequisiteProperty is True, this means that the Object at the end of this
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#AlsoKnownAs -->
+    <!-- http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOfClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#AlsoKnownAs">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MetaRelationship"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
-        <rdfs:comment>Entities are normally defined within specific domains and diagrams, however despite this, entities might reflect the same underlying object or concept. In cases like this, they can be linked using the AlsoKnownAs MetaRelationship.
-
-This is a symmetric relation, if X is AKA Y, then Y must also be AKA Z.
-It&apos;s probably transitive as well.</rdfs:comment>
-        <rdfs:label xml:lang="en">AlsoKnownAs</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOf -->
-
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOf">
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOfClass">
         <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
         <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
@@ -91,7 +74,6 @@ It&apos;s probably transitive as well.</rdfs:comment>
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
         <isRequisiteProperty rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</isRequisiteProperty>
-        <rdfs:label xml:lang="en">MemberOf</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -105,7 +87,28 @@ It&apos;s probably transitive as well.</rdfs:comment>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Attribute"/>
-        <rdfs:label xml:lang="en">Contains</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfDomain">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainContainsClass"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Domain"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfModel -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfModel">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#ModelContainsClass"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
     </owl:ObjectProperty>
     
 
@@ -125,36 +128,54 @@ It&apos;s probably transitive as well.</rdfs:comment>
         <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
-        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
         <rdfs:label xml:lang="en">Contains</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#Defines -->
+    <!-- http://www.tkltd.org/ontologies/datamodel#DomainContainsClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Defines">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MetaRelationship"/>
-        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Realizes"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainContainsClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Domain"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
-        <rdfs:comment>Defines is the relationship that a higher-level model entity has with its lower-level counterpart. So the conceptual entity &quot;Person&quot; *defines* the logical entity &quot;Person&quot;, and this in turn might *define* the physical table &quot;person&quot; in a database. 
-
-The inverse of Defines is Realizes.</rdfs:comment>
-        <rdfs:label xml:lang="en">Defines</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#Generalization -->
+    <!-- http://www.tkltd.org/ontologies/datamodel#DomainContainsDomain -->
 
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Generalization">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#StructuralRelationship"/>
-        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Specialization"/>
-        <rdfs:comment>A Generalization is a case where one or more entities are recouched in more general terms to reflect shared properties, behaviour or composition. Conversely, Specializations of more general entities can be defined, extending some core set of properties from a common definition or template.
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainContainsDomain">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains"/>
+    </owl:ObjectProperty>
+    
 
-The inverse of Generalization is Specialization.</rdfs:comment>
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#DomainContainsEvent -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainContainsEvent">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#EventIsMemberOfDomain"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Domain"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainEvent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#DomainIsMemberOfDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainIsMemberOfDomain">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#EventIsMemberOfDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#EventIsMemberOfDomain">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainEvent"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Domain"/>
     </owl:ObjectProperty>
     
 
@@ -164,34 +185,39 @@ The inverse of Generalization is Specialization.</rdfs:comment>
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#MemberOf">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
-        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
         <rdfs:label xml:lang="en">MemberOf</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#MetaRelationship -->
+    <!-- http://www.tkltd.org/ontologies/datamodel#ModelContainsClass -->
 
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#MetaRelationship">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ModelContainsClass">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#Realizes -->
+    <!-- http://www.tkltd.org/ontologies/datamodel#ModelContainsRelationship -->
 
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Realizes">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MetaRelationship"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
-        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Class"/>
-        <rdfs:comment>&quot;Materializes&quot; was an alternative name for this relationship.</rdfs:comment>
-        <rdfs:comment>Realizes is the relationship that an entity has with its higher level counterparts. A physical table definition will Realize a similar entity as defined at a logical level. And the logical entity might be a Realizeation of a more abstract conceptual entity. 
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ModelContainsRelationship">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+    </owl:ObjectProperty>
+    
 
-Realizes is the inverse of Defines.</rdfs:comment>
-        <rdfs:label xml:lang="en">Realizes</rdfs:label>
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#Precedes -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Precedes">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Succeeds"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainEvent"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainEvent"/>
     </owl:ObjectProperty>
     
 
@@ -220,6 +246,16 @@ Realizes is the inverse of Defines.</rdfs:comment>
     
 
 
+    <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute">
@@ -244,21 +280,12 @@ Realizes is the inverse of Defines.</rdfs:comment>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#Specialization -->
+    <!-- http://www.tkltd.org/ontologies/datamodel#Succeeds -->
 
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Specialization">
-        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#StructuralRelationship"/>
-        <rdfs:comment>A Specialization is the relationship between an entity that&apos;s been created from a more generalized template. Often used to express inheritance.
-
-The inverse of Specialization is Generalization.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.tkltd.org/ontologies/datamodel#StructuralRelationship -->
-
-    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#StructuralRelationship">
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#Succeeds">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainEvent"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainEvent"/>
     </owl:ObjectProperty>
     
 
@@ -414,18 +441,6 @@ The inverse of Specialization is Generalization.</rdfs:comment>
     
 
 
-    <!-- http://www.tkltd.org/ontologies/datamodel#UniqueIdentifier -->
-
-    <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#UniqueIdentifier">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>An Identifier is indended to be a unique name that distinguishes similarly named objects across different contexts.</rdfs:comment>
-        <rdfs:label xml:lang="en">UniqueIdentifier</rdfs:label>
-    </owl:DatatypeProperty>
-    
-
-
     <!-- http://www.tkltd.org/ontologies/datamodel#isIdentifierForClass -->
 
     <owl:DatatypeProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#isIdentifierForClass">
@@ -462,6 +477,7 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Attribute">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>An attribute describes a property or detail that objects of a particular class might exhibit.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Attribute</rdfs:label>
     </owl:Class>
     
@@ -471,6 +487,7 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Class">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>A Class is a component of a model that represents a classification of some entity or concept being modelled.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Class</rdfs:label>
     </owl:Class>
     
@@ -522,7 +539,24 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Domain">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>A Domain is a conceptual boundary that divides a broad area of interest into themes or groups of activity that can be considered for the most part as encapsulated units.
+
+Inter Domain interactions should have the opportunity to be modelled using interfaces.
+
+Each Domain should be able to enumerate a set of Events that occur or are handled entirely within that Domain.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Domain</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#DomainEvent -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainEvent">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>A DomainEvent is an occurance in the real world, aspects of which are of interest and can be recorded as data and associated to a particular Domain.
+
+Domain Events will tend to be independent, but where there is a dependency relation within or across Domains, Domain Events can be described as Preceding or Succeeding one another.</rdfs:comment>
+        <rdfs:label>DomainEvent</rdfs:label>
     </owl:Class>
     
 
@@ -578,6 +612,7 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Model">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>A model is a collective representation of Domains, Classes, Attributes, Relationships and other Definitions that reflects important aspects of their existence and behaviour.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model</rdfs:label>
     </owl:Class>
     
@@ -587,6 +622,9 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Namespace">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>A Namespace defines some boundary whithin which objects can be uniquely named and defined.
+
+All objects within a Namespace are must have unique names - two objects in the same Namespace that share the same name are considered to be the same object.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Namespace</rdfs:label>
     </owl:Class>
     
@@ -615,6 +653,7 @@ The inverse of Specialization is Generalization.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Relationship">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>A Relationship describes some interaction between classes that is of interest. Relationships have a name that describes themselves, and are considered directional, that is, they have a starting class and an ending class. Relationships that are Symetrical can be identified as such where appropriate.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relationship</rdfs:label>
     </owl:Class>
 </rdf:RDF>

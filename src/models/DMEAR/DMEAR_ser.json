@@ -7,21 +7,29 @@
                       "http://www.tkltd.org/ontologies/datamodel#Class",
                       "http://www.tkltd.org/ontologies/datamodel#Attribute",
                       "http://www.tkltd.org/ontologies/datamodel#Domain",
+                      "http://www.tkltd.org/ontologies/datamodel#DomainEvent",
                       "http://www.tkltd.org/ontologies/datamodel#Relationship"
                         ],
     "targetProperties": ["http://www.tkltd.org/ontologies/datamodel#Contains", 
                          "http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute",
+                         "http://www.tkltd.org/ontologies/datamodel#DomainContainsDomain", 
+                         "http://www.tkltd.org/ontologies/datamodel#DomainContainsClass", 
+                         "http://www.tkltd.org/ontologies/datamodel#DomainContainsEvent", 
+                         "http://www.tkltd.org/ontologies/datamodel#ModelContainsClass", 
+                         "http://www.tkltd.org/ontologies/datamodel#ModelContainsRelationship", 
                          "http://www.tkltd.org/ontologies/datamodel#MemberOf", 
-                         "http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOf", 
+                         "http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOfClass", 
+                         "http://www.tkltd.org/ontologies/datamodel#DomainIsMemberOfDomain", 
+                         "http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfDomain", 
+                         "http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfModel", 
+                         "http://www.tkltd.org/ontologies/datamodel#EventIsMemberOfDomain",
+                         "http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel",  
                          "http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass",
                          "http://www.tkltd.org/ontologies/datamodel#RelationshipToClass",
                          "http://www.tkltd.org/ontologies/datamodel#RelationshipFromAttribute",
-                         "http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute",
-                         "http://www.tkltd.org/ontologies/datamodel#AlsoKnownAs",
-                         "http://www.tkltd.org/ontologies/datamodel#Defines",
-                         "http://www.tkltd.org/ontologies/datamodel#Realizes",
-                         "http://www.tkltd.org/ontologies/datamodel#Generalization",
-                         "http://www.tkltd.org/ontologies/datamodel#Specialization"],
+                         "http://www.tkltd.org/ontologies/datamodel#RelationshipToAttribute"
+                        
+                        ],
 
     "targetDataProperties": ["http://www.tkltd.org/ontologies/datamodel#FromCardinality", 
                              "http://www.tkltd.org/ontologies/datamodel#ToCardinality",
@@ -36,7 +44,7 @@
     "targetStaticProperties": [],
     "source_headers": ["Sequence","Namespace","NamespaceDescription","Model","ModelDescription","ModelType",
                        "Class","ClassDescription","Attribute","AttributeDescription","DataType",
-                       "Domain", "DomainDescription", "SubDomain","Nulls","Is PK","Relationship",
+                       "Domain", "DomainDescription", "ParentDomain", "DomainEvent","DomainEventDescription","Nulls","Is PK","Relationship",
                        "FromModel","FromClass","FromAttribute","FromCardinality",
                        "ToModel","ToClass","ToAttribute","ToCardinality"],
     "serialization_mappings": [
@@ -67,6 +75,11 @@
          {"mapping_name": "RelationshipClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Relationship",
          "label": "Relationship",
+         "parent_label": "Model"},
+
+         {"mapping_name": "DomainEventClassMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#DomainEvent",
+         "label": "DomainEvent",
          "parent_label": "Model"},
          
          {"mapping_name": "FromClassMapping",
@@ -105,19 +118,59 @@
          "range": "Attribute"},
 
          {"mapping_name": "AttributeIsMemberOfClassPropertyMapping",
-         "target": "http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOf",
+         "target": "http://www.tkltd.org/ontologies/datamodel#AttributeIsMemberOfClass",
          "domain": "Attribute",
          "range": "Class"},
          
          {"mapping_name": "DomainContainsClassPropertyMapping",
-         "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
+         "target": "http://www.tkltd.org/ontologies/datamodel#DomainContainsClass",
          "domain": "Domain",
          "range": "Class"},
 
-         {"mapping_name": "DomainContainsSubDomainPropertyMapping",
-         "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
+         {"mapping_name": "ClassIsMemberOfDomainPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfDomain",
+         "domain": "Class",
+         "range": "Domain"},
+
+         {"mapping_name": "DomainContainsDomainPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#DomainContainsDomain",
+         "domain": "ParentDomain",
+         "range": "Domain"},
+
+         {"mapping_name": "DomainIsMemberOfDomainPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#DomainIsMemberOfDomain",
          "domain": "Domain",
-         "range": "SubDomain"},
+         "range": "ParentDomain"},
+
+         {"mapping_name": "DomainContainsEventPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#DomainContainsEvent",
+         "domain": "Domain",
+         "range": "DomainEvent"},
+
+         {"mapping_name": "EventIsMemberOfDomainPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#EventIsMemberOfDomain",
+         "domain": "DomainEvent",
+         "range": "Domain"},
+
+         {"mapping_name": "ModelContainsClassPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#ModelContainsClass",
+         "domain": "Model",
+         "range": "Class"},
+
+         {"mapping_name": "ClassIsMemberOfModelPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfModel",
+         "domain": "Class",
+         "range": "Model"},
+
+         {"mapping_name": "ModelContainsRelationshipPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#ModelContainsRelationship",
+         "domain": "Model",
+         "range": "Relationship"},
+
+         {"mapping_name": "RelationshipIsMemberOfModelPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel",
+         "domain": "Relationship",
+         "range": "Model"},
 
          {"mapping_name": "RelationshipFromClassPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass",
@@ -164,30 +217,35 @@
          "domain": "Model",
          "range": "ModelDescription"},
 
+         {"mapping_name": "DomainHasDescriptionDataPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#Description",
+         "domain": "Domain",
+         "range": "DomainDescription"},
+
+         {"mapping_name": "DomainEventHasDescriptionDataPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#Description",
+         "domain": "DomainEvent",
+         "range": "DomainEventDescription"},
+
          {"mapping_name": "ClassHasDescriptionDataPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Description",
          "domain": "Class",
          "range": "ClassDescription"},
-
-         {"mapping_name": "AttributeHasSequenceDataPropertyMapping",
-         "target": "http://www.tkltd.org/ontologies/datamodel#Sequence",
-         "domain": "Attribute",
-         "range": "Sequence"},
 
          {"mapping_name": "AttributeHasDescriptionDataPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Description",
          "domain": "Attribute",
          "range": "AttributeDescription"},
 
+         {"mapping_name": "AttributeHasSequenceDataPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#Sequence",
+         "domain": "Attribute",
+         "range": "Sequence"},
+
          {"mapping_name": "AttributeHasDataTypeDataPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#DataType",
          "domain": "Attribute",
          "range": "DataType"},
-
-         {"mapping_name": "DomainHasDescriptionDataPropertyMapping",
-         "target": "http://www.tkltd.org/ontologies/datamodel#Description",
-         "domain": "Domain",
-         "range": "DomainDescription"},
 
          {"mapping_name": "AttributeOptionalityDataPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Optionality",
