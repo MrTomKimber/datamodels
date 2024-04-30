@@ -18,12 +18,14 @@
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#EntityClassMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#AttributeClassMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#DomainClassMapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#ParentDomainClassMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#RelationshipClassMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#DomainEventClassMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#FromClassMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#ToClassMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#FromAttributeMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#ToAttributeMapping" />
+		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#NamespaceContainsDomainPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#NamespaceContainsModelPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#NamespaceContainsClassPropertyMapping" />
 		<ser:ContainsMapping rdf:resource="http://www.tkltd.org/serializations/DMEA#ClassContainsAttributePropertyMapping" />
@@ -285,6 +287,13 @@
 		<ser:SerializationLabel>Domain</ser:SerializationLabel>
 		<ser:SerializationParentLabel>Namespace</ser:SerializationParentLabel>
 	</NamedIndividual>
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DMEA#ParentDomainClassMapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Domain" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
+		<ser:SerializationLabel>ParentDomain</ser:SerializationLabel>
+		<ser:SerializationParentLabel>Namespace</ser:SerializationParentLabel>
+	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DMEA#RelationshipClassMapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
 		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship" />
@@ -326,6 +335,13 @@
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
 		<ser:SerializationLabel>ToAttribute</ser:SerializationLabel>
 		<ser:SerializationParentLabel>ToClass</ser:SerializationParentLabel>
+	</NamedIndividual>
+	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DMEA#NamespaceContainsDomainPropertyMapping">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />
+		<ser:MappingMetaTarget rdf:resource="http://www.tkltd.org/ontologies/datamodel#Contains" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
+		<ser:MappingDomain>Namespace</ser:MappingDomain>
+		<ser:MappingRange>Domain</ser:MappingRange>
 	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/serializations/DMEA#NamespaceContainsModelPropertyMapping">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#Mapping" />

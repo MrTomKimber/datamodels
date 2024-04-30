@@ -1,5 +1,12 @@
 WITH <http://discourse>
             DELETE {{ ?s ?p ?o }}
             WHERE {{ ?s ?p ?o.
-            FILTER (?s=<{discourse_uri}> )
+            {{
+            SELECT  ?o 
+            WHERE {{ ?d ((<>|!<>))* ?o.
+            FILTER (?d=<{discourse_uri}> )
+                  }} 
+
             }}
+
+        }}

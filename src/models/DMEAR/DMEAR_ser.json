@@ -72,6 +72,11 @@
          "label": "Domain",
          "parent_label": "Namespace"},
          
+         {"mapping_name": "ParentDomainClassMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#Domain",
+         "label": "ParentDomain",
+         "parent_label": "Namespace"},
+
          {"mapping_name": "RelationshipClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Relationship",
          "label": "Relationship",
@@ -101,6 +106,11 @@
          "target": "http://www.tkltd.org/ontologies/datamodel#Attribute",
          "label": "ToAttribute",
          "parent_label": "ToClass"},
+
+         {"mapping_name": "NamespaceContainsDomainPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
+         "domain": "Namespace",
+         "range": "Domain"},
 
          {"mapping_name": "NamespaceContainsModelPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
