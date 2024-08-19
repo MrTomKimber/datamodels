@@ -15,6 +15,7 @@
                          "http://www.tkltd.org/ontologies/datamodel#DomainContainsDomain", 
                          "http://www.tkltd.org/ontologies/datamodel#DomainContainsClass", 
                          "http://www.tkltd.org/ontologies/datamodel#DomainContainsEvent", 
+                         "http://www.tkltd.org/ontologies/datamodel#DomainContainsParticipant", 
                          "http://www.tkltd.org/ontologies/datamodel#ModelContainsClass", 
                          "http://www.tkltd.org/ontologies/datamodel#ModelContainsRelationship", 
                          "http://www.tkltd.org/ontologies/datamodel#MemberOf", 
@@ -23,6 +24,7 @@
                          "http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfDomain", 
                          "http://www.tkltd.org/ontologies/datamodel#ClassIsMemberOfModel", 
                          "http://www.tkltd.org/ontologies/datamodel#EventIsMemberOfDomain",
+                         "http://www.tkltd.org/ontologies/datamodel#ParticipantIsMemberOfDomain",
                          "http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel",  
                          "http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass",
                          "http://www.tkltd.org/ontologies/datamodel#RelationshipToClass",
@@ -60,7 +62,7 @@
          {"mapping_name": "EntityClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Class",
          "label": "Class",
-         "parent_label": "Model"},
+         "parent_label": "Namespace"},
 
          {"mapping_name": "AttributeClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Attribute",
@@ -80,22 +82,22 @@
          {"mapping_name": "RelationshipClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Relationship",
          "label": "Relationship",
-         "parent_label": "Model"},
+         "parent_label": "Namespace"},
 
          {"mapping_name": "DomainEventClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#DomainEvent",
          "label": "DomainEvent",
-         "parent_label": "Model"},
+         "parent_label": "Domain"},
          
          {"mapping_name": "FromClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Class",
          "label": "FromClass",
-         "parent_label": "FromModel"},         
+         "parent_label": "FromNamespace"},         
          
          {"mapping_name": "ToClassMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Class",
          "label": "ToClass",
-         "parent_label": "ToModel"},
+         "parent_label": "ToNamespace"},
          
          {"mapping_name": "FromAttributeMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#Attribute",
@@ -121,6 +123,11 @@
          "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
          "domain": "Namespace",
          "range": "Class"},
+
+         {"mapping_name": "NamespaceContainsRelationshipPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#Contains",
+         "domain": "Namespace",
+         "range": "Relationship"},
 
          {"mapping_name": "ClassContainsAttributePropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute",
@@ -160,6 +167,16 @@
          {"mapping_name": "EventIsMemberOfDomainPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#EventIsMemberOfDomain",
          "domain": "DomainEvent",
+         "range": "Domain"},
+
+         {"mapping_name": "DomainContainsParticipantPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#DomainContainsParticipant",
+         "domain": "Domain",
+         "range": "DomainParticipant"},
+
+         {"mapping_name": "ParticipantIsMemberOfDomainPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#ParticipantIsMemberOfDomain",
+         "domain": "DomainParticipant",
          "range": "Domain"},
 
          {"mapping_name": "ModelContainsClassPropertyMapping",

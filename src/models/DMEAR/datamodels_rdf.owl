@@ -162,6 +162,16 @@ Where isRequisiteProperty is True, this means that the Object at the end of this
     
 
 
+    <!-- http://www.tkltd.org/ontologies/datamodel#DomainHostsParticipant -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainHostsParticipant">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Domain"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainParticipant"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.tkltd.org/ontologies/datamodel#DomainIsMemberOfDomain -->
 
     <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainIsMemberOfDomain">
@@ -207,6 +217,16 @@ Where isRequisiteProperty is True, this means that the Object at the end of this
         <owl:inverseOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel"/>
         <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#Model"/>
         <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Relationship"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#ParticipantParticipatesInDomain -->
+
+    <owl:ObjectProperty rdf:about="http://www.tkltd.org/ontologies/datamodel#ParticipantParticipatesInDomain">
+        <rdfs:subPropertyOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#MemberOf"/>
+        <rdfs:domain rdf:resource="http://www.tkltd.org/ontologies/datamodel#DomainParticipant"/>
+        <rdfs:range rdf:resource="http://www.tkltd.org/ontologies/datamodel#Domain"/>
     </owl:ObjectProperty>
     
 
@@ -553,10 +573,20 @@ Each Domain should be able to enumerate a set of Events that occur or are handle
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainEvent">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
-        <rdfs:comment>A DomainEvent is an occurance in the real world, aspects of which are of interest and can be recorded as data and associated to a particular Domain.
+        <rdfs:comment>A DomainEvent is an occurance in the real world, likely as interactions between domain participants, aspects of which are of interest and can be recorded as data and associated to a particular Domain.
 
 Domain Events will tend to be independent, but where there is a dependency relation within or across Domains, Domain Events can be described as Preceding or Succeeding one another.</rdfs:comment>
         <rdfs:label>DomainEvent</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/datamodel#DomainParticipant -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainParticipant">
+        <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
+        <rdfs:comment>A DomainParticipant is an actor that participates within the context of a domain. Sometimes, domains might be defined to cover interactions between specific domain participants.</rdfs:comment>
+        <rdfs:label>DomainParticipant</rdfs:label>
     </owl:Class>
     
 
@@ -612,7 +642,7 @@ Domain Events will tend to be independent, but where there is a dependency relat
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/datamodel#Model">
         <rdfs:subClassOf rdf:resource="http://www.tkltd.org/ontologies/datamodel#Definition"/>
-        <rdfs:comment>A model is a collective representation of Domains, Classes, Attributes, Relationships and other Definitions that reflects important aspects of their existence and behaviour.</rdfs:comment>
+        <rdfs:comment>A model is a collective representation of Classes, Attributes, Relationships and other Definitions that reflects important aspects of their existence and behaviour.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Model</rdfs:label>
     </owl:Class>
     
