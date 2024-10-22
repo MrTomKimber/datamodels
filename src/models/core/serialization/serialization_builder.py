@@ -38,8 +38,12 @@ def process_json_serialization(jsonfilename):
 
     else:
         assert False
-
-
+# TODO: Create a simple template from a serialisation expression file
+def gen_serialisation_template(jsonfilename):
+    with open(jsonfilename, 'r') as file:
+        jdata = json.load(file)
+    mapping_value_list = fetch_mapping_values(jdata)
+    return mapping_value_list
 
 def validate_schema(datafilename, schemafilename):
     """Given a datafile, and associated json schema filename, perform commodity level validation check"""
