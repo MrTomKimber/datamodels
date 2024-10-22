@@ -170,6 +170,10 @@
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
 	</NamedIndividual>
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#DomainContainsRelationship">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
+	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#ModelContainsClass">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
@@ -206,11 +210,23 @@
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
 	</NamedIndividual>
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfDomain">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
+	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipIsMemberOfModel">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
 	</NamedIndividual>
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipFromNamespace">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
+	</NamedIndividual>
 	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipFromClass">
+		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
+		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
+	</NamedIndividual>
+	<NamedIndividual rdf:about="http://www.tkltd.org/ontologies/datamodel#RelationshipToNamespace">
 		<rdf:type rdf:resource="http://www.tkltd.org/ontologies/serialization#MetaProperty" />
 		<ser:IsComponentOfSerialization rdf:resource="http://www.tkltd.org/serializations/DMEAR" />
 	</NamedIndividual>
