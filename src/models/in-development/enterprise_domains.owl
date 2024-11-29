@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#"
+     xml:base="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Describes -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Describes">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Data"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Process"/>
+        <rdfs:label>Describes</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Drives -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Drives">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Motivation"/>
+        <rdfs:label>Drives</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Flow -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Flow">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#System"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#System"/>
+        <rdfs:label>Flow</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Generates -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Generates">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>Generates</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Governs -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Governs">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Organisation"/>
+        <rdfs:label>Governs</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#HParent -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#HParent">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>HParent</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#hasRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#hasRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Personnel"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Organisation"/>
+        <rdfs:label>hasRole</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Motivation"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#SDLC"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Motivation"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Organisation"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Process"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#System"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Action -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Action">
+        <rdfs:label>Action</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Data -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Data">
+        <rdfs:label>Data</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Domain -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Domain">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Data"/>
+        <rdfs:label>Domain</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Mapping -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Mapping">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Data"/>
+        <rdfs:label>Mapping</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#MetaData -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#MetaData">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Data"/>
+        <rdfs:label>MetaData</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Modelling -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Modelling">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Data"/>
+        <rdfs:label>Modelling</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Motivation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Motivation">
+        <rdfs:label>Motivation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Organisation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Organisation">
+        <rdfs:label>Organisation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Personnel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Personnel">
+        <rdfs:label>Personnel</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Process -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#Process">
+        <rdfs:label>Process</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#SDLC -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#SDLC">
+        <rdfs:label>SDLC</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#System -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/tomk/ontologies/2024/10/enterprise_domains#System">
+        <rdfs:label>System</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

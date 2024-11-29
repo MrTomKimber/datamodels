@@ -88,14 +88,6 @@
     
 
 
-    <!-- http://www.tkltd.org/ontologies/sdlc#Actor -->
-
-    <owl:Class rdf:about="http://www.tkltd.org/ontologies/sdlc#Actor">
-        <rdfs:comment>An Actor is a participant in the solution domain who plays some functional role. As such, they should be consulted when eliciting requirements that the intended solution should address as part of its functionality.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.tkltd.org/ontologies/sdlc#Component -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/sdlc#Component">
@@ -115,6 +107,14 @@
     <!-- http://www.tkltd.org/ontologies/sdlc#Outcome -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/sdlc#Outcome"/>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/sdlc#Persona -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/sdlc#Persona">
+        <rdfs:comment>A Persona is a participant in the solution domain who plays some functional role. As such, they should be consulted when eliciting requirements that the intended solution should address as part of its functionality.</rdfs:comment>
+    </owl:Class>
     
 
 
@@ -143,6 +143,12 @@
     <!-- http://www.tkltd.org/ontologies/sdlc#Test -->
 
     <owl:Class rdf:about="http://www.tkltd.org/ontologies/sdlc#Test"/>
+    
+
+
+    <!-- http://www.tkltd.org/ontologies/sdlc#Use-Case -->
+
+    <owl:Class rdf:about="http://www.tkltd.org/ontologies/sdlc#Use-Case"/>
 </rdf:RDF>
 
 

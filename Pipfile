@@ -24,6 +24,7 @@ owlready2 = "*"
 django = "*"
 selenium = "*"
 graphviz = "*"
+openpyxl = "*"
 
 [dev-packages]
 

@@ -1,14 +1,15 @@
 {  "$schema" : "serialisation_schema.json",
-    "serialization_iri": "http://www.tkltd.org/serializations/DMEAR",
-    "serialization_label": "Data Model Entity Attribute Relation Serialization",
+    "serialization_iri": "http://www.tkltd.org/serializations/DMCAR/",
+    "serialization_label": "Domain Model Class Attribute Relation Serialization",
     "targetOntology": "http://www.tkltd.org/ontologies/datamodel",
     "targetClasses": ["http://www.tkltd.org/ontologies/datamodel#Namespace",
+                      "http://www.tkltd.org/ontologies/datamodel#Domain",
                       "http://www.tkltd.org/ontologies/datamodel#Model",
                       "http://www.tkltd.org/ontologies/datamodel#Class",
                       "http://www.tkltd.org/ontologies/datamodel#Attribute",
-                      "http://www.tkltd.org/ontologies/datamodel#Domain",
+                      "http://www.tkltd.org/ontologies/datamodel#Relationship",
                       "http://www.tkltd.org/ontologies/datamodel#DomainEvent",
-                      "http://www.tkltd.org/ontologies/datamodel#Relationship"
+                      "http://www.tkltd.org/ontologies/datamodel#DomainParticipant"
                         ],
     "targetProperties": ["http://www.tkltd.org/ontologies/datamodel#Contains", 
                          "http://www.tkltd.org/ontologies/datamodel#ClassContainsAttribute",
@@ -37,7 +38,8 @@
                         
                         ],
 
-    "targetDataProperties": ["http://www.tkltd.org/ontologies/datamodel#FromCardinality", 
+    "targetDataProperties": ["http://www.tkltd.org/ontologies/datamodel#RelationshipType",
+                             "http://www.tkltd.org/ontologies/datamodel#FromCardinality", 
                              "http://www.tkltd.org/ontologies/datamodel#ToCardinality",
                              "http://www.tkltd.org/ontologies/datamodel#DataType",
                              "http://www.tkltd.org/ontologies/datamodel#Description",
@@ -52,7 +54,7 @@
                        "Class","ClassLabel", "ClassDescription","Attribute","AttributeLabel", "AttributeDescription","DataType",
                        "Domain", "DomainLabel", "DomainDescription", "ParentDomain", "DomainParticipant","DomainParticipantLabel", "DomainParticipantDescription",
                        "DomainEvent", "DomainEventLabel", "DomainEventDescription","Nulls","Is PK","Relationship","RelationshipLabel","RelationshipDescription",
-                       "FromNamespace","FromClass","FromAttribute","FromCardinality",
+                       "RelationshipType", "FromNamespace","FromClass","FromAttribute","FromCardinality",
                        "ToNamespace","ToClass","ToAttribute","ToCardinality"],
     "serialization_mappings": [
         {"mapping_name": "NamespaceClassMapping",
@@ -208,6 +210,11 @@
          "target": "http://www.tkltd.org/ontologies/datamodel#Description",
          "domain": "Relationship",
          "range": "RelationshipDescription"},
+
+         {"mapping_name": "RelationshipHasTypeDataPropertyMapping",
+         "target": "http://www.tkltd.org/ontologies/datamodel#RelationshipType",
+         "domain": "Relationship",
+         "range": "RelationshipType"},
 
          {"mapping_name": "ModelContainsRelationshipPropertyMapping",
          "target": "http://www.tkltd.org/ontologies/datamodel#ModelContainsRelationship",

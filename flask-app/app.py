@@ -795,7 +795,11 @@ def upload_discourse_file():
                          "createdon" : request_d.get("createdon") 
                          }
             #file_data = pd.read_csv(storage_filename, index_col="Sequence")
-            file_data = pd.read_csv(storage_filename, index_col=False)
+            if ".csv" in storage_filename.lower()[-4:]:
+                file_data = pd.read_csv(storage_filename, index_col=False)
+            elif ".xlsx" in storage_filename.lower()[-5:]:
+                file_data = pd.read_excel(storage_filename, index_col=False)
+
             datarows = [dict({rk:get_field(rv) for rk, rv in r.items()}) for i,r in file_data.iterrows()]
             col_set = set(repository.get_variables_from_flat_query_results( datarows))
             match_ser=loader.match_serialization_from_columns(repo.ds, repo.registered_serializations_uri,col_set)

@@ -8,7 +8,9 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.tkltd.org/ontologies/datamapping">
-        <rdfs:comment xml:lang="en">A Data Mapping is a set of relationships that explain exactly how one data model is related to one or more source models.</rdfs:comment>
+        <rdfs:comment xml:lang="en">A Data Mapping is a set of relationships that explain exactly how one data model is related to one or more source models.
+
+This might be to express equivalences between physical and more rareified models, to link and identify lineage between dataflows, or to define transformations from one dataset to another.</rdfs:comment>
         <rdfs:label xml:lang="en">Data Mapping Ontology</rdfs:label>
     </owl:Ontology>
     
