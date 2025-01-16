@@ -67,7 +67,10 @@ def process_data(graphname=None):
 
 def gen_vis(graph):
     gjgf=visualise_erd.process_graph(graph)
+    gh=800
     canvas = gv.d3(gjgf, 
+                    graph_height=gh,
+                    details_height=300,
                     layout_algorithm_active=True, 
                     node_label_data_source='label',
                     show_edge_label=True,

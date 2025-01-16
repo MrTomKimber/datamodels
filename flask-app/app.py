@@ -349,8 +349,10 @@ def serialisations():
             for t in triples:
                 g.add(t)
             gjgf=vis_rdf.process_graph(g)
-
+            gh=800
             visual = gv.d3(gjgf, 
+                graph_height=gh,
+                details_height=300,
                 node_label_data_source='label',
                 show_edge_label=True,
                 edge_label_size_factor=0.7,
@@ -431,8 +433,10 @@ def discourses():
             gjgf=vis_rdf.process_graph(g)
 
             #print(gjgf)
-
+            gh=800
             canvas = gv.d3(gjgf, 
+                graph_height=gh,
+                details_height=300,
                 node_label_data_source='label',
                 show_edge_label=True,
                 edge_label_size_factor=0.7,
@@ -538,8 +542,10 @@ def graphs():
             gjgf=vis_rdf.process_graph(g)
 
             #print(gjgf)
-
+            gh=800
             canvas = gv.d3(gjgf, 
+                graph_height=gh,
+                details_height=300,
                 node_label_data_source='label',
                 show_edge_label=True,
                 edge_label_size_factor=0.7,
@@ -636,8 +642,10 @@ def visualise(g):
     content = """visualise"""
 
     gjgf=vis_owl.gen_gjgf_from_owl_model_graph(g)
-
+    gh=800
     model_html = gv.d3(gjgf, 
+      graph_height=gh,
+      details_height=300,
       node_label_data_source='label',
       show_edge_label=True,
       edge_label_size_factor=0.7,

@@ -74,7 +74,10 @@ def process_data(graphname=None):
 
 def gen_vis(graph):
     gjgf=vis_rdf.process_graph(graph)
-    canvas = gv.d3(gjgf, 
+    gh=800
+    canvas = gv.d3(gjgf,  
+        graph_height=gh,
+        details_height=300,
         node_label_data_source='label',
         show_edge_label=True,
         edge_label_size_factor=0.7,
@@ -100,7 +103,9 @@ def gen_vis(graph):
 
 def gen_vis_3d(graph):
     gjgf=vis_rdf.process_graph(graph)
+    gh=600
     canvas = gv.three(gjgf, 
+        graph_height=gh,
         node_label_data_source='label',
         show_edge_label=True,
         edge_label_size_factor=0.7,
