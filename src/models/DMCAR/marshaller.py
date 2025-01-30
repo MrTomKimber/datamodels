@@ -160,7 +160,7 @@ class MermaidWrapper:
         for a in entity.attributes:
             p_attributes.append(MermaidWrapper.format_erd_attribute(a))
         attributes = "\n".join(p_attributes)
-        return """{indent}{entity}[{optional_alias}] {{
+        return """{indent}{entity}[\"{optional_alias}\"] {{
         {attributes}
         {indent}}}""".format(indent=indent, entity=entity.name, optional_alias=entity.label, attributes=attributes)
 
@@ -177,7 +177,7 @@ class MermaidWrapper:
             else:
                 o_token = "o"
 
-            if relationship.from_cardinality_one:
+            if not relationship.from_cardinality_one:
                 c_token = "}"
         else:
             if relationship.to_attribute is not None:
@@ -186,7 +186,7 @@ class MermaidWrapper:
                     o_token = "o"
                 else:
                     o_token = "|"
-            if relationship.to_cardinality_one:
+            if not relationship.to_cardinality_one:
                 c_token = "{"
         
         if left:
@@ -226,13 +226,12 @@ class MermaidWrapper:
                                                                    right=relationship.to_class_name, 
                                                                    lt=lt, 
                                                                    rt=rt, 
-                                                                   relationship=relationship.name)
+                                                                   relationship="\"" + str(relationship.label) + "\"")
         
 
 
 
-def from_pandas(df : DataFrame):
-
+def popo_from_pandas(df : DataFrame):
     # Get raw Classes from DataFrame
     classes=[]
     for c in df.groupby("Class").groups:
@@ -248,15 +247,27 @@ def from_pandas(df : DataFrame):
 
     for c in classes:
         a_list = [a for a in attributes if a.parent_class.name == c.name]
-        print(a_list)
         c.set_child_attributes(a_list)
 
     relationships=[]
     for r in df.groupby(["Relationship"]).groups:
-        relationship = Relationship.marshal_from_DMCAR(df.groupby(["Relationship"]).get_group(r).iloc[0])
+
+        relationship = Relationship.marshal_from_DMCAR(df.groupby("Relationship").get_group(r).iloc[0])
         relationship.set_parents(classes, attributes)
         relationships.append( relationship )
 
+    return { "classes" : classes, 
+             "attributes" : attributes, 
+             "relationships" : relationships}
 
-    return classes, attributes, relationships
+def mermaid_from_popo(popo : dict) -> str:
+    mnodes=[]
+    for n in popo['classes']:
+        mnodes.append(MermaidWrapper.format_erd_node(n))
+
+    mrels=[]
+    for l in popo['relationships']:
+        mrels.append(MermaidWrapper.format_erd_relationship(l))
+
+    return """erDiagram\n """ + "\n".join(mnodes) + "\n".join(mrels)
 
