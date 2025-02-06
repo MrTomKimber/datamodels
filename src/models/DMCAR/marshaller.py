@@ -2,6 +2,19 @@ from dataclasses import dataclass
 from pandas import DataFrame, isna
 import re
 
+def conform_to_string(value):
+    if value is None:
+        return ""
+    else:
+        if isinstance(value, str):
+            return value
+        elif isinstance(value, float):
+            if isna(value):
+                return ""
+            else:
+                return str(value)
+        else:
+            return str(value)
 
 @dataclass
 class Class:
@@ -16,10 +29,10 @@ class Class:
     
     @staticmethod
     def marshal_from_DMCAR(row):
-        return Class(namespace=row.Namespace, 
-                       name=row.Class, 
-                       label=row.ClassLabel, 
-                       description=row.ClassDescription)
+        return Class(namespace=conform_to_string(row.Namespace), 
+                       name=conform_to_string(row.Class), 
+                       label=conform_to_string(row.ClassLabel), 
+                       description=conform_to_string(row.ClassDescription))
 
         
 
@@ -39,19 +52,19 @@ class Attribute:
 
     def set_parents(self, classes : list[Class]):
         classnames_d = {".".join([c.namespace , c.name]):c for c in classes}
-        self.parent_class = classnames_d.get(".".join([self.namespace , self.parent_class_name]), "unassigned")
+        self.parent_class = classnames_d.get(".".join([self.namespace , self.parent_class_name]), "{pclass} unassigned for attribute {attribute}".format(pclass=self.parent_class_name, attribute=self.name))
 
     @staticmethod
     def marshal_from_DMCAR(row) :
-        return Attribute(namespace=row.Namespace, 
-                     parent_class_name=row.Class,
-                     name=row.Attribute, 
-                     label=row.AttributeLabel, 
-                     description=row.AttributeDescription, 
-                     sequence=row.Sequence, 
-                     datatype=row.DataType, 
-                     nulls=row.Nulls,
-                     ispk=row.IsPK
+        return Attribute(namespace=conform_to_string(row.Namespace), 
+                     parent_class_name=conform_to_string(row.Class),
+                     name=conform_to_string(row.Attribute), 
+                     label=conform_to_string(row.AttributeLabel), 
+                     description=conform_to_string(row.AttributeDescription), 
+                     sequence=conform_to_string(row.Sequence), 
+                     datatype=conform_to_string(row.DataType), 
+                     nulls=conform_to_string(row.Nulls),
+                     ispk=conform_to_string(row.IsPK)
                     )
 
 
@@ -80,43 +93,43 @@ class Relationship:
     def set_parents(self, classes : list[Class], attributes : list[Attribute]):
         classnames_d = {".".join([c.namespace , c.name]):c for c in classes}
         attrnames_d = {".".join([a.namespace , a.parent_class_name, a.name]):a for a in attributes}
-        self.from_class = classnames_d.get(".".join([self.from_namespace , self.from_class_name]), "unassigned")
-        self.to_class = classnames_d.get(".".join([self.to_namespace , self.to_class_name]), "unassigned")
+        self.from_class = classnames_d.get(".".join([self.from_namespace , self.from_class_name]), "from: {fclass} unassigned for relationship {rel}".format(fclass=self.from_class_name, rel=self.name))
+        self.to_class = classnames_d.get(".".join([self.to_namespace , self.to_class_name]), "to: {tclass} unassigned for relationship {rel}".format(tclass=self.from_class_name, rel=self.name))
 
-        if not isna(self.from_attribute_name):
+        if not isna(self.from_attribute_name) and self.from_attribute_name.strip() != "":
             self.from_attribute = attrnames_d.get(".".join([self.from_namespace , self.from_class_name, self.from_attribute_name]), "unassigned")
             print(self.from_attribute, self.from_attribute_name)
 
-        if not isna(self.to_attribute_name):
+        if not isna(self.to_attribute_name) and self.to_attribute_name.strip() != "":
             self.to_attribute = attrnames_d.get(".".join([self.to_namespace , self.to_class_name, self.to_attribute_name]), "unassigned")
             print(self.to_attribute, self.to_attribute_name)
 
     def marshal_from_DMCAR(row) :
-        if str(row.FromCardinality).lower() in ("one", "1", "None"):
+        if conform_to_string(row.FromCardinality).lower() in ("one", "1", "None"):
             bool_from_cardinality_one = True
         else:
             bool_from_cardinality_one = False
 
-        if str(row.ToCardinality).lower() in ("one", "1", "None"):
+        if conform_to_string(row.ToCardinality).lower() in ("one", "1", "None"):
             bool_to_cardinality_one = True
         else:
             bool_to_cardinality_one = False
 
             
-        return Relationship(namespace=row.Namespace, 
-                     name=row.Relationship, 
-                     label=row.RelationshipLabel, 
-                     description=row.RelationshipDescription, 
-                     type=row.RelationshipType, 
-                     from_namespace=row.FromNamespace, 
-                     from_class_name=row.FromClass, 
-                     from_attribute_name=row.FromAttribute, 
-                     from_cardinality=row.FromCardinality, 
+        return Relationship(namespace=conform_to_string(row.Namespace), 
+                     name=conform_to_string(row.Relationship), 
+                     label=conform_to_string(row.RelationshipLabel), 
+                     description=conform_to_string(row.RelationshipDescription), 
+                     type=conform_to_string(row.RelationshipType), 
+                     from_namespace=conform_to_string(row.FromNamespace), 
+                     from_class_name=conform_to_string(row.FromClass), 
+                     from_attribute_name=conform_to_string(row.FromAttribute), 
+                     from_cardinality=conform_to_string(row.FromCardinality), 
                      from_cardinality_one=bool_from_cardinality_one, 
-                     to_namespace=row.ToNamespace, 
-                     to_class_name=row.ToClass, 
-                     to_attribute_name=row.ToAttribute, 
-                     to_cardinality=row.ToCardinality, 
+                     to_namespace=conform_to_string(row.ToNamespace), 
+                     to_class_name=conform_to_string(row.ToClass), 
+                     to_attribute_name=conform_to_string(row.ToAttribute), 
+                     to_cardinality=conform_to_string(row.ToCardinality), 
                      to_cardinality_one=bool_to_cardinality_one
 
 
@@ -143,6 +156,9 @@ class MermaidWrapper:
     def format_erd_attribute(attribute : Attribute) -> str:
         indent="\t"
         datatype = MermaidWrapper.escape_str(attribute.datatype)
+        if datatype.strip() == "":
+            # Set default value for blank datatype
+            datatype = "_"
         attribute_name = MermaidWrapper.escape_str(attribute.name)
         keys = MermaidWrapper.escape_str(MermaidWrapper.get_keys_string(attribute))
         description = MermaidWrapper.escape_str(attribute.description)
@@ -157,8 +173,9 @@ class MermaidWrapper:
     def format_erd_node(entity : Class) -> str:
         indent="\t"
         p_attributes = []
-        for a in entity.attributes:
+        for a in sorted(entity.attributes, key=lambda a : a.sequence):
             p_attributes.append(MermaidWrapper.format_erd_attribute(a))
+
         attributes = "\n".join(p_attributes)
         return """{indent}{entity}[\"{optional_alias}\"] {{
         {attributes}

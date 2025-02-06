@@ -87,3 +87,15 @@ class dq_namespace_is_populated(Function):
         else:
             return True
         
+
+class dq_class_label_population_requires_class_is_populated(Function):
+    name = "dq_class_label_population_requires_class_is_populated"
+    description = "Class label should be populated if class is populated"
+    scope=FunctionScope.ALL
+
+    def __call__(self, row):
+        if not isna(row.get("ClassLabel")):
+            return False
+        else:
+            return True
+        
