@@ -189,7 +189,7 @@ class MermaidWrapper:
             
 
 
-    def format_erd_attribute(attribute : Attribute) -> str:
+    def format_erd_attribute(attribute : Attribute, include_description : bool = None) -> str:
         indent="\t"
         datatype = MermaidWrapper.escape_str(attribute.datatype)
         if datatype.strip() == "":
@@ -198,11 +198,19 @@ class MermaidWrapper:
         attribute_name = MermaidWrapper.escape_str(attribute.name)
         keys = MermaidWrapper.escape_str(MermaidWrapper.get_keys_string(attribute))
         description = MermaidWrapper.escape_str(attribute.description)
-        return """{indent}{indent}{datatype} {attribute} {keys} \"{description}\" """.format(indent=indent, 
-                                                                                            datatype=datatype, 
-                                                                                            attribute=attribute_name, 
-                                                                                            keys=keys, 
-                                                                                            description=description)
+
+        if include_description:
+            return """{indent}{indent}{datatype} {attribute} {keys} \"{description}\" """.format(indent=indent, 
+                                                                                                datatype=datatype, 
+                                                                                                attribute=attribute_name, 
+                                                                                                keys=keys, 
+                                                                                                description=description)
+        else:
+            return """{indent}{indent}{datatype} {attribute} {keys} """.format(indent=indent, 
+                                                                            datatype=datatype, 
+                                                                            attribute=attribute_name, 
+                                                                            keys=keys)
+
         
         
 

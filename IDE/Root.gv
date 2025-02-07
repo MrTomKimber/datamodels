@@ -1,4 +1,4 @@
-digraph Root {
+graph Root {
 	subgraph cluster_Payments {
 		subgraph cluster_Accounts {
 			Account
@@ -7,18 +7,18 @@ digraph Root {
 			CashEntry
 			DirectDebitMandate
 			StandingOrder
-			Account -> AccountHolder [label=hasHolder]
-			Account -> DirectDebitMandate [label=hostsMandate]
-			Account -> StandingOrder [label=hostsSO]
-			Account -> AccountServicer [label=isServicedBy]
-			CashEntry -> Account [label=appliedTo]
+			Account -- AccountHolder [label=hasHolder]
+			Account -- DirectDebitMandate [label=hostsMandate]
+			Account -- StandingOrder [label=hostsSO]
+			Account -- AccountServicer [label=isServicedBy]
+			CashEntry -- Account [label=appliedTo]
 		}
 		subgraph cluster_Interface {
 			Channel
 			Interface
 			InterfaceMedia
-			Channel -> Interface [label="IsSubClassOf(7)"]
-			Interface -> InterfaceMedia [label=usesMedia]
+			Channel -- Interface [label="IsSubClassOf(7)"]
+			Interface -- InterfaceMedia [label=usesMedia]
 		}
 		subgraph cluster_Investigation {
 			PaymentInvestigationCase
@@ -27,8 +27,8 @@ digraph Root {
 			MessageFunction
 			MessageType
 			PaymentMessage
-			MessageType -> MessageFunction [label=Function]
-			PaymentMessage -> MessageType [label=hasType]
+			MessageType -- MessageFunction [label=Function]
+			PaymentMessage -- MessageType [label=hasType]
 		}
 		subgraph cluster_Party {
 			ClearingSystem
@@ -37,51 +37,47 @@ digraph Root {
 			Party
 			PaymentRole
 			Person
-			ClearingSystem -> FinancialInstitution [label="IsSubClassOf(6)"]
-			FinancialInstitution -> Organisation [label="IsSubClassOf(3)"]
-			Organisation -> Party [label="IsSubClassOf(2)"]
-			Person -> Party [label="IsSubClassOf(1)"]
+			ClearingSystem -- FinancialInstitution [label="IsSubClassOf(6)"]
+			FinancialInstitution -- Organisation [label="IsSubClassOf(3)"]
+			Organisation -- Party [label="IsSubClassOf(2)"]
+			Person -- Party [label="IsSubClassOf(1)"]
 		}
 		subgraph cluster_Payment {
+			Charges
+			CurrencyExchange
+			Obligation
 			Payment
+			PaymentIdentification
 			PaymentInstructionGroup
 			PaymentPartyRole
-			subgraph cluster_PaymentDetails {
-				CurrencyExchange
-				Obligation
-				PaymentIdentification
-				subgraph cluster_PaymentDetailsLevel2 {
-					Charges
-				}
-			}
-			Payment -> PaymentInstructionGroup [label=PartOfGroup]
-			Payment -> Charges [label=applied]
-			Payment -> CurrencyExchange [label=appliedFX]
-			Payment -> Obligation [label=associatedObligation]
-			Payment -> PaymentPartyRole [label=hasPartyRole]
-			Payment -> PaymentIdentification [label=references]
-			PaymentInstructionGroup -> PaymentInstructionGroup [label=parentBlock]
+			Payment -- PaymentInstructionGroup [label=PartOfGroup]
+			Payment -- Charges [label=applied]
+			Payment -- CurrencyExchange [label=appliedFX]
+			Payment -- Obligation [label=associatedObligation]
+			Payment -- PaymentPartyRole [label=hasPartyRole]
+			Payment -- PaymentIdentification [label=references]
+			PaymentInstructionGroup -- PaymentInstructionGroup [label=parentBlock]
 		}
 		subgraph cluster_Processing {
 		}
-		AccountHolder -> Party [label="IsSubClassOf(4)"]
-		AccountServicer -> FinancialInstitution [label="IsSubClassOf(5)"]
-		DirectDebitMandate -> Party [label=authorisedParty]
-		MessageType -> InterfaceMedia [label=memberOfMedia]
-		Payment -> PaymentMessage [label=InstructedIn]
-		Payment -> PaymentMessage [label=ReferencedIn]
-		Payment -> CashEntry [label=bookedEntries]
-		Payment -> Interface [label=inboundInterface]
-		Payment -> Interface [label=initiatingInterface]
-		Payment -> Interface [label=outboundInterface]
-		Payment -> DirectDebitMandate [label=referencesMandate]
-		Payment -> StandingOrder [label=referencesSO]
-		PaymentInstructionGroup -> PaymentMessage [label="InstructedIn(2)"]
-		PaymentInvestigationCase -> PaymentMessage [label="InstructedIn(3)"]
-		PaymentInvestigationCase -> Payment [label=ReferencedPayment]
-		PaymentInvestigationCase -> PaymentInstructionGroup [label=ReferencedPaymentGroup]
-		PaymentMessage -> Interface [label=TransmittedOver]
-		PaymentPartyRole -> PaymentRole [label=assignedRole]
-		PaymentPartyRole -> Party [label=associatedParty]
+		AccountHolder -- Party [label="IsSubClassOf(4)"]
+		AccountServicer -- FinancialInstitution [label="IsSubClassOf(5)"]
+		DirectDebitMandate -- Party [label=authorisedParty]
+		MessageType -- InterfaceMedia [label=memberOfMedia]
+		Payment -- PaymentMessage [label=InstructedIn]
+		Payment -- PaymentMessage [label=ReferencedIn]
+		Payment -- CashEntry [label=bookedEntries]
+		Payment -- Interface [label=inboundInterface]
+		Payment -- Interface [label=initiatingInterface]
+		Payment -- Interface [label=outboundInterface]
+		Payment -- DirectDebitMandate [label=referencesMandate]
+		Payment -- StandingOrder [label=referencesSO]
+		PaymentInstructionGroup -- PaymentMessage [label="InstructedIn(2)"]
+		PaymentInvestigationCase -- PaymentMessage [label="InstructedIn(3)"]
+		PaymentInvestigationCase -- Payment [label=ReferencedPayment]
+		PaymentInvestigationCase -- PaymentInstructionGroup [label=ReferencedPaymentGroup]
+		PaymentMessage -- Interface [label=TransmittedOver]
+		PaymentPartyRole -- PaymentRole [label=assignedRole]
+		PaymentPartyRole -- Party [label=associatedParty]
 	}
 }
