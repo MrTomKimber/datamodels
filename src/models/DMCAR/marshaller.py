@@ -16,30 +16,64 @@ def conform_to_string(value):
         else:
             return str(value)
 
+
+@dataclass
+class Domain:
+    namespace : str
+    name : str
+    label : str
+    description : str
+    parent_domain_name : str
+    parent_domain : object = None
+
+    def set_child_classes(self, class_list):
+        self.classes=class_list
+
+    def set_parents(self, domains : list[object]):
+        domains_d = {".".join([d.namespace , d.name]):d for d in domains}
+        self.parent_domain = domains_d.get(".".join([self.namespace , self.parent_domain_name]), "{pdomain} unassigned for domain {cdomain}".format(pdomain=self.parent_domain_name, cdomain=self.name))
+
+
+    def marshal_from_DMCAR(row):
+        return Domain(namespace=conform_to_string(row.Namespace), 
+                       name=conform_to_string(row.Domain), 
+                       label=conform_to_string(row.DomainLabel), 
+                       description=conform_to_string(row.DomainDescription), 
+                       parent_domain_name = conform_to_string(row.ParentDomain))
+    
+
 @dataclass
 class Class:
     namespace : str
     name :str
     label : str
     description : str
+    parent_domain_name : str
     attributes : list = None
+    parent_domain : Domain = None
 
     def set_child_attributes(self, attribute_list):
         self.attributes=attribute_list
+
+    def set_parents(self, domains : list[Domain]):
+        domains_d = {".".join([d.namespace , d.name]):d for d in domains}
+        self.parent_domain = domains_d.get(".".join([self.namespace , self.parent_domain_name]), "{pdomain} unassigned for class {cclass}".format(pdomain=self.parent_domain_name, cclass=self.name))
+
     
     @staticmethod
     def marshal_from_DMCAR(row):
         return Class(namespace=conform_to_string(row.Namespace), 
                        name=conform_to_string(row.Class), 
                        label=conform_to_string(row.ClassLabel), 
-                       description=conform_to_string(row.ClassDescription))
+                       description=conform_to_string(row.ClassDescription), 
+                       parent_domain_name=conform_to_string(row.Domain))
 
         
 
 
 @dataclass 
 class Attribute:
-    parent_class_name : str
+    
     namespace : str
     name : str
     label : str
@@ -48,6 +82,8 @@ class Attribute:
     datatype : str
     nulls : bool
     ispk : bool
+
+    parent_class_name : str
     parent_class : Class = None
 
     def set_parents(self, classes : list[Class]):
@@ -203,6 +239,8 @@ class MermaidWrapper:
                     o_token = "o"
                 else:
                     o_token = "|"
+            else:
+                o_token = "o"
             if not relationship.to_cardinality_one:
                 c_token = "{"
         
@@ -249,6 +287,15 @@ class MermaidWrapper:
 
 
 def popo_from_pandas(df : DataFrame):
+
+    # Get raw Domains from DataFrame
+    domains=[]
+    for c in df.groupby("Domain").groups:
+        domains.append( Domain.marshal_from_DMCAR(df.groupby("Domain").get_group(c).iloc[0]))
+
+    for d in domains:
+        d.set_parents(domains)
+
     # Get raw Classes from DataFrame
     classes=[]
     for c in df.groupby("Class").groups:
@@ -265,6 +312,7 @@ def popo_from_pandas(df : DataFrame):
     for c in classes:
         a_list = [a for a in attributes if a.parent_class.name == c.name]
         c.set_child_attributes(a_list)
+        c.set_parents(domains)
 
     relationships=[]
     for r in df.groupby(["Relationship"]).groups:
@@ -273,7 +321,8 @@ def popo_from_pandas(df : DataFrame):
         relationship.set_parents(classes, attributes)
         relationships.append( relationship )
 
-    return { "classes" : classes, 
+    return { "domains" : domains, 
+             "classes" : classes, 
              "attributes" : attributes, 
              "relationships" : relationships}
 
