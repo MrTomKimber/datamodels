@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pandas import DataFrame, isna
+from networkx import MultiDiGraph, DiGraph, shortest_path
 import re
 
 def conform_to_string(value):
@@ -15,6 +16,15 @@ def conform_to_string(value):
                 return str(value)
         else:
             return str(value)
+
+def conform_to_integer(value):
+    if value is None:
+        return 0
+    else:
+        if isinstance(value, str) and value.isnumeric():
+            return int(value)
+        else:
+            return int(value)
 
 
 @dataclass
@@ -78,7 +88,7 @@ class Attribute:
     name : str
     label : str
     description : str
-    sequence : str
+    sequence : int
     datatype : str
     nulls : bool
     ispk : bool
@@ -97,7 +107,7 @@ class Attribute:
                      name=conform_to_string(row.Attribute), 
                      label=conform_to_string(row.AttributeLabel), 
                      description=conform_to_string(row.AttributeDescription), 
-                     sequence=conform_to_string(row.Sequence), 
+                     sequence=conform_to_integer(row.Sequence), 
                      datatype=conform_to_string(row.DataType), 
                      nulls=conform_to_string(row.Nulls),
                      ispk=conform_to_string(row.IsPK)
@@ -133,13 +143,21 @@ class Relationship:
         self.to_class = classnames_d.get(".".join([self.to_namespace , self.to_class_name]), "to: {tclass} unassigned for relationship {rel}".format(tclass=self.from_class_name, rel=self.name))
 
         if not isna(self.from_attribute_name) and self.from_attribute_name.strip() != "":
-            self.from_attribute = attrnames_d.get(".".join([self.from_namespace , self.from_class_name, self.from_attribute_name]), "unassigned")
-            print(self.from_attribute, self.from_attribute_name)
+            self.from_attribute = attrnames_d.get(".".join([self.from_namespace , self.from_class_name, self.from_attribute_name]))
+            if self.from_attribute is None:
+                print(self.from_attribute_name, "unassigned", ".".join([self.from_namespace , self.from_class_name, self.from_attribute_name]))
+            else:
+                #print(self.from_attribute.name, self.from_attribute_name)
+                pass
 
         if not isna(self.to_attribute_name) and self.to_attribute_name.strip() != "":
-            self.to_attribute = attrnames_d.get(".".join([self.to_namespace , self.to_class_name, self.to_attribute_name]), "unassigned")
-            print(self.to_attribute, self.to_attribute_name)
-
+            self.to_attribute = attrnames_d.get(".".join([self.to_namespace , self.to_class_name, self.to_attribute_name]))
+            if self.to_attribute is None:
+                print(self.to_attribute_name, "unassigned", ".".join([self.to_namespace , self.to_class_name, self.to_attribute_name]))
+            else:
+                #print(self.to_attribute.name, self.to_attribute_name)
+                pass
+            
     def marshal_from_DMCAR(row) :
         if conform_to_string(row.FromCardinality).lower() in ("one", "1", "None"):
             bool_from_cardinality_one = True
@@ -242,7 +260,6 @@ class MermaidWrapper:
                 c_token = "}"
         else:
             if relationship.to_attribute is not None:
-                print(relationship.to_attribute)
                 if relationship.to_attribute.nulls:
                     o_token = "o"
                 else:
@@ -334,6 +351,86 @@ def popo_from_pandas(df : DataFrame):
              "attributes" : attributes, 
              "relationships" : relationships}
 
+
+
+def get_edge_domain_tuple(graph, edge):
+    ## requires that the graph nodes be annotated with an attribute called domain.
+    fclass = graph.nodes()[edge[0]]
+    tclass = graph.nodes()[edge[1]]
+    return fclass['domain'], tclass['domain']
+
+def last_common_value(lista, listb):
+    for e,i in enumerate(lista):
+        if listb[e]!=i:
+            return e-1
+    return e-1
+
+def popo_to_nx(popo, easy=False):
+    g = MultiDiGraph()
+    if not easy:
+        for c in popo['classes']:
+            g.add_node(c.name, **{"name" : c.label, "domain" : c.parent_domain.name})
+
+        for r in popo['relationships']:
+            g.add_edge(r.from_class.name, r.to_class.name, relationship=r)
+    else:
+        for c in popo['classes']:
+            g.add_node(c.name, **{"name" : c.label, "domain" : c.parent_domain.name})
+
+        for r in popo['relationships']:
+            g.add_edge(r.from_class.name, r.to_class.name)
+    return g
+
+def nx_domain_subgraph(popo):
+    domain_hierarchy_g=nx_domain_hierarchy_from_dmcar_popo(popo)
+
+    # Create the digraph representing the model
+    model_g = popo_to_nx(popo)
+    # Note that all the relationships need(?) to be assigned to the lowest level in the hierarchy that covers both sides.
+
+    # Interrogate the available graphs to determine the subgroup clusters attributable to both nodes and edges. 
+    rel_domain_interaction_d={}
+    domain_relationship_contents_d={}
+    for s,f,d in model_g.edges(data=True):
+        a = (get_edge_domain_tuple(model_g, (s,f)))
+        patha=shortest_path(domain_hierarchy_g, s, "Domain(RootDomain)" )[::-1]
+        pathb=shortest_path(domain_hierarchy_g, f, "Domain(RootDomain)" )[::-1]
+        lca = domain_hierarchy_g.nodes()[patha[last_common_value(patha, pathb)]]['name']
+        # Create a dictionary keyed by relationship name whose values reflect the 
+        # lowest common ancestor within the domain hierarchy
+        rel_domain_interaction_d[d['relationship'].name]=lca
+        if lca not in domain_relationship_contents_d.keys():
+            domain_relationship_contents_d[lca]=[d['relationship'].name]
+        else:
+            domain_relationship_contents_d[lca].append(d['relationship'].name)
+            
+
+    return domain_relationship_contents_d
+
+def nx_domain_hierarchy_from_dmcar_popo(popo):
+    domain_hierarchy_g = DiGraph()
+    for d in popo['domains']:
+        domain_hierarchy_g.add_node("Domain("+d.name+")", **{"name" : d.name, "type" : "Domain"})
+        
+        if isinstance(d.parent_domain, Domain):
+            domain_hierarchy_g.add_edge("Domain("+d.name+")", "Domain("+d.parent_domain.name+")")
+        else:
+            domain_hierarchy_g.add_node("Domain(RootDomain)", **{"name" : "RootDomain", "type" : "Domain"})
+            domain_hierarchy_g.add_edge("Domain("+d.name+")", "Domain(RootDomain)")
+
+    domain_class_contents_d={}
+    for o in popo['classes']:
+        domain_hierarchy_g.add_node(o.name, **{"name" : o.name, "type" : "Class"})
+        domain_hierarchy_g.add_edge(o.name, "Domain("+o.parent_domain.name+")")
+        if o.parent_domain.name not in domain_class_contents_d.keys():
+            domain_class_contents_d[o.parent_domain.name]=[o.name]
+        else:
+            domain_class_contents_d[o.parent_domain.name].append(o.name)
+
+    return domain_hierarchy_g
+
+
+## Move to Mermaid Module!
 def mermaid_from_popo(popo : dict) -> str:
     mnodes=[]
     for n in popo['classes']:
