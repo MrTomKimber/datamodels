@@ -1,4 +1,5 @@
 graph Root {
+	graph [beautify=false compound=true]
 	subgraph cluster_Payments {
 		subgraph cluster_Accounts {
 			Account
@@ -7,6 +8,18 @@ graph Root {
 			CashEntry
 			DirectDebitMandate
 			StandingOrder
+			subgraph cluster_Account {
+			}
+			subgraph cluster_AccountHolder {
+			}
+			subgraph cluster_AccountServicer {
+			}
+			subgraph cluster_CashEntry {
+			}
+			subgraph cluster_DirectDebitMandate {
+			}
+			subgraph cluster_StandingOrder {
+			}
 			Account -- AccountHolder [label=hasHolder]
 			Account -- DirectDebitMandate [label=hostsMandate]
 			Account -- StandingOrder [label=hostsSO]
@@ -17,16 +30,35 @@ graph Root {
 			Channel
 			Interface
 			InterfaceMedia
+			subgraph cluster_Channel {
+			}
+			subgraph cluster_Interface {
+				Channel
+				Interface
+				InterfaceMedia
+				Channel -- Interface [label="IsSubClassOf(7)"]
+				Interface -- InterfaceMedia [label=usesMedia]
+			}
+			subgraph cluster_InterfaceMedia {
+			}
 			Channel -- Interface [label="IsSubClassOf(7)"]
 			Interface -- InterfaceMedia [label=usesMedia]
 		}
 		subgraph cluster_Investigation {
 			PaymentInvestigationCase
+			subgraph cluster_PaymentInvestigationCase {
+			}
 		}
 		subgraph cluster_Messaging {
 			MessageFunction
 			MessageType
 			PaymentMessage
+			subgraph cluster_MessageFunction {
+			}
+			subgraph cluster_MessageType {
+			}
+			subgraph cluster_PaymentMessage {
+			}
 			MessageType -- MessageFunction [label=Function]
 			PaymentMessage -- MessageType [label=hasType]
 		}
@@ -37,6 +69,28 @@ graph Root {
 			Party
 			PaymentRole
 			Person
+			subgraph cluster_ClearingSystem {
+			}
+			subgraph cluster_FinancialInstitution {
+			}
+			subgraph cluster_Organisation {
+			}
+			subgraph cluster_Party {
+				ClearingSystem
+				FinancialInstitution
+				Organisation
+				Party
+				PaymentRole
+				Person
+				ClearingSystem -- FinancialInstitution [label="IsSubClassOf(6)"]
+				FinancialInstitution -- Organisation [label="IsSubClassOf(3)"]
+				Organisation -- Party [label="IsSubClassOf(2)"]
+				Person -- Party [label="IsSubClassOf(1)"]
+			}
+			subgraph cluster_PaymentRole {
+			}
+			subgraph cluster_Person {
+			}
 			ClearingSystem -- FinancialInstitution [label="IsSubClassOf(6)"]
 			FinancialInstitution -- Organisation [label="IsSubClassOf(3)"]
 			Organisation -- Party [label="IsSubClassOf(2)"]
@@ -50,6 +104,34 @@ graph Root {
 			PaymentIdentification
 			PaymentInstructionGroup
 			PaymentPartyRole
+			subgraph cluster_Charges {
+			}
+			subgraph cluster_CurrencyExchange {
+			}
+			subgraph cluster_Obligation {
+			}
+			subgraph cluster_Payment {
+				Charges
+				CurrencyExchange
+				Obligation
+				Payment
+				PaymentIdentification
+				PaymentInstructionGroup
+				PaymentPartyRole
+				Payment -- PaymentInstructionGroup [label=PartOfGroup]
+				Payment -- Charges [label=applied]
+				Payment -- CurrencyExchange [label=appliedFX]
+				Payment -- Obligation [label=associatedObligation]
+				Payment -- PaymentPartyRole [label=hasPartyRole]
+				Payment -- PaymentIdentification [label=references]
+				PaymentInstructionGroup -- PaymentInstructionGroup [label=parentBlock]
+			}
+			subgraph cluster_PaymentIdentification {
+			}
+			subgraph cluster_PaymentInstructionGroup {
+			}
+			subgraph cluster_PaymentPartyRole {
+			}
 			Payment -- PaymentInstructionGroup [label=PartOfGroup]
 			Payment -- Charges [label=applied]
 			Payment -- CurrencyExchange [label=appliedFX]
