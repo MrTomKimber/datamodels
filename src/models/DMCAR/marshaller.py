@@ -23,6 +23,8 @@ def conform_to_integer(value):
     else:
         if isinstance(value, str) and value.isnumeric():
             return int(value)
+        elif isna(value):
+            return 0
         else:
             return int(value)
 
@@ -249,7 +251,7 @@ class MermaidWrapper:
         o_token = "|"
         if left:
             if relationship.from_attribute is not None:
-                if relationship.from_attribute.nulls:
+                if MermaidWrapper.decode_nulls_option_from_string(relationship.from_attribute.nulls):
                     o_token = "o"
                 else:
                     o_token = "|"
@@ -260,7 +262,7 @@ class MermaidWrapper:
                 c_token = "}"
         else:
             if relationship.to_attribute is not None:
-                if relationship.to_attribute.nulls:
+                if MermaidWrapper.decode_nulls_option_from_string(relationship.to_attribute.nulls):
                     o_token = "o"
                 else:
                     o_token = "|"
