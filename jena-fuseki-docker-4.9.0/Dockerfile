@@ -43,6 +43,7 @@ RUN echo && echo "==== Docker build for Apache Jena Fuseki ${JENA_VERSION} ===="
 # Alpine: For objcopy used in jlink
 RUN apk add --no-cache curl binutils
 
+
 ## -- Fuseki installed and runs in /fuseki.
 WORKDIR $FUSEKI_DIR
 
@@ -88,6 +89,7 @@ WORKDIR $FUSEKI_DIR
 
 ARG LOGS=${FUSEKI_DIR}/logs
 ARG DATA=${FUSEKI_DIR}/databases
+ARG CONFIG=${FUSEKI_DIR}/config
 
 ARG JENA_USER=fuseki
 ARG JENA_GROUP=$JENA_USER
@@ -102,15 +104,19 @@ RUN addgroup -g "${JENA_GID}" "${JENA_GROUP}" && \
 
 RUN mkdir --parents "${FUSEKI_DIR}" && \
     chown -R $JENA_USER ${FUSEKI_DIR}
-
+USER root
+RUN apk update && apk add curl
 USER $JENA_USER
 
 RUN \
     mkdir -p $LOGS && \
     mkdir -p $DATA && \
+    mkdir -p $CONFIG && \
     chmod a+x entrypoint.sh
 
+RUN chown -R fuseki $LOGS
 RUN chown -R fuseki $DATA
+RUN chown -R fuseki $CONFIG
 
 ## Default environment variables.
 ENV \
